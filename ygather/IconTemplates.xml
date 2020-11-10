@@ -1,0 +1,44 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+    
+    <Frame name="yGather_ResourceIconTemplate" enableMouse="true" virtual="true" hidden="true">
+        <Size><AbsDimension x="12" y="12"/></Size>
+        <Anchors>
+            <Anchor point="CENTER" relativePoint="CENTER"></Anchor>
+        </Anchors>
+        <Layers>
+            <Layer level="OVERLAY">
+                <Texture name="$parent_Texture" file="Interface\Icons\item_her_001.dds">
+                    <!--Size><AbsDimension x="12" y="12"/></Size-->
+                </Texture>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnLoad>
+                this:RegisterForClicks("LeftButton", "RightButton");
+                this.yGWorldMapX = 0;
+                this.yGWorldMapY = 0;
+                this.yGMatId = 0;
+            </OnLoad>
+            <OnEnter>
+                yGatherIconMenu.icon = this;
+                GameTooltip:SetOwner(this, "ANCHOR_TOPLEFT", 0, 0);
+                GameTooltip:SetText("|cffFFFF00" .. this.yGName .. "|r");
+                if (this.yGZoneId ~= nil and this.yGZoneId ~= 0) then
+                    local entryText = yGather.database.GetEntryText(this.yGZoneId, this.yGMatId,
+                            this.yGWorldMapX * 1000, this.yGWorldMapY * 1000);
+                    if (entryText ~= nil) then
+                        GameTooltip:AddLine(entryText);
+                    end
+                end
+            </OnEnter>
+            <OnLeave>
+                yGatherIconMenu.icon=nil;
+                GameTooltip:Hide();
+            </OnLeave>
+            <OnClick>
+                yGatherIcon_OnClick(this, key);
+            </OnClick>
+        </Scripts>
+    </Frame>
+
+</Ui>

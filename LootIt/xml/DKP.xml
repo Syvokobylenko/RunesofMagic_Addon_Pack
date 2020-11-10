@@ -1,0 +1,1184 @@
+<!-- last changes     by: Tinsus     at: 2013-12-29T14:06:18Z     project-version: v1.9beta1     hash: 406c5dcabf0c49e0a9dd5b3c968e30e8f2d015fb -->
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ ../../../worldxml/ui.xsd">
+	<Frame name="LI_LootFrameTemplate" enableMouse="true" virtual="true" frameLevel="5">
+		<Size>
+			<AbsDimension x="256" y="64"/>
+		</Size>
+		<HitRectInsets>
+			<AbsInset left="0" right="2" top="0" bottom="6"/>
+		</HitRectInsets>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBorder" file="Interface\LootFrame\grouplootframe"/>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Name" inherits="GameFontNormalSmall" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="70" y="30"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="90" y="14"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="$parent_IconFrame" enableMouse="true">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="49" y="14"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<Texture name="$parent_Icon"/>
+					</Layer>
+					<Layer level="ARTWORK">
+						<FontString name="$parent_Count" inherits="NumberFontNormal" weight="BOLD" justifyH="RIGHT" hidden="true">
+							<Anchors>
+								<Anchor point="BOTTOMRIGHT">
+									<Offset>
+										<AbsDimension x="-4" y="-2"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+						GameTooltip:SetHyperLink(this:GetParent().link)
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+			</Frame>
+			<Button name="$parent_RollButton">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="12" y="14"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+						GameTooltip:SetText(GROUPLOOT_ROLL, 1, 1, 1)
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+					<OnClick>
+						LI.RollLoot(this:GetParent(), "roll")
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\LootFrame\grouploot-dice-normal"/>
+				<PushedTexture file="Interface\LootFrame\grouploot-dice-depress"/>
+				<DisabledTexture file="Interface\LootFrame\grouploot-dice-normal"/>
+			</Button>
+			<Button name="$parent_GreedButton">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="175" y="14"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+						GameTooltip:SetText(GROUPLOOT_GREED, 1, 1, 1)
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+					<OnClick>
+						LI.RollLoot(this:GetParent(), "greed")
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\LootFrame\grouploot-greed-normal"/>
+				<PushedTexture file="Interface\LootFrame\grouploot-greed-depress"/>
+				<DisabledTexture file="Interface\LootFrame\grouploot-greed-normal"/>
+			</Button>
+			<Button name="$parent_CancelButton">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="211" y="14"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+						GameTooltip:SetText(GROUPLOOT_CANCEL, 1, 1, 1)
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+					<OnClick>
+						LI.RollLoot(this:GetParent(), "pass")
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\LootFrame\grouploot-pass-normal"/>
+				<PushedTexture file="Interface\LootFrame\grouploot-pass-depress"/>
+				<DisabledTexture file="Interface\LootFrame\grouploot-pass-normal"/>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnShow>
+				LI.PaintFrame(this)
+				LI.CheckOwnRollFrame(this)
+			</OnShow>
+			<OnHide>
+				LI.LootFrame_OnHide(this)
+			</OnHide>
+			<OnUpdate>
+				LI.LootFrame_OnUpdate(this, elapsedTime)
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+	<Frame name="LootIt_RollFrameHighlight_Template2" inherits="LootIt_RollFrameHighlight_Template" enableMouse="false" frameLevel="999" virtual="true">
+		<Scripts>
+			<OnShow>
+				LI.HighlightShow(this)
+			</OnShow>
+			<OnUpdate>
+				LI.HighlightUpdate2(this, elapsedTime)
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+
+	<Frame name="LI_ReshowTemplate" hidden="true" virtual="true" enableMouse="false">
+		<Scripts>
+			<OnHide>
+				LI.ReShow_OnHide(this)
+			</OnHide>
+			<OnUpdate>
+				LI.ReShow_OnUpdate(this, elapsedTime)
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+
+	<Frame name="LI_LootFrame1_Show" inherits="LI_ReshowTemplate"/>
+	<Frame name="LI_LootFrame2_Show" inherits="LI_ReshowTemplate"/>
+	<Frame name="LI_LootFrame3_Show" inherits="LI_ReshowTemplate"/>
+	<Frame name="LI_LootFrame4_Show" inherits="LI_ReshowTemplate"/>
+	<Frame name="LI_LootFrame5_Show" inherits="LI_ReshowTemplate"/>
+	<Frame name="LI_LootFrame6_Show" inherits="LI_ReshowTemplate"/>
+
+	<Frame name="LI_LootFrame1" inherits="LI_LootFrameTemplate" parent="UIParent" hidden="true" id="1"/>
+	<Frame name="LI_LootFrame2" inherits="LI_LootFrameTemplate" parent="UIParent" hidden="true" id="2"/>
+	<Frame name="LI_LootFrame3" inherits="LI_LootFrameTemplate" parent="UIParent" hidden="true" id="3"/>
+	<Frame name="LI_LootFrame4" inherits="LI_LootFrameTemplate" parent="UIParent" hidden="true" id="4"/>
+	<Frame name="LI_LootFrame5" inherits="LI_LootFrameTemplate" parent="UIParent" hidden="true" id="5"/>
+	<Frame name="LI_LootFrame6" inherits="LI_LootFrameTemplate" parent="UIParent" hidden="true" id="6"/>
+
+	<Frame name="LootIt_LootFrame1_Highlight" inherits="LootIt_RollFrameHighlight_Template2" parent="LI_LootFrame1" hidden="true"/>
+	<Frame name="LootIt_LootFrame2_Highlight" inherits="LootIt_RollFrameHighlight_Template2" parent="LI_LootFrame2" hidden="true"/>
+	<Frame name="LootIt_LootFrame3_Highlight" inherits="LootIt_RollFrameHighlight_Template2" parent="LI_LootFrame3" hidden="true"/>
+	<Frame name="LootIt_LootFrame4_Highlight" inherits="LootIt_RollFrameHighlight_Template2" parent="LI_LootFrame4" hidden="true"/>
+	<Frame name="LootIt_LootFrame5_Highlight" inherits="LootIt_RollFrameHighlight_Template2" parent="LI_LootFrame5" hidden="true"/>
+	<Frame name="LootIt_LootFrame6_Highlight" inherits="LootIt_RollFrameHighlight_Template2" parent="LI_LootFrame6" hidden="true"/>
+
+	<Button name="LootIt_MasterLootButton" parent="LootFrame" hidden="true" frameStrata="DIALOG" inherits="UIPanelButtonTemplate">
+		<Size>
+			<AbsDimension y="25" x="25"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset>
+					<AbsDimension x="5" y="5"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Frame name="$parent_Dropdown" inherits="UIDropDownMenuTemplate" hidden="true"/>
+		</Frames>
+		<Scripts>
+			<OnClick>
+				GameTooltip:Hide()
+
+				ToggleDropDownMenu(LootIt_MasterLootButton_Dropdown)
+			</OnClick>
+			<OnEnter>
+				LI.GameTooltip(this, "ANCHOR_BOTTOMRIGHT", 4, 0, "TOOLTIP_AUTODICEBUTTON")
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+			<OnLoad>
+				UIDropDownMenu_SetWidth(LootIt_MasterLootButton_Dropdown, 10)
+				UIDropDownMenu_Initialize(LootIt_MasterLootButton_Dropdown, LI.MiniConfigGenerateMasterlootAuto)
+				UIDropDownMenu_SetAnchor(LootIt_MasterLootButton_Dropdown, 10, -2, "TOPLEFT", "TOPRIGHT", this:GetName())
+			</OnLoad>
+		</Scripts>
+		<NormalTexture file="Interface\merchantframe\merchantaddshoppingcart-normal.tga"/>
+		<PushedTexture file="Interface\merchantframe\merchantaddshoppingcart-depress.tga"/>
+		<HighlightTexture file="Interface\merchantframe\merchantaddshoppingcart-highlight.tga" alphaMode="ADD"/>
+	</Button>
+	<Button name="LootIt_MasterLootDiceNow" parent="LootFrame" hidden="true" frameStrata="DIALOG" inherits="UIPanelButtonTemplate">
+		<Size>
+			<AbsDimension y="25" x="25"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeTo="LootIt_MasterLootButton" relativePoint="TOPRIGHT">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnClick>
+				GameTooltip:Hide()
+
+				for i = 1, 10 do
+					LI.CountingDownDices()
+				end
+			</OnClick>
+			<OnEnter>
+				LI.GameTooltip(this, "ANCHOR_BOTTOMRIGHT", 4, 0, "TOOLTIP_DICEALLBUTTON")
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+		</Scripts>
+		<NormalTexture file="Interface\bagframe\clockbutton-normal.tga"/>
+		<PushedTexture file="Interface\bagframe\clockbutton-depress.tga"/>
+		<HighlightTexture file="Interface\buttons\panelupbutton-highlight.tga" alphaMode="ADD"/>
+	</Button>
+	<Frame name="LootIt_MasterlootDropdown" inherits="UIDropDownMenuTemplate" hidden="true"/>
+	<Button name="LootIt_FilterMasterButton" virtual="true" enableMouse="true">
+		<Layers>
+			<Layer>
+				<FontString name="$parent_Roll" justifyH="LEFT" inherits="Font_Normal">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="-65" y="-10"/>
+							</Offset>
+						</Anchor>
+						<Anchor point="BOTTOMRIGHT" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="0" y="10"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="12"/>
+					</FontHeight>
+				</FontString>
+				<FontString name="$parent_Name" justifyH="LEFT" inherits="Font_Normal">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="LEFT" relativeTo="$parent">
+							<Offset>
+								<AbsDimension x="10" y="-10"/>
+							</Offset>
+						</Anchor>
+						<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Roll">
+							<Offset>
+								<AbsDimension x="-5" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="12"/>
+					</FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForClicks("LeftButton", "RightButton")
+			</OnLoad>
+			<OnClick>
+				LI.SelectMasterFilterRow(this)
+			</OnClick>
+			<OnMouseWheel>
+				LI.ScrollBar(LootIt_MasterItemFilter_ScrollBar, delta * -1)
+			</OnMouseWheel>
+			<OnEnter>
+				if getglobal(this:GetName().."_Name"):GetColor() == 1 then
+					getglobal(this:GetName().."_Name"):SetColor(1, 0.82, 0)
+					getglobal(this:GetName().."_Roll"):SetColor(1, 0.82, 0)
+				else
+					getglobal(this:GetName().."_Name"):SetColor(0.5, 0.41, 0)
+					getglobal(this:GetName().."_Roll"):SetColor(0.5, 0.41, 0)
+				end
+			</OnEnter>
+			<OnLeave>
+				if getglobal(this:GetName().."_Name"):GetColor() == 1 then
+					getglobal(this:GetName().."_Name"):SetColor(1, 1, 1)
+					getglobal(this:GetName().."_Roll"):SetColor(1, 1, 1)
+				else
+					getglobal(this:GetName().."_Name"):SetColor(0.5, 0.5, 0.5)
+					getglobal(this:GetName().."_Roll"):SetColor(0.5, 0.5, 0.5)
+				end
+			</OnLeave>
+		</Scripts>
+		<HighlightTexture file="Interface\AuctionFrame\AuctionFrameItem-Highlight" alphaMode="ADD">
+			<Anchors>
+				<Anchor point="TOPLEFT"/>
+				<Anchor point="BOTTOMRIGHT"/>
+			</Anchors>
+		</HighlightTexture>
+	</Button>
+	<Frame name="LootIt_MasterItemFilter" parent="UIParent" inherits="UIPanelBackdropFrame" enableMouse="true" hidden="true" >
+		<Size>
+			<AbsDimension x="280" y="200"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="UIParent" relativePoint="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer>
+				<FontString name="$parent_Headline" inherits="QuestTitleFont" text="LootIt!">
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="5"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="16"/>
+					</FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+		<ResizeBounds>
+			<minResize>
+				<AbsDimension x="230" y="200"/>
+			</minResize>
+			<maxResize>
+				<AbsDimension x="400" y="200"/>
+			</maxResize>
+		</ResizeBounds>
+		<Frames>
+			<Button name="$parent_Close" inherits="UIPanelCloseButtonTemplate">
+				<Size>
+					<AbsDimension x="24" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-1" y="1"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parent_ResizerButton">
+				<Size>
+					<AbsDimension x="24" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT"/>
+				</Anchors>
+				<Scripts>
+					<OnMouseDown>
+						LootIt_MasterItemFilter:StartSizing("BOTTOMRIGHT")
+					</OnMouseDown>
+					<OnMouseUp>
+						LootIt_MasterItemFilter:StopMovingOrSizing()
+
+						LI.PaintMasterFilterFrame()
+					</OnMouseUp>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\LootIt\Textures\Corner"/>
+				<PushedTexture file="Interface\AddOns\LootIt\Textures\CornerDown"/>
+			</Button>
+			<Button name="$parent_Add" inherits="UIPlusButtonTemplate" enableMouse="true">
+				<Size>
+					<AbsDimension x="20" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="20" y="60"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this:RegisterForClicks("LeftButton", "RightButton")
+					</OnLoad>
+					<OnClick>
+						LI.AddMasterButton(this)
+					</OnClick>
+					<OnEnter>
+						LI.GameTooltip(this, "ANCHOR_BOTTOMRIGHT", 4, 0, "ADD_MASTERBUTTON_TOOLTIP")
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+			</Button>
+			<Button name="$parent_Remove" inherits="UIMinusButtonTemplate">
+				<Size>
+					<AbsDimension x="20" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parent_Add" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this:RegisterForClicks("LeftButton", "RightButton")
+					</OnLoad>
+					<OnClick>
+						LI.DelMasterButton(this)
+					</OnClick>
+					<OnEnter>
+						LI.GameTooltip(this, "ANCHOR_BOTTOMRIGHT", 4, 0, "DEL_BUTTON_TOOLTIP")
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+			</Button>
+			<Frame name="$parent_Rolling" inherits="UIDropDownMenuTemplate" enableMouse="true">
+				<Size>
+					<AbsDimension x="100" y="28"/>
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-20" y="60"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnter>
+						LI.GameTooltip(this, "ANCHOR_BOTTOMRIGHT", 4, 0, "ROLL_BUTTON_TOOLTIP")
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+					<OnLoad>
+						LI.LoadMasterRollingDropDown(this)
+					</OnLoad>
+					<OnShow>
+						UIDropDownMenu_SetText(this, LI.Trans("ROLL"))
+					</OnShow>
+				</Scripts>
+			</Frame>
+			<EditBox name="$parent_Itemname">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_Remove" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="5" y="-14"/>
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_Rolling" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="-5" y="14"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\Tooltip-border" tile="true">
+					<EdgeSize>
+						<AbsValue val="10"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="5"/>
+					</TileSize>
+				</Backdrop>
+				<Layers>
+					<Layer>
+						<FontString name="$parent_Title" justifyH="LEFT" inherits="Font_Normal">
+							<Anchors>
+								<Anchor point="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="5" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<FontHeight>
+								<AbsValue val="12"/>
+							</FontHeight>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnEscapePressed>
+						this:ClearFocus()
+					</OnEscapePressed>
+					<OnEnterPressed>
+						LI.AddMasterButton(getglobal(this:GetParent():GetName().."_Add"))
+					</OnEnterPressed>
+					<OnHide>
+						this:ClearFocus()
+					</OnHide>
+					<OnKeyUp>
+						if this:GetText() ~= "" then
+							LI.PaintMasterFilterFrame(this:GetText())
+						else
+							LI.PaintMasterFilterFrame()
+						end
+					</OnKeyUp>
+					<OnEnter>
+						LI.FilterExplain(this)
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+				<FontString name="$parent_Text" inherits="GameTooltipFont" justifyH="LEFT">
+					<FontHeight>
+						<AbsValue val="13"/>
+					</FontHeight>
+				</FontString>
+				<TextInsets>
+					<AbsInset left="8" right="4" top="7" bottom="0"/>
+				</TextInsets>
+			</EditBox>
+			<Frame name="$parent_Filterlist" enableMouse="true">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="20" y="80"/>
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-40" y="-10"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\Tooltip-border" bgFile="Interface\SocialFrame\SocialFrame_Contextborder_bg">
+					<EdgeSize>
+						<AbsValue val="10"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="5"/>
+					</TileSize>
+				</Backdrop>
+				<Frames>
+					<Button name="$parent_Item1" inherits="LootIt_FilterMasterButton" id="1"/>
+					<Button name="$parent_Item2" inherits="LootIt_FilterMasterButton" id="2"/>
+					<Button name="$parent_Item3" inherits="LootIt_FilterMasterButton" id="3"/>
+					<Button name="$parent_Item4" inherits="LootIt_FilterMasterButton" id="4"/>
+					<Button name="$parent_Item5" inherits="LootIt_FilterMasterButton" id="5"/>
+					<Button name="$parent_Item6" inherits="LootIt_FilterMasterButton" id="6"/>
+					<Button name="$parent_Item7" inherits="LootIt_FilterMasterButton" id="7"/>
+					<Button name="$parent_Item8" inherits="LootIt_FilterMasterButton" id="8"/>
+					<Button name="$parent_Item9" inherits="LootIt_FilterMasterButton" id="9"/>
+					<Button name="$parent_Item10" inherits="LootIt_FilterMasterButton" id="10"/>
+				</Frames>
+				<Scripts>
+					<OnLoad>
+						for n = 1, 10 do
+							getglobal("LootIt_MasterItemFilter_Filterlist_Item"..n):ClearAllAnchors()
+							getglobal("LootIt_MasterItemFilter_Filterlist_Item"..n):SetAnchor("TOPLEFT", "TOPLEFT", LootIt_MasterItemFilter_Filterlist, 0, n * 20 - 10)
+							getglobal("LootIt_MasterItemFilter_Filterlist_Item"..n):SetAnchor("BOTTOMRIGHT", "TOPRIGHT", LootIt_MasterItemFilter_Filterlist, 0, n * 20 + 10)
+						end
+					</OnLoad>
+					<OnShow>
+						LI.PaintMasterFilterFrame()
+					</OnShow>
+					<OnMouseWheel>
+						LI.ScrollBar(LootIt_MasterItemFilter_ScrollBar, delta * -1)
+					</OnMouseWheel>
+				</Scripts>
+			</Frame>
+			<Slider name="$parent_ScrollBar" inherits="LootIt_FilterScrollbarTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-35" y="100"/>
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-25" y="-30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnValueChanged>
+						LI.PaintMasterFilterFrame()
+					</OnValueChanged>
+				</Scripts>
+			</Slider>
+		</Frames>
+		<Scripts>
+			<OnMouseDown>
+				LootIt_MasterItemFilter:StartMoving("CENTER")
+			</OnMouseDown>
+			<OnMouseUp>
+				LootIt_MasterItemFilter:StopMovingOrSizing()
+			</OnMouseUp>
+			<OnShow>
+				getglobal(this:GetName().."_Headline"):SetText("LootIt! "..tostring(LI.version))
+
+				LI_MasterFilterCache = nil
+			</OnShow>
+		</Scripts>
+	</Frame>
+
+	<Frame name="LootIt_DKPBiddingFrame_Show" inherits="LI_ReshowTemplate"/>
+
+	<Frame name="LootIt_DKPBiddingFrame" enableMouse="true" frameLevel="5" hidden="true">
+		<Size>
+			<AbsDimension x="256" y="64"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<HitRectInsets>
+			<AbsInset left="0" right="2" top="0" bottom="6"/>
+		</HitRectInsets>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBorder" file="Interface\LootFrame\grouplootframe"/>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Name" inherits="GameFontNormalSmall" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="70" y="30"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="90" y="14"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="$parent_IconFrame" enableMouse="true">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="49" y="14"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<Texture name="$parent_Icon"/>
+					</Layer>
+					<Layer level="ARTWORK">
+						<FontString name="$parent_Count" inherits="NumberFontNormal" weight="BOLD" justifyH="RIGHT" hidden="true">
+							<Anchors>
+								<Anchor point="BOTTOMRIGHT">
+									<Offset>
+										<AbsDimension x="-4" y="-2"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+						GameTooltip:SetHyperLink(this:GetParent().link)
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+			</Frame>
+			<Button name="$parent_CancelButton">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="12" y="14"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+						GameTooltip:SetText(GROUPLOOT_CANCEL, 1, 1, 1)
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+					<OnClick>
+						getglobal(this:GetParent():GetName().."_Bidding"):SetText(0)
+
+						LI.CheckBidding(getglobal(this:GetParent():GetName().."_Bidding"))
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\LootFrame\grouploot-pass-normal"/>
+				<PushedTexture file="Interface\LootFrame\grouploot-pass-depress"/>
+				<DisabledTexture file="Interface\LootFrame\grouploot-pass-normal"/>
+			</Button>
+			<Button name="$parent_RollButton" hidden="true">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="12" y="14"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+						GameTooltip:SetText(GROUPLOOT_ROLL, 1, 1, 1)
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+					<OnClick>
+						LI.CheckBidding(getglobal(this:GetParent():GetName().."_Bidding"))
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\LootFrame\grouploot-dice-normal"/>
+				<PushedTexture file="Interface\LootFrame\grouploot-dice-depress"/>
+				<DisabledTexture file="Interface\LootFrame\grouploot-dice-normal"/>
+			</Button>
+			<EditBox name="$parent_Bidding">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_Name" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="5" y="-12"/>
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_Name" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="80" y="12"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\Tooltip-border" tile="true">
+					<EdgeSize>
+						<AbsValue val="10"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="5"/>
+					</TileSize>
+				</Backdrop>
+				<Layers>
+					<Layer>
+						<FontString name="$parent_Title" justifyH="LEFT" inherits="Font_Normal">
+							<Anchors>
+								<Anchor point="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="5" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<FontHeight>
+								<AbsValue val="12"/>
+							</FontHeight>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnEscapePressed>
+						this:ClearFocus()
+					</OnEscapePressed>
+					<OnEnterPressed>
+						LI.CheckBidding(this)
+					</OnEnterPressed>
+					<OnKeyUp>
+						if this:GetText() == nil or tostring(this:GetText()) == "" or tonumber(this:GetText()) == 0 then
+							getglobal(this:GetParent():GetName().."_RollButton"):Hide()
+							getglobal(this:GetParent():GetName().."_CancelButton"):Show()
+						else
+							getglobal(this:GetParent():GetName().."_RollButton"):Show()
+							getglobal(this:GetParent():GetName().."_CancelButton"):Hide()
+						end
+					</OnKeyUp>
+					<OnShow>
+						LI.CheckBidding(this, true)
+					</OnShow>
+					<OnHide>
+						this:ClearFocus()
+					</OnHide>
+					<OnEnter>
+						--explain it
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+				<FontString name="$parent_Text" inherits="GameTooltipFont" justifyH="LEFT">
+					<FontHeight>
+						<AbsValue val="13"/>
+					</FontHeight>
+				</FontString>
+				<TextInsets>
+					<AbsInset left="8" right="4" top="7" bottom="0"/>
+				</TextInsets>
+			</EditBox>
+		</Frames>
+		<Scripts>
+			<OnShow>
+				LI.DKPPaintFrame(this)
+			</OnShow>
+			<OnHide>
+				LI.DKPLootFrame_OnHide(this)
+			</OnHide>
+			<OnUpdate>
+				LI.LootFrame_OnUpdate(this, elapsedTime)
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+
+	<EditBox name="LI_LoginBoxTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="140" y="32"/>
+		</Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parent_Descr" inherits="GameFontHighlightLarge" text="Error" justifyH="RIGHT">
+					<Size>
+						<AbsDimension x="130" y="40"/>
+					</Size>
+					<Anchors>
+						<Anchor point="RIGHT" relativePoint="LEFT">
+							<Offset>
+								<AbsDimension x="-15" y="-5"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="14"/>
+					</FontHeight>
+				</FontString>
+			</Layer>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentLeft" file="Interface\DialogFrame\DialogBox-Input-Border">
+					<Size>
+						<AbsDimension x="8" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="-12" y="-4"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0" right="0.25" top="0" bottom="1.0"/>
+				</Texture>
+				<Texture name="$parentRight" file="Interface\DialogFrame\DialogBox-Input-Border">
+					<Size>
+						<AbsDimension x="8" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="RIGHT">
+							<Offset>
+								<AbsDimension x="12" y="-4"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.75" right="1.0" top="0" bottom="1.0"/>
+				</Texture>
+				<Texture file="Interface\DialogFrame\DialogBox-Input-Border">
+					<Size>
+						<AbsDimension x="16" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+						<Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.25" right="0.75" top="0" bottom="1.0"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<TextInsets>
+			<AbsInset top="4" left="2" bottom="0" right="2"/>
+		</TextInsets>
+		<FontString inherits="GameEditFont"/>
+	</EditBox>
+
+	<Frame name="LootIt_DKP_Info" parent="UIParent" inherits="UICommonFrameTemplate" hidden="true">
+		<Size>
+			<AbsDimension x="290" y="370"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer>
+				<FontString name="$parent_Headline" inherits="QuestTitleFont" text="LootIt!">
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="5"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="16"/>
+					</FontHeight>
+				</FontString>
+			</Layer>
+			<Layer>
+				<FontString name="$parent_Log_Head" inherits="QuestTitleFont" justifyH="LEFT" text="Error">
+					<Size>
+						<AbsDimension x="250" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="0" y="205"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer>
+				<FontString name="$parent_Log" inherits="Font_FrameTitle" justifyH="LEFT" justifyV="TOP" text="Error">
+					<Size>
+						<AbsDimension x="266" y="100"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_Log_Head">
+							<Offset>
+								<AbsDimension x="0" y="1"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Slider name="$parent_ScrollBar" inherits="LootIt_FilterScrollbarTemplate">
+				<Size>
+					<AbsDimension x="15" y="75"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parent_Log">
+						<Offset>
+							<AbsDimension x="-10" y="14"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnValueChanged>
+						LI.DKP_Log()
+					</OnValueChanged>
+					<OnMouseWheel>
+						LI.ScrollBar(this, delta * -1)
+					</OnMouseWheel>
+				</Scripts>
+			</Slider>
+			<EditBox name="$parent_Box1" inherits="LI_LoginBoxTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+						<Offset>
+							<AbsDimension x="-43" y="38"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnShow>
+						getglobal(this:GetName().."_Descr"):SetText(LI.Trans("DESC_SYSTEMID")..": ")
+						LI.DKP_Box_Show(this)
+						LI.DKP_Box_Check(this)
+					</OnShow>
+					<OnEscapePressed>
+						this:ClearFocus()
+					</OnEscapePressed>
+					<OnTabPressed>
+						LootIt_DKP_Info_Box2:SetFocus()
+					</OnTabPressed>
+					<OnEnterPressed>
+						LI.DKP_Box_Check(this)
+					</OnEnterPressed>
+					<OnEditFocusLost>
+						LI.DKP_Box_Check(this)
+					</OnEditFocusLost>
+					<OnEnter>
+						LI.GameTooltip(this, "ANCHOR_RIGHT", 16, -4, "TOOLTIP_SYSTEMID")
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+			</EditBox>
+			<EditBox name="$parent_Box2" inherits="LI_LoginBoxTemplate" id="2">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent_Box1">
+						<Offset>
+							<AbsDimension x="0" y="14"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnShow>
+						getglobal(this:GetName().."_Descr"):SetText(LI.Trans("DESC_SPIN")..": ")
+						LI.DKP_Box_Show(this)
+					</OnShow>
+					<OnEscapePressed>
+						this:ClearFocus()
+					</OnEscapePressed>
+					<OnTabPressed>
+						LootIt_DKP_Info_Box3:SetFocus()
+					</OnTabPressed>
+					<OnEnterPressed>
+						LI.DKP_Box_Check(this)
+					</OnEnterPressed>
+					<OnEditFocusLost>
+						LI.DKP_Box_Check(this)
+					</OnEditFocusLost>
+					<OnEnter>
+						LI.GameTooltip(this, "ANCHOR_RIGHT", 16, -4, "TOOLTIP_SPIN")
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+			</EditBox>
+			<EditBox name="$parent_Box3" inherits="LI_LoginBoxTemplate" id="3">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent_Box2">
+						<Offset>
+							<AbsDimension x="0" y="14"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnShow>
+						getglobal(this:GetName().."_Descr"):SetText(LI.Trans("DESC_RAIDNAME")..": ")
+						LI.DKP_Box_Show(this)
+					</OnShow>
+					<OnEscapePressed>
+						this:ClearFocus()
+					</OnEscapePressed>
+					<OnTabPressed>
+						LootIt_DKP_Info_Box1:SetFocus()
+					</OnTabPressed>
+					<OnEnterPressed>
+						LI.DKP_Box_Check(this)
+					</OnEnterPressed>
+					<OnEditFocusLost>
+						LI.DKP_Box_Check(this)
+					</OnEditFocusLost>
+					<OnEnter>
+						LI.GameTooltip(this, "ANCHOR_RIGHT", 16, -4, "TOOLTIP_RAIDNAME")
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+			</EditBox>
+			<Button name="$parent_StartStopButton" inherits="UIPanelButtonTemplate" text="ERROR">
+				<Size>
+					<AbsDimension x="160" y="30"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP" relativePoint="TOP">
+						<Offset>
+							<AbsDimension x="0" y="170"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						LI.DKP_StartStop(this)
+					</OnClick>
+					<OnLoad>
+						this:SetText(LI.Trans("START"))
+					</OnLoad>
+					<OnEnter>
+						LI.GameTooltip(this, "ANCHOR_BOTTOMRIGHT", 4, 0, "TOOLTIP_STARTSTOP")
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+			</Button>
+			<Button name="$parent_SendButton" inherits="UIPanelButtonTemplate" text="ERROR">
+				<Size>
+					<AbsDimension x="160" y="30"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_Log">
+						<Offset>
+							<AbsDimension x="0" y="6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						LI.SendToBrowser()
+					</OnClick>
+					<OnLoad>
+						this:SetText(LI.Trans("SEND_TO_WEB"))
+					</OnLoad>
+					<OnEnter>
+						LI.GameTooltip(this, "ANCHOR_BOTTOMRIGHT", 4, 0, "TOOLTIP_SEND_TO_WEB")
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnShow>
+				getglobal(this:GetName().."_Headline"):SetText("LootIt! "..tostring(LI.version))
+				getglobal(this:GetName().."_Log_Head"):SetText(LI.Trans("LOG_HEADLINE")..":")
+
+				LI.DKP_Log(true)
+			</OnShow>
+			<OnUpdate>
+				LI.DKP_Log_OnUpdate(this, elapsedTime)
+			</OnUpdate>
+			<OnMouseWheel>
+				LI.ScrollBar(getglobal(this:GetName().."_ScrollBar"), delta * -1)
+			</OnMouseWheel>
+		</Scripts>
+	</Frame>
+</Ui>

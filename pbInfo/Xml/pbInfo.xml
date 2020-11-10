@@ -1,0 +1,162 @@
+<!--
+pbInfo - Xml/pbInfo.xml
+	v0.53
+	by p.b. a.k.a. novayuna
+	released under the Creative Commons License By-Nc-Sa: http://creativecommons.org/licenses/by-nc-sa/3.0/
+-->
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="..\..\worldxml\ui.xsd">
+	<Frame name="pbInfo_MainFrame" parent="UIParent" hidden="true">
+		<Scripts>
+			<OnLoad>
+				this:RegisterEvent("VARIABLES_LOADED");
+				this:RegisterEvent("UNIT_TARGET_CHANGED");
+				this:RegisterEvent("UPDATE_MOUSEOVER_UNIT");
+				this:RegisterEvent("CHAT_MSN_POPUP");
+				this:RegisterEvent("CHAT_MSG_WHISPER");
+				this:RegisterEvent("CHAT_MSG_WHISPER_INFORM");
+				--this:RegisterEvent("CHAT_MSN_OPEN");
+				this:RegisterEvent("STORE_OPEN");
+				this:RegisterEvent("BAG_ITEM_UPDATE");
+
+				this:RegisterEvent("SEARCH_GROUP_RESULT");
+				this:RegisterEvent("ZONE_CHANGED");
+
+				SaveVariables("pbInfoSettings");
+				SaveVariables("pbInfoCharData");
+				pbInfo.Scripts.OnLoad();
+			</OnLoad>
+			<OnEvent>
+				if (event == "VARIABLES_LOADED") then
+					if (pbInfoSettings["ENABLE"] == false) then
+						DEFAULT_CHAT_FRAME:AddMessage("[|cffFFFFFFpbInfo|r] " .. pbInfo.Locale["Messages"]["ATTENTIONENABLE"], unpack(pbInfo.MessageColor));
+					end;
+					pbInfo.Scripts.OnLoad();
+					pbInfo.BloodBars.Scripts.OnLoad();
+					pbInfo.ChatFrame.Scripts.OnLoad();
+					pbInfo.ChatLog.Scripts.OnLoad();
+					pbInfo.TargetFrame.Scripts.OnLoad();
+					pbInfo.Tooltip.Scripts.OnLoad();
+					
+					if (AddonManager) then
+						local addon = {
+							name = "pbInfo",
+							version = pbInfo.Version,
+							author = "novayuna, odie2",
+							description = pbInfo.Locale["Messages"]["DESCRIPTION"],
+							icon = pbInfo.Directory .. "Textures/pbInfo.png",
+							category = "Interface",
+							configFrame = pbInfoConfig, 
+							slashCommands = SLASH_pbInfoToggleConfig2,
+							miniButton = pbInfoMiniButton
+						};
+						if (AddonManager.RegisterAddonTable) then
+							AddonManager.RegisterAddonTable(addon);
+						else
+							AddonManager.RegisterAddon(addon.name, addon.description, addon.icon, addon.category, addon.configFrame, addon.slashCommands, addon.miniButton, addon.version, addon.author);
+						end;
+					else
+						DEFAULT_CHAT_FRAME:AddMessage(pbInfo.Locale["Messages"]["LOADED"] .. ": |cffFFFFFFpbInfo " .. pbInfo.Version .. "|r\n[|cffFFFFFFpbInfo|r] " .. pbInfo.Locale["Messages"]["ONLOAD"], unpack(pbInfo.MessageColor));
+					end;
+				elseif (pbInfoSettings["ENABLE"]) then
+					if (event == "UNIT_TARGET_CHANGED" and arg1 == "player") then
+						pbInfo.MobDB.Update("target");
+					elseif (event == "UPDATE_MOUSEOVER_UNIT") then
+						pbInfo.Tooltip.Scripts.OnUpdate();
+					<!-- elseif ((event == "CHAT_MSG_WHISPER" or event == "CHAT_MSG_WHISPER_INFORM") and pbInfoSettings["CHATLOG"]) then -->
+					elseif (event == "CHAT_MSG_WHISPER" and pbInfoSettings["CHATLOG"]) then
+						pbInfo.ChatLog.Scripts.OnEvent(this, event, arg1, arg2);
+					elseif (event == "STORE_OPEN") then
+						if (pbInfoSettings["AUTOREPAIRALL"]) then
+							ClickRepairAllButton();
+						end;
+						if (pbInfoSettings["PLAYERINFO"]) then
+							SearchGroupPeople(-1, 0, 100, -1, 0, 100);
+						end;
+					elseif (event == "ZONE_CHANGED" and pbInfoSettings["PLAYERINFO"]) then
+						SearchGroupPeople(-1, 0, 100, -1, 0, 100);
+					elseif (event == "SEARCH_GROUP_RESULT" and (pbInfoSettings["PLAYERINFO"] or pbInfoSettings["TOOLTIPSHOWPLAYERINFO"])) then
+						pbInfo.PlayerDB.ParseGroupSearch();
+					elseif (event == "BAG_ITEM_UPDATE" and pbInfoSettings["MATINFOITEMCOUNT"]) then
+						-- arg1: 1-49 ItemShop, 50-55 Arcane Transmutor, 60-240 Bags
+						if (type(arg1) == "number") then
+							local _, name = GetGoodsItemInfo(arg1);
+							pbInfo.MatDBitemCount[name] = nil;
+						end;
+					end;
+				end;
+			</OnEvent>
+		</Scripts>
+	</Frame>
+    <Button name="pbInfoMiniButton" inherits="UIPanelButtonTemplate" parent="AddonManagerMiniFrame" hidden="true">
+		<Size>
+			<AbsDimension y="24" x="24"/>
+		</Size>
+		<Scripts>
+			<OnClick>
+				PlaySoundByPath("sound\\interface\\ui_generic_click.mp3");
+				if (not pbInfoConfig:IsVisible()) then
+					PlaySoundByPath("sound\\interface\\ui_generic_open.mp3");
+				end;
+				AddonManager.MiniButton_OnClick(this);
+			</OnClick>
+			<OnEnter>
+                AddonManager.MiniButton_OnEnter(this);
+			</OnEnter>
+			<OnLeave>
+				AddonManager.MiniButton_OnLeave(this);
+			</OnLeave>
+		</Scripts>
+	    <NormalTexture file="Interface\AddOns\pbInfo\Textures\pbInfo.png"/>
+	    <PushedTexture file="Interface\AddOns\pbInfo\Textures\MiniButton\Pushed.png"/>
+		<HighlightTexture file="Interface\AddOns\pbInfo\Textures\MiniButton\Highlight.png" alphaMode="BLEND"/>
+	</Button>
+	<!-- Timers are enabled/disabled via scripts. No need to put pbInfoSettings checks in here -->
+	<Frame name="pbInfoChatLogTimer" parent="UIParent" hidden="true">
+		<Scripts>
+			<OnUpdate>
+					pbInfo.ChatLog.Scripts.OnUpdate();
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+	<Frame name="pbInfoTargetFrameTimer" parent="UIParent" hidden="false">
+		<Scripts>
+			<OnUpdate>
+				if (TargetFrame:IsVisible()) then
+					pbInfo.TargetFrame.Scripts.OnUpdate();
+				end;
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+	<Frame name="pbInfoTooltipTimer" parent="UIParent" hidden="false">
+		<Scripts>
+			<OnUpdate>
+				if (GameTooltip:IsVisible()) then
+					pbInfo.Tooltip.Scripts.OnUpdate();
+				end;
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+	<Frame name="pbInfoBloodBarsTimer" parent="UIParent" hidden="false">
+		<Scripts>
+			<OnUpdate>
+				pbInfo.BloodBars.Scripts.OnUpdate();
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+	<Frame name="pbInfoCharDataTimer" parent="UIParent" hidden="false">
+		<Scripts>
+			<OnLoad>
+				if (not os) then
+					pbInfoCharDataTimer:Hide();
+				end;
+			</OnLoad>
+			<OnUpdate>
+				local name = UnitName("player");
+				name = pbCleanUpUnitNamePlayer(name);
+				if (not pbIsEmpty(name)) then
+					pbInfo.CharData.Scripts.OnLoad(name);
+				end;
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+</Ui>

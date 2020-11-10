@@ -1,0 +1,17 @@
+## Title: Streamline
+## Description: Streamlines the interface by removing unnecessary clicks and other minor improvements
+## Author: Alleris
+## Contributors: growmax - German, newvark - Polish, korigard - Italian
+## X-Curse-Packaged-Version: v1.51
+## X-Curse-Project-Name: Streamline
+## X-Curse-Project-ID: streamline
+## X-Curse-Repository-ID: rom/streamline/mainline
+
+Libs/Sol/LibStub.lua
+Libs/Sol/Sol.lua
+
+Streamline.lua
+StreamlineConfig.lua
+Streamline.xml
+StreamlineConfig.xml
+Locale/Streamline.loc.EN.lua

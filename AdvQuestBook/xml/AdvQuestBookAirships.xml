@@ -1,0 +1,41 @@
+<!-- ä
+
+	Name: Advanced Questbook
+	By: Crypton
+
+-->
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Button name="AdvQuestBookAirshipIcon" hidden="true" enableMouse="true" virtual="true">
+		<Size>
+			<AbsDimension x="20" y="20" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" />
+		</Anchors>
+		<NormalTexture file="Interface\AddOns\AdvQuestBook\images\airship.png" />
+		<PushedTexture file="Interface\AddOns\AdvQuestBook\images\airship.png" />
+		<HighlightTexture file="Interface\AddOns\AdvQuestBook\images\airshiphl.png" alphaMode="NONE" />
+		<Scripts>
+			<OnClick>
+				AdvQuestBook_AutoMoveTo(this:GetName());
+			</OnClick>
+			<OnEnter>
+				AdvQuestBookIcon_OnDirection(this:GetName(), "ash", "in");
+			</OnEnter>
+			<OnLeave>
+				AdvQuestBookIcon_OnDirection(this, nil, nil);
+			</OnLeave>
+		</Scripts>
+	</Button>
+	<Frame name="AdvQuestBookAirshipIcons" parent="WorldMapViewFrame" hidden="false" enableMouse="true" frameLevel="10000" frameStrata="HIGH">
+		<Size>
+			<AbsDimension x="20" y="20" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" />
+		</Anchors>
+		<Frames>
+			<Button name="$parent1" inherits="AdvQuestBookAirshipIcon" />
+		</Frames>
+	</Frame>
+</Ui>

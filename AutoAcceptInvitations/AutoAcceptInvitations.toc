@@ -1,0 +1,2 @@
+AutoAcceptInvitations.lua
+AutoAcceptInvitations.xml

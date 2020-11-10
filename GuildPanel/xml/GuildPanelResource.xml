@@ -1,0 +1,725 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/..\..\WorldXML\UI.xsd">
+    <Frame name="GuildPanel_ResourceFrame" parent="GuildPanelFrame" hidden="true">
+        <Size>
+            <AbsDimension x="676" y="370" />
+        </Size>
+        <Anchors>
+            <Anchor point="TOPLEFT">
+                <Offset>
+                    <AbsDimension x="12" y="153" />
+                </Offset>
+            </Anchor>
+        </Anchors>
+        <Frames>
+            <Frame name="GuildPanel_ResourceList" inherits="GuildPanel_BackDropTemplate2" enableMouse="true" >
+                <Size>
+                    <AbsDimension x="380" y="360" />
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="295" y="20" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parent_TitleName" inherits="GameFontYellow" text="GUILD_STR_CONTRIBUTIONER">
+                            <Anchors>
+                                <Anchor point="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="15" y="10"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+
+                        <FontString name="$parent_TitleResource" inherits="GameFontYellow" text="GUILD_RESOURCE_INFO">
+                            <Anchors>
+                                <Anchor point="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="120" y="10"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+
+                        <FontString name="$parent_TitleDay" inherits="GameFontYellow" text="GUILD_RESOURCE_DATE">
+                            <Anchors>
+                                <Anchor point="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="260" y="10"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+
+                        <Texture file="Interface\Common\PanelSeparate-HorizontalLine">
+                            <Size>
+                                <AbsDimension x="340" y="6"/>
+                            </Size>
+                            <Anchors>
+                                <Anchor point="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="16" y="25"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <TexCoords left="0.05" right="0.95" top="0" bottom="1"/>
+                        </Texture>
+                    </Layer>
+                </Layers>
+
+                <Frames>
+                    <Button name="$parent_Resource1" inherits="GuildPanel_ResourceTemplate" id="1">
+                        <Anchors>
+                        	<Anchor point="TOPLEFT">
+                            	<Offset>
+                                	<AbsDimension x="2" y="32" />
+                            	</Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Button>
+                    <Button name="$parent_Resource2" inherits="GuildPanel_ResourceTemplate" id="2">
+                        <Anchors>
+                        	<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Resource1">
+                            	<Offset>
+                                	<AbsDimension x="0" y="0" />
+                            	</Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Button>
+                    <Button name="$parent_Resource3" inherits="GuildPanel_ResourceTemplate" id="3">
+                        <Anchors>
+                        	<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Resource2">
+                            	<Offset>
+                                	<AbsDimension x="0" y="0" />
+                            	</Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Button>
+                    <Button name="$parent_Resource4" inherits="GuildPanel_ResourceTemplate" id="4">
+                        <Anchors>
+                        	<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Resource3">
+                            	<Offset>
+                                	<AbsDimension x="0" y="0" />
+                            	</Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Button>
+                    <Button name="$parent_Resource5" inherits="GuildPanel_ResourceTemplate" id="5">
+                        <Anchors>
+                        	<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Resource4">
+                            	<Offset>
+                                	<AbsDimension x="0" y="0" />
+                            	</Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Button>
+                    <Button name="$parent_Resource6" inherits="GuildPanel_ResourceTemplate" id="6">
+                        <Anchors>
+                        	<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Resource5">
+                            	<Offset>
+                                	<AbsDimension x="0" y="0" />
+                            	</Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Button>
+                    <Button name="$parent_Resource7" inherits="GuildPanel_ResourceTemplate" id="7">
+                        <Anchors>
+                        	<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Resource6">
+                            	<Offset>
+                                	<AbsDimension x="0" y="0" />
+                            	</Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Button>
+                    <Button name="$parent_Resource8" inherits="GuildPanel_ResourceTemplate" id="8">
+                        <Anchors>
+                        	<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Resource7">
+                            	<Offset>
+                                	<AbsDimension x="0" y="0" />
+                            	</Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Button>
+                    <Button name="$parent_Resource9" inherits="GuildPanel_ResourceTemplate" id="9">
+                        <Anchors>
+                        	<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Resource8">
+                            	<Offset>
+                                	<AbsDimension x="0" y="0" />
+                            	</Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Button>
+                    <Button name="$parent_Resource10" inherits="GuildPanel_ResourceTemplate" id="10">
+                        <Anchors>
+                        	<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Resource9">
+                            	<Offset>
+                                	<AbsDimension x="0" y="0" />
+                            	</Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Button>
+                    <Button name="$parent_Resource11" inherits="GuildPanel_ResourceTemplate" id="11">
+                        <Anchors>
+                        	<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Resource10">
+                            	<Offset>
+                                	<AbsDimension x="0" y="0" />
+                            	</Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Button>
+                    <Button name="$parent_Resource12" inherits="GuildPanel_ResourceTemplate" id="12">
+                        <Anchors>
+                        	<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Resource11">
+                            	<Offset>
+                                	<AbsDimension x="0" y="0" />
+                            	</Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Button>
+                    <Button name="$parent_Resource13" inherits="GuildPanel_ResourceTemplate" id="13">
+                        <Anchors>
+                        	<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Resource12">
+                            	<Offset>
+                                	<AbsDimension x="0" y="0" />
+                            	</Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Button>
+                    <Button name="$parent_Resource14" inherits="GuildPanel_ResourceTemplate" id="14">
+                        <Anchors>
+                        	<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Resource13">
+                            	<Offset>
+                                	<AbsDimension x="0" y="0" />
+                            	</Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Button>
+                    <Button name="$parent_Resource15" inherits="GuildPanel_ResourceTemplate" id="15">
+                        <Anchors>
+                        	<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Resource14">
+                            	<Offset>
+                                	<AbsDimension x="0" y="0" />
+                            	</Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Button>
+                    <Button name="$parent_Resource16" inherits="GuildPanel_ResourceTemplate" id="16">
+                        <Anchors>
+                        	<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Resource15">
+                            	<Offset>
+                                	<AbsDimension x="0" y="0" />
+                            	</Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Button>
+                    <Button name="$parent_Resource17" inherits="GuildPanel_ResourceTemplate" id="17">
+                        <Anchors>
+                        	<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Resource16">
+                            	<Offset>
+                                	<AbsDimension x="0" y="0" />
+                            	</Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Button>
+                    <Button name="$parent_Resource18" inherits="GuildPanel_ResourceTemplate" id="18">
+                        <Anchors>
+                        	<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Resource17">
+                            	<Offset>
+                                	<AbsDimension x="0" y="0" />
+                            	</Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Button>
+                    <Button name="$parent_Resource19" inherits="GuildPanel_ResourceTemplate" id="19">
+                        <Anchors>
+                        	<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Resource18">
+                            	<Offset>
+                                	<AbsDimension x="0" y="0" />
+                            	</Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Button>
+                    <Button name="$parent_Resource20" inherits="GuildPanel_ResourceTemplate" id="20">
+                        <Anchors>
+                        	<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Resource19">
+                            	<Offset>
+                                	<AbsDimension x="0" y="0" />
+                            	</Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Button>
+                    <!-- Entry frames here -->
+                    <Slider name="GuildPanel_ResourceListSlider" inherits="UIPanelScrollBarTemplate" enableMouse="true">
+                        <Size>
+                            <AbsDimension x="12" y="360" />
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPRIGHT">
+                                <Offset>
+                                    <AbsDimension x="-1" y="45" />
+                                </Offset>
+                            </Anchor>
+                            <Anchor point="BOTTOMRIGHT">
+                                <Offset>
+                                    <AbsDimension x="-1" y="-19" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnValueChanged>
+                                GuildPanel_ResourceList_OnValueChanged(this, arg1);
+                            </OnValueChanged>
+                            <OnMouseWheel>
+                                GuildPanel_ResourceList_OnMouseWheel(GuildPanel_ResourceListSlider, delta);
+                            </OnMouseWheel>
+                            <OnLoad>
+                        		 this:SetValueStepMode("INT")
+                                 this:SetMinMaxValues(1,17);
+                            </OnLoad>
+                        </Scripts>
+                    </Slider>
+                </Frames>
+                <Scripts>
+                    <OnMouseWheel>
+                        GuildPanel_ResourceList_OnMouseWheel(GuildPanel_ResourceListSlider, delta);
+                    </OnMouseWheel>
+	                <OnShow>
+						GuildPanel.SelectResourceUser("");
+                        GuildPanel.PopulateResourceList(this);
+	                </OnShow>
+                    <OnLoad>
+                    	GuildPanel.FetchResourceList(this);
+                    </OnLoad>
+                </Scripts>
+            </Frame>
+            <!-- begin contrib frame -->
+            <Frame name="GuildPanel_ContribFrame" inherits="GuildPanel_BackDropTemplate1">
+                <Size>
+                    <AbsDimension x="285" y="205" />
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="5" y="20" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+	            <Frames>
+	                <Frame name="GP_Contrib_Item1" inherits="GC_ItemTemplate" id="1">
+	                    <Anchors>
+	                        <Anchor point="TOPLEFT">
+	                            <Offset>
+	                                <AbsDimension x="10" y="10"/>
+	                            </Offset>
+	                        </Anchor>
+	                    </Anchors>
+	                </Frame>
+	                <Frame name="GP_Contrib_Item2" inherits="GC_ItemTemplate" id="2">
+	                    <Anchors>
+	                        <Anchor point="TOPLEFT" relativeTo="GP_Contrib_Item1" relativePoint="TOPRIGHT">
+	                            <Offset>
+	                                <AbsDimension x="3" y="0"/>
+	                            </Offset>
+	                        </Anchor>
+	                    </Anchors>
+	                </Frame>
+	                <Frame name="GP_Contrib_Item3" inherits="GC_ItemTemplate" id="3">
+	                    <Anchors>
+	                        <Anchor point="TOPLEFT" relativeTo="GP_Contrib_Item1" relativePoint="BOTTOMLEFT">
+	                            <Offset>
+	                                <AbsDimension x="0" y="3"/>
+	                            </Offset>
+	                        </Anchor>
+	                    </Anchors>
+	                </Frame>
+	                <Frame name="GP_Contrib_Item4" inherits="GC_ItemTemplate" id="4">
+	                    <Anchors>
+	                        <Anchor point="TOPLEFT" relativeTo="GP_Contrib_Item3" relativePoint="TOPRIGHT">
+	                            <Offset>
+	                                <AbsDimension x="3" y="0"/>
+	                            </Offset>
+	                        </Anchor>
+	                    </Anchors>
+	                </Frame>
+	                <Frame name="GP_Contrib_Item5" inherits="GC_ItemTemplate" id="5">
+	                    <Anchors>
+	                        <Anchor point="TOPLEFT" relativeTo="GP_Contrib_Item3" relativePoint="BOTTOMLEFT">
+	                            <Offset>
+	                                <AbsDimension x="0" y="3"/>
+	                            </Offset>
+	                        </Anchor>
+	                    </Anchors>
+	                </Frame>
+	                <Frame name="GP_Contrib_Item6" inherits="GC_ItemTemplate" id="6">
+	                    <Anchors>
+	                        <Anchor point="TOPLEFT" relativeTo="GP_Contrib_Item5" relativePoint="TOPRIGHT">
+	                            <Offset>
+	                                <AbsDimension x="3" y="0"/>
+	                            </Offset>
+	                        </Anchor>
+	                    </Anchors>
+	                </Frame>
+
+	                <Frame name="GP_GuildContributionMoney" inherits="MoneyInputFrameTemplate">
+	                    <Anchors>
+	                        <Anchor point="TOPLEFT" relativeTo="GP_Contrib_Item5" relativePoint="BOTTOMLEFT" >
+	                            <Offset>
+	                                <AbsDimension x="0" y="5"/>
+	                            </Offset>
+	                        </Anchor>
+	                    </Anchors>
+	                    <Scripts>
+	                        <OnLoad>
+	                            MoneyInputFrame_SetMode(this, "copper");
+	                            MoneyInputFrame_SetOnvalueChangedFunc(this, GCF_CanContribution);
+	                        </OnLoad>
+	                    </Scripts>
+	                </Frame>
+
+	                <Frame name="GP_GuildContributionBonusMoney" inherits="MoneyInputFrameTemplate">
+	                    <Anchors>
+	                        <Anchor point="LEFT" relativePoint="RIGHT" relativeTo="GP_GuildContributionMoney">
+	                            <Offset>
+	                                <AbsDimension x="8" y="0"/>
+	                            </Offset>
+	                        </Anchor>
+	                    </Anchors>
+	                    <Scripts>
+	                        <OnLoad>
+	                            MoneyInputFrame_SetMode(this, "bonus");
+	                            MoneyInputFrame_SetOnvalueChangedFunc(this, GCF_CanContributionBonus);
+	                        </OnLoad>
+	                    </Scripts>
+	                </Frame>
+
+	                <Button name="GP_CancelContrib" text="GUILD_MSG_CLEAN" inherits="UIPanelButtonTemplate">
+	                    <Size>
+	                        <AbsDimension x="60" y="24"/>
+	                    </Size>
+	                    <Anchors>
+	                        <Anchor point="BOTTOMRIGHT">
+	                            <Offset>
+	                                <AbsDimension x="-2" y="-2"/>
+	                            </Offset>
+	                        </Anchor>
+	                    </Anchors>
+	                    <Scripts>
+	                        <OnClick>
+	                            GP_Ressource_OnClean();
+                                -- reset queries
+                                GuildPanel.ResourceLoaded = false;
+                                GuildPanel.ResourcePage = 0;
+	                        </OnClick>
+	                    </Scripts>
+	                </Button>
+
+	                <Button name="GP_SubmitContrib" text="BSF_STR_APPLY" inherits="UIPanelButtonTemplate">
+	                    <Size>
+	                        <AbsDimension x="60" y="24"/>
+	                    </Size>
+	                    <Anchors>
+	                        <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMLEFT" relativeTo="GP_CancelContrib">
+	                            <Offset>
+	                                <AbsDimension x="-2" y="0"/>
+	                            </Offset>
+	                        </Anchor>
+	                    </Anchors>
+	                    <Scripts>
+	                        <OnClick>
+                            		GP_Ressource_OnOK();
+	                                -- reset queries
+	                                GuildPanel.ResourceLoaded = false;
+	                                GuildPanel.ResourcePage = 0;
+        					</OnClick>
+	                    </Scripts>
+	                </Button>
+
+	            </Frames>
+
+	            <Scripts>
+	                <OnLoad>
+	                    GP_RessItems_OnLoad(this)
+	                </OnLoad>
+	                <OnEvent>
+	                    GP_RessItems_OnEvent(this, event)
+	                </OnEvent>
+	                <OnShow>
+	                    GP_RessItems_OnShow(this)
+	                </OnShow>
+	                <OnHide>
+	                    GP_RessItems_OnHide(this)
+	                </OnHide>
+	            </Scripts>
+            </Frame>
+            <!-- end contrib frame -->
+
+            <!-- start -->
+            <Frame name="GuildPanel_GuildFunctionsFrame" inherits="GuildPanel_BackDropTemplate2">
+                <Size>
+                    <AbsDimension x="285" y="205" />
+                </Size>
+
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="5" y="20"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+
+                <Layers>
+                    <Layer level="ARTWORK">
+
+                        <FontString name="GP_GuildPage1Text" inherits="GameFontYellow" text="GUILDCONTRIBUTION_GUILDFUNCTION">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" >
+                                    <Offset>
+                                        <AbsDimension x="15" y="10"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+
+                        <FontString name="GP_GuildNowLevText" inherits="GameFontYellow" text="GRF_MSG_NOW_LEVEL">
+                            <Anchors>
+                                <Anchor point="TOPLEFT"  >
+                                    <Offset>
+                                        <AbsDimension x="125" y="10"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+
+                        <FontString name="GP_NextPointText" inherits="GameFontYellow" text="GRF_MSG_NEXT_LEVEL">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" >
+                                    <Offset>
+                                        <AbsDimension x="205" y="10"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+
+                        <Texture file="Interface\Common\PanelSeparate-HorizontalLine">
+                            <Size>
+                                <AbsDimension x="260" y="6"/>
+                            </Size>
+                            <Anchors>
+                                <Anchor point="TOP">
+                                    <Offset>
+                                        <AbsDimension x="0" y="25"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <TexCoords left="0.05" right="0.95" top="0" bottom="1"/>
+                        </Texture>
+                    </Layer>
+                </Layers>
+
+                <Frames>
+                    <Frame name="$parent_Func1" inherits="GuildFunc_Temp">
+                        <Anchors>
+                            <Anchor point="TOPLEFT"  relativePoint="TOPLEFT"  >
+                                <Offset>
+                                    <AbsDimension x="8" y="35"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Frame>
+                    <Frame name="$parent_Func2" inherits="GuildFunc_Temp">
+                        <Anchors>
+                            <Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_Func1">
+                                <Offset>
+                                    <AbsDimension x="0" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Frame>
+                    <Frame name="$parent_Func3" inherits="GuildFunc_Temp">
+                        <Anchors>
+                            <Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_Func2">
+                                <Offset>
+                                    <AbsDimension x="0" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Frame>
+                    <Frame name="$parent_Func4" inherits="GuildFunc_Temp">
+                        <Anchors>
+                            <Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_Func3">
+                                <Offset>
+                                    <AbsDimension x="0" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Frame>
+                    <Frame name="$parent_Func5" inherits="GuildFunc_Temp">
+                        <Anchors>
+                            <Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_Func4">
+                                <Offset>
+                                    <AbsDimension x="0" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Frame>
+                    <Frame name="$parent_Func6" inherits="GuildFunc_Temp">
+                        <Anchors>
+                            <Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_Func5">
+                                <Offset>
+                                    <AbsDimension x="0" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Frame>
+                    <Frame name="$parent_Func7" inherits="GuildFunc_Temp">
+                        <Anchors>
+                            <Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_Func6">
+                                <Offset>
+                                    <AbsDimension x="0" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Frame>
+                    <Frame name="$parent_Func8" inherits="GuildFunc_Temp">
+                        <Anchors>
+                            <Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_Func7">
+                                <Offset>
+                                    <AbsDimension x="0" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Frame>
+                </Frames>
+                <Scripts>
+                    <OnLoad>
+                        GP_GuildFunctions_OnLoad(this)
+                    </OnLoad>
+                    <OnShow>
+                        GP_GuildFunctions_OnShow(this)
+                    </OnShow>
+                </Scripts>
+            </Frame>
+            <!-- end functions -->
+            <!--  GuildPanel_RessStatus -->
+
+            <Frame name="GuildPanel_RessStatus" enableMouse="false" inherits="GuildPanel_BackDropTemplate2">
+                <Size>
+                    <AbsDimension x="285" y="150"/>
+                </Size>
+                <Anchors>
+                   <Anchor point="TOPLEFT">
+ 	                   <Offset>
+	                       <AbsDimension x="5" y="230"/>
+                          </Offset>
+                      </Anchor>
+                  </Anchors>
+                  <Frames>
+                      <Frame name="$parent_Res1" inherits="GuildRes_Temp">
+                          <Anchors>
+                              <Anchor point="TOPLEFT"  relativePoint="TOPLEFT"  >
+                                  <Offset>
+                                      <AbsDimension x="9" y="5"/>
+                                  </Offset>
+                              </Anchor>
+                          </Anchors>
+                      </Frame>
+
+                      <Frame name="$parent_Res3" inherits="GuildRes_Temp">
+                          <Anchors>
+                              <Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_Res1">
+                                  <Offset>
+                                      <AbsDimension x="0" y="0"/>
+                                  </Offset>
+                              </Anchor>
+                          </Anchors>
+                      </Frame>
+                      <Frame name="$parent_Res4" inherits="GuildRes_Temp">
+                          <Anchors>
+                              <Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_Res3">
+                                  <Offset>
+                                      <AbsDimension x="0" y="0"/>
+                                  </Offset>
+                              </Anchor>
+                          </Anchors>
+                      </Frame>
+                      <Frame name="$parent_Res5" inherits="GuildRes_Temp">
+                          <Anchors>
+                              <Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_Res4">
+                                  <Offset>
+                                      <AbsDimension x="0" y="0"/>
+                                  </Offset>
+                              </Anchor>
+                          </Anchors>
+                      </Frame>
+
+                      <Frame name="$parent_Res2" inherits="GuildRes_Temp">
+                          <Anchors>
+                              <Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_Res1">
+                                  <Offset>
+                                      <AbsDimension x="20" y="0"/>
+                                  </Offset>
+                              </Anchor>
+                          </Anchors>
+                      </Frame>
+
+                      <Frame name="$parent_Res6" inherits="GuildRes_Temp">
+                          <Anchors>
+                              <Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_Res2">
+                                  <Offset>
+                                      <AbsDimension x="0" y="0"/>
+                                  </Offset>
+                              </Anchor>
+                          </Anchors>
+                      </Frame>
+
+                      <Frame name="$parent_Res7" inherits="GuildRes_Temp">
+                          <Anchors>
+                              <Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_Res6">
+                                  <Offset>
+                                      <AbsDimension x="0" y="0"/>
+                                  </Offset>
+                              </Anchor>
+                          </Anchors>
+                      </Frame>
+
+                      <Frame name="$parent_GuildLevel" inherits="PointFrameTemplate" hidden="true">
+                          <Anchors>
+                              <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Res5">
+                                  <Offset>
+                                      <AbsDimension x="-4" y="15"/>
+                                  </Offset>
+                              </Anchor>
+                          </Anchors>
+                      </Frame>
+
+                      <Button name="GP_GuildUpgrade" inherits="UIPanelButtonTemplate" text="GUILD_RESOURCE_UPGRADE">
+                          <Size>
+                              <AbsDimension x="120" y="24"/>
+                          </Size>
+                          <Anchors>
+                              <Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_Res7">
+                                  <Offset>
+                                      <AbsDimension x="0" y="10"/>
+                                  </Offset>
+                              </Anchor>
+                          </Anchors>
+                          <Scripts>
+                              <OnClick>
+                                  GRF_GuildUpgrade_OnClick(this);
+                              </OnClick>
+                          </Scripts>
+                      </Button>
+
+                  </Frames>
+                  <Scripts>
+                      <OnShow>
+                          GP_RessStatus_OnShow(this)
+                      </OnShow>
+                  </Scripts>
+            </Frame>
+        </Frames>
+    </Frame>
+</Ui>

@@ -1,0 +1,50 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+    <!-- this frame is (currently) for just in time configuration feedback only -->
+	<Frame name="yGather_MinimapFrame" parent="MinimapViewFrame">
+		<Anchors>
+			<Anchor point="TOPLEFT"/>
+			<Anchor point="BOTTOMRIGHT"/>
+		</Anchors>
+        <Frames>
+            <Frame name="$parent_Icon1" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon2" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon3" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon4" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon5" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon6" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon7" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon8" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon9" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon10" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon11" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon12" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon13" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon14" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon15" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon16" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon17" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon18" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon19" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon20" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon20" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon21" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon22" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon23" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon24" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon25" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon26" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon27" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon28" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon29" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent_Icon30" inherits="yGather_ResourceIconTemplate"/>
+        </Frames>
+		<Scripts>
+            <OnLoad>
+                yGather.minimap.OnLoad(this);
+            </OnLoad>
+            <OnUpdate>
+                yGather.minimap.OnUpdate(this, elapsedTime);
+            </OnUpdate>
+		</Scripts>
+	</Frame>
+</Ui>

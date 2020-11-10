@@ -1,0 +1,1033 @@
+<!--
+File-Author: Pyrrhus
+File-Hash: 8d3280d61e434e0680fd57d8dcda8680ebdf7838
+File-Date: 2017-07-10T20:30:02Z
+-->
+<Bindings>
+	<Binding name="MOVEFORWARD" runOnUp="true" header="MOVEMENT">
+		if ( keystate == "down" ) then
+			MoveForwardStart();
+		else
+			MoveForwardStop();
+		end
+	</Binding>
+	<Binding name="MOVEBACKWARD" runOnUp="true">
+		if ( keystate == "down" ) then
+			MoveBackwardStart();
+		else
+			MoveBackwardStop();
+		end
+	</Binding>
+	<Binding name="STRAFELEFT" runOnUp="true">
+		if ( keystate == "down" ) then
+			StrafeLeftStart();
+		else
+			StrafeLeftStop();
+		end
+	</Binding>
+	<Binding name="STRAFERIGHT" runOnUp="true">
+		if ( keystate == "down" ) then
+			StrafeRightStart();
+		else
+			StrafeRightStop();
+		end
+	</Binding>
+	<Binding name="TURNLEFT" runOnUp="true">
+		if ( keystate == "down" ) then
+			TurnLeftStart();
+		else
+			TurnLeftStop();
+		end
+	</Binding>
+	<Binding name="TURNRIGHT" runOnUp="true">
+		if ( keystate == "down" ) then
+			TurnRightStart();
+		else
+			TurnRightStop();
+		end
+	</Binding>
+	<Binding name="JUMP">
+		Jump();
+	</Binding>
+	<Binding name="SITORSTAND">
+		SitOrStand();
+	</Binding>
+	<Binding name="TOGGLEAUTORUN">
+		ToggleAutoRun();
+	</Binding>
+	<Binding name="TOGGLERUN">
+		ToggleRun();
+	</Binding>
+	<Binding name="TOGGLESHEATH">
+		ToggleSheath();
+	</Binding>
+	<Binding name="FOLLOWTARGET">
+		FollowUnit("target");
+	</Binding>
+	<Binding name="SCREENSHOT">
+		TakeScreenshot();
+	</Binding>
+	<!--發話按鍵設定-->
+	<Binding name="PUSHTOTALK" runOnUp="true">
+		if ( keystate == "down" ) then
+			VoiceChat_PushToTalk_Start();
+			PMF_MicIconButton:GetNormalTexture():SetFile( "Interface\\PlayerFrame\\MicIcon_StartSpeak" );
+		else
+			VoiceChat_PushToTalk_Stop();
+			PMF_MicIconButton:GetNormalTexture():SetFile( "Interface\\PlayerFrame\\MicIcon_Normal" );
+		end
+	</Binding>
+	<!-- UI Frames -->
+	<Binding name="TOGGLEBACKPACK" header="INTERFACE">
+		ToggleBackpack();
+	</Binding>
+	<Binding name="TOGGLECHARACTER0">
+		ToggleCharacter("EquipmentFrame");
+	</Binding>
+	<Binding name="TOGGLECHARACTER1">
+		ToggleCharacter("PracticedFrame");
+	</Binding>
+	<Binding name="TOGGLECHARACTER2">
+		ToggleCharacter("CCFrame");
+	</Binding>
+	<Binding name="TOGGLECHARACTER3">
+		ToggleUIFrame( AchievementTitleFrame );
+	</Binding>
+	<Binding name="TOGGLECHARACTER4">
+		ToggleCharacter("CEFrame");
+	</Binding>
+	<Binding name="TOGGLECHARACTER5">
+		ToggleCharacter("CharacterClassListFrame");
+	</Binding>
+	<Binding name="TOGGLESPELLBOOK">
+		ToggleUIFrame(UI_SkillBook);
+	</Binding>
+	<Binding name="TOGGLEQUESTBOOK">
+		ToggleUIFrame(UI_QuestBook);
+	</Binding>
+	<!--公會-->
+	<Binding name="TOGGLEGUILD">
+		ToggleUIFrame(GuildFrame);
+	</Binding>
+	<Binding name="TOGGLEINSTANCERECORD">
+		ToggleUIFrame(InstanceRecordFrame);
+	</Binding>
+	<!--夥伴背包-->
+	<Binding name="TOGGLEPARTERFRAME">
+		ToggleUIFrame(PartnerFrame);
+	</Binding>
+	<!-- 社群介面的玩家介面
+	<Binding name="TOGGLEINFO">
+		ToggleSocialFrame("PersonalData");
+	</Binding>
+	-->
+	<!--朋友列表-->
+	<Binding name="TOGGLESOCIALFRAME">
+		ToggleSocialFrame("Friend");
+	</Binding>
+	<!--黑名單-->
+	<Binding name="TOGGLEBLACKLISTFRAME">
+		ToggleSocialFrame("BadFriend");
+	</Binding>
+	<!--仇人列表-->
+	<Binding name="TOGGLEHATEFRIEND">
+		ToggleSocialFrame("HateFriend");
+	</Binding>
+	<!--組隊搜尋-->
+	<Binding name="TOGGLESEARCHGROUP">
+		ToggleSocialFrame("SearchGroup");
+	</Binding>
+	<!--卡片圖鑑-->
+	<Binding name="TOGGLECHARTBOOK">
+		ToggleUIFrame(CardBookFrame);
+	</Binding>
+	<!--造型工坊-->
+	<Binding name="TOGGLEBEAUTYSTUDIO">
+		if (IsEnableMerchant()) then
+			ToggleUIFrame(BeautyStudioFrame);
+		end
+	</Binding>
+	<!--點數商城-->
+	<Binding name="TOGGLEITEMMALL">
+		if ( not IsBattleGroundZone() and IsEnableMerchant() ) then
+			ToggleUIFrame(ItemMallFrame);
+		end
+	</Binding>
+	<!--生產列表 刪除
+	<Binding name="TOGGLECRAFTFRAME">
+		ToggleUIFrame(CraftFrame);
+	</Binding>
+	-->
+	<!--活動之家-->
+	<Binding name="TOGGLEBULLETINBOARD">
+		ToggleUIFrame(BulletinBoard);
+	</Binding>
+	<!--大地圖-->
+	<Binding name="TOGGLEWORLDMAP">
+		ToggleWorldMap();
+	</Binding>
+	<!--區域地圖-->
+	<Binding name="TOGGLEAREAMAP">
+		ToggleAreaMap();
+	</Binding>
+	<!--世界搜尋-->
+	<Binding name="TOGGLENPCTRACK">
+		ToggleUIFrame(NpcTrackFrame);
+	</Binding>
+	<!--遊戲教學-->
+	<Binding name="TOGGLETEACHING">
+		ToggleUIFrame(TeachingFrame);
+	</Binding>
+	<!--圖示教學-->
+	<Binding name="TOGGLEGAMEHELP">
+		ToggleUIFrame(GameIconFrame);
+	</Binding>
+	<!--排行榜-->
+	<Binding name="TOGGLESORTSCOREBOARD">
+		ToggleUIFrame(SortScoreBoard);
+	</Binding>
+	<Binding name="TOGGLEDRAWOUTRUNE">
+		ToggleUIFrame(DrawRuneFrame);
+	</Binding>
+	<Binding name="TOGGLESKILLSUIT">
+		ToggleUIFrame(SkillSuitFrame);
+	</Binding>
+	<!--主畫面解說-->
+	<Binding name="TOGGLETUTORIALEXPLAIN">
+		ToggleUIFrame(TutorialExplainFrame);
+	</Binding>
+	<!--顯示FPS-->
+	<Binding name="TOGGLEFPSTEXT">
+		if ( FramerateText:IsVisible() ) then
+			FramerateText:Hide();
+		else
+			FramerateText:Show();
+		end
+	</Binding>
+	<!--隱藏所有介面-->
+	<Binding name="TOGGLEUI">
+		if ( UIParent:IsVisible() ) then
+			CloseAllWindows();
+			UIParent:Hide();
+		else
+			UIParent:Show();
+		end
+	</Binding>
+	<!--ESC 不可設定 在遊戲中不會顯示-->
+	<Binding name="TOGGLEGAMEMENU">
+		if (ToggleMsnWin()==false)then
+			ToggleGameMenu();
+		end
+	</Binding>
+	<!--Toggle Title-->
+	<Binding name="TOGGLENPCNAME" header="VIEW_SWITCH">
+		ToggleUI_NPCNAME();
+	</Binding>
+	<Binding name="TOGGLEHEALTH">
+		ToggleUI_ObjectBloodBar();
+	</Binding>
+	<Binding name="TOGGLEPLATES">
+		ToggleUI_TITLE();
+	</Binding>
+	<!-- Chat Frame Bindings -->
+	<Binding name="OPENCHAT" header="CHAT">
+		ChatEdit_OpenEditBox("");
+	</Binding>
+	<Binding name="REPLY">
+		ChatEdit_ReplyTell();
+	</Binding>
+	<Binding name="REPEAT">
+		ChatEdit_RepeatTell();
+	</Binding>
+	<Binding name="CHATPAGEUP">
+		DEFAULT_CHAT_FRAME:ScrollUp();
+	</Binding>
+	<Binding name="CHATPAGEDOWN">
+		DEFAULT_CHAT_FRAME:ScrollDown();
+	</Binding>
+	<Binding name="CHATTOP">
+		DEFAULT_CHAT_FRAME:ScrollTop();
+	</Binding>
+	<Binding name="CHATBOTTOM">
+		DEFAULT_CHAT_FRAME:ScrollBottom();
+	</Binding>
+	<Binding name="CHAT_PARTY">
+		ChatEditMenu_Party();
+	</Binding>
+	<Binding name="CHAT_GUILD">
+		ChatEditMenu_Guild();
+	</Binding>
+	<Binding name="CHAT_SAY">
+		ChatEditMenu_Say();
+	</Binding>
+	<Binding name="CHAT_YELL">
+		ChatEditMenu_Yell();
+	</Binding>
+	<Binding name="CHAT_ZONE">
+		ChatEditMenu_Zone();
+	</Binding>
+	<!-- Minimap -->
+	<Binding name="MINIMAPZOOMIN" header="MINIMAP">
+		MiniMapZoomIn();
+	</Binding>
+	<Binding name="MINIMAPZOOMOUT">
+		MiniMapZoomOut();
+	</Binding>
+	<!-- Target function key bindings -->
+	<Binding name="TARGETNEARESTENEMY" header="TARGETING">
+		TargetNearestEnemy();
+	</Binding>
+	<Binding name="TARGETPREVIOUSENEMY">
+		TargetNearestEnemy(true);
+	</Binding>
+	<Binding name="TARGETNEARESTFRIEND">
+		TargetNearestFriend();
+	</Binding>
+	<Binding name="TARGETPREVIOUSFRIEND">
+		TargetNearestFriend(true);
+	</Binding>
+	<Binding name="TARGETSELF">
+		TargetUnit("player");
+	</Binding>
+	<Binding name="TARGETPARTY1">
+		TargetUnit("party1");
+	</Binding>
+	<Binding name="TARGETPARTY2">
+		TargetUnit("party2");
+	</Binding>
+	<Binding name="TARGETPARTY3">
+		TargetUnit("party3");
+	</Binding>
+	<Binding name="TARGETPARTY4">
+		TargetUnit("party4");
+	</Binding>
+	<Binding name="TARGETPARTY5">
+		TargetUnit("party5");
+	</Binding>
+	<Binding name="TARGETPLAYERPET">
+		TargetUnit("playerpet");
+	</Binding>
+	<Binding name="TARGETPARTY1PET">
+		TargetUnit("party1pet");
+	</Binding>
+	<Binding name="TARGETPARTY2PET">
+		TargetUnit("party2pet");
+	</Binding>
+	<Binding name="TARGETPARTY3PET">
+		TargetUnit("party3pet");
+	</Binding>
+	<Binding name="TARGETPARTY4PET">
+		TargetUnit("party4pet");
+	</Binding>
+	<Binding name="TARGETPARTY5PET">
+		TargetUnit("party5pet");
+	</Binding>
+	<Binding name="ASSISTTARGET">
+		AssistUnit("target");
+	</Binding>
+	<Binding name="RAIDTARGET1">
+		SetRaidTarget("target", 1);
+	</Binding>
+	<Binding name="RAIDTARGET2">
+		SetRaidTarget("target", 2);
+	</Binding>
+	<Binding name="RAIDTARGET3">
+		SetRaidTarget("target", 3);
+	</Binding>
+	<Binding name="RAIDTARGET4">
+		SetRaidTarget("target", 4);
+	</Binding>
+	<Binding name="RAIDTARGET5">
+		SetRaidTarget("target", 5);
+	</Binding>
+	<Binding name="RAIDTARGET6">
+		SetRaidTarget("target", 6);
+	</Binding>
+	<Binding name="RAIDTARGET7">
+		SetRaidTarget("target", 7);
+	</Binding>
+	<Binding name="RAIDTARGET8">
+		SetRaidTarget("target", 8);
+	</Binding>
+	<!-- ActionBar Bindings -->
+	<Binding name="ACTIONBAR1BUTTON1" runOnUp="true" header="ACTIONBAR1">
+		if ( keystate == "down" ) then
+			ActionButtonDown(1);
+		else
+			ActionButtonUp(1);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR1BUTTON2" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(2);
+		else
+			ActionButtonUp(2);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR1BUTTON3" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(3);
+		else
+			ActionButtonUp(3);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR1BUTTON4" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(4);
+		else
+			ActionButtonUp(4);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR1BUTTON5" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(5);
+		else
+			ActionButtonUp(5);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR1BUTTON6" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(6);
+		else
+			ActionButtonUp(6);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR1BUTTON7" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(7);
+		else
+			ActionButtonUp(7);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR1BUTTON8" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(8);
+		else
+			ActionButtonUp(8);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR1BUTTON9" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(9);
+		else
+			ActionButtonUp(9);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR1BUTTON10" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(10);
+		else
+			ActionButtonUp(10);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR1BUTTON11" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(11);
+		else
+			ActionButtonUp(11);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR1BUTTON12" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(12);
+		else
+			ActionButtonUp(12);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR1BUTTON13" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(13);
+		else
+			ActionButtonUp(13);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR1BUTTON14" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(14);
+		else
+			ActionButtonUp(14);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR1BUTTON15" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(15);
+		else
+			ActionButtonUp(15);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR1BUTTON16" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(16);
+		else
+			ActionButtonUp(16);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR1BUTTON17" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(17);
+		else
+			ActionButtonUp(17);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR1BUTTON18" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(18);
+		else
+			ActionButtonUp(18);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR1BUTTON19" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(19);
+		else
+			ActionButtonUp(19);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR1BUTTON20" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(20);
+		else
+			ActionButtonUp(20);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR2BUTTON1" runOnUp="true" header="ACTIONBAR2">
+		if ( keystate == "down" ) then
+			ActionButtonDown(21);
+		else
+			ActionButtonUp(21);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR2BUTTON2" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(22);
+		else
+			ActionButtonUp(22);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR2BUTTON3" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(23);
+		else
+			ActionButtonUp(23);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR2BUTTON4" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(24);
+		else
+			ActionButtonUp(24);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR2BUTTON5" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(25);
+		else
+			ActionButtonUp(25);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR2BUTTON6" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(26);
+		else
+			ActionButtonUp(26);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR2BUTTON7" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(27);
+		else
+			ActionButtonUp(27);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR2BUTTON8" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(28);
+		else
+			ActionButtonUp(28);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR2BUTTON9" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(29);
+		else
+			ActionButtonUp(29);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR2BUTTON10" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(30);
+		else
+			ActionButtonUp(30);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR2BUTTON11" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(31);
+		else
+			ActionButtonUp(31);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR2BUTTON12" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(32);
+		else
+			ActionButtonUp(32);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR2BUTTON13" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(33);
+		else
+			ActionButtonUp(33);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR2BUTTON14" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(34);
+		else
+			ActionButtonUp(34);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR2BUTTON15" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(35);
+		else
+			ActionButtonUp(35);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR2BUTTON16" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(36);
+		else
+			ActionButtonUp(36);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR2BUTTON17" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(37);
+		else
+			ActionButtonUp(37);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR2BUTTON18" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(38);
+		else
+			ActionButtonUp(38);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR2BUTTON19" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(39);
+		else
+			ActionButtonUp(39);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR2BUTTON20" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(40);
+		else
+			ActionButtonUp(40);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR3BUTTON1" runOnUp="true" header="ACTIONBAR3">
+		if ( keystate == "down" ) then
+			ActionButtonDown(41);
+		else
+			ActionButtonUp(41);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR3BUTTON2" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(42);
+		else
+			ActionButtonUp(42);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR3BUTTON3" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(43);
+		else
+			ActionButtonUp(43);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR3BUTTON4" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(44);
+		else
+			ActionButtonUp(44);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR3BUTTON5" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(45);
+		else
+			ActionButtonUp(45);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR3BUTTON6" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(46);
+		else
+			ActionButtonUp(46);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR3BUTTON7" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(47);
+		else
+			ActionButtonUp(47);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR3BUTTON8" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(48);
+		else
+			ActionButtonUp(48);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR3BUTTON9" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(49);
+		else
+			ActionButtonUp(49);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR3BUTTON10" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(50);
+		else
+			ActionButtonUp(50);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR3BUTTON11" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(51);
+		else
+			ActionButtonUp(51);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR3BUTTON12" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(52);
+		else
+			ActionButtonUp(52);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR3BUTTON13" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(53);
+		else
+			ActionButtonUp(53);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR3BUTTON14" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(54);
+		else
+			ActionButtonUp(54);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR3BUTTON15" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(55);
+		else
+			ActionButtonUp(55);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR3BUTTON16" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(56);
+		else
+			ActionButtonUp(56);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR3BUTTON17" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(57);
+		else
+			ActionButtonUp(57);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR3BUTTON18" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(58);
+		else
+			ActionButtonUp(58);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR3BUTTON19" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(59);
+		else
+			ActionButtonUp(59);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR3BUTTON20" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(60);
+		else
+			ActionButtonUp(60);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR4BUTTON1" runOnUp="true" header="ACTIONBAR4">
+		if ( keystate == "down" ) then
+			ActionButtonDown(61);
+		else
+			ActionButtonUp(61);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR4BUTTON2" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(62);
+		else
+			ActionButtonUp(62);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR4BUTTON3" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(63);
+		else
+			ActionButtonUp(63);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR4BUTTON4" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(64);
+		else
+			ActionButtonUp(64);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR4BUTTON5" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(65);
+		else
+			ActionButtonUp(65);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR4BUTTON6" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(66);
+		else
+			ActionButtonUp(66);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR4BUTTON7" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(67);
+		else
+			ActionButtonUp(67);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR4BUTTON8" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(68);
+		else
+			ActionButtonUp(68);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR4BUTTON9" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(69);
+		else
+			ActionButtonUp(69);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR4BUTTON10" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(70);
+		else
+			ActionButtonUp(70);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR4BUTTON11" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(71);
+		else
+			ActionButtonUp(71);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR4BUTTON12" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(72);
+		else
+			ActionButtonUp(72);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR4BUTTON13" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(73);
+		else
+			ActionButtonUp(73);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR4BUTTON14" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(74);
+		else
+			ActionButtonUp(74);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR4BUTTON15" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(75);
+		else
+			ActionButtonUp(75);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR4BUTTON16" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(76);
+		else
+			ActionButtonUp(76);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR4BUTTON17" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(77);
+		else
+			ActionButtonUp(77);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR4BUTTON18" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(78);
+		else
+			ActionButtonUp(78);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR4BUTTON19" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(79);
+		else
+			ActionButtonUp(79);
+		end
+	</Binding>
+	<Binding name="ACTIONBAR4BUTTON20" runOnUp="true">
+		if ( keystate == "down" ) then
+			ActionButtonDown(80);
+		else
+			ActionButtonUp(80);
+		end
+	</Binding>
+	<Binding name="PETACTIONBARBUTTON1" header="PETACTIONBAR">
+		UsePetAction(1);
+	</Binding>
+	<Binding name="PETACTIONBARBUTTON2">
+		UsePetAction(2);
+	</Binding>
+	<Binding name="PETACTIONBARBUTTON3">
+		UsePetAction(3);
+	</Binding>
+	<Binding name="PETACTIONBARBUTTON4">
+		UsePetAction(4);
+	</Binding>
+	<Binding name="PETACTIONBARBUTTON5">
+		UsePetAction(5);
+	</Binding>
+	<Binding name="PETACTIONBARBUTTON6">
+		UsePetAction(6);
+	</Binding>
+	<Binding name="PETACTIONBARBUTTON7">
+		UsePetAction(7);
+	</Binding>
+	<Binding name="PETACTIONBARBUTTON8">
+		UsePetAction(8);
+	</Binding>
+	<Binding name="PETACTIONBARBUTTON9">
+		UsePetAction(9);
+	</Binding>
+	<Binding name="PETACTIONBARBUTTON10">
+		UsePetAction(10);
+	</Binding>
+	<Binding name="EXTRAACTIONBUTTON1" runOnUp="true" header="EXTRAACTIONBAR">
+		ExtraActionButton_Click( 1, keystate );
+	</Binding>
+	<Binding name="EXTRAACTIONBUTTON2" runOnUp="true">
+		ExtraActionButton_Click( 2, keystate );
+	</Binding>
+	<Binding name="EXTRAACTIONBUTTON3" runOnUp="true">
+		ExtraActionButton_Click( 3, keystate );
+	</Binding>
+	<Binding name="EXTRAACTIONBUTTON4" runOnUp="true">
+		ExtraActionButton_Click( 4, keystate );
+	</Binding>
+	<Binding name="EXTRAACTIONBUTTON5" runOnUp="true">
+		ExtraActionButton_Click( 5, keystate );
+	</Binding>
+	<Binding name="EXTRAACTIONBUTTON6" runOnUp="true">
+		ExtraActionButton_Click( 6, keystate );
+	</Binding>
+	<Binding name="EXTRAACTIONBUTTON7" runOnUp="true">
+		ExtraActionButton_Click( 7, keystate );
+	</Binding>
+	<Binding name="EXTRAACTIONBUTTON8" runOnUp="true">
+		ExtraActionButton_Click( 8, keystate );
+	</Binding>
+	<Binding name="EXTRAACTIONBUTTON9" runOnUp="true">
+		ExtraActionButton_Click( 9, keystate );
+	</Binding>
+	<Binding name="EXTRAACTIONBUTTON10" runOnUp="true">
+		ExtraActionButton_Click( 10, keystate );
+	</Binding>
+	<Binding name="PYLIB1" runOnUp="true" header="PYLIB">
+		pylib.bindings.Press(1, keystate)
+	</Binding>
+	<Binding name="PYLIB2" runOnUp="true">
+		pylib.bindings.Press(2, keystate)
+	</Binding>
+	<Binding name="PYLIB3" runOnUp="true">
+		pylib.bindings.Press(3, keystate)
+	</Binding>
+	<Binding name="PYLIB4" runOnUp="true">
+		pylib.bindings.Press(4, keystate)
+	</Binding>
+	<Binding name="PYLIB5" runOnUp="true">
+		pylib.bindings.Press(5, keystate)
+	</Binding>
+	<Binding name="PYLIB6" runOnUp="true">
+		pylib.bindings.Press(6, keystate)
+	</Binding>
+	<Binding name="PYLIB7" runOnUp="true">
+		pylib.bindings.Press(7, keystate)
+	</Binding>
+	<Binding name="PYLIB8" runOnUp="true">
+		pylib.bindings.Press(8, keystate)
+	</Binding>
+	<Binding name="PYLIB9" runOnUp="true">
+		pylib.bindings.Press(9, keystate)
+	</Binding>
+	<Binding name="PYLIB10" runOnUp="true">
+		pylib.bindings.Press(10, keystate)
+	</Binding>
+	<Binding name="PYLIB11" runOnUp="true">
+		pylib.bindings.Press(11, keystate)
+	</Binding>
+	<Binding name="PYLIB12" runOnUp="true">
+		pylib.bindings.Press(12, keystate)
+	</Binding>
+	<Binding name="PYLIB13" runOnUp="true">
+		pylib.bindings.Press(13, keystate)
+	</Binding>
+	<Binding name="PYLIB14" runOnUp="true">
+		pylib.bindings.Press(14, keystate)
+	</Binding>
+	<Binding name="PYLIB15" runOnUp="true">
+		pylib.bindings.Press(15, keystate)
+	</Binding>
+	<Binding name="PYLIB16" runOnUp="true">
+		pylib.bindings.Press(16, keystate)
+	</Binding>
+	<Binding name="PYLIB17" runOnUp="true">
+		pylib.bindings.Press(17, keystate)
+	</Binding>
+	<Binding name="PYLIB18" runOnUp="true">
+		pylib.bindings.Press(18, keystate)
+	</Binding>
+	<Binding name="PYLIB19" runOnUp="true">
+		pylib.bindings.Press(19, keystate)
+	</Binding>
+	<Binding name="PYLIB20" runOnUp="true">
+		pylib.bindings.Press(20, keystate)
+	</Binding>
+</Bindings>

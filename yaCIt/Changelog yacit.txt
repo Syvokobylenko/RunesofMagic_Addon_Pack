@@ -1,0 +1,113 @@
+v3.0
+
+New: 
+
+- Monster cards were assigned to appropriate zones where this was missing;
+
+- Specified the positions of monster cards where the same name appeared;
+
+- Eliminated the assignment of tabs to monsters from instances where they should not be (*most of them);
+
+- Updated the list of bugged/inaccessible monster cards;
+
+- "Select zone" was completed with missing zones: Moorlans of Farsitan (33)/Tasuq (34)/Korris (35)/Enoch (36)/Vortis (37);
+
+- The names of the zones have been enriched with the corresponding IDs;
+
+- New filters added: Draco Cards/Monster Spawn random/Event related Monster/**Event Cards;
+
+- Percentage of the number of cards in possession corrected to hundredths parts, e.g. 1908/1911 cards (99.84%);
+
+- The monster information window now also shows which production runes might be looted.
+
+Deleted:
+
+- Filter deactivated: Card has AAH history;
+
+- Sorting was deactivated: owned firts and avg.price;
+
+v2.0
+new:
+
+multi character support.
+configuration dialog
+changed / fixed:
+
+misc. filter in compendium to support multi character, expanded with 'invert' checkbox
+new buttons for configuration / summary
+pets are assumed to have no card to circumvent PvP issue
+zone 358 (Ystra event area) is replaced by zone 5
+some design issues fixed in compendium
+deleted:
+
+all command options except 'cfg 'and search
+ExtraTip support
+Addon manager support
+v1.4.1
+new in compendium:
+
+found a polish language file based on 1.3, so tooltip are in english
+fixed:
+
+the owned status in the compendium wasn't updated on takeout/insert after the redesign
+a tooltip hook caused errors in some house function items
+v1.4
+new in compendium:
+
+now the original frame is used and modified (no longer using global update loop to detect frame open and close)
+a checkbox to display the hidden detail (replacing the CTRL-click option)
+a '#' followed by a 6-digit number shows the card with that object ID if present
+a button to reset all filters
+some tooltips for help
+changed in data:
+
+takes into account all changes up to chapter 5.0.3
+added one card from Yrvandis Hollow to 'quest related' (Ambush Phantom)
+added some cards as 'not obtainable' (see yaCItData.lua for reasons)
+hopefully added all cards not found by NPC search to the zone list. At the moment you should have 2 cards in 'unknown zone'
+changed / fixed:
+
+a bug in yaCIt.lua preventig correct ALT-key handling together with AAH (missing parenthesis)
+if the chat editbox is closed / invisible the 'link to chat' option now posts that link directly to the general chat frame
+v1.3
+new in compendium:
+
+a filter for cards with an Adv. Auctionhouse history
+a sort option by average AH sell price (descending)
+no more worldXML folder
+also new:
+
+a filter definition for Adv. Auctionhouse ($notowned)
+added a chat command (updatenpc) to recreate the zone association (attention, may take several seconds with frozen screen)
+changed / fixed:
+
+fixed an error which made v1.2 unuseable (compile error '=' insread of '=='; sorry)
+removed worldxml folder, ESC key won't close frame anymore
+v1.2
+new in compendium:
+
+when a list entry is clicked with CTRL key pressed, additional information shown now adds AAH history (min, avg, max value) if available
+changed / fixed:
+
+removed the 'not obtainable' flag for cards changed in patch 4.0.5
+added a comment with the affected card name to each line in the static data file
+code to disable tooltip processing in dedicated PvP zones (SW, Arena, etc)
+v1.1
+new in compendium:
+
+when a list entry is clicked with CTRL key pressed, additional information is shown
+due special request a button has been added to show a stat bous summary
+changed / fixed:
+
+modified the folder hierachy again. Now the tooltip part is Curse client compatibel; to get the compendium running the 'caveats'
+the card description now has a scrollbar and can contain more than 256 chars (although no one could see that before)
+v1.0.1
+
+Forgot some housekeeping in the 1st version
+Also corrected an error in the folder hierachy
+v1.0
+first version
+
+Supports pbInfo and Adv. Auctionhouse (also 2.7)
+
+Also see readme-EN.txt

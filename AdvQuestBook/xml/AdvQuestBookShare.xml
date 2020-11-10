@@ -1,0 +1,22 @@
+<!-- ä
+
+	Name: Advanced Questbook
+	By: Crypton
+
+-->
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Frame name="AdvQuestBookShareFrame">
+		<Scripts>
+			<OnLoad>
+				AdvQuestBookQuestShare_OnLoad(this);
+			</OnLoad>
+			<OnUpdate>
+				AdvQuestBookQuestShare_OnUpdate(elapsedTime);
+			</OnUpdate>
+			<OnEvent>
+				local e1, e2, e3, e4 = arg1, arg2, arg3, arg4;
+				AdvQuestBookQuestShare_OnEvent(this, event, e1, e2, e3, e4);
+			</OnEvent>
+		</Scripts>
+	</Frame>
+</Ui>

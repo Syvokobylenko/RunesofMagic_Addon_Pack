@@ -1,0 +1,1328 @@
+<!-- ä
+
+	Name: Advanced Questbook
+	By: Crypton
+
+-->
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Button name="AdvQuestBookMiniButton" hidden="true" inherits="UIPanelButtonTemplate" parent="AddonManagerMiniFrame">
+		<Size>
+			<AbsDimension y="24" x="24" />
+		</Size>
+		<Scripts>
+			<OnClick>
+				AddonManager.MiniButton_OnClick(this);
+			</OnClick>
+			<OnEnter>
+				PlaySoundByPath("sound\\interface\\ui_contextmenu_click.mp3");
+				AddonManager.MiniButton_OnEnter(this);
+			</OnEnter>
+			<OnLeave>
+				AddonManager.MiniButton_OnLeave(this);
+			</OnLeave>
+		</Scripts>
+		<NormalTexture file="Interface\AddOns\AdvQuestBook\images\aqb.png" />
+		<PushedTexture file="Interface\AddOns\AdvQuestBook\images\aqb.png" />
+		<HighlightTexture file="Interface\AddOns\AdvQuestBook\images\aqbhl.png" alphaMode="NONE" />
+	</Button>
+	<Button name="AdvQuestBookMiniMapShareButton" hidden="true" inherits="MinimapButtonTemplate" parent="UIParent">
+		<Size>
+			<AbsDimension y="20" x="20" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="MinimapViewFrame" relativePoint="CENTER">
+				<Offset>
+					<RelDimension x="-26" y="-72" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnMouseDown>
+				AdvQuestBookShareMiniButton_OnClick(this, key);
+			</OnMouseDown>
+			<OnEnter>
+				GameTooltip:SetOwner(this, "TOPLEFT" and "ANCHOR_LEFT", -6, 0 or "TOPRIGHT" and "ANCHOR_RIGHT", 0, 6);
+				GameTooltip:SetText("|cFF06ff00"..AdvQuestBook_Messages["AQB_GET_PQUEST"].."|r");
+				GameTooltip:AddLine("|cFF00b1e0"..AdvQuestBook_Messages["AQB_SHIFT_RIGHT"].."|r");
+				GameTooltip:Show();
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:ClearAllAnchors();
+				GameTooltip:Hide();
+			</OnLeave>
+		</Scripts>
+		<NormalTexture file="Interface\AddOns\AdvQuestBook\images\share.png" />
+		<PushedTexture file="Interface\AddOns\AdvQuestBook\images\share.png" />
+		<HighlightTexture file="Interface\AddOns\AdvQuestBook\images\sharehl.png" alphaMode="NONE" />
+	</Button>
+	<Frame name="AdvQuestBookMiniBookFrame" hidden="true" parent="UIParent" frameStrata="LOW" frameLevel="1002">
+		<Size>
+			<AbsDimension x="36" y="36" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" />
+		</Anchors>
+		<Frames>
+			<Frame name="$parentBorder" frameStrata="BACKGROUND">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" />
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" />
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\Tooltip-border">
+					<EdgeSize>
+						<AbsValue val="16" />
+					</EdgeSize>
+				</Backdrop>
+			</Frame>
+			<Frame name="$parentCorner" frameStrata="LOW" enableMouse="true">
+				<Size>
+					<AbsDimension x="16" y="16" />
+				</Size>
+				<Backdrop bgFile="Interface\WorldMap\WorldMap-TitlebarSwitch-Normal">
+					<TileSize>
+						<AbsValue val="4" />
+					</TileSize>
+				</Backdrop>
+				<Scripts>
+					<OnEnter>
+						GameTooltip:ClearAllAnchors();
+						GameTooltip:SetOwner(this, "TOPLEFT" and "ANCHOR_LEFT", -6, 0 or "TOPRIGHT" and "ANCHOR_RIGHT", 0, 6);
+						GameTooltip:SetText("|cffFFFF00"..AdvQuestBook_Messages["AQB_MOVE_BTN"].."|r");
+						GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:ClearAllAnchors();
+						GameTooltip:Hide();
+					</OnLeave>
+					<OnMouseDown>
+						if (AdvQuestBook_Config["minibook"]["status"] == "unlocked") then
+							AdvQuestBookMiniBookFrame:StartMoving("TOPLEFT");
+						end
+					</OnMouseDown>
+					<OnMouseUp>
+						if (AdvQuestBook_Config["minibook"]["status"] == "unlocked") then
+							AdvQuestBookMiniBookFrame:StopMovingOrSizing();
+							AdvQuestBookMiniButton_SavePOS();
+						end
+					</OnMouseUp>
+				</Scripts>
+			</Frame>
+			<Button name="AdvQuestBookMiniBookButton" inherits="UIPanelButtonTemplate">
+				<Size>
+					<AbsDimension y="24" x="24" />
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER" relativePoint="CENTER" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						AdvQuestBookMiniBook_OnClick(this, key);
+					</OnClick>
+					<OnEnter>
+						PlaySoundByPath("sound\\interface\\ui_contextmenu_click.mp3");
+						GameTooltip:ClearAllAnchors();
+						GameTooltip:SetOwner(this, "TOPLEFT" and "ANCHOR_LEFT", -6, 0 or "TOPRIGHT" and "ANCHOR_RIGHT", 0, 6);
+						GameTooltip:SetText("|cffFFFF00"..AdvQuestBook_Messages["AQB_OPEN"].." "..AQB_ADDON_NAME.."|r");
+						if (AdvQuestBook_Config["minibook"]["status"] == "unlocked") then
+							GameTooltip:AddLine(AdvQuestBook_Messages["AQB_RCLICK"].." - "..AdvQuestBook_Messages["AQB_LOCK"]);
+						else
+							GameTooltip:AddLine(AdvQuestBook_Messages["AQB_RCLICK"].." - "..AdvQuestBook_Messages["AQB_UNLOCK"]);
+						end
+						GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:ClearAllAnchors();
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\AdvQuestBook\images\aqb.png" />
+				<PushedTexture file="Interface\AddOns\AdvQuestBook\images\aqb.png" />
+				<HighlightTexture file="Interface\AddOns\AdvQuestBook\images\aqbhl.png" alphaMode="NONE" />
+			</Button>
+		</Frames>
+	</Frame>
+	<Button name="AdvQuestBookMFQLBTemplate" inherits="ListItemButtonTemplate" hidden="true" virtual="true">
+		<Size>
+			<AbsDimension x="280" y="18" />
+		</Size>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="$parentText" inherits="Font_Normal" text="">
+					<Size>
+						<AbsDimension x="0" y="0" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="0" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<NormalText name="$parentText" inherits="GameFontNormal" justifyH="LEFT">
+			<Size>
+				<AbsDimension x="0" y="16" />
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT">
+					<Offset>
+						<AbsDimension x="5" y="0" />
+					</Offset>					
+				</Anchor>
+			</Anchors>
+		</NormalText>
+		<HighlightTexture name="$parentHighlight" file="interface\Buttons\ListItemHighlight" alphaMode="ADD" />
+		<Scripts>
+			<OnLoad>
+				this:RegisterForClicks("LeftButton", "RightButton");
+			</OnLoad>
+			<OnClick>
+				AdvQuestBook_ResultsOnClick(this:GetName(), key, "qst");
+			</OnClick>
+			<OnMouseWheel>
+				AdvQuestBook_OnMouseWheel(AdvQuestBookMainFrameSearchResultsList_ScrollBar, delta);
+			</OnMouseWheel>
+		</Scripts>
+	</Button>
+	<Button name="AdvQuestBookHelpButtonTemplate" inherits="ListItemButtonTemplate" hidden="true" virtual="true">
+		<Size>
+			<AbsDimension x="280" y="18" />
+		</Size>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="$parentText" inherits="Font_Normal" text="">
+					<Size>
+						<AbsDimension x="0" y="0" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="0" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>
+				--AdvQuestBookMainFrameHelpButton_OnClick(this:GetName());
+			</OnClick>
+		</Scripts>
+	</Button>
+	<Button name="AdvQuestBookShareButtonTemplate" inherits="ListItemButtonTemplate" hidden="true" virtual="true">
+		<Size>
+			<AbsDimension x="280" y="18" />
+		</Size>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="$parentText" inherits="Font_Normal" text="">
+					<Size>
+						<AbsDimension x="0" y="0" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="0" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>
+				AdvQuestBookMainFrameShareResult_OnClick(this:GetName());
+			</OnClick>
+			<OnMouseWheel>
+				AdvQuestBook_OnMouseWheel(AdvQuestBookMainFrameShareResultsList_ScrollBar, delta);
+			</OnMouseWheel>
+		</Scripts>
+	</Button>
+	<Button name="AdvQuestBookShareQuestButtonTemplate" inherits="ListItemButtonTemplate" hidden="true" virtual="true">
+		<Size>
+			<AbsDimension x="280" y="18" />
+		</Size>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="$parentText" inherits="Font_Normal" text="">
+					<Size>
+						<AbsDimension x="0" y="0" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="0" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<NormalText name="$parentText" inherits="GameFontNormal" justifyH="LEFT">
+			<Size>
+				<AbsDimension x="0" y="16" />
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT">
+					<Offset>
+						<AbsDimension x="5" y="0" />
+					</Offset>					
+				</Anchor>
+			</Anchors>
+		</NormalText>
+		<HighlightTexture name="$parentHighlight" file="interface\Buttons\ListItemHighlight" alphaMode="ADD" />
+		<Scripts>
+			<OnLoad>
+				this:RegisterForClicks("LeftButton", "RightButton");
+			</OnLoad>
+			<OnClick>
+				AdvQuestBook_ResultsOnClick(this:GetName(), key, "sha")
+			</OnClick>
+			<OnMouseWheel>
+				AdvQuestBook_OnMouseWheel(AdvQuestBookMainFrameShareQuestResultsList_ScrollBar, delta);
+			</OnMouseWheel>
+		</Scripts>
+	</Button>
+	<Button name="AdvQuestBookShareButtonBackTemplate" inherits="ListItemButtonTemplate" hidden="true" virtual="true">
+		<Size>
+			<AbsDimension x="280" y="18" />
+		</Size>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="$parentText" inherits="Font_Normal" text="">
+					<Size>
+						<AbsDimension x="0" y="0" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="0" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>
+				AdvQuestBookMainFrameShareBack_OnClick(this:GetName());
+			</OnClick>
+		</Scripts>
+	</Button>
+	<!-- BeginDef -->
+	<MessageFrame name="AdvQuestBookMessageFrameTemplate1" frameStrata="HIGH" displayDuration="0" maxLines="100" virtual="true">
+		<Size>
+			<AbsDimension x="400" y="0" />
+		</Size>		
+		<Layers>
+			<Layer>
+				<FontString name="$parentText" inherits="Font_Kraft_Text" justifyH="LEFT" justifyV="TOP" hidden="true" bytes="4096">
+					<Size>
+						<AbsDimension x="400" y="0" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForClicks("LeftButton", "RightButton");
+				this:SetLineBytes(4096);
+				this:EnableHyperlink(true);
+			</OnLoad>
+			<OnHyperlinkClick>
+				AdvQuestBookMainFrame_OnHyperlinkClick(this, link, key);
+			</OnHyperlinkClick>
+			<OnHyperlinkEnter>
+				AdvQuestBookMainFrame_OnHyperlinkEnter(this, link);
+			</OnHyperlinkEnter>
+			<OnHyperlinkLeave>
+				AdvQuestBookMainFrame_OnHyperlinkLeave(this, link);
+			</OnHyperlinkLeave>
+		</Scripts>
+		<FontString inherits="Font_Kraft_Text" justifyH="LEFT" justifyV="TOP" />
+	</MessageFrame>
+	<MessageFrame name="AdvQuestBookMessageFrameTemplate2" frameStrata="HIGH" displayDuration="0" maxLines="10" virtual="true">
+		<Size>
+			<AbsDimension x="400" y="0" />
+		</Size>		
+		<Layers>
+			<Layer>
+				<FontString name="$parentText" inherits="Font_Kraft_Text" justifyH="LEFT" justifyV="TOP" hidden="true" bytes="512">
+					<Size>
+						<AbsDimension x="400" y="0" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForClicks("LeftButton", "RightButton");
+				this:SetLineBytes(512);
+				this:EnableHyperlink(true);
+			</OnLoad>
+			<OnHyperlinkClick>
+				AdvQuestBookMainFrame_OnHyperlinkClick(this, link, key);
+			</OnHyperlinkClick>
+			<OnHyperlinkEnter>
+				AdvQuestBookMainFrame_OnHyperlinkEnter(this, link);
+			</OnHyperlinkEnter>
+			<OnHyperlinkLeave>
+				AdvQuestBookMainFrame_OnHyperlinkLeave(this, link);
+			</OnHyperlinkLeave>
+		</Scripts>
+		<FontString inherits="Font_Kraft_Text" justifyH="LEFT" justifyV="TOP" />
+	</MessageFrame>
+	<!-- EndDef -->
+	<!-- Begin Mainframe -->
+	<Frame name="AdvQuestBookMainFrame" inherits="UICommonFrameTemplate" enableMouse="true" hidden="true" parent="UIParent" frameLevel="10000" frameStrata="HIGH">
+		<Size>
+			<AbsDimension x="820" y="520" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="12" y="33" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<!-- Begin Title -->
+			<Layer>
+				<FontString name="$parentTitle" inherits="Font_FrameTitle" text="AQB_TITLE_PAGE">
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="7" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<!-- End Title -->
+		</Layers>
+		<Frames>
+			<!-- BeginDef -->
+			<Frame name="AdvQuestBookMainFrameQuestDetailBackdrop" inherits="UIPanelBackdropFrame" enableMouse="false" parent="AdvQuestBookMainFrame">
+				<Size>
+					<AbsDimension x="480" y="470" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-12" y="31" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="AdvQuestBookMainFrameQuestBookName" inherits="Font_FrameTitle" text="AQB_XML_QDTAILS">
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="7" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<Texture name="AdvQuestBookMainFrameTexture" file="Interface\SpeakFrame\SpeakFrame_Kraft">
+							<Size>
+								<AbsDimension x="450" y="440"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="-5" y="25" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords top="0" left="0" right="1" bottom="1" />
+						</Texture>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnLoad>
+						UIPanelBackdropFrame_SetTexture(this, "Interface/Common/PanelListFrame", 128, 128);
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<ScrollFrame name="AdvQuestBookMainFrameQuestDetailScrollFrame" inherits="UIPanelScrollFrameHaveBackdropTemplate" enableMouse="true" hidden="false">
+				<Size>
+					<AbsDimension x="430" y="410" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AdvQuestBookMainFrameQuestDetailBackdrop" relativePoint="TOP">
+						<Offset>
+							<AbsDimension x="5" y="30" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<Frame inherits="FrameBorderTemplate" hidden="true" />
+				</Frames>
+				<Scripts>
+					<OnLoad>
+						UIPanelScrollFrame_OnLoad(this);
+					</OnLoad>
+				</Scripts>
+				<ScrollChild>
+					<Frame>
+						<Frames>
+							<Frame>
+								<Layers>
+									<Layer>
+										<!-- Name -->
+										<FontString name="AdvQuestBookMainFrameQuestName" inherits="Font_Kraft_Title" text=" " justifyH="CENTER" justifyV="MIDDLE">
+											<Size>
+												<AbsDimension x="400" y="0" />
+											</Size>
+											<Anchors>
+												<Anchor point="TOP">
+													<Offset>
+														<AbsDimension x="0" y="8" />
+													</Offset>
+												</Anchor>
+											</Anchors>
+											<FontHeight>
+												<AbsValue val="20" />
+											</FontHeight>
+										</FontString>
+									</Layer>
+								</Layers>
+							</Frame>
+							<!-- Description -->
+							<Frame>
+								<Layers>
+									<Layer>
+										<FontString name="AdvQuestBookMainFrameQuestDesc" inherits="Font_Kraft_Title" text="AQB_XML_DESCR" justifyH="LEFT">
+											<Size>
+												<AbsDimension x="400" y="0" />
+											</Size>
+											<Anchors>
+												<Anchor point="TOP" relativeTo="AdvQuestBookMainFrameQuestName" relativePoint="BOTTOM">
+													<Offset>
+														<AbsDimension x="0" y="12" />
+													</Offset>
+												</Anchor>
+											</Anchors>
+										</FontString>
+									</Layer>
+								</Layers>
+							</Frame>
+							<MessageFrame name="AdvQuestBookMainFrameQuestDescMessage" inherits="AdvQuestBookMessageFrameTemplate1">
+								<Anchors>
+									<Anchor point="TOPLEFT" relativeTo="AdvQuestBookMainFrameQuestDesc" relativePoint="BOTTOMLEFT">
+										<Offset>
+											<AbsDimension x="0" y="8" />
+										</Offset>
+									</Anchor>
+								</Anchors>
+							</MessageFrame>
+							<!-- Details -->
+							<Frame>
+								<Layers>
+									<Layer>
+										<FontString name="AdvQuestBookMainFrameQuestDetails" inherits="Font_Kraft_Title" text="AQB_XML_DETAILS" justifyH="LEFT">
+											<Size>
+												<AbsDimension x="400" y="0" />
+											</Size>
+											<Anchors>
+												<Anchor point="TOP" relativeTo="AdvQuestBookMainFrameQuestDescMessage" relativePoint="BOTTOM">
+													<Offset>
+														<AbsDimension x="0" y="12" />
+													</Offset>
+												</Anchor>
+											</Anchors>
+										</FontString>
+									</Layer>
+								</Layers>
+							</Frame>
+							<MessageFrame name="AdvQuestBookMainFrameQuestDetailsMessage" inherits="AdvQuestBookMessageFrameTemplate2">
+								<Anchors>
+									<Anchor point="TOPLEFT" relativeTo="AdvQuestBookMainFrameQuestDetails" relativePoint="BOTTOMLEFT">
+										<Offset>
+											<AbsDimension x="0" y="8" />
+										</Offset>
+									</Anchor>
+								</Anchors>
+							</MessageFrame>
+							<!-- Rewards -->
+							<Frame>
+								<Layers>
+									<Layer>
+										<FontString name="AdvQuestBookMainFrameQuestReward" inherits="Font_Kraft_Title" text="AQB_XML_REWARDS" justifyH="LEFT">
+											<Size>
+												<AbsDimension x="400" y="0" />
+											</Size>
+											<Anchors>
+												<Anchor point="TOP" relativeTo="AdvQuestBookMainFrameQuestDetailsMessage" relativePoint="BOTTOM">
+													<Offset>
+														<AbsDimension x="0" y="12" />
+													</Offset>
+												</Anchor>
+											</Anchors>
+										</FontString>
+									</Layer>
+								</Layers>
+							</Frame>
+							<MessageFrame name="AdvQuestBookMainFrameQuestRewardMessage" inherits="AdvQuestBookMessageFrameTemplate2">
+								<Anchors>
+									<Anchor point="TOPLEFT" relativeTo="AdvQuestBookMainFrameQuestReward" relativePoint="BOTTOMLEFT">
+										<Offset>
+											<AbsDimension x="0" y="8" />
+										</Offset>
+									</Anchor>
+								</Anchors>
+							</MessageFrame>
+							<!-- Location -->
+							<Frame>
+								<Layers>
+									<Layer>
+										<FontString name="AdvQuestBookMainFrameQuestLocation" inherits="Font_Kraft_Title" text="AQB_XML_LOCATIONS" justifyH="LEFT">
+											<Size>
+												<AbsDimension x="400" y="0" />
+											</Size>
+											<Anchors>
+												<Anchor point="TOP" relativeTo="AdvQuestBookMainFrameQuestRewardMessage" relativePoint="BOTTOM">
+													<Offset>
+														<AbsDimension x="0" y="12" />
+													</Offset>
+												</Anchor>
+											</Anchors>
+										</FontString>
+									</Layer>
+								</Layers>
+							</Frame>
+							<MessageFrame name="AdvQuestBookMainFrameQuestLocationMessage" inherits="AdvQuestBookMessageFrameTemplate2">
+								<Anchors>
+									<Anchor point="TOPLEFT" relativeTo="AdvQuestBookMainFrameQuestLocation" relativePoint="BOTTOMLEFT">
+										<Offset>
+											<AbsDimension x="0" y="8" />
+										</Offset>
+									</Anchor>
+								</Anchors>
+							</MessageFrame>
+						</Frames>
+					</Frame>
+				</ScrollChild>
+			</ScrollFrame>
+			<!-- EndDef -->
+			<Button name="$parentConfigButton" inherits="UIPanelButtonTemplate" text="AQB_XML_CONFIG" parent="AdvQuestBookMainFrame" frameLevel="2">
+				<Size>
+					<AbsDimension x="80" y="16" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-80" y="7" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if (AdvQuestBookConfig:IsVisible()) then
+							AdvQuestBookConfig:Hide();
+						else
+							if (AdvQuestBookIconConfig:IsVisible()) then
+								AdvQuestBookIconConfig:Hide();
+							end
+							AdvQuestBookConfig:Show();
+						end
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentConfigButton2" inherits="UIPanelButtonTemplate" text="Icon Config" parent="AdvQuestBookMainFrame" frameLevel="2">
+				<Size>
+					<AbsDimension x="80" y="16" />
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="AdvQuestBookMainFrameConfigButton">
+						<Offset>
+							<AbsDimension x="-86" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if (AdvQuestBookIconConfig:IsVisible()) then
+							AdvQuestBookIconConfig:Hide();
+						else
+							if (AdvQuestBookConfig:IsVisible()) then
+								AdvQuestBookConfig:Hide();
+							end
+							AdvQuestBookIconConfig:Show();
+						end
+					</OnClick>
+				</Scripts>
+			</Button>
+			<!-- Begin Help Panel -->
+			<Frame name="$parentHelpResults" inherits="UIPanelBackdropFrame" enableMouse="false" parent="AdvQuestBookMainFrame" hidden="true" frameLevel="1003">
+				<Size>
+					<AbsDimension x="310" y="370" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="12" y="133" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentTitle" inherits="Font_FrameTitle" text="AQB_XML_HSECTION">
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="7" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Button name="$parentItemButton_1" inherits="AdvQuestBookHelpButtonTemplate" id="1" />
+					<Button name="$parentItemButton_2" inherits="AdvQuestBookHelpButtonTemplate" id="2" />
+					<Button name="$parentItemButton_3" inherits="AdvQuestBookHelpButtonTemplate" id="3" />
+					<Button name="$parentItemButton_4" inherits="AdvQuestBookHelpButtonTemplate" id="4" />
+					<Button name="$parentItemButton_5" inherits="AdvQuestBookHelpButtonTemplate" id="5" />
+					<Button name="$parentItemButton_6" inherits="AdvQuestBookHelpButtonTemplate" id="6" />
+					<Button name="$parentItemButton_7" inherits="AdvQuestBookHelpButtonTemplate" id="7" />
+					<Button name="$parentItemButton_8" inherits="AdvQuestBookHelpButtonTemplate" id="8" />
+					<Slider name="$parentListScrollBar" inherits="UIPanelScrollBarTemplate">
+						<Size>
+							<AbsDimension x="12" y="204" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="-1" y="45" />
+								</Offset>
+							</Anchor>
+							<Anchor point="BOTTOMRIGHT">
+								<Offset>
+									<AbsDimension x="-1" y="-19" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this:Hide();
+							</OnLoad>
+						</Scripts>
+					</Slider>
+				</Frames>
+				<Scripts>
+					<OnLoad>
+						UIPanelBackdropFrame_SetTexture(this, "Interface/Common/PanelListFrame", 128 , 128);
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Button name="$parentHelpButton" inherits="UIPanelButtonTemplate" text="AQB_XML_OPENHELP" parent="AdvQuestBookMainFrame" frameLevel="2" hidden="true">
+				<Size>
+					<AbsDimension x="80" y="16" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="60" y="7" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if (not AdvQuestBookMainFrameHelpResults:IsVisible()) then
+							AdvQuestBook_CloseOpen();
+							AdvQuestBookMainFrameHelpResults:Show();
+							AdvQuestBookMainFrameHelpButton:SetText(AQB_XML_CLOSEHELP);
+						else
+							AdvQuestBook_CloseOpen();
+							AdvQuestBookMainFrameHelpButton:SetText(AQB_XML_OPENHELP);
+							AdvQuestBookMainFrameShareButton:SetText(AQB_XML_SHOWSHARE);
+							AdvQuestBookMainFrameSearchResults:Show();
+							AdvQuestBookMainFrameShareButton:Show();
+						end
+					</OnClick>
+				</Scripts>
+			</Button>
+			<!-- End Help Panel -->
+			<!-- Begin Donator Panel -->
+			<Frame name="$parentDonFrame" inherits="UICommonFrameTemplate" enableMouse="true" hidden="true" parent="AdvQuestBookMainFrame" frameLevel="1003">
+				<Size>
+					<AbsDimension x="250" y="220" />
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER">
+						<Offset>
+							<AbsDimension x="12" y="33" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentTitle" inherits="Font_FrameTitle" text="Donators">
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="7" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+					<Layer>
+						<FontString name="$parentP1" inherits="Font_FrameTitle" text="These players have donated via">
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="30" y="35" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+					<Layer>
+						<FontString name="$parentP2" inherits="Font_FrameTitle" text="Paypal on the Curse website">
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="AdvQuestBookMainFrameDonFrameP1">
+									<Offset>
+										<AbsDimension x="0" y="20" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+					<Layer>
+						<FontString name="$parentP3" inherits="Font_FrameTitle" text="AQB Addon page.">
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="AdvQuestBookMainFrameDonFrameP2">
+									<Offset>
+										<AbsDimension x="0" y="20" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+					<Layer>
+						<FontString name="$parent_1" inherits="Font_FrameTitle" text="Yamabuki">
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="30" y="110" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+					<Layer>
+						<FontString name="$parent_2" inherits="Font_FrameTitle" text="Keith G.">
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="AdvQuestBookMainFrameDonFrame_1">
+									<Offset>
+										<AbsDimension x="0" y="20" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+					<Layer>
+						<FontString name="$parentTY" inherits="Font_FrameTitle" text="Thank you Donators!">
+							<Anchors>
+								<Anchor point="BOTTOM">
+									<Offset>
+										<AbsDimension x="0" y="-35" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnLoad>
+						UIPanelBackdropFrame_SetTexture(this, "Interface/Common/PanelCommonFrame", 256 , 256);
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Button name="$parentDonButton" inherits="UIPanelButtonTemplate" text="Donators" parent="AdvQuestBookMainFrame" frameLevel="2" hidden="false">
+				<Size>
+					<AbsDimension x="80" y="16" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="60" y="7" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if (not AdvQuestBookMainFrameDonFrame:IsVisible()) then
+							AdvQuestBookMainFrameDonFrame:Show();
+						else
+							AdvQuestBookMainFrameDonFrame:Hide();
+						end
+					</OnClick>
+				</Scripts>
+			</Button>
+			<!-- End Donator Panel -->
+			<!-- Begin Quest Share -->
+			<!-- Begin Player Shares -->
+			<Frame name="$parentShareResults" inherits="UIPanelBackdropFrame" enableMouse="false" parent="AdvQuestBookMainFrame" hidden="true" frameLevel="1001">
+				<Size>
+					<AbsDimension x="310" y="370" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="12" y="133" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentTitle" inherits="Font_FrameTitle" text="AQB_XML_SHARERES">
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="7" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Button name="$parentItemButton_1" inherits="AdvQuestBookShareButtonTemplate" id="1" />
+					<Button name="$parentItemButton_2" inherits="AdvQuestBookShareButtonTemplate" id="2" />
+					<Button name="$parentItemButton_3" inherits="AdvQuestBookShareButtonTemplate" id="3" />
+					<Button name="$parentItemButton_4" inherits="AdvQuestBookShareButtonTemplate" id="4" />
+					<Button name="$parentItemButton_5" inherits="AdvQuestBookShareButtonTemplate" id="5" />
+					<Button name="$parentItemButton_6" inherits="AdvQuestBookShareButtonTemplate" id="6" />
+					<Button name="$parentItemButton_7" inherits="AdvQuestBookShareButtonTemplate" id="7" />
+					<Button name="$parentItemButton_8" inherits="AdvQuestBookShareButtonTemplate" id="8" />
+					<Button name="$parentItemButton_9" inherits="AdvQuestBookShareButtonTemplate" id="9" />
+					<Button name="$parentItemButton_10" inherits="AdvQuestBookShareButtonTemplate" id="10" />
+					<Button name="$parentItemButton_11" inherits="AdvQuestBookShareButtonTemplate" id="11" />
+					<Button name="$parentItemButton_12" inherits="AdvQuestBookShareButtonTemplate" id="12" />
+					<Button name="$parentItemButton_13" inherits="AdvQuestBookShareButtonTemplate" id="13" />
+					<Button name="$parentItemButton_14" inherits="AdvQuestBookShareButtonTemplate" id="14" />
+					<Button name="$parentItemButton_15" inherits="AdvQuestBookShareButtonTemplate" id="15" />
+					<Button name="$parentItemButton_16" inherits="AdvQuestBookShareButtonTemplate" id="16" />
+					<Slider name="$parentList_ScrollBar" inherits="UIPanelScrollBarTemplate">
+						<Size>
+							<AbsDimension x="12" y="204" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="-1" y="45" />
+								</Offset>
+							</Anchor>
+							<Anchor point="BOTTOMRIGHT">
+								<Offset>
+									<AbsDimension x="-1" y="-19" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnValueChanged>
+								AdvQuestBook_OnValueChanged(this:GetName(), arg1);
+							</OnValueChanged>
+							<OnMouseWheel>
+								AdvQuestBook_OnMouseWheel(AdvQuestBookMainFrameShareResultsList_ScrollBar, delta);
+							</OnMouseWheel>
+						</Scripts>
+					</Slider>
+				</Frames>
+				<Scripts>
+					<OnLoad>
+						UIPanelBackdropFrame_SetTexture(this, "Interface/Common/PanelListFrame", 128 , 128);
+					</OnLoad>
+					<OnMouseWheel>
+						AdvQuestBook_OnMouseWheel(AdvQuestBookMainFrameShareResultsList_ScrollBar, delta);
+					</OnMouseWheel>
+				</Scripts>
+			</Frame>
+			<Button name="$parentShareButton" inherits="UIPanelButtonTemplate" text="AQB_XML_SHOWSHARE" parent="AdvQuestBookMainFrame" frameLevel="1002">
+				<Size>
+					<AbsDimension x="80" y="16" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="20" y="140" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if (not AdvQuestBookMainFrameShareResults:IsVisible()) then
+							AdvQuestBook_CloseOpen();
+							AdvQuestBookMainFrameShareButton:SetText(AQB_XML_HIDESHARE);
+							AdvQuestBookMainFrameShareButton:Show();
+							AdvQuestBookMainFrameShareButton_ShowShared();
+							AdvQuestBookMainFrameShareResults:Show();
+						else
+							AdvQuestBook_CloseOpen();
+							AdvQuestBookMainFrameShareButton:SetText(AQB_XML_SHOWSHARE);
+							AdvQuestBookMainFrameShareButton:Show();
+							AdvQuestBookMainFrameSearchResults:Show();
+						end
+					</OnClick>
+				</Scripts>
+			</Button>
+			<!-- End Player Shares -->
+			<!-- Begin Player Quest List -->
+			<Frame name="$parentShareQuestResults" inherits="UIPanelBackdropFrame" enableMouse="false" parent="AdvQuestBookMainFrame" hidden="true" frameLevel="1002">
+				<Size>
+					<AbsDimension x="310" y="370" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="12" y="133" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentTitle" inherits="Font_FrameTitle" text="AQB_XML_SHARERES">
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="7" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Button name="$parentItemButton_1" inherits="AdvQuestBookShareQuestButtonTemplate" id="1" />
+					<Button name="$parentItemButton_2" inherits="AdvQuestBookShareQuestButtonTemplate" id="2" />
+					<Button name="$parentItemButton_3" inherits="AdvQuestBookShareQuestButtonTemplate" id="3" />
+					<Button name="$parentItemButton_4" inherits="AdvQuestBookShareQuestButtonTemplate" id="4" />
+					<Button name="$parentItemButton_5" inherits="AdvQuestBookShareQuestButtonTemplate" id="5" />
+					<Button name="$parentItemButton_6" inherits="AdvQuestBookShareQuestButtonTemplate" id="6" />
+					<Button name="$parentItemButton_7" inherits="AdvQuestBookShareQuestButtonTemplate" id="7" />
+					<Button name="$parentItemButton_8" inherits="AdvQuestBookShareQuestButtonTemplate" id="8" />
+					<Button name="$parentItemButton_9" inherits="AdvQuestBookShareQuestButtonTemplate" id="9" />
+					<Button name="$parentItemButton_10" inherits="AdvQuestBookShareQuestButtonTemplate" id="10" />
+					<Button name="$parentItemButton_11" inherits="AdvQuestBookShareQuestButtonTemplate" id="11" />
+					<Button name="$parentItemButton_12" inherits="AdvQuestBookShareQuestButtonTemplate" id="12" />
+					<Button name="$parentItemButton_13" inherits="AdvQuestBookShareQuestButtonTemplate" id="13" />
+					<Button name="$parentItemButton_14" inherits="AdvQuestBookShareQuestButtonTemplate" id="14" />
+					<Button name="$parentItemButton_15" inherits="AdvQuestBookShareQuestButtonTemplate" id="15" />
+					<Button name="$parentItemButton_16" inherits="AdvQuestBookShareQuestButtonTemplate" id="16" />
+					<Button name="$parentBackButton" inherits="UIPanelButtonTemplate" text="AQB_XML_BACK">
+						<Size>
+							<AbsDimension x="80" y="16" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPRIGHT" relativeTo="AdvQuestBookMainFrameShareQuestResults">
+								<Offset>
+									<AbsDimension x="-6" y="7" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								AdvQuestBookMainFrameShareBack_OnClick();
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Slider name="$parentList_ScrollBar" inherits="UIPanelScrollBarTemplate">
+						<Size>
+							<AbsDimension x="12" y="204" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="-1" y="45" />
+								</Offset>
+							</Anchor>
+							<Anchor point="BOTTOMRIGHT">
+								<Offset>
+									<AbsDimension x="-1" y="-19" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnValueChanged>
+								AdvQuestBook_OnValueChanged(this:GetName(), arg1);
+							</OnValueChanged>
+							<OnMouseWheel>
+								AdvQuestBook_OnMouseWheel(AdvQuestBookMainFrameShareQuestResultsList_ScrollBar, delta);
+							</OnMouseWheel>
+						</Scripts>
+					</Slider>
+				</Frames>
+				<Scripts>
+					<OnLoad>
+						UIPanelBackdropFrame_SetTexture(this, "Interface/Common/PanelListFrame", 128 , 128);
+					</OnLoad>
+					<OnMouseWheel>
+						AdvQuestBook_OnMouseWheel(AdvQuestBookMainFrameShareQuestResultsList_ScrollBar, delta);
+					</OnMouseWheel>
+				</Scripts>
+			</Frame>
+			<!-- End Player Quest List -->
+			<!-- End Quest Share -->
+			<!-- Begin Search Options -->
+			<Frame name="$parentSearchOptions" inherits="UIPanelBackdropFrame" enableMouse="false" parent="AdvQuestBookMainFrame">
+				<Size>
+					<AbsDimension x="310" y="95" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="12" y="33" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentTypeSearchText" inherits="Font_FrameTitle" text="AQB_XML_TYPEKEYWORD">
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="18" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<EditBox name="$parentSearchBox" historyLines="10">
+						<Size>
+							<AbsDimension x="130" y="32" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="90" y="38" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture name="$parentLeft" file="Interface\DialogFrame\DialogBox-Input-Border">
+									<Size>
+										<AbsDimension x="8" y="32" />
+									</Size>
+									<Anchors>
+										<Anchor point="LEFT">
+											<Offset>
+												<AbsDimension x="-12" y="-4" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0" right="0.25" top="0" bottom="1.0" />
+								</Texture>
+								<Texture name="$parentRight" file="Interface\DialogFrame\DialogBox-Input-Border">
+									<Size>
+										<AbsDimension x="8" y="32" />
+									</Size>
+									<Anchors>
+										<Anchor point="RIGHT">
+											<Offset>
+												<AbsDimension x="12" y="-4" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0.75" right="1.0" top="0" bottom="1.0" />
+								</Texture>
+								<Texture file="Interface\DialogFrame\DialogBox-Input-Border">
+									<Size>
+										<AbsDimension x="16" y="32" />
+									</Size>
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT">
+											<Offset>
+												<AbsDimension x="0" y="0" />
+											</Offset>
+										</Anchor>
+										<Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="0" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0.25" right="0.75" top="0" bottom="1.0"/>
+								</Texture>
+								<FontString name="$parentName" inherits="GameFontHighlight" justifyH="RIGHT" justifyV="MIDDLE">
+									<Size>
+										<AbsDimension x="100" y="32" />
+									</Size>
+									<Anchors>
+										<Anchor point="RIGHT" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="-15" y="-5" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnEnterPressed>
+								AdvQuestBook_CloseOpen();
+								AdvQuestBookMainFrame_SearchQuest();
+								AdvQuestBookMainFrameSearchResults:Show();
+								AdvQuestBookMainFrameShareButton:SetText(AQB_XML_SHOWSHARE);
+								AdvQuestBookMainFrameShareButton:Show();
+								--AdvQuestBookMainFrameHelpButton:SetText(AQB_XML_OPENHELP);
+							</OnEnterPressed>
+							<OnEscapePressed>
+								this:ClearFocus();
+							</OnEscapePressed>
+						</Scripts>
+						<TextInsets>
+							<AbsInset top="4" left="2" bottom="0" right="2" />
+						</TextInsets>
+						<FontString inherits="GameEditFont" />
+					</EditBox>
+					<Button name="$parentSearchButton" inherits="UIPanelButtonTemplate" text="AQB_XML_SEARCH">
+						<Size>
+							<AbsDimension x="105" y="20" />
+						</Size>
+						<Anchors>
+							<Anchor point="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="103" y="-5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								AdvQuestBook_CloseOpen();
+								AdvQuestBookMainFrame_SearchQuest();
+								AdvQuestBookMainFrameSearchResults:Show();
+								AdvQuestBookMainFrameShareButton:SetText(AQB_XML_SHOWSHARE);
+								AdvQuestBookMainFrameShareButton:Show();
+								--AdvQuestBookMainFrameHelpButton:SetText(AQB_XML_OPENHELP);
+							</OnClick>
+						</Scripts>
+					</Button>
+				</Frames>
+				<Scripts>
+					<OnLoad>
+						UIPanelBackdropFrame_SetTexture(this, "Interface/Common/PanelCommonFrame2", 128 , 128);
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<!-- End Search Options -->
+			<!-- Begin Search Results -->
+			<Frame name="$parentSearchResults" inherits="UIPanelBackdropFrame" enableMouse="true" parent="AdvQuestBookMainFrame" frameLevel="1000">
+				<Size>
+					<AbsDimension x="310" y="370" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="12" y="133" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentTitle" inherits="Font_FrameTitle" text="AQB_XML_SEARCHRES">
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="7" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Button name="$parentItemButton_1" inherits="AdvQuestBookMFQLBTemplate" id="1" />
+					<Button name="$parentItemButton_2" inherits="AdvQuestBookMFQLBTemplate" id="2" />
+					<Button name="$parentItemButton_3" inherits="AdvQuestBookMFQLBTemplate" id="3" />
+					<Button name="$parentItemButton_4" inherits="AdvQuestBookMFQLBTemplate" id="4" />
+					<Button name="$parentItemButton_5" inherits="AdvQuestBookMFQLBTemplate" id="5" />
+					<Button name="$parentItemButton_6" inherits="AdvQuestBookMFQLBTemplate" id="6" />
+					<Button name="$parentItemButton_7" inherits="AdvQuestBookMFQLBTemplate" id="7" />
+					<Button name="$parentItemButton_8" inherits="AdvQuestBookMFQLBTemplate" id="8" />
+					<Button name="$parentItemButton_9" inherits="AdvQuestBookMFQLBTemplate" id="9" />
+					<Button name="$parentItemButton_10" inherits="AdvQuestBookMFQLBTemplate" id="10" />
+					<Button name="$parentItemButton_11" inherits="AdvQuestBookMFQLBTemplate" id="11" />
+					<Button name="$parentItemButton_12" inherits="AdvQuestBookMFQLBTemplate" id="12" />
+					<Button name="$parentItemButton_13" inherits="AdvQuestBookMFQLBTemplate" id="13" />
+					<Button name="$parentItemButton_14" inherits="AdvQuestBookMFQLBTemplate" id="14" />
+					<Button name="$parentItemButton_15" inherits="AdvQuestBookMFQLBTemplate" id="15" />
+					<Button name="$parentItemButton_16" inherits="AdvQuestBookMFQLBTemplate" id="16" />
+					<Slider name="AdvQuestBookMainFrameSearchResultsList_ScrollBar" inherits="UIPanelScrollBarTemplate" enableMouse="true">
+						<Size>
+							<AbsDimension x="12" y="204" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="-1" y="45" />
+								</Offset>
+							</Anchor>
+							<Anchor point="BOTTOMRIGHT">
+								<Offset>
+									<AbsDimension x="-1" y="-19" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnValueChanged>
+								AdvQuestBook_OnValueChanged(this:GetName(), arg1);
+							</OnValueChanged>
+							<OnMouseWheel>
+								AdvQuestBook_OnMouseWheel(AdvQuestBookMainFrameSearchResultsList_ScrollBar, delta);
+							</OnMouseWheel>
+						</Scripts>
+					</Slider>
+				</Frames>
+				<Scripts>
+					<OnLoad>
+						UIPanelBackdropFrame_SetTexture(this, "Interface/Common/PanelListFrame", 128 , 128);
+					</OnLoad>
+					<OnMouseWheel>
+						AdvQuestBook_OnMouseWheel(AdvQuestBookMainFrameSearchResultsList_ScrollBar, delta);
+					</OnMouseWheel>
+				</Scripts>
+			</Frame>
+			<!-- End Search Results -->
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				UIPanelBackdropFrame_SetTexture(this, "Interface/Common/PanelCommonFrame", 256 , 256);
+				AdvQuestBookMainFrame_OnLoad(this);
+			</OnLoad>
+			<OnShow>
+				AdvQuestBook_CloseOpen();
+				AdvQuestBookMainFrameShareButton:SetText(AQB_XML_SHOWSHARE);
+				AdvQuestBookMainFrameShareButton:Show();
+				AdvQuestBookMainFrameSearchResults:Show();
+				AQB_SHOW = true;
+			</OnShow>
+			<OnHide>
+				AdvQuestBook_CloseOpen();
+				AdvQuestBookMainFrameShareButton:SetText(AQB_XML_SHOWSHARE);
+				AdvQuestBookMainFrameShareButton:Show();
+				AdvQuestBookMainFrameSearchResults:Show();
+				AQB_SHOW = false;
+			</OnHide>
+			<OnEvent>
+				AdvQuestBookMainFrame_OnEvent(this, event);
+			</OnEvent>
+		</Scripts>
+	</Frame>
+	<!-- End Mainfframe -->
+</Ui>

@@ -1,0 +1,17 @@
+## Title: GuildPanel
+## Version: 0.34
+## Notes: Improved guild frame with sorting and detailed guild information
+## Author: Amiya
+
+script\GuildPanel.lua
+script\GuildPanelHelpers.lua
+script\GuildPanelDropdown.lua
+
+script\GuildPanelConfig.lua
+script\GuildPanelResource.lua
+script\GuildPanelResourceList.lua
+
+xml\GuildPanelTemplates.xml
+xml\GuildPanel.xml
+xml\GuildPanelConfig.xml
+xml\GuildPanelResource.xml

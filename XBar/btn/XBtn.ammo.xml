@@ -1,0 +1,41 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Frame name="XBarAmmo" parent="UIParent" frameStrata="BACKGROUND" frameLevel="1">
+		<Size><AbsDimension x="128" y="32"/></Size>
+		<Anchors><Anchor point="LEFT" relativeTo="XBarFrame"><Offset>
+			<AbsDimension x="780" y="0"/></Offset></Anchor></Anchors>
+		<Scripts>
+			<OnEvent>XBar.Ammo_OnEvent(this,event)</OnEvent>
+			<OnShow>XBar.Ammo_OnEvent(this,"LOADED")</OnShow>
+			<OnHide>
+				this:UnregisterEvent("PLAYER_BAG_CHANGED")
+				this:UnregisterEvent("PLAYER_INVENTORY_CHANGED")
+			</OnHide>
+		</Scripts>
+	</Frame>
+	<Frame name="XBarAmmo_BG" inherits="XButton_BGTemp" parent="XBarFrame">
+		<Anchors><Anchor point="LEFT" relativeTo="XBarAmmo"><Offset>
+			<AbsDimension x="-28" y="0"/></Offset></Anchor></Anchors>
+	</Frame>
+	<Button name="XBarAmmo_B" inherits="XButton_BTemp" parent="XBarAmmo">
+		<Anchors><Anchor point="LEFT"/></Anchors>
+		<NormalTexture file="Interface/Icons/Ammo1"/>
+		<PushedTexture file="Interface/Icons/Ammo3"/>
+		<HighlightTexture file="Interface/Icons/Ammo3" alphaMode="ADD"/>
+		<Scripts>
+			<OnClick>
+				if key=="LBUTTON" then
+					XBar.ToggleUI(UI_QuestBook)
+				else
+					XBar.ToggleUI(CardBookFrame)
+				end
+			</OnClick>
+			<OnDragStart>XBar.MoveStart(XBarAmmo)</OnDragStart>
+			<OnDragStop>XBar.MoveEnd(XBarAmmo)</OnDragStop>
+			<OnEnter>XBar.Ammo_OnEnter(this)</OnEnter>
+		</Scripts>
+	</Button>
+	<Frame name="XBarAmmo_F" inherits="XButton_FTemp" parent="XBarAmmo">
+		<Anchors><Anchor point="LEFT"><Offset>
+			<AbsDimension x="26" y="3"/></Offset></Anchor></Anchors>
+	</Frame>
+</Ui>

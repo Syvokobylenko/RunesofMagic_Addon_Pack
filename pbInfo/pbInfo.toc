@@ -1,0 +1,29 @@
+## ## ## ## ##
+## pbInfo v0.56
+## 	  by p.b. a.k.a. novayuna
+## 	  released under the Creative Commons License By-Nc-Sa: http://creativecommons.org/licenses/by-nc-sa/3.0/
+## 
+##    RoM.Curse.com : http://rom.curse.com/downloads/rom-addons/details/pbinfo.aspx
+## 
+##    German thread : http://forum.runesofmagic.com/showthread.php?t=30336
+##    English thread: http://forum.runesofmagic.com/showthread.php?t=30424
+## 
+## Have fun!
+## ## ## ## ##
+## X-Website: http://rom.curse.com/downloads/rom-addons/details/pbinfo.aspx
+## X-Curse-Packaged-Version: v0.56
+## X-Curse-Project-Name: pbInfo
+## X-Curse-Project-ID: pbinfo
+## X-Curse-Repository-ID: rom/pbinfo/mainline
+## ## ## ## ##
+Includes/inc.Core.lua
+Xml/pbInfo.xml
+Xml/ConfigTemplates.xml
+Xml/Config.xml
+Xml/ThreatMeter.xml
+Xml/QuestTracker.xml
+Xml/CastingBar.xml
+-- X-Curse-Packaged-Version: 0.60
+-- X-Curse-Project-Name: pbInfo
+-- X-Curse-Project-ID: pbinfo
+-- X-Curse-Repository-ID: rom/pbinfo/mainline

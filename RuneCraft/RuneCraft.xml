@@ -1,0 +1,1152 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/&#xA;UI.xsd">
+	
+	<!-- Addon Manager Button -->
+	<Button name="RCMiniButton" hidden="true" inherits="UIPanelButtonTemplate" parent="AddonManagerMiniFrame">
+		<Size>
+			<AbsDimension y="24" x="24"/>
+		</Size>
+		<Scripts>
+			<OnClick>
+				AddonManager.MiniButton_OnClick(this);
+			</OnClick>
+			<OnEnter>
+				AddonManager.MiniButton_OnEnter(this);
+			</OnEnter>
+			<OnLeave>
+				AddonManager.MiniButton_OnLeave(this);
+			</OnLeave>
+		</Scripts>
+	    <NormalTexture file="Interface/AddOns/RuneCraft/Gfx/MiniButton_normal.tga"/>
+	    <PushedTexture file="Interface/AddOns/RuneCraft/Gfx/MiniButton_pushed.tga"/>
+		<HighlightTexture file="Interface/AddOns/RuneCraft/Gfx/MiniButton_highlight.tga" alphaMode="ADD" />
+	</Button>
+	
+	<!--Scripts-->
+	<Script file="Libs/Sol/LibStub.lua"></Script>
+	<Script file="Libs/Sol/Sol.lua"></Script>
+	<Script file="RuneCraft.lua"></Script>
+	
+	<!--Tooltip-->
+	<GameTooltip name="RCTooltip" frameStrata="TOOLTIP" hidden="true" inherits="GameTooltipTemplate" parent="UIParent"/>
+	
+	<!-- Tier Template -->
+	<Button name="RCTier_Template" inherits="UIPanelButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="110" y="30"/>
+		</Size>
+		<Scripts>
+			<OnClick>
+				RC_AktTier(this:GetID());
+				RC_SetScroll(this:GetID(),1);
+			</OnClick>
+		</Scripts>
+	</Button>
+	
+	<!--List Template-->
+	<Button name="RCList_Template" virtual="true">
+		<Size>
+			<AbsDimension x="160" y="30"/>
+		</Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Name" inherits="GameFontNormal" justifyH="Center" text="">
+					<Size>
+						<AbsDimension x="150" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="46" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parent_Icon" inherits="ItemButtonTemplate" >
+				<Anchors>
+					<Anchor point="LEFT">
+						<Offset>
+							<AbsDimension x="1" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>		
+				<Scripts>
+					<OnClick>
+						RCList_OnClick(this:GetParent():GetID());
+						RC_TreeList(this:GetParent():GetID());
+					</OnClick>
+					<OnEnter>
+						RCTooltip:SetOwner(this:GetParent(), "ANCHOR_TOPRIGHT", 5, 0);
+						RCTooltip_Set(this:GetParent():GetID());
+					</OnEnter>
+					<OnLeave>
+						RCTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+
+				<NormalTexture file=""/>
+               			<PushedTexture file=""/>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnClick>
+				RCList_OnClick(this:GetID());
+				RC_TreeList(this:GetID());
+			</OnClick>
+			<OnEnter>
+				RCTooltip:SetOwner(this, "ANCHOR_TOPRIGHT", 5, 0);
+				RCTooltip_Set(this:GetID());
+			</OnEnter>
+			<OnLeave>
+				RCTooltip:Hide();
+			</OnLeave>
+		</Scripts>
+		<HighlightTexture file="Interface\Buttons\PanelButton-highlight" alphaMode="ADD">
+			<TexCoords left="0" right="0.671875" top="0" bottom="0.6875"/>
+		</HighlightTexture>
+	</Button>
+	
+	<!--Grade Template-->
+	<Button name="RCGrade_Template" virtual="true">
+		<Size>
+			<AbsDimension x="180" y="16"/>
+		</Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Name" inherits="GameFontNormal" text="">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnEnter>
+				RCTooltip:SetOwner(this, "ANCHOR_TOPRIGHT", 5, 0);
+				RCGrade_Tooltip(this:GetID());
+			</OnEnter>
+			<OnClick>
+				RCGrade_OnClick(this:GetID());
+			</OnClick>
+			<OnLeave>
+				RCTooltip:Hide();
+			</OnLeave>
+		</Scripts>
+	</Button>
+	
+	<!--Needed Template-->
+	<Button name="RCNeed_Template" virtual="true">
+		<Size>
+			<AbsDimension x="95" y="67"/>
+		</Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Name" inherits="GameFontNormal" justifyH="CENTER" justifyV="MIDDLE" text="">
+					<Size>
+						<AbsDimension x="95" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOM">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parent_Icon" inherits="ItemButtonTemplate" >
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="1" y="1"/>
+						</Offset>
+					</Anchor>
+				</Anchors>		
+				<Scripts>
+					<OnEnter>
+						RCTooltip:SetOwner(this:GetParent(), "ANCHOR_TOPRIGHT", 5, 0);
+						RCTooltip_Set(this:GetParent():GetID());
+					</OnEnter>
+					<OnClick>
+						RCList_OnClick(this:GetParent():GetID());
+					</OnClick>
+					<OnLeave>
+						RCTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="interface\addons\RuneCraft\Gfx\empty" />
+				<PushedTexture file="interface\addons\RuneCraft\Gfx\empty" />	
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnEnter>
+				RCTooltip:SetOwner(this, "ANCHOR_TOPRIGHT", 5, 0);
+				RCTooltip_Set(this:GetID());
+			</OnEnter>
+			<OnClick>
+				RCList_OnClick(this:GetID());
+			</OnClick>
+			<OnLeave>
+				RCTooltip:Hide();
+			</OnLeave>
+		</Scripts>
+	</Button>
+		
+	<!-- MainFrame -->
+	<Frame name="RCMain" inherits="UICommonFrameTemplate" parent="UIParent" movable="true" enableMouse="true">
+		<Size>
+			<AbsDimension x="400" y="450"/>
+		</Size>
+		<Scripts>
+			<OnHide>
+				RCTreeShow:Show();
+				RCTreeHide:Hide();
+			</OnHide>
+		</Scripts>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<!--Titel Layer-->
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Title" inherits="GameTitleFont" text="RuneCraft v0.57-2">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="0" y="8"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<!--Tier Layer-->
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Tier" inherits="GameFontNormal" text="" justifyH="CENTER">
+					<Size>
+						<AbsDimension x="155"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+							<Offset>
+								<AbsDimension x="22" y="28"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<!--Needed Layer-->
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Needed" inherits="TitleFontNormal" text="" justifyH="CENTER">
+					<Size>
+						<AbsDimension x="145"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="218" y="247"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<!--Rune Info-->
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Info" inherits="GameFontHighlight" text="" justifyH="CENTER">
+					<Size>
+						<AbsDimension x="130"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="227" y="395"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<!-- Tier Buttons -->
+			<Button name="$parent_Tier0" inherits="RCTier_Template" id="-1">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-110" y="50"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parent_Tier1" inherits="RCTier_Template" id="0">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-110" y="80"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parent_Tier2" inherits="RCTier_Template" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-110" y="110"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parent_Tier3" inherits="RCTier_Template" id="2">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-110" y="140"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parent_Tier4" inherits="RCTier_Template" id="3">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-110" y="170"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parent_Tier5" inherits="RCTier_Template" id="4">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-110" y="200"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parent_Tier6" inherits="RCTier_Template" id="5">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-110" y="230"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parent_Tier7" inherits="RCTier_Template" id="6">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-110" y="260"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<!-- Listen Slider -->
+			<Slider name="$parent_Slider" inherits="UIPanelScrollBarHaveBackdropTemplate">
+				<Size>
+					<AbsDimension x="16" y="345"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="180" y="57"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this:SetValueStepMode("INT");
+                    </OnLoad>
+					<OnValueChanged>
+						UIPanelScrollBar_OnValueChanged(this, arg1);
+						RC_SetScroll(RC_AktTier(nil),this:GetValue());
+                    </OnValueChanged>
+					<OnUpdate>
+						if not RCMain:IsVisible() then
+							if RCTree:IsVisible() then
+								RCTree:Hide();
+							end
+						end						
+					</OnUpdate>
+				</Scripts>
+			</Slider>
+			<!--Liste-->
+			<ScrollFrame name="$parent_ScrollFrame" virtual="UIPanelScrollFrameTemplate">
+				<Size>
+					<AbsDimension x="170" y="345"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="40"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<Button name="RCList_Item1" inherits="RCList_Template" id="1">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="10"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="RCList_Item2" inherits="RCList_Template" id="2">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="50"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="RCList_Item3" inherits="RCList_Template" id="3">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="90"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="RCList_Item4" inherits="RCList_Template" id="4">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="130"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="RCList_Item5" inherits="RCList_Template" id="5">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="170"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="RCList_Item6" inherits="RCList_Template" id="6">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="210"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="RCList_Item7" inherits="RCList_Template" id="7">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="250"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="RCList_Item8" inherits="RCList_Template" id="8">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="290"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="RCList_Item9" inherits="RCList_Template" id="9">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="330"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+				</Frames>
+			</ScrollFrame>
+			<!--Preview-->
+			<Button name="RCPrev_Icon" inherits="RCList_Template" id="0">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="215" y="40"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<!-- TreeFrame show -->
+			<Button name="RCTreeShow" inherits="UIPanelRightPageButtonTemplate">
+				<Size>
+					<AbsDimension x="20" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-10" y="46"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RCTree:Show();
+						RCTreeShow:Hide();
+						RCTreeHide:Show();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<!-- TreeFrame hide -->
+			<Button name="RCTreeHide" inherits="UIPanelLeftPageButtonTemplate">
+				<Size>
+					<AbsDimension x="20" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-10" y="46"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RCTree:Hide();
+						RCTreeShow:Show();
+						RCTreeHide:Hide();
+					</OnClick>
+					<OnLoad>
+						RCTreeHide:Hide();
+					</OnLoad>
+				</Scripts>
+			</Button>
+			<!--Grade-->
+			<Button name="RCPrev_Grade1" inherits="RCGrade_Template" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="210" y="80"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="RCPrev_Grade2" inherits="RCGrade_Template" id="2">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="210" y="96"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="RCPrev_Grade3" inherits="RCGrade_Template" id="3">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="210" y="112"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="RCPrev_Grade4" inherits="RCGrade_Template" id="4">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="210" y="128"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="RCPrev_Grade5" inherits="RCGrade_Template" id="5">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="210" y="144"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="RCPrev_Grade6" inherits="RCGrade_Template" id="6">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="210" y="160"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="RCPrev_Grade7" inherits="RCGrade_Template" id="7">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="210" y="176"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="RCPrev_Grade8" inherits="RCGrade_Template" id="8">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="210" y="192"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="RCPrev_Grade9" inherits="RCGrade_Template" id="9">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="210" y="208"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="RCPrev_Grade10" inherits="RCGrade_Template" id="10">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="210" y="224"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<!--Needed Runes-->
+			<Button name="RCPrev_Need1" inherits="RCNeed_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="195" y="268"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="RCPrev_Need2" inherits="RCNeed_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="290" y="268"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="RCPrev_Need3" inherits="RCNeed_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="195" y="330"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="RCPrev_Need4" inherits="RCNeed_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="290" y="330"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				RCMain_OnLoad(this);
+				UIPanelBackdropFrame_SetTexture(this, "Interface/Common/PanelCommonFrame", 256, 256);
+			</OnLoad>
+			<OnEvent>
+				RCMain_OnEvent(this,event);
+			</OnEvent>
+			<OnHide>
+				RCTree:Hide();
+			</OnHide>
+		</Scripts>
+	</Frame>
+	
+	<!-- TreeFrame -->
+	<Frame name="RCTree" inherits="UICommonFrameTemplate" parent="UIParent" movable="true" enableMouse="true">
+		<Size>
+			<AbsDimension x="300" y="450"/>
+		</Size>
+		<Scripts>
+			<OnHide>
+				RCTreeShow:Show();
+				RCTreeHide:Hide();
+			</OnHide>
+		</Scripts>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="RCMain">
+				<Offset>
+					<AbsDimension x="355" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<!--Title Layer-->
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Title" inherits="GameTitleFont" text="Build List">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="-5" y="8"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line1" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="30"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line2" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="40"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line3" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="50"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line4" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="60"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line5" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="70"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line6" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="80"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line7" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="90"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line8" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="100"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line9" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="110"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line10" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="120"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line11" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="130"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line12" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="140"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line13" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="150"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line14" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="160"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line15" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="170"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line16" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="180"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line17" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="190"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line18" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="200"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line19" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="210"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line20" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="220"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line21" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="230"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line22" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="240"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line23" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="250"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line24" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="260"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line25" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="270"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line26" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="280"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line27" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="290"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line28" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="300"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line29" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="310"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line30" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="320"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line31" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="330"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line32" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="340"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line33" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="350"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line34" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="360"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line35" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="370"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line36" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="380"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line37" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="390"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line38" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="400"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line39" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="410"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Line40" inherits="GameFontNormal" text="FreePlate">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="10" y="420"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+		</Frames>
+		<Scripts>
+		</Scripts>
+	</Frame>
+</Ui>

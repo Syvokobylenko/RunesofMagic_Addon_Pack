@@ -1,0 +1,315 @@
+﻿==v7.4.5; 22 Dez 2019==
+*fix: Automatic pricing "last" will work now again 
+
+==v7.4.4; 11 Juni 2019==
+*fix: Hides equipment tooltips while loading auction items 
+
+==v7.4.3; 8 Juni 2019==
+*fix: Showing history without saved history will work now
+
+==v7.4.2; 5 Juni 2019==
+*add: Button for setting all max saved history entries to default
+*add: default setting of default max saved history entries set to 100 and for mana stones tear 6 to 1000
+
+==v7.4.1; 3 Juni 2019==
+*fix: OnEvent line 67 (history.lua) attempt to compare number with nil (HistoryMaxSaved[itemid] nil case)
+
+==v7.4.0; 2 Juni 2019==
+*add: Number of max saved history entries changable per item (in the history)
+*fix: Red history items ("no information items") now will get out filtered with the zero stat filter
+*fix: Opening history while searching for entries will not mix up history anymore
+
+==v7.3.0; 1 Juni 2019==
+*add: Filter now also works for the history
+*add: Informations of history items now gets saved (so you can view the itemlink for more than 10 items in history)
+
+==v3.0.0; 22 Dez 2012==
+This is a update containing massive refactoring.\\
+TellTod and Noguai know, that this will probably cause some compatibility issues for addons that communicate with AAH.\\
+They will need some updates, but that optimizing greatly enhances AAH's structure. BE AWARE OF THAT!\\
+*fix: Item splitting window doesn't appear anymore when trying to post an item link in chat
+*fix: $bargain filter not working
+*fix: Bugs caused by refactoring
+*add: Money trading functionality for selling/buying gold and diamonds on the auctionhouse
+*add: Item links may now be posted from bid and sell tabs.
+*add: Confirmation dialog for bids higher than a customizable amount.
+*add: Toggleable suggestion of average price if last price is missing.
+*add: The addon may now be toggled on or off with "/aah toggle" or the AddonManager button (added mini bar button)
+*add: Registered filters may now contain descriptions
+*add: Abbreviated formats for money input boxes (e.g. 5k for 5000; Invalid formats are highlighted)
+*rework: Massive restructuring of the addon.
+*rework: Moved functions, variables, gui parts into their own classes
+*rework: Renamed and optimized stuff
+*rework: Sort mode is now kept while loading search results
+*rework: When trading gold units per price instead of price per unit is shown for better comparability
+*rework: Reworked payment functions
+*rework: Reworked the tooltip parser
+*rework: Changed frames default position (Moved it a bit upwards)
+*rework: Scrolling through results with mouse wheel is now possible while hovering icons
+*rework: Price per unit coloring does now happen with gradients.
+*rework: Filter option tooltip is now more dynamic and shows all commands
+*rework: Many many additional minor bits and pieces
+
+==v2.9.5 - 9 Sep 2012==
+*updated: White Mat values for the 2-4-6 progression
+
+==v2.9.4 - 20 Jun 2012==
+*added: Warlock and Champion to Classes - Crypton
+
+==v2.9.3 - 28 Nov 2011==
+*added: Support for lvl 61 common mats
+
+==v2.9.2 - 31 May 2011==
+*update: Translation updates for various locales, thanks to all the translators
+
+==v2.9.1 - 15 Feb 2011==
+*update: Translation updates for various locales, thanks to all the translators
+
+==v2.9.0 - 29 Jan 2011==
+*fix: Bargain filter will now work again, was broken with v2.8.0
+*add: All the Recipes have their level list updated. thanks to tasquer3 for suppling the lists
+*rework: Moved the settings tab to the right side to be less in the way.
+*rework: Moved the timeleft to be on top of the seller for each item in the Browse List to make room for the following item. Also the level column was removed.
+*add: Added 2 custom columns on the browse list that can display/sort items based on (stam, str, dex, wis, intel, hp, mp, patt, matt, pdef, mdef, level, tier, plus, dura, worth, pdam, mdam, speed, dps, pcrit, mcrit, pacc, macc, dodge, parry, heal) - If searching for items causes your game to lag, then please lower your filter speed in the settings.
+*rework: Tweaked the filters to take advantage of the new listing data
+
+==v2.8.2 - 25 Jan 2011==
+*update: Spanish Locale file updated thanks to cpzdarwen
+
+==v2.8.1 - 21 Jan 2011==
+*update: German Locale file updated thanks to DaSilentStorm and Maelgwn71
+*update: Recipe Level list has complete Alchemy list now thanks to kenshin81. Still need data for the other 5 crafts
+
+==v2.8.0 - 19 Jan 2011==
+NOTE: Due to the updated Filter code, some people will need to use the english filter commands until their language's locale file gets updated to the new system
+*rework: Added my own function for setting text to lower that will support non english alphabet letters. (currently supported letters: Ä,Ö,Ü - please submit a bug ticket if your language has other letters that have an upper and lower case versions)
+*rework: The entire filter system has been reworked to be modular and allow for other addons to create and register their own filters. This has made the filter code much cleaner, more efficient, and better support for other languages
+*rework: All filters that had an optional number will now need to be written like $dura/110
+*rework: Bargain and Vendor filters will now only use one filter box using a / to seperate the options. ie $vendor/10/1440 or {{{$bargain//1440}}}
+*add: Added a $plus filter that works like dura and tier that filters for items that have a minimum plusing
+*add: Added a 4th tab for settings
+*add: Added an option to display Materials as Price/Unit/White Mat. This feature allows you to compare the prices of the same mat at different refinement levels much easier.
+*add: Added a filter speed option to increase the speed of the filter at the cost of momentary FPS loss
+*add: Pet Eggs will now have the level of the pet displayed in the level column and will be a green color to let you know that you can't search for that level as that data is client side and not server side.
+*add: Did the same thing with Recipes though I need help from the community to make a list of all the recipes for this feature, currently only 3 recipes will use this feature.
+*add: The History items that are not current and therefore do not have working tooltips, Will have a red border
+
+==v2.7.4 - 16 Dec 2010==
+*fix: Fixed a bug that prevented tooltips from working correctly in the history window, if there are less then 10 items of history. Bug was introduced in v2.7.0 and was reported by Tiiim.
+
+==v2.7.3 - 16 Dec 2010==
+*fix: redesigned my bag click hooks to hopefully be error free now. zBag, yBag, FlieBag, Default and ItemShop bags should all be working now
+*rework: items waiting to be sold will no longer clear when you switch tabs, but they will if you pickup a different bag item(this can't be helped)
+
+==v2.7.2 - 15 Dec 2010==
+*rework: switched the slash command of /aa to /aah, this was meant to be part of v2.7.0 but got overlooked.
+*fix: goof with v2.7.1 caused an error, fixed now
+
+==v2.7.1 - 15 Dec 2010==
+*fix: Shift left click on a bag item will now correctly fill in the search name box on the browse tab. Bug was introduced in v2.7.0 and was reported by many, but most notably by Bearndt02.
+*fix: Last price feature will work correctly again. Bug was introduced in v2.7.0 and was reported by Bearndt02.
+
+==v2.7.0 - 15 Dec 2010==
+NOTE: v2.7.0 WILL RESET ALL SAVED SETTINGS AND DATA FOR AAH\\LANGUAGES OTHER THEN ENGLISH MAY BE BUGGY
+*rework: The entire code has been cut up and renamed to make my life a ton easier. ALL addons that interfaced with AAH will be broken.(not aware of any though)
+*add: Saved Search Feature - works like the category section. Top level is a folder for grouping of searches. Second level is the name of the search. Third level are the options you have for that search. The plus icon will save a search if the panel is open. The new search will go into the currently selected folder, if one is not seleced then you will be prompted to create a folder. All items can be rearranged by simple drag and drop
+*rework: History frame will now save entries and allow you to scroll through saved history (current max history is 100 entries). Newest entries will be at the top now and only the top 10 will have working tooltips(this can't be helped).
+*add: Slash Command - /aa numhistory <num> - to change the max saved history to an amount other then 100.
+*rework: History is now saved via item ID number instead of just name. Many items share names with other items which caused bad history data. Current hack to ensure access to item id may not be fool proof.
+*remove: Because of previous, the following tooltips will no longer have working price history tooltips due to lack of access of the item ID number. Craft Ingredients, Auction Bid List Items, Auction Sell List Items
+*add: Added tooltip pricehistory support for the following. Loot Items, Vendor Items
+*add: History frame will now show min, max, median and avg in the summary instead of just avg
+*readd: Formula will now use AVG, MIN, MAX, MEDIAN instead of just AVG
+*rework: Removed the Sell Item and Money Transaction tabs and shifted everything on the Auctions tab to increase the number of items for sale listed from 5 to 6.
+*add: Added the ability to increase the size of the auction frame in increments. (up to 5 more items will be displayed in each list)
+*rework: Rearranged and grouped the options on the browse tab for easier distinguishing between search and filter options.
+*add: History summary and price/unit numbers will now show commas in the numbers for ease of reading
+*remove: Removed all old code that dealt with selling/buying items/gold for diamonds
+*rework: The website button now is the Forum button and it links to the Advanced AuctionHouse Forums hosted by Curseforge. This button will now ask for promission before opening up your browser.
+*rename: The reset button is now the clear button. The function remains the same except it will now affect the category choice aswell.
+*rework: The % undercut feature has been changed to % of average. this means where 0% used to be average, now 100% is. This allows users to undercut or overprice.
+*rework: Changed the Rarity dropdown items to use the names of the rarity levels and be listed in the color of that rarity.
+*rework: Changed the Runes dropdown to be simplier and more accurate. (0+, 1+, 2+, 3+, 4+)
+*rework: Default duration of new auctions has been changed from 1 day to 3 days
+*fix: Reworked the $bargain and $vendor filter code. Fixed a bug in the $bargain code that was introduced in v2.6.0
+*fix: Bug in the bidding code that would say you were not bidding enough has been fixed. Default bid now rounds up instead of down.
+*fix: Bug in the official code since beta, that prevented using the mousewheel on the category list to scroll has been fixed.
+*fix: Bug in the official code since beta, that used a nonexistent file for an item highlight overlay on the Auction Sell tab has been fixed. The highlight will now work.
+
+==v2.6.0 - 25 Nov 2010==
+*add: there is now a button that serves as a link to the Advanced Auctionhouse section of the Curse.com website
+*add: $tier - works just like $dura but for an item's tier [requested by blwillia]
+*rework: $clean, $single, $double, $triple are now $zero, $one, $two, $three, $four, $five, $six. These now search for any color stat and not just green ones. The old commands will still work but this made it simpler for people to spell. [thanks to jrmstuff for suggesting/requesting and code submitting 4-6 stat searching]
+*add: you can now combine a stat quantity command with a stat color command in the same filter box(ie $three$yellow - will match items with only 3 stats that are all yellow) NOTE: that you can't use a ! to inverse just one of the commands, a ! inverse the whole filterbox(ie !$three$yellow - will match items that don't have 3 stats and don't have any yellow stats)  [thanks to jrmstuff for suggesting/requesting and code submitting this feature]
+*rework/fix: $egglvl and $eggapt to more accurately detect pet eggs for all languages. This may fail as I can only test english. [thanks to artfulpirate for submitting the bug ticket]
+*rework: The 3 filter box tooltips have been redesigned to hold more text. Needs to be retranslated for all languages
+*remove: The search option for currency type that had no value anymore has been removed to make space.
+*rework: The filter info text has been simplified and moved to make space.
+*add: The much requested Min/Max price filtering has been added. You can now filter items based on the (Min and Max) (BidPPU or BuyoutPPU or BidPrice or BuyPrice). These will filter items together with the other 3 filter boxes
+
+NOTE: Much of the english locale files have been tweaked, updated, changed, added, and deleted that some things might not look right in the other languages until some translators go through the Localization page and do some updating.
+
+TODO: For next version I will be tackling the highly requested feature of saved searches. Coding time is limited so no promises on a timetable.
+
+==v2.5.0 - 17 Sep 2010==
+*add: $egglvl and $eggapt filters for finding eggs with a minimum level or aptitude. This works just like $dura by adding the min number you want. (example: $egglvl20 with filter for all eggs with at least level 20) the default for both if no number is entered is 1 to prevent errors. These features rely on some global client variables which I have not verified that they match to the eggs tooltip wording for all languages. If it doesn't work for your language then please supply a screenshot of an egg tooltip so I can explore better variables to use as well as your language code. (Variables: 'Pet Egg' to detect and filter only eggs. 'Level' to find the level. 'Aptitude' to find the aptitude)
+*fix: tweaked $dura to be a tad more efficient to speed up filtering
+*update: all local files update to current translations. As always thanks to the translators for their work.
+
+==v2.4.0 - 8 Jun 2010==
+*fix: bug caused in v2.3 with the $dura command. thanks to Obi_Wan for sending in the ticket
+*fix: bug caused by items with the same icon as gold or diamonds (daily item: Old Gold Coin). added checks for numbers in the name should help fix those false positives on currency transaction checks
+
+==v2.3.0 - 6 Jun 2010==
+*rework: bit of fixing, reworking, and streamlining to the filtering code. should make for more accurate use of the $clean, $green, $single, $double, $triple keywords. also should filter a tad faster. Runes should no longer be counted as stats anymore in any of the above. also tiered items should no longer be recognized as green stats due to the tier number being green. orange stats will no longer pass the $clean filter
+*note: the new yellow stats that do not currently have stat names will not be recognized as $yellow and can show up under $clean. this is frogster issue to fix along with many server side auctionhouse database bugs that they are not fixing.
+*locale: minor updates from the translators, thanks to all that put in work on the localization page, still trying to get curseforge to support Polish
+
+==v2.2.0 - 25 Apr 2010==
+*fix: German locale file should work correctly again. minor updates to most of the locales thanks to the translators
+*add: Japanese locale file thanks to TBDjp
+*fix: searching for items with an  '  will work correctly now
+*fix: found a few more hard coded values that got replaced with system variables for better locale support
+*add: Current exchange rate values will be transmitted to others through Luna. Created a frame that displays the current exchange rate of gold and diamonds in a small window. Use "/aa exchange" to show/hide this window. This window has little to no value if you do not have Luna installed so it will not be displayed unless it detects Luna. Shift Right click to position the window where you want it. This feature was added to the code before they disabled diamond trading, lets hope it will come back soon
+
+==v2.1.0 - 10 Apr 2010==
+*change: moved all filter commands to the locale files
+*change: added the words filter and reset to the locale files
+*change: replaced many hardcoded system strings with the correct system variable for great locale support
+*add: enabled the $bargain command that was mostly finished by Graves. $bargain allows you to search for items that can be sold to a vendor for profit. Use Filter1 = $bargain, Filter2 = minimum profit from bid items (optional), Filter3 = maximum time in minutes for bid items (optional)
+*change: all files are now encoded in UTF8 without BOM for better locale support
+*change: increased the size of all money input boxes to have better support for large numbers. Shifted a few things to make room for the increased size
+*change: shifted the Price/Unit column to allow for larger numbers. reduced the phrase " Buyout Price:" in the Price column to just "Buyout" to allow for the needed space
+*change: gold and diamond long term history is no longer saved, just the past 10 auctions to allow for a more fluid exchange rate section
+*change: reworked the exchange rate to display diamond to gold and gold to diamond values. these values are from the buyers point of view
+*change: reworked the whole bottom panel to have fluid placement based on size of the values. changed the size and position slightly of many buttons
+*fix: the location of the close button has been centered to the correct location
+*add: Luna has been added as an optional dependency to support an in game new version notification\\
+NOTE: much of the locale has to be reverified. because of this, I am marking this as a Beta. English users can consider this a full release
+
+==v2.0.0 - 14 Mar 2010==
+*add: Taiwanese translation by rfv1122
+*fix: dura matching should work on all locales now (Needs testing to verify) - Mavoc
+
+==v1.9.0 - 5 Mar 2010==
+*add: Russian translation by SilverWF
+*add: you can now add a number after $DURA to search for items with at least that amount of dura - Mavoc
+
+==v1.8.0 - 3 Mar 2010==
+*add: Spanish translation by Darwen of LoresOscuros Guild, Sciath Spain Server.
+*fix: unsupported locales will use English by default - Mavoc 
+
+==v1.7.0 - 16 Feb 2010==
+*fix: mousing over the preview in the craft frame will no longer cause errors - Mavoc
+
+==v1.6.0 - 16 Sep 2009==
+*fix: searching for gold/diamond auctions produced errors after chapter II patch
+*add: french localization added (thx to Ex_Tempus)
+
+==v1.5.0 - 13 Aug 2009==
+*add: price/unit field now works for money auctions
+*add: when submitting a money-auction the input fields will not be cleared so you can submit several auctions with the same prices one after another
+*add: new special filter $dura which will filter for items with durability > 100 (thx to zilvermoon for basic code)
+*fix: now using getLanguage instead of getLocation to determine client language
+*fix: corrected functionality of $single, $double and $trible special filters. now only stats that actually occupy a stat-slot are counted. stats from plussing the item or that are initially on the item (stamina on black set) are not counted anymore
+
+==v1.4.0 - 27 May 2009==
+*fix: adjusted addon to the new auctionhouse diamond policy
+
+==v1.3.0 - 22 May 2009==
+*fix: on machines with slow connection some results were omitted (thx to tobs12)
+*add: its now possible to search for items with 1, 2 or 3 green stats
+
+==v1.2.0 - 7 Apr 2009==
+*fix: auction duration was not changeable
+*fix: auto selecting last sell mode (money/diamonds) was not working as intended
+
+==v1.1.0 - 6 Apr 2009==
+*add: price history is saved for more than 10 items. data is automatically acquired in the background while browsing the ah (only items included in your search will be scanned)
+*add: price history tooltips are shown in numerous locations including bag, bank, craftframe, chat hyperlinks, auctionhouse, inventory viewer frame (if you use that addon) by default price history tooltip is only shown if you are holding down the ALT-key while the item tooltip is opened. you can change this behaviour with the command /aa pricehistory. this will toggle always display price history on and off (this setting is saved and restored in next session)
+*add: price coloring based on deviation from average price (green = cheaper than average, red = above average)
+*add: dynamic decimal places for ppu values so numbers are always readable and have as many decimal places as necessary
+*add: current diamond->gold exchange rate is always displayed in the bottom left of the auctionframe for easier price conversions
+*add: last prices are now stored separately for gold and diamond sales
+*add: you can now use tab-key to cycle through input boxes on browse and create auction frames. shift-tab will cycle to the previous input box
+*add: addon now saves various settings including the last selected auction duration, selected autoprice mode, last used sellmode (gold or diamond), custom formula and undercut and restores those settings on the next game launch (settings are only saved if the client is shut properly, when client crashes data will be lost).
+*change: removed the price per unit checkbox. instead there are now 4 input boxes. two for bid and 2 for buyout where one of those represents the total amount and the other the price per unit. whenever you change one of the fields the other will be updated accordingly, for example when you are creating an auction for 10 harpy claws and you change the bid price per unit from 900 to 1000 the total price will be updated from 9000 to 10000.
+*add slash-commands to remove single items from the pricehistory or to completely reset the pricehistory. if you type /aa you will get a list of commands.
+*fix: completely revamped autoprice feature.
+*fix: several bugfixes for reported and even some none reported errors
+
+==v1.0.0 - 24 Mar 2009==
+*add: new custom filters $GREEN and $YELLOW to be able to filter for items that have at least 1 stat of the color or no stat of the color if the filter is inverted with !
+*fix: automatic update with curse client should work again
+*fix: price/unit on auctions that are paid with diamonds is now displayed as decimal number with 6 decimal places if the price/unit is between 0 and 1
+*fix: min, max and avg price are displayed as decimal number with 6 decimal places for gold-diamond trades
+*fix: sorting of items that have a price/unit between 0 and 1
+*fix: sorting by price per unit on diamond-money auctions
+*fix: prices in diamonds are ignored when calculating min/max/avg price, except for gold-diamond auctions
+
+==v0.9.0 - 24 Mar 2009==
+*add: support for putting up items for diamonds instead of gold
+*add: support for gold-diamond auctions
+*add: experimental price/unit for gold-diamond auctions on browse, bid and history frames
+*add: item icons for gold/diamonds now show the amount (will be * if number is too large to display in icon)
+
+==v0.8.0 - 18 Mar 2009==
+*add: support for curse-client. 
+*fix: other tooltips don't get blanked anymore when filtering is in progress
+*fix: improved filter speed by ~20%
+*fix: using addons that alter game tooltips no longer cause problems while filtering
+
+WHEN UPGRADING FROM VERSION 0.7 OR PRIOR PLEASE MAKE SURE TO DELETE THE FOLLOWING FILES IN YOUR \Interface\worldxml FOLDER:
+* auctionframe.lua
+* auctionframe.xml
+* staticpopup.lua
+
+==v0.7.0 - 16 Mar 2009==
+*add: search results are now displayed on a single page
+*add: reworked column widths on all auctionhouse lists
+*add: filter phrases can now be inverted with ! in front
+*add: sortmarkers on lists to see what list is sorted by
+*add: support for addon manager
+*add: custom autoprice formula
+*add: sorting by price/unit
+*add: sorting by buyout or bid
+*add: descriptive tooltips for all advanced auctionhouse elements
+*fix: - now works in filter phrases
+*fix: sorting by status now works (doesn't work with original client)
+*fix: sorting by buyer now works (doesn't work with original client)
+
+==v0.6.0 - 5 Mar 2009==
+*add: filters can now be changed on the fly
+*add: preloading of pages
+*fix: impossible autoprice values (bid = 0, buyout > bid, ...)
+*fix: if price/unit is < 1 then now it displays "< 1" instead of "0"
+
+==v0.5.1 - 28 Feb 2009==
+*fix: the builtin auctionhouse search was broken with 0.5 this is fixed now
+
+==v0.5.0 - 26 Feb 2009==
+
+*add: reset button on the browse tab to reset all filter inputs
+*add: ability to filter browse results with up to 3 filter phrases that can be connected with and/or
+*add: label displaying info on browsetab on how many results where found on how many tables
+*add: display between next page and previous page buttons displaying the current page and the total pages
+*add: autoprice dropdown and optional price undercut on create auction tab.
+
+==v0.4.0 - 19 Feb 2009==
+
+*fixed: support for client version 1812
+
+==v0.3.0 - 16 Feb 2009==
+
+*added: more accurate display of remaining time, this applies for all 3 tabs in auction window
+*added: extra button in create auction tab to indicate that the entered bid/buyout values are per unit. when creating the auction the addon will automatically multiply the entered values with the stacksize if the "per unit" option is checked
+*added: auction bid/buyout price history. the addon now will remember your last bid/buyout values for all auctioned items. if you put an item of the same type into the auction window next time the addon will automatically fill in the stored bid/buyout values
+
+==v0.2.0 - 15 Feb 2009==
+
+*fixed: messed up sorting by price in auction browse list
+*added: additional display of min/max/average price per unit in history frame
+
+==v0.1.0 - 14 Feb 2009==
+
+*initial version

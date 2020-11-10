@@ -1,0 +1,85 @@
+If a version is not listed here there was only one change: Updated the database.
+
+
+2.02.170719
+------------------------
+Swaped the map IDs of the Ystra and the Snowlands map.
+Added Snowlands flags.
+
+
+2.01.161012
+------------------------
+Find button works now after navigating through the tree (always uses the quest displayed in the info panel).
+
+
+2.00.160826
+------------------------
+Implemented Follow-Up Quests: Information about a quest now include the quests following the currently shown quest in the quest line.
+Implemented searching for loose ends: If a quest is not yet started you can search for where to pick up the quest line to accept that specific quest eventually.
+Improved user experience/readability:
+- Clicking the checkboxes for normal, daily, public and same zone quests searches immediately.
+- Created placeholder for the search edit box. You can insert the quest's name or its ID. (Functionality to search for the ID already existed but its existence was not made clear.)
+- Quest tree is always open when a quest is selected.
+- Navigating the tree updates the info panel automatically.
+- Inserted labels ("Follow-up Quests", "Requirements") into the quest tree to make clear of what kind a quest is.
+- Flag frames in the tree have gray background and colored text in contrast to quests having colored frames and white text.
+- Previously visited quests are colored gray.
+- Added quest id to quest info panel.
+- The level in the info panel is colored red if the level requirement is not met.
+- (small other UI improvements)
+Using the Curse Localization Tool. Please visit https://rom.curseforge.com/addons/queststate/localization/ to help translating QuestState.
+
+
+1.07.150207
+------------------------
+Added Polish translation. Thanks again to Rycerzodie.
+
+
+1.06.141023
+------------------------
+Added flags support
+
+
+1.05.6418
+------------------------
+People, not using DailyNotes, could not click any button in the quest frame. (Accidently, not all DailyNotes references were deleted.)
+Search function used filter (normal, daily, event) which was not intended.
+
+
+1.04.6033
+------------------------
+Added an icon in the speak frame to display the state of each quest in that frame. Can be disabled in the settings which are located in the main frame.
+Filter added for normal, daily and event quests. DailyNotes is not required anymore.
+Translated into all languages by using ingame localization files. Could not find something adequate for "Search Quest".
+
+1.03.5847
+------------------------
+Added search function (name and quest id).
+Added quest line.
+
+
+1.02.5247
+------------------------
+Added Polish translation. Thanks to Rycerzodie.
+
+
+1.01.4900
+------------------------
+Updated quest list with new entries.
+Quests are sorted by id again.
+
+
+1.0
+------------------------
+Release
+
+Frames are dynamic now.
+The database was updated with the latest quests.
+Colors now indicate whether the npc can be found or a quest is done.
+Hooked some NpcTrack functions.
+Added the English language.
+
+
+0.8b
+------------------------
+First beta

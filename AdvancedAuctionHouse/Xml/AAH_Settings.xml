@@ -1,0 +1,449 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Frame name="AAH_SettingsSectionTemplate" enableMouse="true" virtual="true">
+		<Backdrop edgeFile="Interface\AuctionFrame\AuctionFrame-Tooltip-Border" bgFile="Interface\AuctionFrame\AuctionFrame-Tooltip-Background">
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="16" right="16" top="16" bottom="16"/>
+			</BackgroundInsets>
+		</Backdrop>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface\AuctionFrame\AuctionSeparate-HorizontalLine">
+					<Size>
+						<AbsDimension x="1" y="4"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="7" y="21"/>
+							</Offset>
+						</Anchor>
+						<Anchor point="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="-7" y="21"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.25" right="0.75" top="0" bottom="1"/>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parentLabel" inherits="GameFontYellow" justifyH="CENTER" text="">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="0" y="8"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+	<CheckButton name="AAH_SettingsCheckButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="32" y="32"/>
+		</Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parentLabel" inherits="GameFontHighlight" text="" justifyH="LEFT">
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<NormalTexture file="Interface\Buttons\CheckBox-Normal"/>
+		<PushedTexture file="Interface\Buttons\CheckBox-Depress"/>
+		<DisabledTexture file="Interface\Buttons\CheckBox-Disable"/>
+		<HighlightTexture file="Interface\Buttons\CheckBox-Highlight" alphaMode="ADD"/>
+		<CheckedTexture file="Interface\Buttons\CheckBox-Checked"/>
+		<DisabledCheckedTexture file="Interface\Buttons\CheckBox-Checked-Disabled"/>
+	</CheckButton>
+	<Slider name="AAH_SettingsSliderTemplate" orientation="HORIZONTAL" virtual="true">
+		<Size>
+			<AbsDimension x="255" y="15"/>
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentLeft" file="Interface\ChatFrame\ChatEditBox-Border">
+					<Size>
+						<AbsDimension x="16" y="15"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT"/>
+					</Anchors>
+					<TexCoords left="0" right="0.25" top="0" bottom="0.6875"/>
+				</Texture>
+				<Texture name="$parentRight" file="Interface\ChatFrame\ChatEditBox-Border">
+					<Size>
+						<AbsDimension x="16" y="15"/>
+					</Size>
+					<Anchors>
+						<Anchor point="RIGHT"/>
+					</Anchors>
+					<TexCoords left="0.75" right="1" top="0" bottom="0.6875"/>
+				</Texture>
+				<Texture name="$parentMiddle" file="Interface\ChatFrame\ChatEditBox-Border">
+					<Size>
+						<AbsDimension x="1" y="15"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parentLeft"/>
+						<Anchor point="RIGHT" relativePoint="LEFT" relativeTo="$parentRight"/>
+					</Anchors>
+					<TexCoords left="0.25" right="0.75" top="0" bottom="0.6875"/>
+				</Texture>
+			</Layer>
+			<Layer level="BORDER">
+				<FontString name="$parentLabel" inherits="GameFontNormal" text="">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
+							<Offset>
+								<AbsDimension x="0" y="-5"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentValue" inherits="GameFontHighlight" text="">
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="-5" y="-5"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentMin" inherits="GameFontHighlight" text="">
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="5" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentMax" inherits="GameFontHighlight" text="">
+					<Anchors>
+						<Anchor point="RIGHT">
+							<Offset>
+								<AbsDimension x="-5" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<ThumbTexture file="Interface\ChatFrame\ChatFrame-ScrollBar-Knob">
+			<Size>
+				<AbsDimension x="16" y="16"/>
+			</Size>
+		</ThumbTexture>
+	</Slider>
+	<Frame name="AAH_SettingsFrame" parent="AAH_AuctionFrame" hidden="true">
+		<Frames>
+			<Frame name="AAH_SettingsFrame1" inherits="AAH_SettingsSectionTemplate">
+				<Size>
+					<AbsDimension x="274" y="440"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="14" y="32"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<CheckButton name="AAH_SettingsUseWhiteValue" inherits="AAH_SettingsCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="30"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								getglobal(this:GetName().."Label"):SetText(AAHLocale.Messages.SETTINGS_PRICE_PER_UNIT_PER_WHITE)
+							</OnLoad>
+							<OnClick>
+								AAH_SavedSettings.UseMatWhiteValue = this:IsChecked()
+							</OnClick>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT", 4, 0)
+								GameTooltip:SetText(AAHLocale.Messages.SETTINGS_PRICE_PER_UNIT_PER_WHITE_HEADER, 1, 1, 1)
+								GameTooltip:AddLine(AAHLocale.Messages.SETTINGS_PRICE_PER_UNIT_PER_WHITE_TEXT, 0, 0.75, 0.95)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+                    <Slider name="AAH_SettingsMinWarningPrice" inherits="AAH_SettingsSliderTemplate">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="AAH_SettingsUseWhiteValue" relativePoint="BOTTOMLEFT">
+                                <Offset>
+                                    <AbsDimension x="0" y="24"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnLoad>
+                                getglobal(this:GetName().."Label"):SetText(AAHLocale.Messages.SETTINGS_MIN_WARNING_PRICE)
+                                this:SetValueStepMode("INT")
+                                this:SetMinMaxValues(AAH.Settings.MinWarningPriceMin, AAH.Settings.MinWarningPriceMax)
+                                getglobal(this:GetName().."Min"):SetText(AAH.Settings.MinWarningPriceMin)
+                                getglobal(this:GetName().."Max"):SetText(AAH.Settings.MinWarningPriceMax)
+                            </OnLoad>
+                            <OnMouseWheel>
+                                if delta > 0 then
+                                this:SetValue(this:GetValue() + 1000)
+                                else
+                                this:SetValue(this:GetValue() - 1000)
+                                end
+                            </OnMouseWheel>
+                            <OnValueChanged>
+                                if AAH_SavedSettings then
+                                AAH_SavedSettings.BidAlertLimit = this:GetValue()
+                                end
+                                getglobal(this:GetName().."Value"):SetText(this:GetValue())
+                            </OnValueChanged>
+                            <OnEnter>
+                                GameTooltip:SetOwner(this, "ANCHOR_LEFT", 4, 0)
+                                GameTooltip:SetText(AAHLocale.Messages.SETTINGS_MIN_WARNING_PRICE_HEADER, 1, 1, 1)
+                                GameTooltip:AddLine(AAHLocale.Messages.SETTINGS_MIN_WARNING_PRICE_TEXT, 0, 0.75, 0.95)
+                                GameTooltip:Show()
+                            </OnEnter>
+                            <OnLeave>
+                                GameTooltip:Hide()
+                            </OnLeave>
+                        </Scripts>
+                    </Slider>
+                    <CheckButton name="AAH_SettingsAvgDefaultLastPrice" inherits="AAH_SettingsCheckButtonTemplate">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="AAH_SettingsMinWarningPrice" relativePoint="BOTTOMLEFT">
+                                <Offset>
+                                    <AbsDimension x="0" y="6"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnLoad>
+                                getglobal(this:GetName().."Label"):SetText(AAHLocale.Messages.SETTINGS_AVG_DEFAULT_LAST_PRICE)
+                            </OnLoad>
+                            <OnClick>
+                                AAH_SavedSettings.AvgSuggest = this:IsChecked()
+                            </OnClick>
+                            <OnEnter>
+                                GameTooltip:SetOwner(this, "ANCHOR_LEFT", 4, 0)
+                                GameTooltip:SetText(AAHLocale.Messages.SETTINGS_AVG_DEFAULT_LAST_PRICE_HEADER, 1, 1, 1)
+                                GameTooltip:AddLine(AAHLocale.Messages.SETTINGS_AVG_DEFAULT_LAST_PRICE_TEXT, 0, 0.75, 0.95)
+                                GameTooltip:Show()
+                            </OnEnter>
+                            <OnLeave>
+                                GameTooltip:Hide()
+                            </OnLeave>
+                        </Scripts>
+                    </CheckButton>
+				</Frames>
+				<Scripts>
+					<OnLoad>
+						getglobal(this:GetName().."Label"):SetText(AAHLocale.Messages.SETTINGS_GENERAL)
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame name="AAH_SettingsFrame2" inherits="AAH_SettingsSectionTemplate">
+				<Size>
+					<AbsDimension x="274" y="440"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AAH_SettingsFrame1" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<Slider name="AAH_SettingsFilterSpeed" inherits="AAH_SettingsSliderTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="47"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								getglobal(this:GetName().."Label"):SetText(AAHLocale.Messages.SETTINGS_FILTER_SPEED)
+								this:SetValueStepMode("INT")
+								this:SetMinMaxValues(AAH.Settings.FilterSpeedMin, AAH.Settings.FilterSpeedMax)
+								getglobal(this:GetName().."Min"):SetText(AAH.Settings.FilterSpeedMin)
+								getglobal(this:GetName().."Max"):SetText(AAH.Settings.FilterSpeedMax)
+							</OnLoad>
+							<OnMouseWheel>
+								if delta > 0 then
+									this:SetValue(this:GetValue() + 1)
+								else
+									this:SetValue(this:GetValue() - 1)
+								end
+							</OnMouseWheel>
+							<OnValueChanged>
+								if AAH_SavedSettings then
+									AAH_SavedSettings.FilterSpeed = this:GetValue()
+								end
+								getglobal(this:GetName().."Value"):SetText(this:GetValue())
+							</OnValueChanged>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT", 4, 0)
+								GameTooltip:SetText(AAHLocale.Messages.SETTINGS_FILTER_SPEED_HEADER, 1, 1, 1)
+								GameTooltip:AddLine(AAHLocale.Messages.SETTINGS_FILTER_SPEED_TEXT, 0, 0.75, 0.95)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</Slider>
+				</Frames>
+				<Scripts>
+					<OnLoad>
+						getglobal(this:GetName().."Label"):SetText(AAHLocale.Messages.SETTINGS_BROWSE)
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame name="AAH_SettingsFrame3" inherits="AAH_SettingsSectionTemplate">
+				<Size>
+					<AbsDimension x="274" y="440"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AAH_SettingsFrame2" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<CheckButton name="AAH_SettingsAlwaysShowPriceHistory" inherits="AAH_SettingsCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="30"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								getglobal(this:GetName().."Label"):SetText(AAHLocale.Messages.SETTINGS_PRICE_HISTORY_TOOLTIP)
+							</OnLoad>
+							<OnClick>
+								AAH_SavedSettings.PriceHistoryAutoshow = this:IsChecked()
+							</OnClick>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT", 4, 0)
+								GameTooltip:SetText(AAHLocale.Messages.SETTINGS_PRICE_HISTORY_TOOLTIP_HEADER, 1, 1, 1)
+								GameTooltip:AddLine(AAHLocale.Messages.SETTINGS_PRICE_HISTORY_TOOLTIP_TEXT, 0, 0.75, 0.95)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<Slider name="AAH_SettingsMaxHistory" inherits="AAH_SettingsSliderTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SettingsAlwaysShowPriceHistory" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="24"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								getglobal(this:GetName().."Label"):SetText(AAHLocale.Messages.SETTINGS_MAX_SAVED_HISTORY)
+								this:SetValueStepMode("INT")
+								this:SetMinMaxValues(AAH.Settings.HistoryMin, AAH.Settings.HistoryMax)
+								getglobal(this:GetName().."Min"):SetText(AAH.Settings.HistoryMin)
+								getglobal(this:GetName().."Max"):SetText(AAH.Settings.HistoryMax)
+							</OnLoad>
+							<OnMouseWheel>
+								if delta > 0 then
+									this:SetValue(this:GetValue() + 1)
+								else
+									this:SetValue(this:GetValue() - 1)
+								end
+							</OnMouseWheel>
+							<OnValueChanged>
+							    if AAH_SavedSettings then 
+									AAH.History.SetMaxDefaultEntries(this:GetValue())
+							    end
+								getglobal(this:GetName().."Value"):SetText(this:GetValue())
+							</OnValueChanged>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT", 4, 0)
+								GameTooltip:SetText(AAHLocale.Messages.SETTINGS_MAX_SAVED_HISTORY_HEADER, 1, 1, 1)
+								GameTooltip:AddLine(AAHLocale.Messages.SETTINGS_MAX_SAVED_HISTORY_TEXT, 0, 0.75, 0.95)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</Slider>
+					<Button name="AAH_SetAllMaxSavedHistory" inherits="UIPanelButtonTemplate" text="Set all to default">
+						<Size>
+							<AbsDimension x="200" y="22"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP"  relativePoint="TOP">
+								<Offset>
+									<AbsDimension x="1" y="115"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								for k in pairs(AAH_SavedSettings.HistoryMaxSaved) do 
+									AAH_SavedSettings.HistoryMaxSaved[k] = AAH_SavedSettings.HistoryMaxSavedDefault or 100
+								end
+								AAH.History.UpdateHistoryEntries()
+							</OnClick>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT", 4, 0)
+								GameTooltip:SetText(AAHLocale.Messages.SETTINGS_MAX_SAVED_HISTORY_RESET_HEADER, 1, 1, 1)
+								GameTooltip:AddLine(AAHLocale.Messages.SETTINGS_MAX_SAVED_HISTORY_RESET_TEXT, 0, 0.75, 0.95)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</Button>
+				</Frames>
+				<Scripts>
+					<OnLoad>
+						getglobal(this:GetName().."Label"):SetText(AAHLocale.Messages.SETTINGS_HISTORY)
+						AAH_SetAllMaxSavedHistory:SetText(AAHLocale.Messages.SETTINGS_MAX_SAVED_HISTORY_RESET_BUTTON)
+					</OnLoad>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnShow>
+				AAH.History.Processing = false
+			</OnShow>
+			<OnHide>
+				AAH.History.Processing = true
+			</OnHide>
+		</Scripts>
+	</Frame>
+</Ui>

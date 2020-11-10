@@ -1,0 +1,339 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ UI.xsd">
+	<!-- Made by Zhur -->	
+	<Frame name="HouseServantActionButton1" parent="HouseServantValueBar1">
+		<Size>
+			<AbsDimension x="20" y="20"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" >
+				<Offset>
+					<AbsDimension x="0" y="10" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+        <Frames>
+			<Button name="$parent_Button" inherits="UIPanelButtonTemplate">
+               <Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="HouseServantValueBar1Icon">
+						<Offset>
+							<AbsDimension x="0" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if(GetNumSpeakOption() == 8 and GetSpeakOption(1)==TEXT("C_HOUSESERVANT_TALK_OPTION_1")) then
+							ChoiceListDialogOption(0);	--chat
+						else
+							SendWarningMsg("Housekeeper error. Re-open window.");
+						end
+					</OnClick>
+					<OnEnter>
+						local p = this:GetParent();
+						if(p) then
+							p = p:GetParent();
+							if( p and p.tips )then
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+								GameTooltip:SetText( p.tips, 1, 1, 1 );
+							end
+						end
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="interface\\HouseFrame\\HouseServant_Ability_1" />
+				<PushedTexture file="interface\\HouseFrame\\HouseServant_Ability_1" />
+				<HighlightTexture file="interface\\HouseFrame\\HouseServant_Ability_1" alphaMode="ADD" />
+			</Button>
+		</Frames>
+	</Frame>
+	<Frame name="HouseServantActionButton2" parent="HouseServantValueBar2">
+		<Size>
+			<AbsDimension x="20" y="20"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset>
+					<AbsDimension x="0" y="10" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+        <Frames>
+			<Button name="$parent_Button" inherits="UIPanelButtonTemplate">
+               <Anchors>
+				   <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="HouseServantValueBar2Icon">
+						<Offset>
+							<AbsDimension x="0" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if(GetNumSpeakOption() == 8 and GetSpeakOption(1)==TEXT("C_HOUSESERVANT_TALK_OPTION_1")) then
+							ChoiceListDialogOption(0);	--chat
+						else
+							SendWarningMsg("Housekeeper error. Re-open window.");
+						end
+					</OnClick>
+					<OnEnter>
+						local p = this:GetParent();
+						if(p) then
+							p = p:GetParent();
+							if( p and p.tips )then
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+								GameTooltip:SetText( p.tips, 1, 1, 1 );
+							end
+						end
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="interface\\HouseFrame\\HouseServant_Ability_2" />
+				<PushedTexture file="interface\\HouseFrame\\HouseServant_Ability_2" />
+				<HighlightTexture file="interface\\HouseFrame\\HouseServant_Ability_2" alphaMode="ADD" />
+			</Button>
+		</Frames>
+	</Frame>
+	<Frame name="HouseServantActionButton4" parent="HouseServantValueBar4">
+		<Size>
+			<AbsDimension x="20" y="20"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" >
+				<Offset>
+					<AbsDimension x="0" y="10" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+        <Frames>
+			<Button name="$parent_Button" inherits="UIPanelButtonTemplate">
+               <Anchors>
+				   <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="HouseServantValueBar4Icon">
+						<Offset>
+							<AbsDimension x="0" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if(GetNumSpeakOption() == 8 and GetSpeakOption(1)==TEXT("C_HOUSESERVANT_TALK_OPTION_1")) then
+							ChoiceListDialogOption(1);	--magic
+						else
+							SendWarningMsg("Housekeeper error. Re-open window.");
+						end
+					</OnClick>
+					<OnEnter>
+						local p = this:GetParent();
+						if(p) then
+							p = p:GetParent();
+							if( p and p.tips )then
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+								GameTooltip:SetText( p.tips, 1, 1, 1 );
+							end
+						end
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="interface\\HouseFrame\\HouseServant_Ability_4" />
+				<PushedTexture file="interface\\HouseFrame\\HouseServant_Ability_4" />
+				<HighlightTexture file="interface\\HouseFrame\\HouseServant_Ability_4" alphaMode="ADD" />
+			</Button>
+		</Frames>
+	</Frame>
+	<Frame name="HouseServantActionButton5" parent="HouseServantValueBar5">
+		<Size>
+			<AbsDimension x="20" y="20"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" >
+				<Offset>
+					<AbsDimension x="0" y="10" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+        <Frames>
+			<Button name="$parent_Button" inherits="UIPanelButtonTemplate">
+               <Anchors>
+				   <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="HouseServantValueBar5Icon">
+						<Offset>
+							<AbsDimension x="0" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if(GetNumSpeakOption() == 8 and GetSpeakOption(1)==TEXT("C_HOUSESERVANT_TALK_OPTION_1")) then
+							ChoiceListDialogOption(2);	--battle
+						else
+							SendWarningMsg("Housekeeper error. Re-open window.");
+						end
+					</OnClick>
+					<OnEnter>
+						local p = this:GetParent();
+						if(p) then
+							p = p:GetParent();
+							if( p and p.tips )then
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+								GameTooltip:SetText( p.tips, 1, 1, 1 );
+							end
+						end
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="interface\\HouseFrame\\HouseServant_Ability_5" />
+				<PushedTexture file="interface\\HouseFrame\\HouseServant_Ability_5" />
+				<HighlightTexture file="interface\\HouseFrame\\HouseServant_Ability_5" alphaMode="ADD" />
+			</Button>
+		</Frames>
+	</Frame>
+	<Frame name="HouseServantActionButton6" parent="HouseServantValueBar6">
+		<Size>
+			<AbsDimension x="20" y="20"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" >
+				<Offset>
+					<AbsDimension x="0" y="10" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+        <Frames>
+			<Button name="$parent_Button" inherits="UIPanelButtonTemplate">
+               <Anchors>
+				   <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="HouseServantValueBar6Icon">
+						<Offset>
+							<AbsDimension x="0" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if(GetNumSpeakOption() == 8 and GetSpeakOption(1)==TEXT("C_HOUSESERVANT_TALK_OPTION_1")) then
+							ChoiceListDialogOption(3);	--protection
+						else
+							SendWarningMsg("Housekeeper error. Re-open window.");
+						end
+					</OnClick>
+					<OnEnter>
+						local p = this:GetParent();
+						if(p) then
+							p = p:GetParent();
+							if( p and p.tips )then
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+								GameTooltip:SetText( p.tips, 1, 1, 1 );
+							end
+						end
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="interface\\HouseFrame\\HouseServant_Ability_6" />
+				<PushedTexture file="interface\\HouseFrame\\HouseServant_Ability_6" />
+				<HighlightTexture file="interface\\HouseFrame\\HouseServant_Ability_6" alphaMode="ADD" />
+			</Button>
+		</Frames>
+	</Frame>
+	<Frame name="HouseServantActionButton7" parent="HouseServantValueBar7">
+		<Size>
+			<AbsDimension x="20" y="20"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" >
+				<Offset>
+					<AbsDimension x="0" y="10" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+        <Frames>
+			<Button name="$parent_Button" inherits="UIPanelButtonTemplate">
+               <Anchors>
+				   <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="HouseServantValueBar7Icon">
+						<Offset>
+							<AbsDimension x="0" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if(GetNumSpeakOption() == 8 and GetSpeakOption(1)==TEXT("C_HOUSESERVANT_TALK_OPTION_1")) then
+							ChoiceListDialogOption(4);	--cooking
+						else
+							SendWarningMsg("Housekeeper error. Re-open window.");
+						end
+					</OnClick>
+					<OnEnter>
+						local p = this:GetParent();
+						if(p) then
+							p = p:GetParent();
+							if( p and p.tips )then
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+								GameTooltip:SetText( p.tips, 1, 1, 1 );
+							end
+						end
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="interface\\HouseFrame\\HouseServant_Ability_7" />
+				<PushedTexture file="interface\\HouseFrame\\HouseServant_Ability_7" />
+				<HighlightTexture file="interface\\HouseFrame\\HouseServant_Ability_7" alphaMode="ADD" />
+			</Button>
+		</Frames>
+	</Frame>
+	<Frame name="HouseServantActionButton8" parent="HouseServantValueBar8">
+		<Size>
+			<AbsDimension x="20" y="20"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" >
+				<Offset>
+					<AbsDimension x="0" y="10" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+        <Frames>
+			<Button name="$parent_Button" inherits="UIPanelButtonTemplate">
+               <Anchors>
+				   <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="HouseServantValueBar8Icon">
+						<Offset>
+							<AbsDimension x="0" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if(GetNumSpeakOption() == 8 and GetSpeakOption(1)==TEXT("C_HOUSESERVANT_TALK_OPTION_1")) then
+							ChoiceListDialogOption(5);	--crafting
+						else
+							SendWarningMsg("Housekeeper error. Re-open window.");
+						end
+					</OnClick>
+					<OnEnter>
+						local p = this:GetParent();
+						if(p) then
+							p = p:GetParent();
+							if( p and p.tips )then
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+								GameTooltip:SetText( p.tips, 1, 1, 1 );
+							end
+						end
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="interface\\HouseFrame\\HouseServant_Ability_8" />
+				<PushedTexture file="interface\\HouseFrame\\HouseServant_Ability_8" />
+				<HighlightTexture file="interface\\HouseFrame\\HouseServant_Ability_8" alphaMode="ADD" />
+			</Button>
+		</Frames>
+	</Frame>
+</Ui>

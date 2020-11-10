@@ -1,0 +1,64 @@
+<!-- ä
+
+	Name: Advanced Questbook
+	By: Crypton
+
+-->
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Button name="AdvQuestBookSnoopIcona" hidden="true" enableMouse="true" virtual="true">
+		<Size>
+			<AbsDimension x="20" y="20" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" />
+		</Anchors>
+		<NormalTexture file="Interface\AddOns\AdvQuestBook\images\snoopok.png" />
+		<PushedTexture file="Interface\AddOns\AdvQuestBook\images\snoopok.png" />
+		<HighlightTexture file="Interface\AddOns\AdvQuestBook\images\snoopokhl.png" alphaMode="NONE" />
+		<Scripts>
+			<OnClick>
+				AdvQuestBook_AutoMoveTo(this:GetName());
+			</OnClick>
+			<OnEnter>
+				AdvQuestBookIcon_OnDirection(this:GetName(), "sno", "in");
+			</OnEnter>
+			<OnLeave>
+				AdvQuestBookIcon_OnDirection(this, nil, nil);
+			</OnLeave>
+		</Scripts>
+	</Button>
+	<Button name="AdvQuestBookSnoopIconb" hidden="true" enableMouse="true" virtual="true">
+		<Size>
+			<AbsDimension x="20" y="20" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" />
+		</Anchors>
+		<NormalTexture file="Interface\AddOns\AdvQuestBook\images\snooplow.png" />
+		<PushedTexture file="Interface\AddOns\AdvQuestBook\images\snooplow.png" />
+		<HighlightTexture file="Interface\AddOns\AdvQuestBook\images\snooplowhl.png" alphaMode="NONE" />
+		<Scripts>
+			<OnClick>
+				AdvQuestBook_AutoMoveTo(this:GetName());
+			</OnClick>
+			<OnEnter>
+				AdvQuestBookIcon_OnDirection(this:GetName(), "sno", "in");
+			</OnEnter>
+			<OnLeave>
+				AdvQuestBookIcon_OnDirection(this, nil, nil);
+			</OnLeave>
+		</Scripts>
+	</Button>
+	<Frame name="AdvQuestBookSnoopIcons" parent="WorldMapViewFrame" hidden="false" enableMouse="true" frameLevel="10000" frameStrata="HIGH">
+		<Size>
+			<AbsDimension x="20" y="20" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" />
+		</Anchors>
+		<Frames>
+			<Button name="$parenta" inherits="AdvQuestBookSnoopIcona" />
+			<Button name="$parentb" inherits="AdvQuestBookSnoopIconb" />
+		</Frames>
+	</Frame>
+</Ui>

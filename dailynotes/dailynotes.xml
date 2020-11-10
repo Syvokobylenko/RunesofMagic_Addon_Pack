@@ -1,0 +1,994 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ ../../worldxml/ui.xsd">
+	<!-- Button template-->
+	<Button name="DNButtonTemplate" inherits="UIPanelButtonTemplate" virtual="true">
+		<Scripts>
+			<OnLoad>
+			  this.__SetText = this.SetText
+			  this.SetText = function (this, text)
+				if text and string.find(text,"&lt;tooltip&gt;") then
+				  text,this.tooltip = string.match(text,"^(.-)%s*&lt;tooltip&gt;%s*(.-)$")
+				end
+				this.__SetText(this,text)
+			  end
+			  this:SetText(this:GetText())
+		  </OnLoad>
+			<OnEnter>
+			  if (this.tooltip) then
+				GameTooltip:ClearAllAnchors();
+				GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT", 4, 0)
+				GameTooltip:SetText("") GameTooltip:AddLine(this.tooltip)
+				GameTooltip:Show()
+			  end
+		</OnEnter>
+		</Scripts>
+	</Button>
+	<!-- Header button -->
+	<Button name="DailyNotesHeaderButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="64" y="20"/>
+		</Size>
+		<Layers>
+			<Layer>
+				<Texture name="$parentSortIcon">
+					<Size>
+						<AbsDimension x="8" y="8"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>DailyNotes.List_Header_OnClick(this)</OnClick>
+		</Scripts>
+		<NormalText inherits="GameFontYellow"/>
+		<PushedTextOffset>
+			<AbsDimension x="1" y="1"/>
+		</PushedTextOffset>
+	</Button>
+	<!-- List entry -->
+	<Button name="DailyNotesItemTemplate" virtual="true" hidden="true" enableMouse="true">
+		<Size>
+			<AbsDimension y="16" x="620"/>
+		</Size>
+		<Frames>
+			<CheckButton name="$parentCheck" inherits="UIPanelCheckButtonTemplate">
+				<Size>
+					<AbsDimension y="22" x="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT">
+						<Offset>
+							<AbsDimension y="0" x="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+  				    DailyNotes.AutoQuestSetCheck(this:GetParent(),this:IsChecked())
+  				  </OnClick>
+				</Scripts>
+			</CheckButton>
+		</Frames>
+		<Layers>
+			<Layer>
+				<FontString name="$parentCounter" inherits="GameFontHighlight" justifyH="RIGHT">
+					<Size>
+						<AbsDimension x="50" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension y="0" x="10"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentSplitter" inherits="GameFontHighlight" text="/">
+					<Size>
+						<AbsDimension x="6" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentCounter" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="2" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentTarget" inherits="GameFontHighlight" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="50" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentSplitter" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="2" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<Texture name="$parentIcon" file="interface\addons\dailynotes\dn_icons.dds" hidden="false">
+					<Size>
+						<AbsDimension x="16" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentTarget" relativePoint="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="1" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.25" right="0.5" top="0" bottom="1"/>
+				</Texture>
+				<Texture name="$parentIconOnce" file="interface\addons\dailynotes\dn_icons.dds" hidden="true">
+					<Size>
+						<AbsDimension x="16" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentTarget" relativePoint="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="1" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.0" right="0.125" top="0" bottom="1"/>
+				</Texture>
+				<Texture name="$parentIconDone" file="interface\addons\dailynotes\dn_icons.dds" hidden="true">
+					<Size>
+						<AbsDimension x="6" y="12"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentIcon" relativePoint="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="0" y="2"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.125" right="0.25" top="0" bottom="1"/>
+				</Texture>
+				<FontString name="$parentName" inherits="GameFontHighlight" justifyH="LEFT">
+					<Size>
+						<AbsDimension y="16" x="140"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentIconDone" relativePoint="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="2" y="-2"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentLevel" inherits="GameFontHighlight" justifyH="RIGHT">
+					<Size>
+						<AbsDimension y="16" x="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentName" relativePoint="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="4" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentZone" inherits="GameFontHighlight">
+					<Size>
+						<AbsDimension x="102" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentLevel" relativePoint="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="4" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentItem" inherits="GameFontHighlight" justifyH="LEFT">
+					<Size>
+						<AbsDimension y="16" x="130"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentZone" relativePoint="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="4" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentREW1" inherits="GameFontHighlight">
+					<Size>
+						<AbsDimension y="16" x="60"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentItem" relativePoint="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="4" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentREW2" inherits="GameFontHighlight">
+					<Size>
+						<AbsDimension y="16" x="60"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentREW1" relativePoint="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="4" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<Texture name="$parentHighlight" file="Interface\AuctionFrame\AuctionFrameItem-Highlight" alphaMode="ADD" hidden="true">
+					<Size>
+						<AbsDimension x="588" y="16"/>
+					</Size>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnEnter>DailyNotes.List_Item_OnEnter(this)</OnEnter>
+			<OnLeave>DailyNotes.List_Item_OnLeave(this)</OnLeave>
+			<OnMouseWheel>UIPanelScrollBar_OnMouseWheel(DailyNotesListScrollBar, delta)</OnMouseWheel>
+			<OnClick>DailyNotes.List_Item_OnClick(this, key)</OnClick>
+			<OnLoad> this:RegisterForClicks("LeftButton", "RightButton")</OnLoad>
+		</Scripts>
+	</Button>
+	<!-- Main Dialog -->
+	<Frame name="DailyNotesFrame" parent="UIParent" inherits="UICommonFrameTemplate" hidden="true">
+		<Size>
+			<AbsDimension x="720" y="445"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="DailyNotesListSize" inherits="GameFontNormal">
+					<Size>
+						<AbsDimension x="100" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="40" y="-5"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="DailyNotesDailyCount" inherits="GameFontNormal" justifyH="RIGHT">
+					<Size>
+						<AbsDimension x="65" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="480" y="-5"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="DailyNotesDoAble" inherits="GameFontNormal" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="60" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="550" y="-5"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="DailyNotesDailyFinished" inherits="GameFontNormal" justifyH="RIGHT">
+					<Size>
+						<AbsDimension x="85" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="250" y="-5"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="DailyNotesFinAble" inherits="GameFontNormal" text="" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="50" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="340" y="-5"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<Texture file="Interface\AuctionFrame\AuctionSeparate-VerticalLine">
+					<Size>
+						<AbsDimension x="8" y="50"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="126" y="26"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="DNFFilterZoneDropDown" inherits="UIDropDownMenuTemplate">
+				<Size>
+					<AbsDimension x="110" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="150" y="44"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="DNFFilterZoneDropDownLabel" inherits="GameFontHighlight">
+							<Anchors>
+								<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="4" y="-2"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnLoad>DailyNotes.FZoneDropDown_OnLoad(this)</OnLoad>
+					<OnEnter>
+                        GameTooltip:SetOwner(this, "ANCHOR_RIGHT", 4, 0);
+                        GameTooltip:SetText("") GameTooltip:AddLine(DailyNotes.L.T_ZONE)
+                        GameTooltip:Show();
+                    </OnEnter>
+					<OnLeave>GameTooltip:Hide()</OnLeave>
+				</Scripts>
+			</Frame>
+			<Button name="DNFFilterOptions" inherits="DNButtonTemplate" text="Filter:">
+				<Size>
+					<AbsDimension x="200" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="300" y="50"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>ToggleDropDownMenu(DNFilterOptionsMenu)</OnClick>
+				</Scripts>
+			</Button>
+			<Frame name="DNFilterOptionsMenu" inherits="UIDropDownMenuTemplate">
+				<Anchors>
+					<Anchor point="RIGHT" relativePoint="LEFT" relativeTo="DNFFilterOptions"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>DailyNotes.FilterOptionsMenu_OnLoad(this)</OnLoad>
+				</Scripts>
+			</Frame>
+			<CheckButton name="DailyNotesAutoQuest" inherits="UIPanelCheckButtonTemplate">
+				<Size>
+					<AbsDimension x="18" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="20" y="28"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="DailyNotesAutoQuestTake" inherits="GameFontHighlight" justifyH="LEFT">
+							<Size>
+								<AbsDimension x="70" y="16"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="RIGHT">
+									<Offset>
+										<AbsDimension x="0" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+                    DailyNotes.AutoQuest(this)
+                  </OnClick>
+					<OnEnter>
+                    GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT", 4, 0);
+                    GameTooltip:SetText("") GameTooltip:AddLine(DailyNotes.L.T_AUTOQUEST)
+                    GameTooltip:Show();
+                </OnEnter>
+					<OnLeave>
+                    GameTooltip:Hide();
+                </OnLeave>
+				</Scripts>
+			</CheckButton>
+			<Button name="DailyNoteOptions" inherits="DNButtonTemplate" text="DN_F_Q_OPTIONS">
+				<Size>
+					<AbsDimension x="64" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-20" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+                    DailyNotes.Show_Options()
+                  </OnClick>
+				</Scripts>
+			</Button>
+			<Button name="DailyNoteAQClear" inherits="DNButtonTemplate" hidden="true">
+				<Size>
+					<AbsDimension x="46" y="16"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="20" y="46"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+                    DailyNotes.AutoQuestClear()
+                  </OnClick>
+				</Scripts>
+			</Button>
+			<Button name="DailyNoteAQAll" inherits="DNButtonTemplate" hidden="true">
+				<Size>
+					<AbsDimension x="46" y="16"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="70" y="46"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+                    DailyNotes.AutoQuestSelectAll()
+                  </OnClick>
+				</Scripts>
+			</Button>
+			<Button name="DailyNoteAQKill" inherits="DNButtonTemplate" hidden="true">
+				<Size>
+					<AbsDimension x="46" y="16"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="20" y="62"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+                    DailyNotes.AutoQuestSelectKill()
+                  </OnClick>
+				</Scripts>
+			</Button>
+			<Button name="DailyNoteAQGather" inherits="DNButtonTemplate" hidden="true">
+				<Size>
+					<AbsDimension x="46" y="16"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="70" y="62"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+  				    DailyNotes.AutoQuestSelectGather()
+  				  </OnClick>
+				</Scripts>
+			</Button>
+			<Frame name="DailyNotesList" enableMouse="true">
+				<Size>
+					<AbsDimension x="700" y="335"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="80"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\AuctionFrame\AuctionFrame-Tooltip-Border" bgFile="Interface\AuctionFrame\AuctionFrame-Tooltip-Background">
+					<EdgeSize>
+						<AbsValue val="16"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+					<BackgroundInsets>
+						<AbsInset left="16" right="16" top="16" bottom="16"/>
+					</BackgroundInsets>
+				</Backdrop>
+				<Frames>
+					<!-- Scroll Bar -->
+					<Slider name="DailyNotesListScrollBar" inherits="UIPanelScrollBarTemplate">
+						<Anchors>
+							<Anchor point="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="-2" y="44"/>
+								</Offset>
+							</Anchor>
+							<Anchor point="BOTTOMRIGHT">
+								<Offset>
+									<AbsDimension x="-2" y="-22"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>this:SetValueStepMode("INT")</OnLoad>
+							<OnValueChanged>
+                        UIPanelScrollBar_OnValueChanged(this, arg1)
+                        DailyNotes.UpdateListView()
+                    </OnValueChanged>
+						</Scripts>
+					</Slider>
+					<!-- Header -->
+					<Button name="DailyNotesListCountHeader" inherits="DailyNotesHeaderButtonTemplate" id="1">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="27" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="DailyNotesListTargetHeader" inherits="DailyNotesHeaderButtonTemplate" id="2">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="78" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="DailyNotesListNameHeader" inherits="DailyNotesHeaderButtonTemplate" id="3">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="145" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="DailyNotesListLevelHeader" inherits="DailyNotesHeaderButtonTemplate" id="4">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="290" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="DailyNotesListZoneHeader" inherits="DailyNotesHeaderButtonTemplate" id="5">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="358" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="DailyNotesListItemHeader" inherits="DailyNotesHeaderButtonTemplate" id="6">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="455" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="DailyNotesListREW1Header" inherits="DailyNotesHeaderButtonTemplate" id="7">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="581" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="DailyNotesListREW2Header" inherits="DailyNotesHeaderButtonTemplate" id="8">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="634" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<!-- List -->
+					<Button name="DailyNotesListItem1" inherits="DailyNotesItemTemplate" id="1">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="25"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="DailyNotesListItem2" inherits="DailyNotesItemTemplate" id="2">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="DailyNotesListItem1" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="DailyNotesListItem3" inherits="DailyNotesItemTemplate" id="3">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="DailyNotesListItem2" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="DailyNotesListItem4" inherits="DailyNotesItemTemplate" id="4">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="DailyNotesListItem3" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="DailyNotesListItem5" inherits="DailyNotesItemTemplate" id="5">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="DailyNotesListItem4" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="DailyNotesListItem6" inherits="DailyNotesItemTemplate" id="6">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="DailyNotesListItem5" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="DailyNotesListItem7" inherits="DailyNotesItemTemplate" id="7">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="DailyNotesListItem6" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="DailyNotesListItem8" inherits="DailyNotesItemTemplate" id="8">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="DailyNotesListItem7" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="DailyNotesListItem9" inherits="DailyNotesItemTemplate" id="9">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="DailyNotesListItem8" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="DailyNotesListItem10" inherits="DailyNotesItemTemplate" id="10">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="DailyNotesListItem9" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="DailyNotesListItem11" inherits="DailyNotesItemTemplate" id="11">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="DailyNotesListItem10" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="DailyNotesListItem12" inherits="DailyNotesItemTemplate" id="12">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="DailyNotesListItem11" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="DailyNotesListItem13" inherits="DailyNotesItemTemplate" id="13">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="DailyNotesListItem12" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="DailyNotesListItem14" inherits="DailyNotesItemTemplate" id="14">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="DailyNotesListItem13" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="DailyNotesListItem15" inherits="DailyNotesItemTemplate" id="15">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="DailyNotesListItem14" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+				</Frames>
+				<Scripts>
+					<OnMouseWheel>
+                UIPanelScrollBar_OnMouseWheel(DailyNotesListScrollBar, delta);
+            </OnMouseWheel>
+				</Scripts>
+			</Frame>
+			<!-- Context menue -->
+			<Frame name="DNFrameItemMenu" inherits="UIDropDownMenuTemplate">
+				<Scripts>
+					<OnLoad>
+						UIDropDownMenu_Initialize(this, DailyNotes.ShowContextMenu, "MENU")
+					</OnLoad>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>DailyNotes.OnLoad(this)</OnLoad>
+			<OnEvent>DailyNotes.OnEvent(event)</OnEvent>
+			<OnShow>DailyNotes.OnShow()</OnShow>
+			<OnHide>DailyNotes.OnHide()</OnHide>
+		</Scripts>
+	</Frame>
+	<!-- Option Dialog -->
+	<CheckButton name="DNCheckboxTemplate" inherits="UIPanelCheckButtonTemplate" virtual="true">
+		<Size><AbsDimension x="20" y="20"/></Size>
+		<Frames><Frame name="$parentTe" enableMouse="true">
+			<Size><AbsDimension x="100" y="20"/></Size>
+			<Anchors><Anchor point="LEFT" relativePoint="RIGHT">
+				<Offset><AbsDimension x="0" y="3"/></Offset>
+			</Anchor></Anchors>
+			<Layers><Layer><FontString name="$parentxt" inherits="GameFontHighlight"  justifyH="LEFT"/></Layer></Layers>
+			<Scripts>
+				<OnEnter>DailyNotes.Config_OptionOnEnter(this:GetParent())</OnEnter>
+				<OnLeave>DailyNotes.Config_OptionOnLeave()</OnLeave>
+			</Scripts>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnShow>DailyNotes.Config_OptionOnShow(this)</OnShow>
+			<OnClick>DailyNotes.Config_OptionOnClick(this)</OnClick>
+			<OnEnter>DailyNotes.Config_OptionOnEnter(this)</OnEnter>
+			<OnLeave>DailyNotes.Config_OptionOnLeave()</OnLeave>
+		</Scripts>
+	</CheckButton>
+	<Frame name="DailyNotesConfigFrame" parent="UIParent" inherits="UICommonFrameTemplate" frameStrata="HIGH" hidden="true">
+		<Size>
+			<AbsDimension x="550" y="220"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER"/>
+		</Anchors>
+		<Frames>
+			<Frame name="DailyNotesConfigFrame2">
+				<Frames>
+					<CheckButton name="DailyNotesCharLevel" inherits="DNCheckboxTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset><AbsDimension x="32" y="32"/></Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="DailyNotesTaker" inherits="DNCheckboxTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="32" y="54"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="DailyNotesVerbose" inherits="DNCheckboxTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="32" y="76"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="DailyNotesVerboseQuest" inherits="DNCheckboxTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="32" y="98"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="DailyNotesCounterDisplay" inherits="DNCheckboxTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="32" y="120"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="DailyNotesCounterDQ" inherits="DNCheckboxTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="42" y="142"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="DailyNotesTT_Mobs" inherits="DNCheckboxTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="300" y="32"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="DailyNotesTT_Items" inherits="DNCheckboxTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="300" y="54"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="DailyNotesTT_Dialog" inherits="DNCheckboxTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="300" y="78"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="DailyNotesZbagHook" inherits="DNCheckboxTemplate" hidden="true">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="300" y="102"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="DailyNotesUndoneQuests" inherits="DNCheckboxTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="300" y="126"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="DailyNotesDebug" inherits="DNCheckboxTemplate" hidden="true">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="32" y="164"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+				</Frames>
+			</Frame>
+			<Button inherits="UIPanelButtonTemplate" text="OKAY">
+				<Size>
+					<AbsDimension x="64" y="18"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="400" y="190"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+				    DailyNotesConfigFrame:Hide()
+				  </OnClick>
+				</Scripts>
+			</Button>
+			<Button name="DNConfigFrame2Reset" inherits="UIPanelButtonTemplate">
+				<Size>
+					<AbsDimension x="100" y="18"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="32" y="190"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+				    DailyNotes.Config_Clear()
+				  </OnClick>
+					<OnEnter>
+    				GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT", 4, 0);
+  				  GameTooltip:SetText("") GameTooltip:AddLine(DailyNotes.L.T_RESET)
+    				GameTooltip:Show();
+			    </OnEnter>
+					<OnLeave>
+    				GameTooltip:Hide();
+    			</OnLeave>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>DailyNotes.Config_OnLoad(this)</OnLoad>
+			<OnShow>DailyNotes.Config_Load()</OnShow>
+			<OnHide>DailyNotes.Config_Save()</OnHide>
+		</Scripts>
+	</Frame>
+	<!-- Addon Manager Button -->
+	<Button name="DailyNotesMiniButton" hidden="true" inherits="UIPanelButtonTemplate" parent="AddonManagerMiniFrame">
+		<Size>
+			<AbsDimension y="24" x="24"/>
+		</Size>
+		<Scripts>
+			<OnClick>AddonManager.MiniButton_OnClick(this)</OnClick>
+			<OnEnter>AddonManager.MiniButton_OnEnter(this)</OnEnter>
+			<OnLeave>AddonManager.MiniButton_OnLeave(this)</OnLeave>
+		</Scripts>
+		<NormalTexture file="interface/AddOns/dailynotes/icon.dds"/>
+		<PushedTexture file="interface/AddOns/dailynotes/icon.dds"/>
+		<HighlightTexture file="Interface\Buttons\PanelSmallButtonHighlight" alphaMode="ADD"/>
+	</Button>
+</Ui>

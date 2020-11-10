@@ -1,0 +1,393 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="../../worldxml/ui.xsd"> 
+	<Frame name="XMinimapMoveTemp" enableMouse="true" virtual="true">
+		<Scripts>
+			<OnLoad>this:RegisterForDrag("RightButton")</OnLoad>
+			<OnDragStart>XMinimap.MoveStart(this, true)</OnDragStart>
+			<OnDragStop>XMinimap.MoveEnd(this)</OnDragStop>
+			<OnEnter>XMinimap.Tooltip(this)</OnEnter>
+			<OnLeave>GameTooltip:Hide()</OnLeave>
+		</Scripts>
+	</Frame>
+	<CheckButton name="XMinimapCheckTemp" inherits="UIPanelCheckButtonTemplate" virtual="true">
+		<Layers><Layer>
+				<FontString name="$parent_Text" inherits="GameTitleFont" justifyH="LEFT" text="GCF_VISIBLE">
+					<Anchors><Anchor point="LEFT" relativePoint="RIGHT"/></Anchors>
+				</FontString>
+			</Layer></Layers>
+	</CheckButton>
+	<EditBox name="XMinimapPosTemp" inherits="UIPanelEditBoxTemplate" letters="5" virtual="true">
+		<Size><AbsDimension x="50" y="18"/></Size>
+	</EditBox>
+	<EditBox name="XMinimapXTemp" inherits="XMinimapPosTemp" virtual="true">
+		<Layers><Layer>
+				<FontString name="$parent_Text" inherits="GameTitleFont" justifyH="LEFT" text="X :">
+					<Anchors><Anchor point="RIGHT" relativePoint="LEFT"/></Anchors>
+				</FontString>
+				<FontString name="$parent_Desc" inherits="GameTitleFont" justifyH="LEFT">
+					<Anchors><Anchor point="LEFT"><Offset>
+					<AbsDimension x="-150" y="0"/></Offset></Anchor></Anchors>
+				</FontString>
+			</Layer></Layers>
+	</EditBox>
+	<EditBox name="XMinimapYTemp" inherits="XMinimapPosTemp" virtual="true">
+		<Layers><Layer>
+				<FontString name="$parent_Text" inherits="GameTitleFont" justifyH="LEFT" text="Y :">
+					<Anchors><Anchor point="RIGHT" relativePoint="LEFT"/></Anchors>
+				</FontString>
+			</Layer></Layers>
+	</EditBox>
+	<Frame name="XMinimapGUITemp" virtual="true" hidden="true" enableMouse="true" frameLevel="1">
+		<Size><AbsDimension x="612" y="503"/></Size>
+		<Anchors><Anchor point="CENTER"/></Anchors>
+		<Backdrop edgeFile="Interface\Tooltips\Tooltip-Border" bgFile="Interface\Tooltips\Tooltip-Background">
+			<BackgroundInsets><AbsInset top="4" left="4" bottom="4" right="4"/></BackgroundInsets>
+			<EdgeSize><AbsValue val="16"/></EdgeSize>
+			<TileSize><AbsValue val="16"/></TileSize>
+		</Backdrop>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Version" inherits="Font_FrameTitle">
+					<Anchors><Anchor point="TOP"><Offset>
+						<AbsDimension x="0" y="10"/></Offset></Anchor></Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parent_Close" inherits="UIPanelButtonTemplate" text="CLOSE">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-7" y="-6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size><AbsDimension x="110" y="30"/></Size>
+				<Scripts>
+					<OnClick>
+						if XBARVERSION and XBARVERSION>=1.51 then
+							XAddonMngr:Hide()
+						end
+						XMinimap.OnHide()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_Save" inherits="UIPanelButtonTemplate" text="OBJ_SAVE">
+				<Anchors>
+					<Anchor point="RIGHT" relativePoint="LEFT" relativeTo="$parent_Close"/>
+				</Anchors>
+				<Size><AbsDimension x="110" y="30"/></Size>
+				<Scripts>
+					<OnClick>XMinimap.Save()</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnShow>
+				if XBARVERSION and XBARVERSION>=1.51 then
+					XAddon_Page(this)
+					XMinimapTab:Hide()
+				else
+					XMinimapTab:Show()
+				end
+				XMinimap.OnShow()
+				XMinimap.Pre(this)
+			</OnShow>
+			<OnDragStart>
+				if not XBARVERSION then
+					this:StartMoving()
+				end
+			</OnDragStart>
+			<OnHide>XMinimap.OnHide()</OnHide>
+		</Scripts>
+	</Frame>
+	<Frame name="XMinimapGUI1" inherits="XMinimapGUITemp" parent="UIParent">
+		<Frames>
+			<Button name="$parent_Default" inherits="UIPanelButtonTemplate" text="DEFAULT">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="10" y="-6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size><AbsDimension x="120" y="30"/></Size>
+				<Scripts><OnClick>XMinimap.Default()</OnClick></Scripts>
+			</Button>
+			<CheckButton name="$parent_CB" inherits="XMinimapCheckTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="15" y="35"/></Offset></Anchor></Anchors>
+				<Scripts><OnClick>XMinimap.Disable(this:IsChecked())</OnClick></Scripts>
+			</CheckButton>
+			<CheckButton name="$parent_XA" inherits="XMinimapCheckTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="180" y="35"/></Offset></Anchor></Anchors>
+			</CheckButton>
+			<EditBox name="$parent_X" inherits="XMinimapXTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="40" y="70"/></Offset></Anchor></Anchors>
+			</EditBox>
+			<EditBox name="$parent_Y" inherits="XMinimapYTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="170" y="70"/></Offset></Anchor></Anchors>
+			</EditBox>
+			<EditBox name="$parent_Size" numeric="true" inherits="XMinimapYTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="380" y="70"/></Offset></Anchor></Anchors>
+				<Size><AbsDimension x="50" y="18"/></Size>
+			</EditBox>
+			<Frame name="$parent_Style" inherits="UIDropDownMenuTemplate">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="50" y="95"/></Offset></Anchor></Anchors>
+				<Layers><Layer>
+						<FontString name="$parent_Text" inherits="GameTitleFont" justifyH="LEFT">
+							<Anchors><Anchor point="LEFT" relativePoint="RIGHT"><Offset>
+								<AbsDimension x="5" y="0"/></Offset></Anchor></Anchors>
+						</FontString>
+					</Layer></Layers>
+				<Scripts>
+					<OnShow>UIDropDownMenu_SetWidth(this, 150) UIDropDownMenu_Initialize(this, XMinimap.Style_Show)</OnShow>
+				</Scripts>
+			</Frame>
+			<Button name="$parent_Switch">
+				<NormalTexture file="interface\CharacterFrame\EquipSwapButton-Normal"/>
+				<PushedTexture file="interface\CharacterFrame\EquipSwapButton-Depress"/>
+				<HighlightTexture file="interface\CharacterFrame\EquipSwapButton-Normal" alphaMode="ADD"/>
+				<DisabledTexture file="interface\CharacterFrame\EquipSwapButton-Normal"><Color a=".5"/></DisabledTexture>
+				<Size><AbsDimension x="20" y="20"/></Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativePoint="LEFT" relativeTo="$parent_Style">
+						<Offset>
+							<AbsDimension x="-5" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>XMinimap.Switch()</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_BOTTOM", 0, 0)
+						GameTooltip:SetText(XBar.Lng["XM"]["Switch"])
+					</OnEnter>
+					<OnLeave>GameTooltip:Hide()</OnLeave>
+				</Scripts>
+			</Button>
+			<CheckButton name="$parent_Title_CB" inherits="XMinimapCheckTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="15" y="180"/></Offset></Anchor></Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Title_XA" inherits="XMinimapCheckTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="180" y="180"/></Offset></Anchor></Anchors>
+			</CheckButton>
+			<EditBox name="$parent_Title_X" inherits="XMinimapXTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="40" y="215"/></Offset></Anchor></Anchors>
+			</EditBox>
+			<EditBox name="$parent_Title_Y" inherits="XMinimapYTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="170" y="215"/></Offset></Anchor></Anchors>
+			</EditBox>
+			<CheckButton name="$parent_Time_CB" inherits="XMinimapCheckTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="15" y="270"/></Offset></Anchor></Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Time_XA" inherits="XMinimapCheckTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="180" y="270"/></Offset></Anchor></Anchors>
+			</CheckButton>
+			<EditBox name="$parent_Time_X" inherits="XMinimapXTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="40" y="305"/></Offset></Anchor></Anchors>
+			</EditBox>
+			<EditBox name="$parent_Time_Y" inherits="XMinimapYTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="170" y="305"/></Offset></Anchor></Anchors>
+			</EditBox>
+			<CheckButton name="$parent_Coord_CB" inherits="XMinimapCheckTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="15" y="360"/></Offset></Anchor></Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Coord_XA" inherits="XMinimapCheckTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="180" y="360"/></Offset></Anchor></Anchors>
+			</CheckButton>
+			<EditBox name="$parent_Coord_X" inherits="XMinimapXTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="40" y="395"/></Offset></Anchor></Anchors>
+			</EditBox>
+			<EditBox name="$parent_Coord_Y" inherits="XMinimapYTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="170" y="395"/></Offset></Anchor></Anchors>
+			</EditBox>
+		</Frames>
+		<Scripts>
+			<OnDragStop>XMinimap.Pos(this, "XMinimapGUI2")</OnDragStop>
+			<OnLoad>this:RegisterEvent("VARIABLES_LOADED")</OnLoad>
+			<OnEvent>XMinimap.OnEvent()</OnEvent>
+		</Scripts>
+	</Frame>
+	<Frame name="XMinimapGUI2" inherits="XMinimapGUITemp" parent="UIParent">
+		<Frames>
+			<CheckButton name="$parent_Bull" inherits="XMinimapCheckTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="15" y="35"/></Offset></Anchor></Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Npc" inherits="XMinimapCheckTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="15" y="80"/></Offset></Anchor></Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_BS" inherits="XMinimapCheckTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="15" y="130"/></Offset></Anchor></Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Store" inherits="XMinimapCheckTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="15" y="180"/></Offset></Anchor></Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_QT" inherits="XMinimapCheckTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="15" y="230"/></Offset></Anchor></Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Option" inherits="XMinimapCheckTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="15" y="280"/></Offset></Anchor></Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_BG" inherits="XMinimapCheckTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="15" y="330"/></Offset></Anchor></Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_RUI" inherits="XMinimapCheckTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="15" y="380"/></Offset></Anchor></Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Plus" inherits="XMinimapCheckTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="260" y="35"/></Offset></Anchor></Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Minus" inherits="XMinimapCheckTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="260" y="80"/></Offset></Anchor></Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_PB" inherits="XMinimapCheckTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="260" y="130"/></Offset></Anchor></Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Pet" inherits="XMinimapCheckTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="260" y="180"/></Offset></Anchor></Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_PCard" inherits="XMinimapCheckTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="260" y="230"/></Offset></Anchor></Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_WBG" inherits="XMinimapCheckTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="260" y="280"/></Offset></Anchor></Anchors>
+			</CheckButton>
+		</Frames>
+		<Scripts>
+			<OnDragStop>
+				XMinimap.Pos(this, "XMinimapGUI1")
+			</OnDragStop>
+		</Scripts>
+	</Frame>
+	<Frame name="XMinimapTab" parent="UIParent" hidden="true">
+		<Frames>
+			<Button name="$parent_1" inherits="UIPanelButtonTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="XMinimapGUI1">
+						<Offset>
+							<AbsDimension x="0" y="35"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size><AbsDimension x="110" y="30"/></Size>
+				<Scripts>
+					<OnClick>XMinimap.Page("XMinimapGUI1")</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_2" inherits="UIPanelButtonTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="XMinimapGUI1">
+						<Offset>
+							<AbsDimension x="120" y="35"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size><AbsDimension x="110" y="30"/></Size>
+				<Scripts>
+					<OnClick>XMinimap.Page("XMinimapGUI2")</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+	</Frame>
+	<Frame name="XMinimapF" parent="UIParent" frameStrata="LOW" inherits="XMinimapMoveTemp">
+		<Size><AbsDimension x="30" y="30"/></Size>
+		<Anchors><Anchor point="TOP" relativeTo="MinimapFrame"/></Anchors>
+		<Layers>
+			<Layer>
+				<Texture name="$parentN" file="Interface\AddOns\XBar\img\map\map_normal"/>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="$parentMenu" inherits="UIDropDownMenuTemplate">
+				<Scripts>
+					<OnLoad>
+						UIDropDownMenu_Initialize(this, XMinimap.ButtonMenu, "MENU")
+						UIDropDownMenu_SetAnchor(this, 0, 0, "TOPRIGHT", "BOTTOMLEFT", this:GetParent())
+					</OnLoad>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForClicks("LeftButton", "RightButton", "MiddleButton")
+				this:RegisterForDrag("RightButton")
+				this:SetAlpha(.3)
+				this:RegisterEvent("MAP_DISABLE")
+			</OnLoad>
+			<OnEvent>MinimapDisableFrame:Hide()</OnEvent>
+			<OnClick>XMinimap.Toggle(key, true)</OnClick>
+			<OnDragStart>XMinimap.MoveStart(MinimapFrame)</OnDragStart>
+			<OnDragStop>XMinimap.MoveEnd(MinimapFrame)</OnDragStop>
+			<OnEnter>
+				GameTooltip:SetOwner(this, "ANCHOR_BOTTOMLEFT", 0, 0)
+				GameTooltip:SetText("XMinimap")
+				GameTooltip:AddLine("- "..XBar.Lng["XM"]["Left"], 0, .7, .9)
+				GameTooltip:AddLine("- "..XBar.Lng["XM"]["Right"], 0, .7, .9)
+				GameTooltip:AddLine("- "..XBar.Lng["XM"]["Middle"], 0, .7, .9)
+				GameTooltip:AddLine("- "..UIPANELANCHORFRAME_TOOLTIP, 0, .7, .9)
+			</OnEnter>
+		</Scripts>
+	</Frame>
+	<Frame name="XMinimapFTitle" parent="UIParent" frameStrata="LOW" inherits="XMinimapMoveTemp">
+		<Size><AbsDimension x="170" y="24"/></Size>
+		<Anchors><Anchor point="CENTER" relativeTo="MinimapViewFrame"><Offset>
+			<AbsDimension x="0" y="-100"/></Offset></Anchor></Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface\Login\CharacterSelect\CharacterSelect-ZoneBorder">
+					<Color a=".6"/>
+				</Texture>
+			</Layer>
+			<Layer>
+				<FontString name="$parent_Text" inherits="Font_FrameTitle">
+					<FontHeight><AbsValue val="13"/></FontHeight>
+					<Anchors><Anchor point="CENTER"/></Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				this:RegisterEvent("ZONE_CHANGED")
+				this:RegisterForDrag("RightButton")
+				XMinimap.Title()
+			</OnLoad>
+			<OnEvent>XMinimap.Title(arg1)</OnEvent>
+			<OnDragStart>XMinimap.MoveStart(this)</OnDragStart>
+			<OnEnter>XMinimap.Tooltip(this)</OnEnter>
+			<OnLeave>GameTooltip:Hide()</OnLeave>
+		</Scripts>
+	</Frame>
+	<Frame name="XMinimapFTime" parent="MinimapFrameTime" inherits="XMinimapMoveTemp">
+		<Size><AbsDimension x="16" y="16"/></Size>
+		<Anchors><Anchor point="TOPLEFT" relativeTo="MinimapFrameTime"/></Anchors>
+		<Layers>
+			 <Layer>
+				<Texture file="Interface\WorldMap\WorldMap-TitlebarSwitch-Normal"/>
+			</Layer>
+		</Layers>
+	</Frame>
+	<Frame name="XMinimapFCoord" parent="MinimapFramePlayerPosition" inherits="XMinimapMoveTemp">
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeTo="MinimapFramePlayerPosition"/>
+			<Anchor point="BOTTOMRIGHT" relativeTo="MinimapFramePlayerPosition"/>
+		</Anchors>
+	</Frame>
+	<Frame name="MinimapZoomOverlayFrame" parent="MinimapViewFrame" enableMouse="true">
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeTo="MinimapViewFrame">
+			<Offset><AbsDimension x="10" y="10"/></Offset></Anchor>
+			<Anchor point="BOTTOMRIGHT" relativeTo="MinimapViewFrame">
+			<Offset><AbsDimension x="-10" y="-10"/></Offset></Anchor>
+		</Anchors>
+		<Scripts>
+			<OnMouseWheel>
+				MinimapZoomOverlayFrame_OnMouseWheel(delta)
+			</OnMouseWheel>
+			<OnClick>
+				MinimapPing_OnClick()
+			</OnClick>
+			<OnLoad>
+				MinimapZoomOverlayFrame_OnLoad()
+			</OnLoad>
+		</Scripts>
+	</Frame>
+</Ui>

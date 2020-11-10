@@ -1,0 +1,17 @@
+tag v6.0.7
+36c302dfec000c04d720c63922ff6b2b8809de25
+McBen <viertelvor12@gmx.net>
+2014-03-20 20:10:55 +0100
+
+v6.0.7
+
+
+--------------------
+
+McBen:
+	- project ide
+	- new: minimap-buttons hide
+	- prevent click on recently expanded minibar
+	- prevent click on recently expanded minibar
+	- better error message
+	- sol update

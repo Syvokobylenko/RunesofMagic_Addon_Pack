@@ -1,0 +1,25 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ ../../worldxml/ui.xsd">
+
+	<CheckButton name="CPCheckbox" inherits="UIPanelCheckButtonTemplate" autoChecked="true" virtual="true">
+		<Size>
+			<AbsDimension x="18" y="20"/>
+		</Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parentText" inherits="GameFontHighlight" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="150" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="1" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</CheckButton>
+
+</Ui>

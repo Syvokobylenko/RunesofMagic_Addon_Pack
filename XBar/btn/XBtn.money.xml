@@ -1,0 +1,41 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Frame name="XBarMoney" parent="UIParent" frameStrata="BACKGROUND" frameLevel="1">
+		<Size><AbsDimension x="128" y="32"/></Size>
+		<Anchors><Anchor point="LEFT" relativeTo="XBarFrame"><Offset>
+			<AbsDimension x="405" y="0"/></Offset></Anchor></Anchors>
+		<Scripts>
+			<OnEvent>XBar.Money_OnEvent(this,event)</OnEvent>
+			<OnShow>XBar.Money_OnEvent(this,"LOADED")</OnShow>
+			<OnHide>
+				this:UnregisterEvent("PLAYER_MONEY")
+				this:UnregisterEvent("PLAYER_BAG_CHANGED")
+			</OnHide>
+		</Scripts>
+	</Frame>
+	<Frame name="XBarMoney_BG" inherits="XButton_BGTemp" parent="XBarFrame">
+		<Anchors><Anchor point="LEFT" relativeTo="XBarMoney"><Offset>
+			<AbsDimension x="-28" y="0"/></Offset></Anchor></Anchors>
+	</Frame>
+	<Button name="XBarMoney_B" inherits="XButton_BTemp" parent="XBarMoney">
+		<Anchors><Anchor point="LEFT"/></Anchors>
+		<NormalTexture file="Interface/Icons/Coin_03"/>
+		<PushedTexture file="Interface/Icons/Crystal_01"/>
+		<HighlightTexture file="Interface/Icons/Crystal_01" alphaMode="ADD"/>
+		<Scripts>
+			<OnClick>
+				if key=="LBUTTON" then
+					XBar.ToggleUI(GoodsFrame)
+				else
+					XBar.ToggleUI(ItemMallFrame)
+				end
+			</OnClick>
+			<OnDragStart>XBar.MoveStart(XBarMoney)</OnDragStart>
+			<OnDragStop>XBar.MoveEnd(XBarMoney)</OnDragStop>
+			<OnEnter>XBar.Money_OnEnter(this)</OnEnter>
+		</Scripts>
+	</Button>
+	<Frame name="XBarMoney_F" inherits="XButton_FTemp" parent="XBarMoney">
+		<Anchors><Anchor point="LEFT"><Offset>
+			<AbsDimension x="26" y="3"/></Offset></Anchor></Anchors>
+	</Frame>
+</Ui>

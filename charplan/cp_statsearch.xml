@@ -1,0 +1,190 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ ../../worldxml/ui.xsd">
+	<Frame name="CPStatSearchItemTemplate" enableMouse="true" virtual="true">
+		<Size><AbsDimension x="415" y="15"></AbsDimension></Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parentName" inherits="GameFontHighlight" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="210" y="14"></AbsDimension>
+					</Size>
+					<FontHeight><AbsValue val="12"/></FontHeight>
+				</FontString>
+				<FontString name="$parentValue" inherits="GameFontNormalSmall"  justifyH="LEFT">
+					<Size><AbsDimension x="210" y="14"></AbsDimension></Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentName" relativePoint="RIGHT"></Anchor>
+					</Anchors>
+					<FontHeight><AbsValue val="9"/></FontHeight>
+				</FontString>
+				<Texture name="$parentHighlight" file="Interface\AuctionFrame\AuctionFrameItem-Highlight" alphaMode="ADD" hidden="true">
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset><AbsDimension x="-2" y="0"></AbsDimension></Offset></Anchor>
+					<Anchor point="BOTTOMRIGHT"><Offset><AbsDimension x="-10" y="-1"></AbsDimension></Offset></Anchor>
+				</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>Charplan.StatSearch.ItemClicked(this,key)</OnClick>
+			<OnDoubleClick>
+					Charplan.StatSearch.ItemClicked(this,key)
+					Charplan.StatSearch.Close()
+			</OnDoubleClick>
+			<OnMouseWheel>
+				Charplan.StatSearch.ItemOnLeave()
+				UIPanelScrollBar_OnMouseWheel(CPStatSearchItemSB, delta)
+				Charplan.StatSearch.ItemOnEnter(this)
+			</OnMouseWheel>
+			<OnEnter>Charplan.StatSearch.ItemOnEnter(this)</OnEnter>
+			<OnLeave>Charplan.StatSearch.ItemOnLeave()</OnLeave>
+		</Scripts>
+	</Frame>
+
+	<EditBox name="CPStatSearch_FilterBox" inherits="UIPanelEditBoxTemplate" virtual="true">
+		<Size><AbsDimension x="75" y="20"/></Size>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="$parentBack" inherits="GameFontDisable">
+					<Anchors>
+						<Anchor point="LEFT"><Offset><AbsDimension x="5" y="0"></AbsDimension></Offset></Anchor>
+					</Anchors>
+					<FontHeight><AbsValue val="12"></AbsValue></FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnEditFocusGained>Charplan.StatSearch.FilterFocus(this,true)</OnEditFocusGained>
+			<OnEditFocusLost>Charplan.StatSearch.FilterFocus(this,false)</OnEditFocusLost>
+			<OnTextChanged>Charplan.StatSearch.UpdateList(this)</OnTextChanged>
+		</Scripts>
+	</EditBox>
+
+	<Frame name="CPStatSearch" hidden="true" parent="CPPimpMe" inherits="UICommonFrameTemplate" frameStrata="TOOLTIP" frameLevel="1000">
+		<Size><AbsDimension x="490" y="300"></AbsDimension></Size>
+		<Frames>
+		  <!-- filter -->
+		  <EditBox name="$parentSearchBox1" inherits="CPStatSearch_FilterBox">
+				<Size><AbsDimension x="170" y="20"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT"><Offset><AbsDimension x="15" y="29" /></Offset></Anchor>
+				</Anchors>
+			</EditBox>
+		  <EditBox name="$parentSearchBox2" inherits="CPStatSearch_FilterBox">
+				<Size><AbsDimension x="100" y="20"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentSearchBox1" relativePoint="TOPRIGHT"><Offset><AbsDimension x="5" y="0" /></Offset></Anchor>
+				</Anchors>
+			</EditBox>
+		  <EditBox name="$parentSearchBox3" inherits="CPStatSearch_FilterBox">
+				<Size><AbsDimension x="100" y="20"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentSearchBox2" relativePoint="TOPRIGHT"><Offset><AbsDimension x="5" y="0" /></Offset></Anchor>
+				</Anchors>
+			</EditBox>
+		  <EditBox name="$parentSearchBox4" inherits="CPStatSearch_FilterBox">
+				<Size><AbsDimension x="35" y="20"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentSearchBox3" relativePoint="TOPRIGHT"><Offset><AbsDimension x="5" y="0" /></Offset></Anchor>
+				</Anchors>
+			</EditBox>
+		  <EditBox name="$parentSearchBox5" inherits="CPStatSearch_FilterBox">
+				<Size><AbsDimension x="35" y="20"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentSearchBox4" relativePoint="TOPRIGHT"><Offset><AbsDimension x="5" y="0" /></Offset></Anchor>
+				</Anchors>
+			</EditBox>
+
+			<Frame name="$parentItem" enableMouse="true">
+				<Size>
+					<AbsDimension x="460" y="210"></AbsDimension>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP"><Offset><AbsDimension y="50" x="0"></AbsDimension></Offset></Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\Tooltip-border">
+				    <EdgeSize><AbsValue val="8"/></EdgeSize>
+				</Backdrop>
+				<Frames>
+					<Frame name="$parent1" inherits="CPStatSearchItemTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="4" y="8"></AbsDimension></Offset></Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="$parent2" inherits="CPStatSearchItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent1" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Frame>
+					<Frame name="$parent3" inherits="CPStatSearchItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent2" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Frame>
+					<Frame name="$parent4" inherits="CPStatSearchItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent3" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Frame>
+					<Frame name="$parent5" inherits="CPStatSearchItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent4" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Frame>
+					<Frame name="$parent6" inherits="CPStatSearchItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent5" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Frame>
+					<Frame name="$parent7" inherits="CPStatSearchItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent6" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Frame>
+					<Frame name="$parent8" inherits="CPStatSearchItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent7" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Frame>
+					<Frame name="$parent9" inherits="CPStatSearchItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent8" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Frame>
+					<Frame name="$parent10" inherits="CPStatSearchItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent9" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Frame>
+					<Frame name="$parent11" inherits="CPStatSearchItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent10" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Frame>
+					<Frame name="$parent12" inherits="CPStatSearchItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent11" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Frame>
+					<Frame name="$parent13" inherits="CPStatSearchItemTemplate">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent12" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Frame>
+					<Slider name="$parentSB" inherits="UIPanelScrollBarTemplate">
+						<Anchors>
+							<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT"><Offset><AbsDimension x="-1" y="19"/></Offset></Anchor>
+							<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT"><Offset><AbsDimension x="-1" y="-19"/></Offset></Anchor>
+						</Anchors>
+						<Scripts>
+							<OnValueChanged>
+								UIPanelScrollBar_OnValueChanged(this, arg1)
+								Charplan.StatSearch.ListUpdate()
+							</OnValueChanged>
+						</Scripts>
+					</Slider>
+				</Frames>
+				<Scripts>
+					<OnMouseWheel>UIPanelScrollBar_OnMouseWheel(CPStatSearchItemSB, delta)</OnMouseWheel>
+				</Scripts>
+			</Frame>
+			<Button name="$parentBtnOK" inherits="UIPanelButtonTemplate" text="OK">
+				<Size><AbsDimension x="60" y="24"></AbsDimension></Size>
+				<Anchors>
+					<Anchor point="BOTTOM"><Offset><AbsDimension x="-45" y="-8"></AbsDimension></Offset></Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>Charplan.StatSearch.Close()</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentBtnCancel" inherits="UIPanelButtonTemplate" text="CANCEL">
+				<Size><AbsDimension x="60" y="24"></AbsDimension></Size>
+				<Anchors>
+					<Anchor point="BOTTOM"><Offset><AbsDimension x="55" y="-8"></AbsDimension></Offset></Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>Charplan.StatSearch.Cancel()</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnShow>Charplan.StatSearch.OnShow(this)</OnShow>
+			<OnHide>Charplan.StatSearch.OnHide(this)</OnHide>
+		</Scripts>
+
+	</Frame>
+</Ui>

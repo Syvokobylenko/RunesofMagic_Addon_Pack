@@ -1,0 +1,118 @@
+<!--
+pbInfo - Xml/CastingBar.xml
+	v0.51-fix
+	by p.b. a.k.a. novayuna
+	released under the Creative Commons License By-Nc-Sa: http://creativecommons.org/licenses/by-nc-sa/3.0/
+	
+	pbInfoCastingBar_Display script code by Bother, thanks!
+-->
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="..\..\worldxml\ui.xsd">
+	<!-- ThreatMeter -->
+	<Frame name="pbInfoCastingBar" hidden="false" parent="CastingBarFrame" frameStrata="DIALOG">
+		<Size>
+			<AbsDimension x="16" y="16"/>
+		</Size>
+		<Frames>
+			<Frame name="pbInfoCastingBar_MovingFrame" hidden="true" enableMouse="true">
+				<Size>
+					<AbsDimension x="256" y="64"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="CastingBarBorderMiddle" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnShow>
+						CastingBarFrame.holdTime = 0;
+						CastingBarFrame:SetAlpha(1.0);
+						CastingBarFrame:Show();
+					</OnShow>
+					<OnMouseDown>
+						CastingBarFrame:StartMoving("TOPLEFT");
+					</OnMouseDown>
+					<OnMouseUp>
+						CastingBarFrame:StopMovingOrSizing();
+						pbInfoSettings["CastingBarPosition"] = {CastingBarFrame:GetPos()};
+						CastingBarFrame:Hide();
+						this:Hide();
+						pbInfoConfig:Show();pbInfo.Config.TabClick();pbInfoConfig_PageCastingBar:Show();
+					</OnMouseUp>
+				</Scripts>
+			</Frame>
+			<Frame name="pbInfoCastingBar_Display" hidden="true">
+				<Layers>
+					<Layer>
+						<FontString name="pbInfoCastingBarTime" inherits="GameFontLabelYellow">
+							<Size>
+								<AbsDimension x="180" y="16"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOP" relativeTo="CastingBarFrame" relativePoint="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-2"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="pbInfoCastingBarText" inherits="GameFontLabelYellow">
+							<Size>
+								<AbsDimension x="300" y="16"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOP" relativeTo="CastingBarFrame" relativePoint="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-20"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnLoad>
+						this:RegisterEvent("VARIABLES_LOADED");
+						this:RegisterEvent("CASTING_START");
+						this:RegisterEvent("CASTING_STOP");
+						this:RegisterEvent("CASTING_FAILED");
+						this:RegisterEvent("CASTING_DELAYED");
+						pbInfo.CastingBar.TimeStart = 0;
+						pbInfo.CastingBar.TimeNeed = 0;
+					</OnLoad>
+					<OnEvent>
+						if (event == "VARIABLES_LOADED" and pbInfoSettings["CASTINGBARMOVEONLOAD"]) then
+							local scale, x, y = GetUIScale(), unpack(pbInfoSettings["CastingBarPosition"]);
+							if (x > 0 and y > 0) then
+								CastingBarFrame:ClearAllAnchors();
+								CastingBarFrame:SetAnchor("TOPLEFT", "TOPLEFT", "UIParent", x / scale, y / scale);
+							end;
+						elseif (pbInfoSettings["CASTINGBARSHOWCASTTIME"]) then
+							if (event == "CASTING_START") then
+								CastingBarText:Hide();
+								pbInfoCastingBarText:SetText(arg1);
+								pbInfo.CastingBar.TimeStart = GetTime();
+								pbInfo.CastingBar.TimeNeed = arg2;
+								this:Show();
+							elseif (event == "CASTING_STOP" and this:IsVisible()) then
+								this:Hide();
+							elseif (event == "CASTING_FAILED" and this:IsVisible()) then
+								this:Hide();
+							elseif (event == "CASTING_DELAYED" and this:IsVisible()) then
+								pbInfo.CastingBar.TimeNeed = pbInfo.CastingBar.TimeNeed + arg1;
+							end;
+						end;
+					</OnEvent>
+					<OnUpdate>
+						local ElapsedTime = pbInfo.CastingBar.TimeNeed - (GetTime() - pbInfo.CastingBar.TimeStart);
+						if (0 > ElapsedTime) then
+							ElapsedTime = 0;
+						end;
+						pbInfoCastingBarTime:SetText(string.format("%.1f",ElapsedTime).." sec");
+					</OnUpdate>
+				</Scripts>
+			</Frame>
+		</Frames>
+	</Frame>
+</Ui>

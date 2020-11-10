@@ -1,0 +1,138 @@
+--[[
+pbInfo - Locales/lang.DE.lua
+	v0.49
+	by p.b. a.k.a. novayuna
+	released under the Creative Commons License By-Nc-Sa: http://creativecommons.org/licenses/by-nc-sa/3.0/
+]]
+pbInfo.QuestTracker.CompleteText = '%(Fertig%)';
+pbInfo.QuestTracker.DailyQuestPatterns = {'"(%d+) Tages%-Quest"', "heute nicht noch einmal", "benutzt Tagesquest%-Karte"};
+pbInfo.ChatFrame.XPTP = {'^%+%d+ Erfahrungspunkte', '^%+%d+ Talentpunkte'};
+pbInfo.ChatFrame.XPTPDebt = {'^Erfahrungsschulden sind um %d+ gesunken', '^TP%-Schulden wurden um %d+ reduziert'};
+pbInfo.ChatFrame.Progress = {'^(.+)%-Lernfortschritt: [%d.]+%%'}; -- do not translate %s and PERCENTAGE
+pbInfo.Locale = {
+	["Messages"] = {
+		["DESCRIPTION"]  		= "pbInfo shows a tooltip with several information about the mob, player or NPC you are hovering, a tooltip with information about gathering materials and it modifies the target blood bars to show a mob's real healthpoints.\n\nBy now, pbInfo includes a ThreatMeter, a QuestTracker and a ChatLog.",
+		["LOADED"] 			= "AddOn geladen",
+		["NVT"] 			= "Kein g\195\188ltiges Ziel ausgew\195\164hlt!",
+		["TOGGLEtrue"] 		= " wurde erfolgreich |cff00FF00aktiviert|r.",
+		["TOGGLEfalse"]		= " wurde erfolgreich |cffFF0000deaktiviert|r.",
+		["TOGGLEerror"]		= " existiert nicht in der Konfiguration.",
+		["ONLOAD"]			= "Um Optionen umzuschalten, benutze den Minimap-Button oder /pbic.",
+		["ATTENTIONENABLE"]	= "Achtung, das AddOn wurde in der Vergangenheit |cffFF0000deaktiviert|r. Benutze /pbic zum Aktivieren."
+	},
+	["Tooltip"] = {
+		["HP"] 			= "Lebenspunkte",
+		["LVL"] 		= "Stufe",
+		["PROGRESS"]	= "Fortschritt",
+		["TITLE"]	 	= "Titel",
+		["GUILD"]	 	= "Gilde",
+		["DISTANCE"] 	= "Entfernung",
+		["TARGET"] 		= "Ziel",
+		["MANATYPE1"] 	= "Mana",
+		["MANATYPE2"] 	= "Wut",
+		["MANATYPE3"] 	= "Fokus",
+		["MANATYPE4"] 	= "Energie",
+		["MATINBAG"]	= "Im Rucksack",
+		["MATONBANK"]	= "Auf der Bank"
+	},
+	["ClockTooltip"] = {
+		["CNDTIME"] 	= "Candara-Zeit",
+		["ONLINE"] 		= "Online",
+		["TIMEFORMAT"] 	= "%H:%M" -- http://www.lua.org/pil/22.1.html
+	},
+	["QuestTracker"] = {
+		["DAILY"] 		= "Tagesquest",
+		["REWARD"] 		= "Belohnung",
+		["QUESTNPC"] 	= "Quest-NPC",
+		["XP"] 			= "XP",
+		["TP"] 			= "TP",
+		["GOLD"] 		= "Gold",
+		["DQITEMS"] 	= "Tagesquest-Items",
+		["COMPLQUESTS"]	= "fertige Quests",
+		["INFOTOOLTIP"] = "Linke Maustaste zum Ein-/Ausblenden dr\195\188cken.\n\nUmschalttaste und rechte Maustaste gedr\195\188ckt halten, um den QuestTracker zu bewegen."
+	},
+	["Config"] = {
+		["Title"] 									= "pbInfo-Einstellungen",
+		["TabGeneral"] 								= "Allgemein",
+		["TabTooltip"] 								= "Tooltip",
+		["TabTargetFrame"] 							= "TargetFrame",
+		["TabBloodBars"] 							= "BloodBars",
+		["TabThreatMeter"] 							= "Aggr-O-Meter",
+		["TabQuestTracker"] 						= "QuestTracker",
+		["TabChatLog"] 								= "ChatLog",
+		["TabCastingBar"] 							= "CastingBar",
+		["TabChatFrame"] 							= "ChatFrame",
+		["SettingEnable"] 							= "pbInfo aktivieren",
+		["SettingThousandsSeparatorFormat"] 		= "Tsd.-Trennzeichen:",
+		["SettingTimeStampFormat"] 					= "Uhrzeit Format:",
+		["SettingExtraLanguage"] 					= "Sprache:",
+		["SettingModifyTooltip"] 					= "Infos zu Monstern/Spielern anzeigen",
+		["SettingModifyHealthbar"] 					= "Lebenspunkte im Targetframe anzeigen",
+		["SettingHealthbarShowPercentage"] 			= "Prozentwerte auch anzeigen",
+		["SettingHealthColorFade"] 					= "Weiches Lebenspunkte-F\195\164rben",
+		["SettingShowMana"] 						= "Mana, Wut, Energie und Fokus anzeigen",
+		["SettingShowDistance"] 					= "Entfernung anzeigen",
+		["SettingTooltipShowRace"] 					= "Rasse anzeigen",
+		["SettingTooltipShowPlayerInfo"] 			= "Spieler-Titel anzeigen (experimentell)",
+		["SettingShowMouseoverTarget"] 				= "Target des Ziels anzeigen",
+		["SettingAllNPC"] 							= "Auch f\195\188r NPCs anzeigen",
+		["SettingStickyTooltip"] 					= "Tooltip fixieren",
+		["SettingStickyAllTooltips"] 				= "alle Tooltips (Zauber, Items, etc.)",
+		["SettingStickyTooltipButton"] 				= "Position setzen",
+		["SettingShowMaterialInfo"] 				= "Infos zu Abbau-Materialien anzeigen",
+		["SettingShowMatInfoItemCount"] 			= "Anzahl der Items anzeigen",
+		["SettingShowMatInfoItemCountBank"] 		= "+ Bankitems",
+		["SettingShowMatInfoItemCountIV"] 			= "+ InventoryViewer Support",
+		["SettingShowClockTooltip"] 				= "ClockTooltip im Tageslichticon anzeigen",
+		["SettingHealthBarColorFade"] 				= "Lebenspunktebalken f\195\164rben",
+		["SettingModifyBloodBars"] 					= "Lebenspunkte in BloodBars anzeigen",
+		["SettingBloodBarsColorFade"] 				= "BloodBars f\195\164rben",
+		["SettingBloodBarsDelay"] 					= "Update-Verz\195\182gerung in Sekunden:",
+		["SettingThreatMeter"] 						= "Aggr-O-Meter",
+		["SettingThreatMeterShowTitle"] 			= "Titel anzeigen",
+		["SettingThreatMeterLock"] 					= "Position fixieren",
+		["SettingThreatMeterPlayerOnTop"] 			= "Platziere den Spieler immer oben",
+		["SettingThreatMeterWarnTargetTargetTarget"]= 'Warnen, wenn "TargetTargetTarget = Ich"',
+		["TooltipThreatMeterWarnTargetTargetTarget"]= "Zeigt eine Warnmeldung, falls das Ziel deines Ziels dich ansvisiert.\nBsp.: Tank -> Mob -> Du",
+		["SettingThreatMeterHideOnNoTarget"] 		= "Ausblenden bei fehlendem Ziel",
+		["SettingThreatMeterHideOnNoParty"] 		= "Ausblenden, wenn nicht in Gruppe",
+		["SettingThreatMeterRelativeToMaxThreat"] 	= "Aggro relativ zur Max-Aggro anzeigen",
+		["SettingThreatMeterShowRealThreat"] 		= "Zeige Realwerte statt Prozente",
+		["SettingThreatMeterDisplayLimit"] 			= "% min. Aggro f\195\188r Listeneintrag",
+		["SettingGameTooltipAlpha"] 				= "% Tooltip-Transparenz",
+		["SettingThreatMeterAlpha"] 				= "% Aggr-O-Meter-Transparenz",
+		["SettingThreatMeterDelay"] 				= "Update-Verz\195\182gerung in Sekunden:",
+		["SettingQuestTracker"] 					= "QuestTracker",
+		["SettingQuestTrackerShowTitle"] 			= "Titel anzeigen",
+		["SettingQuestTrackerSortAsc"] 				= "Aufsteigend sortieren",
+		["SettingQuestTrackerProgressColorFade"] 	= "Fortschritt weich f\195\164rben",
+		["SettingQuestTrackerTooltip"] 				= "Tooltip anzeigen",
+		["SettingQuestTrackerTooltipRight"] 		= "Tooltip rechts anzeigen",
+		["SettingQuestTrackerTooltipDescription"] 	= "Zusammenfassung anzeigen",
+		["SettingQuestTrackerHighlightDailies"] 	= "Tagesquests hervorheben",
+		["SettingQuestTrackerOpenQuestbook"] 		= "Questbuch bei Linksklick \195\182ffnen",
+		["SettingQuestTrackerShowDailiesCounter"] 	= "Tagesquest-Z\195\164hler anzeigen (experimentell)",
+		["SettingQuestTrackerFontSizesTitle"] 		= "Schriftgr\195\182\195\159e des Titels:",
+		["SettingQuestTrackerFontSizesQuestTitle"] 	= "Schriftgr\195\182\195\159e der Questnamen:",
+		["SettingQuestTrackerFontSizesQuestItems"] 	= "Schriftgr\195\182\195\159e der Questitems:",
+		["SettingQuestTrackerColorsDailyQuest"] 	= "Tagesquest-Farbe",
+		["SettingChatLog"] 							= "ChatLog",
+		["SettingChatLogMaxLinesPerChat"] 			= "Chatzeilen in History speichern",
+		["SettingChatFrameFilterTitles"] 			= "Chat-Titel ([Zone], [Party], ...) entfernen",
+		["SettingChatFrameFilterXPTP"] 				= "XP-/TP-Meldungen entfernen",
+		["SettingChatFrameFilterXPTPDebt"] 			= "Debt-Meldungen entfernen",
+		["SettingChatFrameFilterProgress"] 			= "Fortschritt-Meldungen entfernen", -- changed: remove all progress messages
+		["SettingChatFrameFilterProgressGather"]	= "Nur Sammel-Meldungen",  -- added: remove gathering progress messages only (mining, woodcutting, harbalism)
+		["SettingChatFrameShowPlayerInfo"] 			= "Zeige Klassen- & Level-Infos",
+		["SettingTimeStamp"] 						= "TimeStamp im Chat anzeigen",
+		["SettingTimeStampNotInCombatLog"] 			= "Nicht im Kampfprotokoll anzeigen",
+		["SettingAutoRepairAll"] 					= "Beim Handeln autom. reparieren",
+		["SettingCastingBarShowCastTime"] 			= "Cast-Zeit anzeigen",
+		["SettingCastingBarButton"] 				= "CastingBar verschieben",
+		["TooltipBorderTitle"] 						= "GameTooltip-Position",
+		["TooltipBorderText"] 						= "Ziehen und loslassen",
+		["ResetButton"] 							= "! Reset pbInfo !",
+		["SaveButton"] 								= "Speichern",
+		["CloseButton"] 							= "Schlie\195\159en"
+	}
+};

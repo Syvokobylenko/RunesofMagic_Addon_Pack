@@ -1,0 +1,487 @@
+<!-- ä
+
+	Name: Advanced Questbook
+	By: Crypton
+
+-->
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<CheckButton name="AQBCheckboxTemplate2" inherits="UIPanelCheckButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="22" y="22" />
+		</Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parentText" inherits="GameFontHighlight" text="">
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="0" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>
+				PlaySoundByPath("sound\\interface\\ui_sysmenu_click.mp3");
+			</OnClick>
+		</Scripts>
+	</CheckButton>
+	<Frame name="AdvQuestBookIconConfig" inherits="UIPanelBackdropFrame" enableMouse="true" hidden="true" parent="AdvQuestBookMainFrame" frameLevel="1001">
+		<Size>
+			<AbsDimension x="480" y="470" />
+		</Size>
+		<Anchors>
+			<Anchor point="TOP" relativeTo="AdvQuestBookMainFrameQuestDetailBackdrop" relativePoint="TOP">
+				<Offset>
+					<AbsDimension x="0" y="0" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer>
+				<FontString name="$parentTitleText" inherits="Font_FrameTitle" text="AQB_XML_CONFIG3">
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="18" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer>
+				<FontString name="$parentTitleText2" inherits="Font_FrameTitle" text="Tooltips">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="10" y="40" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer>
+				<FontString name="$parentTitleText3" inherits="Font_FrameTitle" text="Icons">
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="AdvQuestBookIconConfigTitleText2">
+							<Offset>
+								<AbsDimension x="0" y="170" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<CheckButton name="$parentCheckbox1" inherits="AQBCheckboxTemplate2">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="60" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentText" inherits="GameFontHighlight" text="AQB_XML_SHTOOLTIPS">
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="RIGHT">
+									<Offset>
+										<AbsDimension x="2" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+						PlaySoundByPath("sound\\interface\\ui_sysmenu_click.mp3");
+						AdvQuestBook_CheckBoxOnClick(this:GetName());
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheckbox2" inherits="AQBCheckboxTemplate2">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="AdvQuestBookIconConfigCheckbox1">
+						<Offset>
+							<AbsDimension x="0" y="20" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentText" inherits="GameFontHighlight" text="AQB_XML_STTOOLTIPS">
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="RIGHT">
+									<Offset>
+										<AbsDimension x="2" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+						PlaySoundByPath("sound\\interface\\ui_sysmenu_click.mp3");
+						AdvQuestBook_CheckBoxOnClick(this:GetName());
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheckbox3" inherits="AQBCheckboxTemplate2">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="AdvQuestBookIconConfigCheckbox2">
+						<Offset>
+							<AbsDimension x="0" y="20" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentText" inherits="GameFontHighlight" text="AQB_XML_STICONS">
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="RIGHT">
+									<Offset>
+										<AbsDimension x="2" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+						PlaySoundByPath("sound\\interface\\ui_sysmenu_click.mp3");
+						AdvQuestBook_CheckBoxOnClick(this:GetName());
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheckbox4" inherits="AQBCheckboxTemplate2">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="AdvQuestBookIconConfigCheckbox3">
+						<Offset>
+							<AbsDimension x="0" y="20" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentText" inherits="GameFontHighlight" text="AQB_XML_QDONTIPS">
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="RIGHT">
+									<Offset>
+										<AbsDimension x="2" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+						PlaySoundByPath("sound\\interface\\ui_sysmenu_click.mp3");
+						AdvQuestBook_CheckBoxOnClick(this:GetName());
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheckbox5" inherits="AQBCheckboxTemplate2">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="AdvQuestBookIconConfigCheckbox4">
+						<Offset>
+							<AbsDimension x="0" y="20" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentText" inherits="GameFontHighlight" text="AQB_XML_RLONTIPS">
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="RIGHT">
+									<Offset>
+										<AbsDimension x="2" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+						PlaySoundByPath("sound\\interface\\ui_sysmenu_click.mp3");
+						AdvQuestBook_CheckBoxOnClick(this:GetName());
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheckbox6" inherits="AQBCheckboxTemplate2">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="AdvQuestBookIconConfigCheckbox5">
+						<Offset>
+							<AbsDimension x="0" y="20" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentText" inherits="GameFontHighlight" text="AQB_XML_REWONTIPS">
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="RIGHT">
+									<Offset>
+										<AbsDimension x="2" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+						PlaySoundByPath("sound\\interface\\ui_sysmenu_click.mp3");
+						AdvQuestBook_CheckBoxOnClick(this:GetName());
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheckbox7" inherits="AQBCheckboxTemplate2">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="AdvQuestBookIconConfigCheckbox6">
+						<Offset>
+							<AbsDimension x="0" y="20" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentText" inherits="GameFontHighlight" text="AQB_XML_COORDONTIPS">
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="RIGHT">
+									<Offset>
+										<AbsDimension x="2" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+						PlaySoundByPath("sound\\interface\\ui_sysmenu_click.mp3");
+						AdvQuestBook_CheckBoxOnClick(this:GetName());
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheckbox8" inherits="AQBCheckboxTemplate2">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="AdvQuestBookIconConfigTitleText3">
+						<Offset>
+							<AbsDimension x="0" y="20" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentText" inherits="GameFontHighlight" text="AQB_XML_SHOWQUESTS">
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="RIGHT">
+									<Offset>
+										<AbsDimension x="2" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+						PlaySoundByPath("sound\\interface\\ui_sysmenu_click.mp3");
+						AdvQuestBook_CheckBoxOnClick(this:GetName());
+						AdvQuestBook_MapPoints();
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheckbox9" inherits="AQBCheckboxTemplate2">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="AdvQuestBookIconConfigCheckbox8">
+						<Offset>
+							<AbsDimension x="0" y="20" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentText" inherits="GameFontHighlight" text="AQB_XML_SHOWSHARED">
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="RIGHT">
+									<Offset>
+										<AbsDimension x="2" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+						PlaySoundByPath("sound\\interface\\ui_sysmenu_click.mp3");
+						AdvQuestBook_CheckBoxOnClick(this:GetName());
+						AdvQuestBook_MapPoints();
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheckbox10" inherits="AQBCheckboxTemplate2">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="AdvQuestBookIconConfigCheckbox9">
+						<Offset>
+							<AbsDimension x="0" y="20" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentText" inherits="GameFontHighlight" text="AQB_XML_NOTE12">
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="RIGHT">
+									<Offset>
+										<AbsDimension x="2" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+						PlaySoundByPath("sound\\interface\\ui_sysmenu_click.mp3");
+						AdvQuestBook_CheckBoxOnClick(this:GetName());
+						AdvQuestBook_MapPoints();
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheckbox11" inherits="AQBCheckboxTemplate2">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="AdvQuestBookIconConfigCheckbox10">
+						<Offset>
+							<AbsDimension x="0" y="20" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentText" inherits="GameFontHighlight" text="AQB_XML_AIRPORT">
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="RIGHT">
+									<Offset>
+										<AbsDimension x="2" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+						PlaySoundByPath("sound\\interface\\ui_sysmenu_click.mp3");
+						AdvQuestBook_CheckBoxOnClick(this:GetName());
+						AdvQuestBook_MapPoints();
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheckbox12" inherits="AQBCheckboxTemplate2">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="AdvQuestBookIconConfigCheckbox11">
+						<Offset>
+							<AbsDimension x="0" y="20" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentText" inherits="GameFontHighlight" text="AQB_XML_STPORT">
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="RIGHT">
+									<Offset>
+										<AbsDimension x="2" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+						PlaySoundByPath("sound\\interface\\ui_sysmenu_click.mp3");
+						AdvQuestBook_CheckBoxOnClick(this:GetName());
+						AdvQuestBook_MapPoints();
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheckbox13" inherits="AQBCheckboxTemplate2">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="AdvQuestBookIconConfigCheckbox12">
+						<Offset>
+							<AbsDimension x="0" y="20" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentText" inherits="GameFontHighlight" text="AQB_XML_SHOWDAILY">
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="RIGHT">
+									<Offset>
+										<AbsDimension x="2" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+						PlaySoundByPath("sound\\interface\\ui_sysmenu_click.mp3");
+						AdvQuestBook_CheckBoxOnClick(this:GetName());
+						AdvQuestBook_MapPoints();
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheckbox14" inherits="AQBCheckboxTemplate2">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="AdvQuestBookIconConfigCheckbox13">
+						<Offset>
+							<AbsDimension x="0" y="20" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentText" inherits="GameFontHighlight" text="AQB_XML_ETRAIN">
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="RIGHT">
+									<Offset>
+										<AbsDimension x="2" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+						PlaySoundByPath("sound\\interface\\ui_sysmenu_click.mp3");
+						AdvQuestBook_CheckBoxOnClick(this:GetName());
+						AdvQuestBook_MapPoints();
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				UIPanelBackdropFrame_SetTexture(this, "Interface/Common/PanelCommonFrame2", 128 , 128);
+			</OnLoad>
+			<OnShow>
+				AdvQuestBookIconConfig_SetChecked();
+			</OnShow>
+		</Scripts>
+	</Frame>
+</Ui>

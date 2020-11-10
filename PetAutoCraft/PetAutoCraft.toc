@@ -1,0 +1,5 @@
+PetAutoCraft.xml
+-- X-Curse-Packaged-Version: v1.5.0
+-- X-Curse-Project-Name: Pet Auto Craft
+-- X-Curse-Project-ID: pet-auto-craft
+-- X-Curse-Repository-ID: rom/pet-auto-craft/mainline

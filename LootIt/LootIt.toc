@@ -1,0 +1,85 @@
+##############################################################################
+##                    _                _   ___ _   _                        ##
+##                   | |    ___   ___ | |_|_ _| |_| |                       ##
+##                   | |   / _ \ / _ \| __|| || __| |         v1.9beta1          ##
+##                   | |__| (_) | (_) | |_ | || |_|_|                       ##
+##                   |_____\___/ \___/ \__|___|\__(_)                       ##
+##				                                              Tinsus        ##
+##                                                                          ##
+##                 based on Lootomatic 1.1 by PetraAreon                    ##
+##                                                                          ##
+##                                                                          ##
+##  last change: 2016-07-02T09:38:42Z                                       ##
+##                                                                          ##
+##  last commit: 94701e588ee4713e523efa3ed2af190cee403d6d                   ##
+##                                                                          ##
+##                       for license open LICENSE.txt                       ##
+##                                                                          ##
+##############################################################################
+
+##############################################################################
+##  Spezial thanks to the translators:                                      ##
+##                                                                          ##
+##  You can help here:                                                      ##
+##          http://rom.curseforge.com/addons/lootit/localization/           ##
+##                                                                          ##
+##############################################################################
+##                                                                          ##
+##  Brazilian Portuguese (prBR):                                            ##
+##                                                                          ##
+##  English (enUS):                                                         ##
+##    Tinsus                                                                ##
+##                                                                          ##
+##  French (frFR):                                                          ##
+##    niheni                                                                ##
+##    Adinar                                                                ##
+##                                                                          ##
+##  German (deDE):                                                          ##
+##    Tinsus                                                                ##
+##                                                                          ##
+##  Italian (itIT):                                                         ##
+##                                                                          ##
+##  Japanese (jaJP):                                                        ##
+##                                                                          ##
+##  Korean (koKR):                                                          ##
+##                                                                          ##
+##  Polish (plPL):                                                          ##
+##    Rycerzodie                                                            ##
+##                                                                          ##
+##  Russian (ruRU):                                                         ##
+##    NickAlte                                                              ##
+##    tasquer                                                               ##
+##    turbid12                                                              ##
+##                                                                          ##
+##  Simplified Chinese (zhCN):                                              ##
+##                                                                          ##
+##  Spanish (esES):                                                         ##
+##                                                                          ##
+##  Traditional Chinese (zhTW):                                             ##
+##    e65130                                                                ##
+##                                                                          ##
+##############################################################################
+
+LootIt.lua
+
+lua/Filterconfig.lua
+lua/Kernel.lua
+lua/Helper.lua
+lua/IO.lua
+lua/hook.lua
+lua/Config.lua
+lua/Menues.lua
+lua/Filter.lua
+lua/Loader.lua
+lua/DKP.lua
+
+xml/ConfigFrame Templates.xml
+xml/ConfigFrame.xml
+xml/General.xml
+xml/DKP.xml
+
+lua/ZZPlugin.lua
+-- X-Curse-Packaged-Version: v1.9beta1
+-- X-Curse-Project-Name: LootIt!
+-- X-Curse-Project-ID: lootit
+-- X-Curse-Repository-ID: rom/lootit/mainline

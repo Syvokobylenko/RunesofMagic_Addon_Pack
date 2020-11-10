@@ -1,0 +1,69 @@
+<NotepadPlus>
+    <Project name="UMM">
+        <Folder name="Folder Name" />
+        <Folder name="Compose">
+            <File name="Compose\Compose.lua" />
+            <File name="Compose\Compose.xml" />
+        </Folder>
+        <Folder name="Inbox">
+            <File name="Inbox\Inbox.lua" />
+            <File name="Inbox\Inbox.xml" />
+            <File name="Inbox\MailViewer.lua" />
+            <File name="Inbox\MailViewer.xml" />
+        </Folder>
+        <Folder name="Library">
+            <File name="Library\BagManager.lua" />
+            <File name="Library\Colors.lua" />
+            <File name="Library\Config.lua" />
+            <File name="Library\ItemDB.lua" />
+            <File name="Library\LibStub.lua" />
+            <File name="Library\MailManager.lua" />
+            <File name="Library\PopUpDialog.lua" />
+            <File name="Library\PopUpDialog.xml" />
+            <File name="Library\Sol.lua" />
+            <File name="Library\Templates.lua" />
+            <File name="Library\Templates.xml" />
+            <File name="Library\Tools.lua" />
+            <File name="Library\TypeManager.lua" />
+        </Folder>
+        <Folder name="Locales">
+            <File name="Locales\DE.lua" />
+            <File name="Locales\EN.lua" />
+            <File name="Locales\ES.lua" />
+            <File name="Locales\FR.lua" />
+            <File name="Locales\IT.lua" />
+            <File name="Locales\PL.lua" />
+            <File name="Locales\RU.lua" />
+            <File name="Locales\TW.lua" />
+        </Folder>
+        <Folder name="MassSendItems">
+            <File name="MassSendItems\MassSendItems.lua" />
+            <File name="MassSendItems\MassSendItems.xml" />
+        </Folder>
+        <Folder name="Menu">
+            <File name="Menu\Menu.lua" />
+            <File name="Menu\Menu.xml" />
+        </Folder>
+        <Folder name="Recipient">
+            <File name="Recipient\Characters.lua" />
+            <File name="Recipient\Recipient.lua" />
+            <File name="Recipient\Recipient.xml" />
+        </Folder>
+        <Folder name="Sound">
+            <File name="Sound\NewMail.wav" />
+        </Folder>
+        <Folder name="Test">
+            <File name="Test\sol.lua" />
+        </Folder>
+        <Folder name="Textures">
+            <File name="Textures\ItemTaggedBorder.tga" />
+            <File name="Textures\NewMail.tga" />
+        </Folder>
+        <File name=".project" />
+        <File name="README.md" />
+        <File name="Readme.txt" />
+        <File name="UltimateMailMod.lua" />
+        <File name="UltimateMailMod.toc" />
+        <File name="UltimateMailMod.xml" />
+    </Project>
+</NotepadPlus>

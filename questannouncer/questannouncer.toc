@@ -1,0 +1,6 @@
+questannouncer.lua
+questannouncer.xml
+-- X-Curse-Packaged-Version: v1
+-- X-Curse-Project-Name: QuestAnnouncer
+-- X-Curse-Project-ID: questannouncer
+-- X-Curse-Repository-ID: rom/questannouncer/mainline

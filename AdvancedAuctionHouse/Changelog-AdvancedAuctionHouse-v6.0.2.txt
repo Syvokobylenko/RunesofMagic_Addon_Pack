@@ -1,0 +1,122 @@
+------------------------------------------------------------------------
+r237 | mcben | 2013-09-15 06:36:42 +0000 (Sun, 15 Sep 2013) | 1 line
+Changed paths:
+   A /tags/v6.0.2 (from /trunk:236)
+
+Tagging as v6.0.2
+------------------------------------------------------------------------
+r236 | mcben | 2013-09-15 06:01:15 +0000 (Sun, 15 Sep 2013) | 3 lines
+Changed paths:
+   M /trunk/Lua/AAH_Sell.lua
+
+fixed 'last price' for gold auctions
+
+instead of using the inverse value (1/x) we use the set PPU to workaround rounding problems
+------------------------------------------------------------------------
+r235 | mcben | 2013-09-13 16:05:03 +0000 (Fri, 13 Sep 2013) | 1 line
+Changed paths:
+   M /trunk/Data/MatWhiteValue.lua
+   M /trunk/Data/Recipes.lua
+
+patch 6.0.2 recipes & mats
+------------------------------------------------------------------------
+r234 | mcben | 2013-09-13 16:04:56 +0000 (Fri, 13 Sep 2013) | 1 line
+Changed paths:
+   M /trunk/Lua/AAH_Bid.lua
+   M /trunk/Lua/AAH_Browse.lua
+   M /trunk/Lua/AAH_SavedSearch.lua
+   M /trunk/Lua/AAH_Sell.lua
+   M /trunk/Lua/AAH_Tools.lua
+   M /trunk/Lua/ItemLink.lua
+
+removed unused variables/functions
+------------------------------------------------------------------------
+r233 | noguai | 2013-09-06 20:09:09 +0000 (Fri, 06 Sep 2013) | 1 line
+Changed paths:
+   M /trunk/Lua/AAH_Sell.lua
+   M /trunk/Xml/AAH_Sell.xml
+
+did basic implementation of pay currency selection (gold, diamonds) for new item auctions (available to inofficial servers with activated diamond auctions only)
+------------------------------------------------------------------------
+r232 | mcben | 2013-09-01 11:53:04 +0000 (Sun, 01 Sep 2013) | 3 lines
+Changed paths:
+   M /trunk/Lua/AAH_Bid.lua
+   M /trunk/Lua/AAH_Browse.lua
+   M /trunk/Lua/AAH_CustomPay.lua
+   M /trunk/Lua/AAH_Hooks.lua
+   M /trunk/Lua/AAH_Main.lua
+   M /trunk/Lua/AAH_Tools.lua
+
+removed special bid handling
+
+this should fix gold-password problem
+------------------------------------------------------------------------
+r230 | mcben | 2013-09-01 06:03:49 +0000 (Sun, 01 Sep 2013) | 3 lines
+Changed paths:
+   M /trunk/Lua/AAH_CustomPay.lua
+
+clear password if bid/buy is canceled
+
+fixed misspell & removed unused var
+------------------------------------------------------------------------
+r229 | mcben | 2013-09-01 06:03:39 +0000 (Sun, 01 Sep 2013) | 1 line
+Changed paths:
+   M /trunk/Lua/AAH_Sell.lua
+
+fixed PPU/Total display for gold sell auctions
+------------------------------------------------------------------------
+r228 | mcben | 2013-09-01 06:03:33 +0000 (Sun, 01 Sep 2013) | 1 line
+Changed paths:
+   M /trunk/Data/MatWhiteValue.lua
+   M /trunk/Data/Recipes.lua
+   M /trunk/_workingstuff/update_data.rb
+
+recipes & mat update (6.0.1.2655)
+------------------------------------------------------------------------
+r227 | mcben | 2013-09-01 06:03:26 +0000 (Sun, 01 Sep 2013) | 1 line
+Changed paths:
+   M /trunk/Lua/AAH_Sell.lua
+
+fixed check if player has enough money to create auction
+------------------------------------------------------------------------
+r226 | mcben | 2013-06-29 14:25:19 +0000 (Sat, 29 Jun 2013) | 1 line
+Changed paths:
+   A /trunk/.gitignore
+   M /trunk/.pkgmeta
+   M /trunk/AdvancedAuctionHouse.toc
+   M /trunk/CHANGELOG.txt
+   M /trunk/Data/MatWhiteValue.lua
+   M /trunk/Data/Recipes.lua
+   M /trunk/Locales/DE.lua
+   M /trunk/Lua/AAH_Bid.lua
+   M /trunk/Lua/AAH_Browse.lua
+   A /trunk/Lua/AAH_CustomPay.lua
+   M /trunk/Lua/AAH_Filters.lua
+   M /trunk/Lua/AAH_History.lua
+   M /trunk/Lua/AAH_Hooks.lua
+   M /trunk/Lua/AAH_Main.lua
+   A /trunk/Lua/AAH_SavedSearch.lua
+   M /trunk/Lua/AAH_Sell.lua
+   M /trunk/Lua/AAH_Tools.lua
+   A /trunk/Lua/ItemLink.lua
+   A /trunk/Lua/moneyframe.lua
+   M /trunk/Xml/AAH_Bid.xml
+   M /trunk/Xml/AAH_Browse.xml
+   M /trunk/Xml/AAH_History.xml
+   M /trunk/Xml/AAH_Main.xml
+   A /trunk/Xml/AAH_SavedSearch.xml
+   M /trunk/Xml/AAH_Sell.xml
+   M /trunk/Xml/AAH_Settings.xml
+   M /trunk/Xml/AAH_Templates.xml
+   A /trunk/_workingstuff
+   A /trunk/_workingstuff/.gitignore
+   A /trunk/_workingstuff/lib
+   A /trunk/_workingstuff/lib/locales.rb
+   A /trunk/_workingstuff/lib/recipes.rb
+   A /trunk/_workingstuff/lib/rom_utilities.rb
+   A /trunk/_workingstuff/lib/table.rb
+   A /trunk/_workingstuff/path_settings.rb
+   A /trunk/_workingstuff/update_data.rb
+
+merged noguai fork
+------------------------------------------------------------------------

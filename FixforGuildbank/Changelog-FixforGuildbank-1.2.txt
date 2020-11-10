@@ -1,0 +1,13 @@
+tag 1.2
+f623b81f753aa88ffe5833f838d0c8ab2e06b8aa
+Amurilon <jan-wendler@gmx.de>
+2014-06-06 14:57:57 +0200
+
+Tagging as 1.2
+
+
+--------------------
+
+Amurilon:
+	- fixed restack for items with maxstack 1000
+	- fixed local definition

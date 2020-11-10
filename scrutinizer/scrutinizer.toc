@@ -1,0 +1,20 @@
+## Title: scrutinizer
+## Version: 3.9
+## Notes: damagemeter+healmeter+skillviewer
+## Author: NashaRiochtDE
+
+main.lua
+detail.lua
+utilities.lua
+colors.lua
+options.lua
+send.lua
+slash.lua
+tooltips.lua
+bossids.lua
+
+templates.xml
+mainframe.xml
+detailframe.xml
+sendto.xml
+submit.xml

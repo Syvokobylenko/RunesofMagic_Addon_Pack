@@ -1,0 +1,60 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+
+	<Script file="DeathDebtClock.lua"/>
+	<Frame name="DeathDebtClockFrame" parent="UIParent" hidden="true" enableMouse="true">
+		<Size>
+			<AbsDimension x="150" y="50"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPRIGHT">
+				<Offset>
+					<AbsDimension x="-150" y="120"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer>
+				<FontString name="DeathDebtClockTitle" inherits="GameFontNormal" justifyH="LEFT" text="Death Debt Clock">
+
+					<FontHeight> <AbsValue val="12"/> </FontHeight>
+
+					<Anchors>
+
+						<Anchor point="TOP" relativeTo="DeathDebtClockFrame" relativePoint="CENTER">
+
+							<Offset> <AbsDimension x="0" y="-20" /> </Offset>
+
+						</Anchor>
+
+					</Anchors>
+
+				</FontString>
+			</Layer>
+			<Layer>
+				<FontString name="DeathDebtClockTime" inherits="GameFontNormal" justifyH="LEFT" text="HH:MM">
+
+					<FontHeight> <AbsValue val="24"/> </FontHeight>
+
+					<Anchors>
+
+						<Anchor point="CENTER" relativeTo="DeathDebtClockFrame" relativePoint="CENTER">
+
+							<Offset> <AbsDimension x="0" y="10" /> </Offset>
+
+						</Anchor>
+
+					</Anchors>
+
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				DeathDebtClock_OnLoad(this)
+			</OnLoad>
+			<OnEvent>
+				DeathDebtClock_OnEvent(this, event, arg1, arg2, arg3, arg4)
+			</OnEvent>
+		</Scripts>
+	</Frame>
+</Ui>

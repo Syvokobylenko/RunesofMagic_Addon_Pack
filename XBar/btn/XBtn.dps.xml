@@ -1,0 +1,51 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Frame name="XBarDps" parent="UIParent" frameStrata="BACKGROUND" frameLevel="1">
+		<Size><AbsDimension x="128" y="32"/></Size>
+		<Anchors><Anchor point="LEFT" relativeTo="XBarFrame"><Offset>
+			<AbsDimension x="540" y="0"/></Offset></Anchor></Anchors>
+		<Scripts>
+			<OnLoad>SaveVariables("XBtnDps")</OnLoad>
+			<OnEvent>XBar.Dps_OnEvent(this,event)</OnEvent>
+			<OnShow>XBar.Dps_OnEvent(this,"LOADED")</OnShow>
+			<OnHide>
+				this:UnregisterEvent("PLAYER_INVENTORY_CHANGED")
+				this:UnregisterEvent("UNIT_HEALTH")
+				this:UnregisterEvent("COMBATMETER_DAMAGE")
+				this:UnregisterEvent("COMBATMETER_HEAL")
+			</OnHide>
+			<OnUpdate>XBar.Dps_OnUpdate()</OnUpdate>
+		</Scripts>
+	</Frame>
+	<Frame name="XBarDps_BG" inherits="XButton_BGTemp" parent="XBarFrame">
+		<Anchors><Anchor point="LEFT" relativeTo="XBarDps"><Offset>
+			<AbsDimension x="-28" y="0"/></Offset></Anchor></Anchors>
+	</Frame>
+	<Button name="XBarDps_B" inherits="XButton_BTemp" parent="XBarDps">
+		<Anchors><Anchor point="LEFT"/></Anchors>
+		<Scripts>
+			<OnClick>XBar.Dps_OnClick(key)</OnClick>
+			<OnDragStart>XBar.MoveStart(XBarDps)</OnDragStart>
+			<OnDragStop>XBar.MoveEnd(XBarDps)</OnDragStop>
+			<OnEnter>XBar.Dps_OnEnter(this)</OnEnter>
+		</Scripts>
+		<NormalTexture file="Interface/Icons/Im_Ball03"/>
+		<PushedTexture file="Interface/Icons/Im_Ball06"/>
+		<HighlightTexture file="Interface/Icons/Im_Ball06" alphaMode="ADD"/>
+	</Button>
+	<Frame name="XBarDps_F" inherits="XButton_FTemp" parent="XBarDps">
+		<Anchors><Anchor point="LEFT"><Offset>
+			<AbsDimension x="26" y="3"/></Offset></Anchor></Anchors>
+	</Frame>
+	<Frame name="XBarDps_BD" parent="XBarDps" hidden="true">
+		<Anchors><Anchor point="CENTER" relativeTo="XBarDps_B"/></Anchors>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture file="Interface\Buttons\QuickSlot-QualityBorder01" alphaMode="ADD">
+					<Size><AbsDimension x="50" y="50"/></Size>
+					<Anchors><Anchor point="CENTER"/></Anchors>
+					<Color r="1" g="0" b="0"/>
+				</Texture>
+			</Layer>
+		</Layers>
+	</Frame>
+</Ui>

@@ -1,0 +1,218 @@
+<Ui xmlns="http://www.runewaker.com/" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/
+UI.xsd">
+  <Button name="AdvancedHouseChestItemButtonTemplate" virtual="true" inherits="ItemButtonTemplate">
+    <Layers>
+      <Layer level="BACKGROUND">
+        <Texture name="$parentQuality" file="Interface\Buttons\QuickSlot-QualityBorder01" hidden="false" alphaMode="ADD">
+          <Size>
+            <AbsDimension x="64" y="64"/>
+          </Size>
+          <Anchors>
+            <Anchor point="CENTER"/>
+          </Anchors>
+        </Texture>
+      </Layer>
+      <Layer level="ARTWORK">
+        <Texture name="$parentOverlay" file="interface\addons\AdvancedHouse\res\quickslot-gray" hidden="true"/>
+      </Layer>
+    </Layers>
+    <Scripts>
+      <OnLoad>
+	            this:RegisterForClicks("LeftButton", "RightButton");
+                _G[this:GetName().."Overlay"]:SetAlpha(.3)
+      </OnLoad>
+      <OnClick>
+				AdvancedHouse.chest.onClick(this, key)
+      </OnClick>
+      <OnDragStart>
+				AdvancedHouse.chest.onClick(this, "LBUTTON", 1)
+      </OnDragStart>
+      <OnReceiveDrag>
+				AdvancedHouse.chest.onClick(this, "LBUTTON", 1)
+      </OnReceiveDrag>
+      <OnEnter>
+				AdvancedHouse.chest.onEnter(this)
+      </OnEnter>
+      <OnLeave>
+				AdvancedHouse.chest.onLeave(this)
+      </OnLeave>
+      <OnMouseWheel>
+                _G[this:GetParent():GetName().."_scroll"]:scroll(delta)
+      </OnMouseWheel>
+    </Scripts>
+  </Button>
+  <Frame name="AdvancedHouseFrame" parent="UIParent" hidden="true" inherits="PyStyleFrameTemplate">
+    <Anchors>
+      <Anchor point="CENTER"/>
+    </Anchors>
+    <Size>
+      <AbsDimension x="380" y="364"/>
+    </Size>
+    <Scripts>
+      <OnLoad>
+                AdvancedHouseFrameHeaderText:SetText("AdvancedHouse")
+                AdvancedHouse.onLoad(this)
+      </OnLoad>
+      <OnEvent>
+                AdvancedHouse.onEvent(this, event)
+      </OnEvent>
+    </Scripts>
+  </Frame>
+  <Frame name="AdvancedHouseFrameChest" enableMouse="true" parent="AdvancedHouseFrame">
+    <Frames>
+      <Button name="$parent_1" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_2" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_3" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_4" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_5" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_6" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_7" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_8" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_9" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_10" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_11" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_12" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_13" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_14" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_15" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_16" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_17" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_18" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_19" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_20" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_21" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_22" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_23" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_24" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_25" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_26" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_27" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_28" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_29" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_30" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_31" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_32" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_33" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_34" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_35" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_36" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_37" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_38" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_39" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_40" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_41" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_42" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_43" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_44" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_45" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_46" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_47" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_48" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_49" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_50" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_51" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_52" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_53" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_54" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_55" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_56" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_57" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_58" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_59" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_60" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_61" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_62" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_63" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_64" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_65" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_66" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_67" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_68" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_69" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_70" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_71" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_72" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_73" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_74" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_75" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_76" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_77" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_78" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_79" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_80" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_81" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_82" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_83" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_84" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_85" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_86" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_87" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_88" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_89" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_90" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_91" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_92" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_93" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_94" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_95" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_96" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_97" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_98" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_99" inherits="AdvancedHouseChestItemButtonTemplate"/>
+      <Button name="$parent_100" inherits="AdvancedHouseChestItemButtonTemplate"/>
+
+      <Slider name="$parent_scroll" inherits="PyStyleScrollbarTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parent_10">
+            <Offset>
+              <AbsDimension x="0" y="20"/>
+            </Offset>
+          </Anchor>
+          <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent_100">
+            <Offset>
+              <AbsDimension x="20" y="-20"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnValueChanged>
+            this:update()
+            AdvancedHouse.chest.redrawList()
+          </OnValueChanged>
+        </Scripts>
+      </Slider>
+    </Frames>
+    <Scripts>
+      <OnLoad>
+        local name = this:GetName()
+        local btn = nil
+                local i = 0
+                while true do
+                    i = i+1
+                    btn = _G[name.."_"..i];
+                    if btn==nil then break end
+                    btn:ClearAllAnchors()
+                    if i==1 then
+                        btn:SetAnchor("TOPLEFT", "TOPLEFT", this, 2,2)
+                    elseif i%10==1 then
+                        btn:SetAnchor("TOP", "BOTTOM", _G[name.."_"..i-10], 0,0)
+                    else
+                        btn:SetAnchor("LEFT", "RIGHT", _G[name.."_"..i-1], 0,0)
+                    end
+                end
+                this.numRow = i-1
+                AdvancedHouse.chest.onLoad(this)
+      </OnLoad>
+      <OnEvent>
+                AdvancedHouse.chest.onEvent(this, event)
+      </OnEvent>
+      <OnShow>
+                AdvancedHouse.chest.onShow()
+      </OnShow>
+      <OnMouseWheel>
+                _G[this:GetName().."_scroll"]:scroll(delta)
+      </OnMouseWheel>
+    </Scripts>
+  </Frame>
+</Ui>

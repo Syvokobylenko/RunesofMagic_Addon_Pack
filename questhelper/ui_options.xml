@@ -1,0 +1,292 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ ../../worldxml/ui.xsd">
+
+	<Button name="QH_MapButton" inherits="UIPanelButtonTemplate" parent="WorldMapFrame" text="QuestHelper">
+		<Size><AbsDimension x="100" y="22"/></Size>
+		<Anchors>
+			<Anchor point="TOPRIGHT" relativeTo="WorldMapOptionButton" relativePoint="TOPLEFT">
+				<Offset>
+					<AbsDimension x="-10" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnClick>ToggleUIFrame( QH_OptionFrame )</OnClick>
+		</Scripts>
+	</Button>
+	<Button name="QH_QuestBookList" inherits="UIPanelButtonTemplate" parent="UI_QuestBook" text="Quest-List">
+		<Size><AbsDimension x="100" y="22"/></Size>
+		<Anchors>
+			<Anchor point="TOPRIGHT" relativeTo="UI_QuestBookQuestNPCButton" relativePoint="TOPLEFT">
+				<Offset><AbsDimension x="-40" y="0"/></Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnClick>UI_QuestBook:Hide()
+							ToggleUIFrame( QHQuestList )</OnClick>
+		</Scripts>
+	</Button>
+	<CheckButton name="QH_CheckButtonTemplate" inherits="UIPanelCheckButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="24" y="22"/>
+		</Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parentName" inherits="GameFontHighlight" text="none" justifyH="LEFT" justifyV="MIDDLE">
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="1" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>QH.Options.OnCheckClicked(this)</OnClick>
+			<OnEnter>QH.Options.OnCheckEnter( this )</OnEnter>
+			<OnLeave>QH.Options.OnCheckLeave( this )</OnLeave>
+		</Scripts>
+	</CheckButton>
+	<Slider name="QH_SliderTemplate" orientation="HORIZONTAL" virtual="true" smallStep="1">
+		<Size><AbsDimension x="135" y="16"/></Size>
+		<Layers>
+			<Layer>
+				<Texture file="Interface\BagFrame\BagFrame-Slider-Border"/>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parentName" inherits="GameFontHighlight" text="">
+					<Anchors>
+						<Anchor point="RIGHT" relativePoint="LEFT">
+							<Offset>
+								<AbsDimension x="-1" y="-1"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentValue" inherits="GameFontHighlight" text="">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="BOTTOM"/>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentLow" inherits="GameFontHighlight" text="OPTUI_COM_LOW">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT"/>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentHigh" inherits="GameFontHighlight" text="OPTUI_COM_HIGH">
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnValueChanged>
+				CommonOptionsSlider_OnValueChanged(this);
+			</OnValueChanged>
+			<OnEnter>
+				CommonOptionsSlider_OnEnter( this );
+			</OnEnter>
+			<OnLeave>
+				CommonOptionsSlider_OnLeave( this );
+			</OnLeave>
+			<OnEnable>
+				getglobal( this:GetName() .. "_ThumbTexture" ):Show();
+			</OnEnable>
+			<OnDisable>
+				getglobal( this:GetName() .. "_ThumbTexture" ):Hide();
+			</OnDisable>
+		</Scripts>
+		<ThumbTexture name="$parent_ThumbTexture" file="Interface\BagFrame\BagFrame-Slider-Knob">
+			<Size>
+				<AbsDimension x="16" y="16"/>
+			</Size>
+		</ThumbTexture>
+	</Slider>
+    <Frame name="QH_OptionsGroupTemplate" virtual="true">
+		<Backdrop edgeFile="Interface\Tooltips\Tooltip-Border" bgFile="Interface\Tooltips\Tooltip-Background">
+			<BackgroundInsets>
+				<AbsInset top="4" left="4" bottom="4" right="4"/>
+			</BackgroundInsets>
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+		</Backdrop>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentName" inherits="Font_FrameTitle">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="5" y="-5"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color b="0" g="1" r="0"/>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+
+	<Frame name="QH_OptionFrame" parent="UIParent" inherits="UICommonFrameTemplate" frameStrata="HIGH" frameLevel="99" hidden="true">
+		<Size><AbsDimension x="540" y="290"/></Size>
+		<Anchors><Anchor point="CENTER"/></Anchors>
+		<Frames>
+			<Frame name="$parentNavi" inherits="QH_OptionsGroupTemplate">
+				<Size><AbsDimension x="220" y="44"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset>
+						<AbsDimension  x="250" y="34"/>
+					</Offset></Anchor>
+				</Anchors>
+				<Frames>
+					<CheckButton name="$parentEnable" inherits="QH_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT"><Offset>
+								<AbsDimension y="10" x="10"/>
+							</Offset></Anchor>
+						</Anchors>
+					</CheckButton>
+				</Frames>
+			</Frame>
+			<Frame name="$parentTracker" inherits="QH_OptionsGroupTemplate">
+				<Size><AbsDimension x="230" y="150"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset>
+						<AbsDimension  x="10" y="34"/>
+					</Offset></Anchor>
+				</Anchors>
+				<Frames>
+					<CheckButton name="$parentEnable" inherits="QH_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT"><Offset>
+								<AbsDimension y="10" x="10"/>
+							</Offset></Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="$parentTitle" inherits="QH_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT"><Offset>
+								<AbsDimension y="30" x="10"/>
+							</Offset></Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="$parentZoneOnly" inherits="QH_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT"><Offset>
+								<AbsDimension y="50" x="10"/>
+							</Offset></Anchor>
+						</Anchors>
+					</CheckButton>
+					<Slider name="$parentTextSize" inherits="QH_SliderTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT"><Offset>
+								<AbsDimension x="68" y="75"/>
+							</Offset></Anchor>
+						</Anchors>
+					</Slider>
+					<Slider name="$parentLineCount" inherits="QH_SliderTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT"><Offset>
+								<AbsDimension x="68" y="105"/>
+							</Offset></Anchor>
+						</Anchors>
+					</Slider>
+				</Frames>
+			</Frame>
+			<Frame name="$parentMap" inherits="QH_OptionsGroupTemplate">
+				<Size><AbsDimension x="230" y="63"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset><AbsDimension  x="250" y="85"/></Offset></Anchor>
+				</Anchors>
+				<Frames>
+					<CheckButton name="$parentAllPoints" inherits="QH_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT"><Offset>
+								<AbsDimension y="10" x="10"/>
+							</Offset></Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="$parentFullInfo" inherits="QH_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT"><Offset>
+								<AbsDimension y="30" x="10"/>
+							</Offset></Anchor>
+						</Anchors>
+					</CheckButton>
+				</Frames>
+			</Frame>
+			<Frame name="$parentMisc" inherits="QH_OptionsGroupTemplate">
+				<Size><AbsDimension x="200" y="78"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset><AbsDimension  x="250" y="154"/></Offset></Anchor>
+				</Anchors>
+				<Frames>
+					<CheckButton name="$parentSpeakframe" inherits="QH_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT"><Offset><AbsDimension y="10" x="10"/></Offset></Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="$parentEditor" inherits="QH_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT"><Offset><AbsDimension y="30" x="10"/></Offset></Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="$parentDebug" inherits="QH_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT"><Offset><AbsDimension y="50" x="10"/></Offset></Anchor>
+						</Anchors>
+					</CheckButton>
+				</Frames>
+			</Frame>
+			<Frame name="$parentBook" inherits="QH_OptionsGroupTemplate">
+				<Size><AbsDimension x="230" y="66"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset>
+						<AbsDimension  x="10" y="190"/>
+					</Offset></Anchor>
+				</Anchors>
+				<Frames>
+					<CheckButton name="$parentHook" inherits="QH_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT"><Offset>
+								<AbsDimension y="10" x="10"/>
+							</Offset></Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="$parentMinimap" inherits="QH_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT"><Offset>
+								<AbsDimension y="30" x="10"/>
+							</Offset></Anchor>
+						</Anchors>
+					</CheckButton>
+
+				</Frames>
+			</Frame>
+			<Button inherits="UIPanelButtonTemplate" text="OKAY">
+				<Size>
+					<AbsDimension x="90" y="18"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-36" y="-10"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>this:GetParent():Hide()</OnClick>
+				</Scripts>
+			</Button>
+
+		</Frames>
+		<Scripts>
+			<OnShow>QH.Options.OnShow(this)</OnShow>
+		</Scripts>
+	</Frame>
+</Ui>

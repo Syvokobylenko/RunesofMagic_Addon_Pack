@@ -1,0 +1,42 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Frame name="XBarClock" parent="UIParent" frameStrata="BACKGROUND" frameLevel="1">
+		<Size><AbsDimension x="128" y="32"/></Size>
+		<Anchors><Anchor point="LEFT" relativeTo="XBarFrame"><Offset>
+			<AbsDimension x="920" y="0"/></Offset></Anchor></Anchors>
+		<Scripts>
+			<OnUpdate>XBar.Clock_OnUpdate(elapsedTime)</OnUpdate>
+		</Scripts>
+	</Frame>
+	<Frame name="XBarClock_BG" inherits="XButton_BGTemp" parent="XBarFrame">
+		<Anchors><Anchor point="LEFT" relativeTo="XBarClock"><Offset>
+			<AbsDimension x="-28" y="0"/></Offset></Anchor></Anchors>
+	</Frame>
+	<Button name="XBarClock_B" inherits="XButton_BTemp" parent="XBarClock">
+		<Anchors><Anchor point="LEFT"/></Anchors>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parent_Icon" file="Interface\Icons\elf_skill\Skill_ward16-1">
+					<Size><AbsDimension x="20" y="20"/></Size>
+					<Anchors><Anchor point="TOPLEFT"/></Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>XBar.Clock_OnClick(key)</OnClick>
+			<OnDragStart>XBar.MoveStart(XBarClock) XBarClock_B_Icon:SetTexture("interface/icons/Skill_aug42-1")</OnDragStart>
+			<OnDragStop>XBar.MoveEnd(XBarClock) XBarClock_B_Icon:SetTexture("interface/icons/elf_skill/Skill_ward16-1")</OnDragStop>
+			<OnEnter>XBar.Clock_OnEnter(this)</OnEnter>
+			<OnLeave>
+				XBarClock_B_Icon:SetTexture("interface/icons/elf_skill/Skill_ward16-1")
+				GameTooltip:Hide()
+			</OnLeave>
+		</Scripts>
+	</Button>
+	<Frame name="XBarClock_F" inherits="XButton_FTemp" parent="XBarClock">
+		<Anchors><Anchor point="LEFT"><Offset>
+			<AbsDimension x="26" y="3"/></Offset></Anchor></Anchors>
+		<Scripts>
+			<OnLoad>XBarClock_F_S:SetText("Install addon osfix to active.")</OnLoad>
+		</Scripts>
+	</Frame>
+</Ui>

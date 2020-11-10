@@ -1,0 +1,18 @@
+<!-- ä
+
+	Name: Advanced Questbook
+	By: Crypton
+
+-->
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Frame name="AQBErrorDetectFrame">
+		<Scripts>
+			<OnLoad>
+				AQBErrorDetect_OnLoad(this);
+			</OnLoad>
+			<OnEvent>
+				AQBErrorDetect_OnEvent(this, event);
+			</OnEvent>
+		</Scripts>
+	</Frame>
+</Ui>

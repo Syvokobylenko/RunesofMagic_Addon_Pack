@@ -1,0 +1,42 @@
+<!-- ä
+
+	Name: Advanced Questbook
+	By: Crypton
+
+-->
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Button name="AdvQuestBookEliteTrainerIcon" hidden="true" enableMouse="true" virtual="true">
+		<Size>
+			<AbsDimension x="24" y="24" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" />
+		</Anchors>
+		<NormalTexture file="Interface\AddOns\AdvQuestBook\images\elite.png" />
+		<PushedTexture file="Interface\AddOns\AdvQuestBook\images\elite.png" />
+		<HighlightTexture file="Interface\AddOns\AdvQuestBook\images\fhl.png" alphaMode="NONE" />
+		<Scripts>
+			<OnClick>
+				AdvQuestBook_AutoMoveTo(this:GetName());
+			</OnClick>
+			<OnEnter>
+				AdvQuestBookIcon_OnDirection(this:GetName(), "etr", "in");
+			</OnEnter>
+			<OnLeave>
+				AdvQuestBookIcon_OnDirection(this, nil, nil);
+			</OnLeave>
+		</Scripts>
+	</Button>
+	<Frame name="AdvQuestBookEliteTrainerIcons" parent="WorldMapViewFrame" hidden="false" enableMouse="true" frameLevel="10000" frameStrata="HIGH">
+		<Size>
+			<AbsDimension x="24" y="24" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" />
+		</Anchors>
+		<Frames>
+			<Button name="$parent1" inherits="AdvQuestBookEliteTrainerIcon" />
+			<Button name="$parent2" inherits="AdvQuestBookEliteTrainerIcon" />
+		</Frames>
+	</Frame>
+</Ui>

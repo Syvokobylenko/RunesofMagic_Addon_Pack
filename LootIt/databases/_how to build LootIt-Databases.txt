@@ -1,0 +1,81 @@
+-- last changes     by: Tinsus     at: 2013-08-19T17:50:34Z     project-version: v1.9beta1     hash: 17ec986364a61778c7f0c5ac7082fac5c5df4a03
+
+This should help to build the addon-img-databases if you don't know how me (Tinsus) did it.
+
+This is a long file, but you will need about 7 minutes to do all this easy steps (if you know how)
+
+00.00) Download FDB_Extraktor2 ( https://bitbucket.org/TellTod/fdb_extractor2/downloads )
+00.25) If you can't start the FDB_Extrator2 install this ( http://www.microsoft.com/en-us/download/details.aspx?id=30679 )
+00.50) Install LibreOffice/Apache OpenOffice/Microsoft Office or any Office Suit with a Spreadsheet-tool
+00.75) Install a good lua-editor like Notepad++ (or an other tool with extended Search&Replace-Feature)
+
+01) Start FDB_Extraktor2
+02) Open the file data.fdb found in the fdb-dictionary of your Runes of Magic installation (use an actual client!)
+
+03) Extract at leased the following files (or any file containing the information from guid -> imgid)
+
+- addpowerobject.db
+- armorobject.db
+- imageobject.db
+- itemobject.db
+- mineobject.db
+- runeobject.db
+- weaponobject.db
+- + forgotten files (the addon shows a test-icon. Find out the items-type and the corresponding db-filedb-file to extract—if a db-update doesn’t help)
+
+you don't need the files, it's content is saved in the addon-code (only one image per type):
+- cardobject.db
+- recipeobject.db
+
+04) create a new, empty-speadsheet file e.g. on your desktop
+05) open all files under 3. without imageobject.db with the Spreadsheet-tool
+06) Copy the first 6 columns (guid to imageid) of every file to your new file. You will get a very large sheet.
+
+07) When this is done delete unnecessary columns so that you only keep the guid- and the imageid-columns. Also delete the headline-rows containing "guid" and "imageid"
+
+08) not necessary: If you use Microsoft Excel you can sort the sheet based on the imageid. Sort it based on the imageid and delete all rows with only a "0". Then you can sort the sheet based on the guid (looks cleaner)
+
+09) save the file as CSV-file
+
+10) open the CSV-file with Notepad++ or the tool you want to use.
+
+11) open the search&replace mask and set it to advanced to find \n and so one
+
+12) replace '\n' with ',\n[' - add a '[' to the first line and remove the last '[' once
+13) replace ';' with '] = '
+13.5) if there is the comma in it's own row replace '\r' with ''
+
+14) mark everything in the file and copy it to your clipboard using STRG+A, STRG+C
+15) open the file itemID_imgID.lua in the LootIt/databases-folder
+16) delete its content
+17) type:
+
+return {
+
+18) paste the content of your clipboard, check if it is complete (its quite much and some PCs cap the contend based on the number of letters)
+19) type:
+
+}
+
+20) save the file and close all open windows of Excel/Notepad, delete the temporary files from your desktop
+
+21) repeat step 04
+22) open imageobject.db
+23) copy "guid" till "actfield"-columns and delete the unnecessary columns.
+24) delete the rows containing nothing at actfield
+25) repeat steps 09, 10, 11
+
+26) replace '\n' with '",\n[' - add a '[' to the first line and remove the last '[' once
+26.5) if there is the comma in it's own row replace '\r' with ''
+27) replace ';' with '] = "'
+27.5) replace all '\' with '/'
+28) replace 'interface/icons/' with '', replace '.dds' with ''
+
+29) repeat step 14
+30) open the file imgID_file.lua in the LootIt/database-folder
+31) repeat steps 14, 15, 16, 17, 18, 19, 20
+
+32) now its done. You updated the LootIt-image-databases.
+
+
+Please send the files to the author of LootIt to include it to the official addon. On that way everyone have the actual database and all images.

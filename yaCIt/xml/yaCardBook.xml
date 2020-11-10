@@ -1,0 +1,290 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+
+	<FontString name="yaCardBook_InfoItemTemplate" inherits="GameFontNormal" justifyH="LEFT" justifyV="TOP" virtual="true">
+		<Size><AbsDimension x="180"/></Size>
+	</FontString>
+
+	<Frame name="yaCardBookFrame" parent="CardBookFrame">
+		<Size><AbsDimension x="628" y="540"/></Size>
+		<Layers><Layer level="BACKGROUND">
+			<FontString name="yaCardBook_Title" justifyH="CENTER" justifyV="MIDDLE" inherits="Font_Normal">
+				<Size><AbsDimension x="582" y="32"/></Size>
+			</FontString>
+			<FontString name="yaCardBook_FilterBoxLabel" inherits="Font_Normal" justifyH="LEFT">
+				<Size><AbsDimension y="15" x="120"/></Size>
+				<FontHeight><AbsValue val="12"/></FontHeight>
+				<Anchors>
+					<Anchor point="MIDDLELEFT">
+						<Offset><AbsDimension x="165" y="74"/></Offset>
+					</Anchor>
+				</Anchors>
+			</FontString>
+			<FontString name="yaCardBook_CardStatus" inherits="GameFontNormal" justifyH="LEFT">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset><AbsDimension x="324" y="43"/></Offset>
+					</Anchor>
+				</Anchors>
+			</FontString>
+			<FontString name="yaCardBook_CardReward" inherits="GameFontNormal" justifyH="LEFT">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="yaCardBook_CardStatus">
+						<Offset><AbsDimension x="0" y="5"/></Offset>
+					</Anchor>
+				</Anchors>
+			</FontString>
+		</Layer></Layers>
+	</Frame>
+
+	<Frame name="yaCardBook_DD_Zone" parent="CardBookFrame" inherits="UIDropDownMenuTemplate" enableMouse="true">
+		<Size><AbsDimension y="26" x="120"/></Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset><AbsDimension x="15" y="35"/></Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnLoad>yaCardBook.DD_Zone_OnLoad(this);</OnLoad>
+			<OnEnter>yaCIt.ShowTooltip(this);</OnEnter>
+			<OnLeave>GameTooltip:Hide();</OnLeave>
+		</Scripts>
+	</Frame>
+	<Frame name="yaCardBook_DD_Category" parent="CardBookFrame" inherits="UIDropDownMenuTemplate">
+		<Size><AbsDimension y="26" x="120"/></Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="yaCardBook_DD_Zone"/>
+		</Anchors>
+		<Scripts>
+			<OnLoad>yaCardBook.DD_Category_OnLoad(this);</OnLoad>
+		</Scripts>
+	</Frame>
+	<Frame name="yaCardBook_DD_Bonus" parent="CardBookFrame" inherits="UIDropDownMenuTemplate">
+		<Size><AbsDimension y="26" x="120"/></Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="yaCardBook_DD_Category"/>
+		</Anchors>
+		<Scripts>
+			<OnLoad>yaCardBook.DD_Bonus_OnLoad(this);</OnLoad>
+		</Scripts>
+	</Frame>
+	<Frame name="yaCardBook_DD_FiltMisc" parent="CardBookFrame" inherits="UIDropDownMenuTemplate">
+		<Size><AbsDimension y="26" x="120"/></Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="yaCardBook_DD_Bonus"/>
+		</Anchors>
+		<Scripts>
+			<OnLoad>yaCardBook.DD_FiltMisc_OnLoad(this);</OnLoad>
+		</Scripts>
+	</Frame>
+	<Frame name="yaCardBook_DD_Sort" parent="CardBookFrame" inherits="UIDropDownMenuTemplate" enableMouse="true">
+		<Size><AbsDimension y="26" x="120"/></Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="yaCardBook_DD_Zone"/>
+		</Anchors>
+		<Scripts>
+			<OnLoad>yaCardBook.DD_Sort_OnLoad(this);</OnLoad>
+			<OnEnter>yaCIt.ShowTooltip(this);</OnEnter>
+			<OnLeave>GameTooltip:Hide();</OnLeave>
+		</Scripts>
+	</Frame>
+	<EditBox name="yaCardBook_FilterBox" parent="CardBookFrame" inherits="UIPanelEditBoxTemplate">
+		<Size><AbsDimension x="112" y="20"/></Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="yaCardBook_DD_Category">
+				<Offset><AbsDimension x="5" y="30"/></Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnTextChanged>yaCardBook.FilterBox_Update(this);</OnTextChanged>
+			<OnEditFocusGained>this:HighlightText()</OnEditFocusGained>
+			<OnEnter>yaCIt.ShowTooltip(this);</OnEnter>
+			<OnLeave>GameTooltip:Hide();</OnLeave>
+		</Scripts>
+	</EditBox>
+	<Button name="yaCardBook_ResetFilters" parent="CardBookFrame" hidden="false" inherits="UIPanelButtonTemplate">
+		<Size><AbsDimension y="21" x="21"/></Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="yaCardBook_FilterBox">
+				<Offset><AbsDimension x="8" y="1"/></Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnClick>yaCardBook.ResetFilters();</OnClick>
+			<OnEnter>yaCIt.ShowTooltip(this);</OnEnter>
+			<OnLeave>GameTooltip:Hide();</OnLeave>
+		</Scripts>
+		<NormalTexture    file="Interface/Minimap/minimapbutton_restoreui_normal.tga"/>
+		<PushedTexture    file="Interface/Minimap/minimapbutton_restoreui_down.tga"/>
+		<HighlightTexture file="Interface/Minimap/MinimapButton_Highlight" alphaMode="ADD"/>
+	</Button>
+	<CheckButton name="yaCardBook_Chk_Invert" parent="CardBookFrame" inherits="UIPanelCheckButtonTemplate">
+		<Anchors>
+			<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="yaCardBook_DD_FiltMisc">
+				<Offset><AbsDimension x="0" y="-3"/></Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer>
+				<FontString name="$parent_Text" inherits="GameFontHighlight" justifyH="LEFT">
+					<Size><AbsDimension x="120" y="28"/></Size>
+					<Anchors><Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent"/></Anchors>
+					<FontHeight><AbsValue val="12"/></FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>yaCardBook.Chk_Invert_Click(this);</OnClick>
+			<OnEnter>yaCIt.ShowTooltip(this);</OnEnter>
+			<OnLeave>GameTooltip:Hide();</OnLeave>
+		</Scripts>
+	</CheckButton>
+	<Button name="yaCardBook_FilterCount" parent="CardBookFrame" hidden="false">
+		<Size><AbsDimension x="240" y="14"/></Size>
+		<Anchors>
+			<Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT" relativeTo="CardBookFrameList1">
+				<Offset><AbsDimension x="16" y="0"/></Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="$parentText" inherits="GameFontNormal" text="" justifyH="RIGHT">
+					<Size><AbsDimension x="240" y="12"/></Size>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>this:RegisterForClicks("LeftButton");</OnLoad>
+			<OnClick>yaCardBook.FilterCountText_OnClick(this, key)</OnClick>
+		</Scripts>
+	</Button>
+
+	<Frame name="yaCardBook_DD_ListContext" parent="CardBookFrame" inherits="UIDropDownMenuTemplate">
+		<Scripts>
+			<OnLoad>yaCardBook.DD_ListContext_OnLoad(this);</OnLoad>
+		</Scripts>
+	</Frame>
+
+	<Button name="yaCardBook_Config" parent="CardBookFrame">
+		<Size><AbsDimension x="23" y="23"/></Size>
+		<Anchors><Anchor point="TOPRIGHT">
+			<Offset><AbsDimension x="-36" y="36"/></Offset>
+		</Anchor></Anchors>
+		<Scripts>
+			<OnClick>ToggleUIFrame(yaCItConfigFrame);</OnClick>
+			<OnEnter>yaCIt.ShowTooltip(this);</OnEnter>
+			<OnLeave>GameTooltip:Hide();</OnLeave>
+		</Scripts>
+		<NormalTexture file="Interface/Addons/yaCIt/data/config-normal"/>
+		<PushedTexture file="Interface/Addons/yaCIt/data/config-depress"/>
+		<HighlightTexture file="Interface/Addons/yaCIt/data/config-green-highlight" alphaMode="ADD"/>
+	</Button>
+	<Button name="yaCardBook_ToggleSummaryButton" parent="CardBookFrame">
+		<Size><AbsDimension x="23" y="23"/></Size>			
+		<Anchors>
+			<Anchor point="RIGHT" relativeTo="yaCardBook_Config" relativePoint="LEFT">
+				<Offset><AbsDimension x="-5" y="0"/></Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnClick>yaCardBook.ToggleSummaryButton_OnClick(this);</OnClick>
+			<OnEnter>yaCIt.ShowTooltip(this);</OnEnter>
+			<OnLeave>GameTooltip:Hide();</OnLeave>
+		</Scripts>
+		<NormalTexture file="Interface/Addons/yaCIt/data/sum-normal"/>
+		<PushedTexture file="Interface/Addons/yaCIt/data/sum-depress"/>
+		<HighlightTexture file="Interface/Addons/yaCIt/data/sum-red-highlight" alphaMode="ADD"/>
+	</Button>
+
+	<Frame parent="CardBookFrameCard" frameStrata="HIGH">
+		<Size><AbsDimension y="259" x="271"/></Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="yaCardBook_CardIDhex" inherits="GameFontNormal">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT">
+							<Offset><AbsDimension y="-175" x="18"/></Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="yaCardBook_MobLocation" inherits="GameFontNormal" justifyH="LEFT" justifyV="BOTTOM">
+					<Size><AbsDimension x="230" y="24"/></Size>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT">
+							<Offset><AbsDimension y="-20" x="22"/></Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+
+	<ScrollFrame name="yaCardBook_CardDescrScrollFrame" parent="CardBookFrameCard" inherits="UIPanelScrollFrameTemplate" enableMouse="true" hidden="false">
+		<Size><AbsDimension y="85" x="210"/></Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset><AbsDimension y="253" x="23"/></Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Frame inherits="FrameBorderTemplate" hidden="true" />
+		</Frames>
+		<Scripts>
+			<OnLoad>UIPanelScrollFrame_OnLoad(this);</OnLoad>
+		</Scripts>
+		<ScrollChild>
+			<Frame>
+				<Layers>
+					<Layer>
+						<FontString name="yaCardBook_CardDescription" inherits="Font_BlackNornal" justifyH="LEFT" justifyV="TOP" bytes="768">
+							<Size><AbsDimension y="0" x="210"/></Size>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+		</ScrollChild>
+	</ScrollFrame>
+
+	<GameTooltip name="yaCardBook_InfoOverlay" parent="CardBookFrameCard" hidden="true" inherits="GameTooltipTemplate">
+		<Scripts>
+			<OnLoad>
+				this.constructing = false;
+			</OnLoad>
+			<OnSizeChanged>
+				if this:IsVisible() and not this.constructing then
+					if  this:GetHeight() ~= this.LastHeight or this:GetWidth() ~= this.LastWidth then
+						this:SetWidth(this.LastWidth);
+						this:SetHeight(this.LastHeight);
+					end
+				end
+			</OnSizeChanged>
+		</Scripts>
+	</GameTooltip>
+
+	<CheckButton name="yaCardBook_Chk_ShowDetails" parent="CardBookFrameCard" inherits="UIPanelCheckButtonTemplate">
+		<Anchors>
+			<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT">
+				<Offset><AbsDimension x="-6" y="9"/></Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer>
+				<FontString name="$parent_Text" inherits="GameFontHighlight" justifyH="LEFT">
+					<Size><AbsDimension x="400" y="25"/></Size>
+					<Anchors><Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" relativeTo="$parent"/></Anchors>
+					<FontHeight><AbsValue val="12"/></FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>yaCardBook.Chk_ShowDetails_Click(this);</OnClick>
+			<OnEnter>yaCIt.ShowTooltip(this);</OnEnter>
+			<OnLeave>GameTooltip:Hide();</OnLeave>
+		</Scripts>
+	</CheckButton>
+
+	<Frame name="yaCardBookFrame" hidden="true">
+		<Scripts>
+			<OnLoad>yaCardBook.OnLoad( this )</OnLoad>
+		</Scripts>
+	</Frame>
+</Ui>

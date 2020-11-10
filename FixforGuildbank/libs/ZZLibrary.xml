@@ -1,0 +1,17 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ ../../../worldxml/ui.xsd">
+    <Script file="ZZLibrary.lua" />
+    <!-- <Frame name="ZZLibrary_Frame" parent="WorldFrame" hidden="true"> -->
+    <Frame name="ZZLibrary_Frame" hidden="true">
+        <Scripts>
+            <OnLoad>
+                ZZLibrary.ReregisterEvents()
+            </OnLoad>
+            <OnUpdate>
+                ZZLibrary.OnUpdate(this, elapsedTime)
+            </OnUpdate>
+            <OnEvent>
+                ZZLibrary.OnEvent(event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
+            </OnEvent>
+        </Scripts>
+    </Frame>
+</Ui>

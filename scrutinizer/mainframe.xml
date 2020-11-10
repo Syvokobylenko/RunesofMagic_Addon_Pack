@@ -1,0 +1,165 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="..\..\worldxml\ui.xsd">
+	
+	<Frame name="scrutinizer_MainFrame" frameStrata="MEDIUM" parent="UIParent" hidden="true">
+		<Anchors>
+			<Anchor point="TOPLEFT"/>
+		</Anchors>
+		<Size>
+			<AbsDimension x="2" y="2"/>
+		</Size>
+		<Frames>
+			<Frame name="$parent_Head" inherits="scrutinizer_Head_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT"/>
+				</Anchors>
+				<Size>
+					<AbsDimension x="230" y="16"/>
+				</Size>
+				<Frames>
+					<Button name="$parent_MoveButton">
+						<NormalTexture file="Interface\WorldMap\WorldMap-TitlebarSwitch-Normal"/>
+						<PushedTexture file="Interface\WorldMap\WorldMap-TitlebarSwitch-Depress"/>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Size>
+							<AbsDimension x="14" y="14"/>
+						</Size>
+						<Scripts>
+							<OnMouseDown>
+								this:GetParent():StartMoving("TOPLEFT")
+							</OnMouseDown>
+							<OnMouseUp>
+								this:GetParent():StopMovingOrSizing()
+								local x, y = this:GetParent():GetPos()
+								scrutinizer:GetMainFramePos(x, y)
+							</OnMouseUp>
+						</Scripts>
+					</Button>
+					<Button name="$parent_OptionButton">
+						<NormalTexture file="Interface\Minimap\MinimapButton_Option_Checked"/>
+						<PushedTexture file="Interface\Minimap\MinimapButton_Option_Normal"/>
+						<HighlightTexture file="Interface\Minimap\MinimapButton_Highlight" alphaMode="ADD"/>
+						<Anchors>
+							<Anchor point="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Size>
+							<AbsDimension x="14" y="14"/>
+						</Size>
+						<Scripts>
+							<OnClick>
+								ToggleDropDownMenu(scrutinizerOptionMenu)
+							</OnClick>
+						</Scripts>
+						<Frames>
+							<Frame name="scrutinizerOptionMenu" inherits="UIDropDownMenuTemplate">
+								<Scripts>
+									<OnLoad>
+										scrutinizer:OptionsOnLoad(this)
+									</OnLoad>
+								</Scripts>
+							</Frame>
+						</Frames>
+					</Button>
+					<Button name="$parent_ResetButton">
+						<NormalTexture file="Interface\Minimap\MinimapButton_RestoreUI_Normal"/>
+						<PushedTexture file="Interface\Minimap\MinimapButton_RestoreUI_Down"/>
+						<HighlightTexture file="Interface\Minimap\MinimapButton_Highlight" alphaMode="ADD"/>
+						<Anchors>
+							<Anchor point="TOPRIGHT" relativeTo="$parent_OptionButton" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="-2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Size>
+							<AbsDimension x="14" y="14"/>
+						</Size>
+						<Scripts>
+							<OnClick>
+								scrutinizer:ShowSubmitButton()
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button name="$parent_NextCat" inherits="UIPanelRightPageButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPRIGHT" relativeTo="$parent_ResetButton" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="-2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Size>
+							<AbsDimension x="14" y="14"/>
+						</Size>
+						<Scripts>
+							<OnClick>
+								scrutinizer:NextCat()
+							</OnClick>
+						</Scripts>
+					</Button>
+				</Frames>
+			</Frame>
+			<Frame name="$parent_Bar1" inherits="scrutinizer_Bar_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Head"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parent_Bar2" inherits="scrutinizer_Bar_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Bar1"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parent_Bar3" inherits="scrutinizer_Bar_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Bar2"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parent_Bar4" inherits="scrutinizer_Bar_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Bar3"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parent_Bar5" inherits="scrutinizer_Bar_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Bar4"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parent_Bar6" inherits="scrutinizer_Bar_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Bar5"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parent_Group" inherits="scrutinizer_Bar_Template" hidden="true">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Bar6"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parent_Pet" inherits="scrutinizer_Bar_Template" hidden="true">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Group"/>
+				</Anchors>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				scrutinizer:OnLoad(this)
+			</OnLoad>
+			<OnEvent>
+				scrutinizer:OnEvent(this, event, arg1)
+			</OnEvent>
+			<OnUpdate>
+				scrutinizer:OnUpdate(this, elapsedTime)
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+	
+</Ui>

@@ -1,0 +1,25 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+  <!-- v1.01.xxx -->
+  <Frame name="StatRating" parent="UIParent" enableMouse="false">
+		<Scripts>
+			<OnLoad> 
+				StatRating_OnLoad(this);
+			</OnLoad>
+			<OnEvent>
+				StatRating_OnEvent(event);
+			</OnEvent>
+		</Scripts>
+
+  </Frame>		
+    <!-- needed to fetch the right weapon skill -->
+  <GameTooltip name="SRGetDataTooltip" inherits="GameTooltipTemplate" parent="UIParent" frameStrata="DIALOG" hidden="true">
+		<Size>
+			<AbsDimension x="218" y="55"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER"/>
+		</Anchors>
+		<Scripts>
+		</Scripts>
+	</GameTooltip>
+</Ui>

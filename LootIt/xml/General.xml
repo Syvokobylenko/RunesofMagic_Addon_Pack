@@ -1,0 +1,133 @@
+<!-- last changes     by: Tinsus     at: 2014-08-04T13:26:27Z     project-version: v1.9beta1     hash: fdf2147abc9ea23a2283af01ded5c44829218e6f -->
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ ../../../worldxml/ui.xsd">
+	<!-- Addon Event Frame -->
+	<Frame name="LootIt_EventFrame" parent="UIParent">
+		<Scripts>
+			<OnLoad>
+				LI.OnLoad(this)
+			</OnLoad>
+			<OnEvent>
+				LI.OnEvent(this, event, arg1, arg2)
+			</OnEvent>
+			<OnUpdate>
+				LI.OnUpdate(this, elapsedTime)
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+	<!-- MiniMap-Button	-->
+	<Button name="LootIt_MinimapButton" inherits="MinimapButtonTemplate" parent="UIParent">
+		<Size>
+			<AbsDimension y="25" x="25"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeTo="MinimapViewFrame" relativePoint="LEFT">
+				<Offset>
+					<RelDimension x="0" y="-64"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Frame name="LootIt_Dropdown" inherits="UIDropDownMenuTemplate" hidden="true"/>
+			<Frame name="LootIt_Dropdown_Quest" inherits="UIDropDownMenuTemplate" hidden="true"/>
+			<Frame name="LootIt_Dropdown_Skill" inherits="UIDropDownMenuTemplate" hidden="true"/>
+		</Frames>
+		<Scripts>
+			<OnClick>
+				GameTooltip:Hide()
+
+				LI.MiniConfigShow(this)
+			</OnClick>
+			<OnEnter>
+				name = LI.AddCursorItem()
+
+				if name then
+					LootIt_ChatDrop.itemname = name
+
+					LootIt_ChatDrop:Show()
+				else
+					LI.MiniTooltipShow(this)
+				end
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+			<OnLoad>
+				this:RegisterForClicks("LeftButton", "RightButton")
+				LI.MiniConfigShow()
+
+				MinimapButton_OnLoad(this)
+			</OnLoad>
+		</Scripts>
+		<NormalTexture file="Interface\AddOns\LootIt\Textures\minimapbutton-normal"/>
+		<PushedTexture file="Interface\AddOns\LootIt\Textures\minimapbutton-depress"/>
+		<HighlightTexture file="Interface\AddOns\LootIt\Textures\minimapbutton-highlight" alphaMode="ADD"/>
+	</Button>
+	<!-- Bag-Button	-->
+	<Button name="LootIt_BagButton" parent="BagFrame" hidden="true" frameStrata="DIALOG" inherits="UIPanelButtonTemplate">
+		<Size>
+			<AbsDimension y="36" x="36"/>
+		</Size>
+		<Scripts>
+			<OnClick>
+				GameTooltip:Hide()
+
+				ToggleUIFrame(LootIt_ItemFilter)
+			</OnClick>
+			<OnEnter>
+				name = LI.AddCursorItem(true)
+
+				if name then
+					LootIt_ChatDrop.itemname = name
+
+					LootIt_ChatDrop:Show()
+				else
+					LI.GameTooltip(this, "ANCHOR_BOTTOMRIGHT", 4, 0, "TOOLTIP_BAGBUTTON")
+				end
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+			<OnUpdate>
+				LI.BagCheck(this)
+			</OnUpdate>
+		</Scripts>
+		<NormalTexture file="Interface\mainmenuframe\mainmenu-bagbutton-normal.tga"/>
+		<PushedTexture file="Interface\mainmenuframe\mainmenu-bagbutton-depress.tga"/>
+		<HighlightTexture file="Interface\mainmenuframe\mainmenu-bagbutton-highlight.tga" alphaMode="ADD"/>
+	</Button>
+	<!-- AddonManager Button -->
+	<Button name="LootIt_AddonManagerButton" hidden="true" inherits="UIPanelButtonTemplate" parent="AddonManagerMiniFrame">
+		<Size>
+			<AbsDimension y="24" x="24"/>
+		</Size>
+		<Scripts>
+			<OnClick>
+				AddonManager.MiniButton_OnClick(this)
+			</OnClick>
+			<OnEnter>
+				AddonManager.MiniButton_OnEnter(this)
+			</OnEnter>
+			<OnLeave>
+				AddonManager.MiniButton_OnLeave(this)
+			</OnLeave>
+		</Scripts>
+		<NormalTexture file="Interface\AddOns\LootIt\Textures\minimapbutton-normal"/>
+		<PushedTexture file="Interface\AddOns\LootIt\Textures\minimapbutton-depress"/>
+		<HighlightTexture file="Interface\AddOns\LootIt\Textures\minimapbutton-highlight" alphaMode="ADD"/>
+	</Button>
+	<!-- Rollframe-Highlight -->
+	<Frame name="LootIt_GroupLootFrame1_Highlight" inherits="LootIt_RollFrameHighlight_Template" parent="GroupLootFrame1" hidden="true"/>
+	<Frame name="LootIt_GroupLootFrame2_Highlight" inherits="LootIt_RollFrameHighlight_Template" parent="GroupLootFrame2" hidden="true"/>
+	<Frame name="LootIt_GroupLootFrame3_Highlight" inherits="LootIt_RollFrameHighlight_Template" parent="GroupLootFrame3" hidden="true"/>
+	<Frame name="LootIt_GroupLootFrame4_Highlight" inherits="LootIt_RollFrameHighlight_Template" parent="GroupLootFrame4" hidden="true"/>
+	<Frame name="LootIt_GroupLootFrame5_Highlight" inherits="LootIt_RollFrameHighlight_Template" parent="GroupLootFrame5" hidden="true"/>
+	<Frame name="LootIt_GroupLootFrame6_Highlight" inherits="LootIt_RollFrameHighlight_Template" parent="GroupLootFrame6" hidden="true"/>
+	<!-- DropDowns -->
+	<Frame name="LootIt_ItemFrameDropdown" inherits="UIDropDownMenuTemplate" hidden="true">
+		<Scripts>
+			<OnLoad>
+				UIDropDownMenu_Initialize(this, LI.ItemFrameDropDown, "MENU")
+			</OnLoad>
+		</Scripts>
+	</Frame>
+</Ui>

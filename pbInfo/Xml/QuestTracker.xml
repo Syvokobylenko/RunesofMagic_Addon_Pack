@@ -1,0 +1,418 @@
+<!--
+pbInfo - Xml/QuestTracker.xml
+	v0.51-fix
+	by p.b. a.k.a. novayuna
+	released under the Creative Commons License By-Nc-Sa: http://creativecommons.org/licenses/by-nc-sa/3.0/
+-->
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="..\..\worldxml\ui.xsd">
+	<!-- QuestTrackerTemplate -->
+	<Frame name="pbInfoQuestTrackerTemplate" enableMouse="true" virtual="true">
+		<Size>
+			<AbsDimension x="175" y="0"/>
+		</Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parentTitle" inherits="GameTitleFont" justifyH="LEFT">
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="12"/>
+					</FontHeight>
+				</FontString>
+				<FontString name="$parentItems" inherits="Font_QuestTrack_Text" justifyH="LEFT" justifyV="TOP" hidden="false">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentTitle" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="10" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="10"/>
+					</FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnEnter>
+				if (pbInfoSettings["QUESTTRACKERTOOLTIP"]) then
+					pbInfo.QuestTracker.Tooltip(this);
+				end;
+			</OnEnter>
+			<OnLeave>
+				if (pbInfoSettings["QUESTTRACKERTOOLTIP"]) then
+					GameTooltip:Hide();
+				end;
+			</OnLeave>
+			<OnClick>
+				if (key == "LBUTTON" and IsShiftKeyDown()) then
+					local editbox = GetKeyboardFocus() or DEFAULT_CHAT_EDITBOX;
+					-- local questname = '"' .. pbInfo.QuestTracker.TrackedQuests[this:GetID()] .. '"';
+					local questname = QuestBook_GetQuestHyperLink(pbInfo.QuestTracker.Quests[pbInfo.QuestTracker.TrackedQuests[this:GetID()]]["index"]);
+					if (not editbox:IsVisible()) then
+						ChatEdit_OpenEditBox(questname, editbox);
+					else
+						editbox:SetText(editbox:GetText() .. questname);
+					end;
+					editbox:SetPlaceCaret(string.len(editbox:GetText()));
+				elseif (key == "LBUTTON" and IsCtrlKeyDown()) then
+					local rewardNPC = pbInfo.QuestTracker.Quests[pbInfo.QuestTracker.TrackedQuests[this:GetID()]]["rewardNPC"];
+					if (type(rewardNPC) == "table") then
+						pbInfo.QuestTracker.ShowOnWorldmap(rewardNPC);
+					end;
+				elseif (key == "LBUTTON" and pbInfoSettings["QUESTTRACKEROPENQUESTBOOK"]) then
+					ShowUIPanel(UI_QuestBook);
+					ViewQuest_QuestBook(pbInfo.QuestTracker.Quests[pbInfo.QuestTracker.TrackedQuests[this:GetID()]]["index"]);
+				end;
+			</OnClick>
+		</Scripts>
+	</Frame>
+	<!-- QuestTracker -->
+	<Frame name="pbInfoQuestTracker" hidden="false" parent="UIParent" frameStrata="BACKGROUND">
+		<Size>
+			<AbsDimension x="175" y="200"/>
+		</Size>
+<!--		<Backdrop bgFile="Interface\Tooltips\Tooltip-Background" edgeFile="Interface\Tooltips\Tooltip-border" tile="true">
+			<BackgroundInsets>
+				<AbsInset top="4" left="4" bottom="4" right="4"/>
+			</BackgroundInsets>
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+		</Backdrop>
+-->
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Frame name="pbInfoQuestTracker_Head" hidden="false" enableMouse="true">
+				<Size>
+					<AbsDimension x="100" y="0"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="pbInfoQuestTracker_Title" inherits="GameTitleFont" text="QuestTracker" justifyH="LEFT">
+							<Size>
+								<AbsDimension x="100" y="0"/>
+							</Size>
+							<FontHeight>
+								<AbsValue val="14"/>
+							</FontHeight>
+						</FontString>
+						<FontString name="pbInfoQuestTracker_Dailies" inherits="GameTitleFont" justifyH="LEFT" text="" hidden="true">
+							<Size>
+								<AbsDimension x="100" y="0"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="pbInfoQuestTracker_Title">
+									<Offset>
+										<AbsDimension x="0" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<FontHeight>
+								<AbsValue val="14"/>
+							</FontHeight>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnEnter>
+						pbInfo.QuestTracker.InfoTooltip(this);
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+					<OnClick>
+						if (pbInfoQuestTracker_Body:IsVisible()) then
+							pbInfoQuestTracker_Body:Hide();
+						else
+							pbInfoQuestTracker_Body:Show();
+						end;
+					</OnClick>
+					<OnMouseDown>
+						if (key == "RBUTTON" and IsShiftKeyDown()) then
+							pbInfoQuestTracker:StartMoving("TOPLEFT");
+						end;
+					</OnMouseDown>
+					<OnMouseUp>
+						pbInfo.QuestTracker.SavePosition();
+					</OnMouseUp>
+				</Scripts>
+			</Frame>
+<!--			<Button name="pbInfoQuestTracker_ResizeDot">
+				<Size>
+					<AbsDimension x="16" y="16"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<NormalTexture file="Interface\ChatFrame\ChatBtn-Resize-Normal"/>
+				<Scripts>
+					<OnMouseDown>
+						if (pbInfoSettings["QUESTTRACKERRESIZE"] == true) then
+							pbInfoQuestTrackerSizing = true;
+							pbInfoQuestTracker:StartSizing("BOTTOMRIGHT");
+						end;
+					</OnMouseDown>
+					<OnMouseUp>
+						pbInfoQuestTrackerSizing = false;
+						pbInfo.QuestTracker.SavePosition();
+					</OnMouseUp>
+				</Scripts>
+			</Button>
+-->
+			<Frame name="pbInfoQuestTracker_Body" hidden="false">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTracker_Head">
+						<Offset>
+							<AbsDimension x="5" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<Frame name="pbInfoQuestTrackerQuest1" inherits="pbInfoQuestTrackerTemplate" id="1">
+						<Anchors>
+							<Anchor point="TOPLEFT"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest2" inherits="pbInfoQuestTrackerTemplate" id="2">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest1"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest3" inherits="pbInfoQuestTrackerTemplate" id="3">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest2"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest4" inherits="pbInfoQuestTrackerTemplate" id="4">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest3"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest5" inherits="pbInfoQuestTrackerTemplate" id="5">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest4"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest6" inherits="pbInfoQuestTrackerTemplate" id="6">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest5"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest7" inherits="pbInfoQuestTrackerTemplate" id="7">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest6"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest8" inherits="pbInfoQuestTrackerTemplate" id="8">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest7"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest9" inherits="pbInfoQuestTrackerTemplate" id="9">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest8"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest10" inherits="pbInfoQuestTrackerTemplate" id="10">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest9"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest11" inherits="pbInfoQuestTrackerTemplate" id="11">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest10"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest12" inherits="pbInfoQuestTrackerTemplate" id="12">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest11"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest13" inherits="pbInfoQuestTrackerTemplate" id="13">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest12"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest14" inherits="pbInfoQuestTrackerTemplate" id="14">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest13"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest15" inherits="pbInfoQuestTrackerTemplate" id="15">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest14"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest16" inherits="pbInfoQuestTrackerTemplate" id="16">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest15"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest17" inherits="pbInfoQuestTrackerTemplate" id="17">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest16"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest18" inherits="pbInfoQuestTrackerTemplate" id="18">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest17"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest19" inherits="pbInfoQuestTrackerTemplate" id="19">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest18"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest20" inherits="pbInfoQuestTrackerTemplate" id="20">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest19"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest21" inherits="pbInfoQuestTrackerTemplate" id="21">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest20"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest22" inherits="pbInfoQuestTrackerTemplate" id="22">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest21"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest23" inherits="pbInfoQuestTrackerTemplate" id="23">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest22"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest24" inherits="pbInfoQuestTrackerTemplate" id="24">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest23"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest25" inherits="pbInfoQuestTrackerTemplate" id="25">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest24"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest26" inherits="pbInfoQuestTrackerTemplate" id="26">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest25"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest27" inherits="pbInfoQuestTrackerTemplate" id="27">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest26"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest28" inherits="pbInfoQuestTrackerTemplate" id="28">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest27"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest29" inherits="pbInfoQuestTrackerTemplate" id="29">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest28"/>
+						</Anchors>
+					</Frame>
+					<Frame name="pbInfoQuestTrackerQuest30" inherits="pbInfoQuestTrackerTemplate" id="30">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="pbInfoQuestTrackerQuest29"/>
+						</Anchors>
+					</Frame>
+				</Frames>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				if (type(pbInfo.QuestTracker.Scripts.OnLoad) ~= "function") then this:Hide(); end;
+				this:RegisterEvent("VARIABLES_LOADED");
+				this:RegisterEvent("RESET_QUESTTRACK");
+				this:RegisterEvent("RESET_QUESTBOOK");
+				this:RegisterEvent("ADDNEW_QUESTBOOK");
+				this:RegisterEvent("QUEST_COMPLETE");
+				this:RegisterEvent("QUEST_COMPLETE");
+				this:RegisterEvent("CHAT_MSG_SYSTEM");
+				NUM_MAXTRACK_QUEST = 30;
+			</OnLoad>
+			<OnEvent>
+				if (event == "VARIABLES_LOADED") then
+					pbInfo.QuestTracker.Scripts.OnLoad(this);
+					-- pbInfo.QuestTracker.Resize();
+					if (pbInfoSettings["QUESTTRACKER"] == true) then
+						pbInfo.QuestTracker.UpdateTrackerQuests();
+						pbInfo.QuestTracker.UpdateTracker();
+						QuestTrackerFrame:Hide();
+					end;
+				elseif (event == "RESET_QUESTTRACK" and pbInfoSettings["QUESTTRACKER"] and pbInfo.QuestTracker.Loaded) then
+					pbInfo.QuestTracker.Scripts.OnLoad(pbInfoQuestTracker);
+					pbInfoQuestTracker:Show();
+					QuestTrackerFrame:Hide(); --original RoM QuestTrack
+					pbInfo.QuestTracker.UpdateTracker();
+				elseif ((event == "RESET_QUESTBOOK" or event == "ADDNEW_QUESTBOOK" or event == "QUEST_COMPLETE") and pbInfoSettings["QUESTTRACKER"]) then
+					pbInfo.QuestTracker.UpdateTrackerQuests();
+				elseif (event == "CHAT_MSG_SYSTEM") then
+					pbInfo.QuestTracker.CheckDailyQuests(arg1)
+				end;
+			</OnEvent>
+<!--			<OnUpdate>
+				if (pbInfoQuestTrackerSizing == true) then
+					pbInfo.QuestTracker.Resize();
+				end;
+			</OnUpdate>
+-->
+		</Scripts>
+	</Frame>
+	<Button name="pbInfoQuestTracker_Worldmap" parent="UIParent" hidden="true" frameStrata="DIALOG">
+		<Size>
+			<AbsDimension x="22" y="32"/>
+		</Size>
+		<Scripts>
+			<OnClick>
+				NpcId, NpcName = NpcTrack_GetNpc(NpcTrack_SearchNpcByDBID(this:GetID()));
+				WorldMapIconMenu.DropDownMenuMode = "NpcMode";
+				WorldMapIconMenu.NpcID = NpcId;
+				ToggleDropDownMenu(WorldMapIconMenu, 1, nil, "cursor", 1, 1);
+				-- NpcTrackFrame_QuickTrackByNpcID(this:GetID());
+			</OnClick>
+			<OnEnter>
+				local npcId, npcName, npcMapId, npcX, npcY = NpcTrack_GetNpc(NpcTrack_SearchNpcByDBID(this:GetID()));
+--				GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+				GameTooltip:ClearLines();
+				GameTooltip:SetText(npcName, 1.0, 1.0, 1.0);
+				GameTooltip:AddLine((math.floor(npcX * 1000) / 10) .. ", " .. (math.floor(npcY * 1000) / 10), 1.0, 1.0, 1.0);
+				GameTooltip:Show();
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide();
+			</OnLeave>
+			<OnUpdate>
+				local npcId, npcName, npcMapId, npcX, npcY = NpcTrack_GetNpc(NpcTrack_SearchNpcByDBID(this:GetID()));
+				if (WorldMapFrame.mapID ~= npcMapId or not WorldMapFrame:IsVisible()) then
+					this:Hide();
+				end;
+			</OnUpdate>
+		</Scripts>
+		<NormalTexture file="Interface\\AddOns\\pbInfo\\Textures\\WorldMap\\Redpin.tga"/>
+	</Button>
+</Ui>

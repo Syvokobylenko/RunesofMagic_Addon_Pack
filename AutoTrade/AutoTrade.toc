@@ -1,0 +1,6 @@
+AutoTrade.lua
+AutoTrade.xml
+-- X-Curse-Packaged-Version: v0.2
+-- X-Curse-Project-Name: AutoTrade
+-- X-Curse-Project-ID: autotrade
+-- X-Curse-Repository-ID: rom/autotrade/mainline

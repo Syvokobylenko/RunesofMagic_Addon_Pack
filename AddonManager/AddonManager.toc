@@ -1,0 +1,19 @@
+## Title: AddonManager
+## Notes: Addon-managing addon. Displays a list of registered addons.
+## Author: Alleris
+
+Libs/LibStub.lua
+Libs/Sol.lua
+Libs/Nyx.lua
+Libs/WaitTimer.lua
+
+AddonManager.lua
+AddonManager_addons.lua
+AddonManagerMini.lua
+
+AddonManager.xml
+AddonManagerMini.xml
+-- X-Curse-Packaged-Version: v6.0.7
+-- X-Curse-Project-Name: AddonManager
+-- X-Curse-Project-ID: addonmanager
+-- X-Curse-Repository-ID: rom/addonmanager/mainline

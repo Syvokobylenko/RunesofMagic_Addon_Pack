@@ -1,0 +1,211 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Script file="XPExtended.lua"/>
+	<Frame name="XPExtendedFrame" frameStrata="DIALOG" parent="ExperienceFrame" setAllPoints="true">
+		<Anchors>
+			<Anchor point="BOTTOMLEFT">
+				<Offset>
+					<AbsDimension x="5" y="0"/>
+				</Offset>
+			</Anchor>
+			<Anchor point="BOTTOMRIGHT">
+				<Offset>
+					<AbsDimension x="-5" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnLoad>
+				XPExtended_OnLoad(this);
+			</OnLoad>
+			<OnEvent>
+				XPExtended_OnEvent(this, event);
+			</OnEvent>
+		</Scripts>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="XPExtended_Text1" inherits="GameFontLabelYellow">
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="LEFT" relativeTo="XPExtendedFrame">
+							<Offset>
+								<AbsDimension x="5" y="1"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Size>
+						<AbsDimension x="130" y="15"/>
+					</Size>
+					<FontHeight>
+						<AbsValue val="12"/>
+					</FontHeight>
+				</FontString>
+				<Texture name="XPExtended_Text1_Color" file="Interface\Common\Block-Fill" hidden="true">
+					<Color b="0" g="0" r="1" a="0.3"/>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="LEFT" relativeTo="XPExtended_Text1"/>
+					</Anchors>
+					<Size>
+						<AbsDimension x="130" y="15"/>
+					</Size>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="XPExtended_Text2" inherits="GameFontLabelYellow">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" relativeTo="XPExtended_Text1">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Size>
+						<AbsDimension x="90" y="15"/>
+					</Size>
+					<FontHeight>
+						<AbsValue val="12"/>
+					</FontHeight>
+				</FontString>
+				<Texture name="XPExtended_Text2_Color" file="Interface\Common\Block-Fill" hidden="true">
+					<Color b="0" g="1" r="0" a="0.3"/>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="LEFT" relativeTo="XPExtended_Text2"/>
+					</Anchors>
+					<Size>
+						<AbsDimension x="90" y="15"/>
+					</Size>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="XPExtended_Text3" inherits="GameFontLabelYellow">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" relativeTo="XPExtended_Text2">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Size>
+						<AbsDimension x="120" y="15"/>
+					</Size>
+					<FontHeight>
+						<AbsValue val="12"/>
+					</FontHeight>
+				</FontString>
+				<Texture name="XPExtended_Text3_Color" file="Interface\Common\Block-Fill" hidden="true">
+					<Color b="1" g="0" r="0" a="0.3"/>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="LEFT" relativeTo="XPExtended_Text3"/>
+					</Anchors>
+					<Size>
+						<AbsDimension x="120" y="15"/>
+					</Size>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="XPExtended_Text4" inherits="GameFontLabelYellow">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" relativeTo="XPExtended_Text3">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Size>
+						<AbsDimension x="100" y="15"/>
+					</Size>
+					<FontHeight>
+						<AbsValue val="12"/>
+					</FontHeight>
+				</FontString>
+				<Texture name="XPExtended_Text4_Color" file="Interface\Common\Block-Fill" hidden="true">
+					<Color b="0" g="0" r="1" a="0.3"/>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="LEFT" relativeTo="XPExtended_Text4"/>
+					</Anchors>
+					<Size>
+						<AbsDimension x="100" y="15"/>
+					</Size>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="XPExtended_Text5" inherits="GameFontLabelYellow">
+					<Anchors>
+						<Anchor point="RIGHT" relativePoint="RIGHT" relativeTo="XPExtendedFrame">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Size>
+						<AbsDimension x="110" y="15"/>
+					</Size>
+					<FontHeight>
+						<AbsValue val="12"/>
+					</FontHeight>
+				</FontString>
+				<Texture name="XPExtended_Text5_Color" file="Interface\Common\Block-Fill" hidden="true">
+					<Color b="0" g="1" r="0" a="0.3"/>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="LEFT" relativeTo="XPExtended_Text5"/>
+					</Anchors>
+					<Size>
+						<AbsDimension x="110" y="15"/>
+					</Size>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="XPExtended_Text6" inherits="GameFontLabelYellow">
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMLEFT" relativeTo="XPExtended_Text5">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Size>
+						<AbsDimension x="110" y="15"/>
+					</Size>
+					<FontHeight>
+						<AbsValue val="12"/>
+					</FontHeight>
+				</FontString>
+				<Texture name="XPExtended_Text6_Color" file="Interface\Common\Block-Fill" hidden="true">
+					<Color b="1" g="0" r="0" a="0.3"/>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="LEFT" relativeTo="XPExtended_Text6"/>
+					</Anchors>
+					<Size>
+						<AbsDimension x="110" y="15"/>
+					</Size>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="XPExtended_Text7" inherits="GameFontLabelYellow">
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMLEFT" relativeTo="XPExtended_Text6">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Size>
+						<AbsDimension x="130" y="15"/>
+					</Size>
+					<FontHeight>
+						<AbsValue val="12"/>
+					</FontHeight>
+				</FontString>
+				<Texture name="XPExtended_Text7_Color" file="Interface\Common\Block-Fill" hidden="true">
+					<Color b="0" g="0" r="1" a="0.3"/>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="LEFT" relativeTo="XPExtended_Text7"/>
+					</Anchors>
+					<Size>
+						<AbsDimension x="130" y="15"/>
+					</Size>
+				</Texture>
+			</Layer>
+		</Layers>
+	</Frame>
+	<Frame name="XPExtended_ConfigFrame">
+	</Frame>
+</Ui>

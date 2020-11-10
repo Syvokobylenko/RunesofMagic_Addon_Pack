@@ -1,0 +1,50 @@
+tag 954c9900c50f81f255fb73aeb85e184d4d36606a v7.4
+Author:	McBen <viertelvor12@gmx.net>
+Date:	Sat Feb 8 18:32:54 2020 +0100
+
+v7.4
+
+commit 0e568c0f0b5942d1c22a5fe0076a2504ee104132
+Author: McBen <viertelvor12@gmx.net>
+Date:   Sat Feb 8 18:32:09 2020 +0100
+
+    patch 7.4
+
+commit 4afba49052d272f5c46951cce0e948f50a24485f
+Author: McBen <viertelvor12@gmx.net>
+Date:   Wed Feb 5 22:59:25 2020 +0100
+
+    sorted new db entries
+
+commit 6e4cf6a3fd14b802d28782f9f20251403eae613c
+Author: McBen <viertelvor12@gmx.net>
+Date:   Wed Feb 5 22:43:43 2020 +0100
+
+    tools: remove experimental 'type' generation
+    
+    and added latest zone names
+
+commit dd5554b4512422c26fffba61beca4f12f604a4c6
+Author: McBen <viertelvor12@gmx.net>
+Date:   Mon Feb 3 21:56:33 2020 +0100
+
+    Quest list update by "Addon"
+
+commit 15ce603d2e1946889aa5313149421553aa3544ce
+Author: McBen <viertelvor12@gmx.net>
+Date:   Wed Dec 5 20:31:45 2018 +0100
+
+    patch 7.2.1.2859 level changes
+
+commit 63debd161956c4cb62df2a6221256bef8eb50268
+Author: McBen <viertelvor12@gmx.net>
+Date:   Fri Mar 30 22:36:01 2018 +0200
+
+    just translation comment update
+
+commit 0c14f8a433b0767e7dba1b35a106d6b8457a88c4
+Author: McBen <viertelvor12@gmx.net>
+Date:   Thu Feb 1 20:47:01 2018 +0100
+
+    new zone data
+

@@ -1,0 +1,656 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ ../../worldxml/ui.xsd">
+	<Button name="AddonManagerMinimapButton" hidden="true" inherits="MinimapButtonTemplate" parent="UIParent">
+		<Size>
+			<AbsDimension y="24" x="24"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="MinimapViewFrame" relativePoint="CENTER">
+				<Offset>
+					<RelDimension x="79.957" y="-2.599"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnClick>
+                AddonManager.MinimapButton_OnClick(this)
+			</OnClick>
+			<OnEnter>
+	            GameTooltip:SetOwner(this, "ANCHOR_LEFT", 4, 0);
+	            GameTooltip:SetText("AddonManager", 1, 1, 1);
+	            GameTooltip:AddLine(UI_MINIMAPBUTTON_MOVE, 0, 0.75, 0.95);
+	            GameTooltip:Show();
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+		</Scripts>
+		<NormalTexture file="Interface\AddOns\AddonManager\Textures\addonManagerMiniIcon.tga"/>
+		<PushedTexture file="Interface\AddOns\AddonManager\Textures\addonManagerMiniIconInv.tga"/>
+		<HighlightTexture file="Interface\Minimap\MinimapButton_Highlight" alphaMode="ADD"/>
+	</Button>
+	<CheckButton name="AddonManagerCheckBoxTemplate" inherits="UIPanelCheckButtonTemplate" frameLevel="2" hidden="true" virtual="true">
+		<Size>
+			<AbsDimension y="24" x="24"/>
+		</Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parentLabel" inherits="GameTitleFont" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="88" y="14"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="0" y="5"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="0.5" g="0.5" b="0.5"/>
+					<FontHeight>
+						<AbsValue val="10"/>
+					</FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnEnter>AddonManager.OnAddonEntered( _G[this:GetParent():GetName() .. "Select"], this:GetParent():GetID() )</OnEnter>
+			<OnLeave>AddonManager.OnAddonLeave( _G[this:GetParent():GetName() .. "Select"])</OnLeave>
+		</Scripts>
+	</CheckButton>
+	<Frame name="AddonButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="127" y="53"/>
+		</Size>
+		<Frames>
+			<Frame name="$parent_AddonInfo" inherits="Common_NameFrame_Short">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="37" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parent_Name" inherits="Font_ItemButton_Desc" justifyH="LEFT" text="TEMP">
+							<Size>
+								<AbsDimension x="88" y="14"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="4" y="3"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="$parent_Category" inherits="GameTitleFont" justifyH="LEFT" text="TEMP">
+							<Size>
+								<AbsDimension x="88" y="14"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="4" y="20"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<Color r="0.5" g="0.5" b="0.5"/>
+							<FontHeight>
+								<AbsValue val="10"/>
+							</FontHeight>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			<Frame name="$parentSelect" enableMouse="true">
+				<Layers>
+					<Layer level="OVERLAY">
+						<Texture name="$parentSelect" file="Interface\SkillBook\SkillBook_SpellFrame_Highlight" alphaMode="ADD" hidden="true">
+							<Size>
+								<AbsDimension y="70" x="137"/>
+							</Size>
+							<Anchors>
+								<Anchor point="CENTER">
+									<Offset>
+										<AbsDimension y="0" x="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords top="0" left="0" bottom="0.984375" right="0.53515625"/>
+						</Texture>
+						<Texture name="$parentHighlight" file="Interface\SkillBook\SkillBook_SpellFrame_Highlight" alphaMode="ADD" hidden="true">
+							<Size>
+								<AbsDimension y="70" x="137"/>
+							</Size>
+							<Anchors>
+								<Anchor point="CENTER">
+									<Offset>
+										<AbsDimension y="0" x="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords top="0" left="0" bottom="0.984375" right="0.53515625"/>
+						</Texture>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnEnter>AddonManager.OnAddonEntered( this, this:GetParent():GetID() )</OnEnter>
+					<OnLeave>AddonManager.OnAddonLeave(this)</OnLeave>
+				</Scripts>
+			</Frame>
+			<CheckButton name="$parentMiniCheck" inherits="AddonManagerCheckBoxTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="-3" y="6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+                        AddonManager.OnAddonMiniChecked(this, this:GetParent():GetID())
+                    </OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentEnabledCheck" inherits="AddonManagerCheckBoxTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-35" y="6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>                        
+                        AddonManager.OnAddonEnabledChecked(this, this:GetParent():GetID())
+                    </OnClick>
+				</Scripts>
+			</CheckButton>
+			<Button name="$parentItemButton" inherits="ItemButtonTemplate" frameLevel="2" enableMouse="true">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this:SetID( this:GetParent():GetID() )
+						this:RegisterForClicks("LeftButton","RightButton","MiddleButton")						
+					</OnLoad>
+					<OnClick>AddonManager.OnAddonClicked( this, this:GetParent():GetID() )</OnClick>
+					<OnEnter>AddonManager.OnAddonEntered(_G[this:GetParent():GetName() .. "Select"], this:GetParent():GetID())</OnEnter>
+					<OnLeave>AddonManager.OnAddonLeave(_G[this:GetParent():GetName() .. "Select"])</OnLeave>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>AddonManager.ButtonTemplateLoad(this)</OnLoad>
+		</Scripts>
+	</Frame>
+	<Button name="AddonManagerTabTemplate" inherits="UIPanelTopTabTemplate" virtual="true">
+		<Scripts>
+			<OnClick>
+				AddonManager.OnTabClicked( this, this:GetID() )
+			</OnClick>
+		</Scripts>
+	</Button>
+	<FontString name="AddonManagerLabelTemplate" inherits="GameTitleFont" justifyH="LEFT" virtual="true">
+		<Anchors>
+			<Anchor point="LEFT" relativePoint="RIGHT"/>
+		</Anchors>
+		<FontHeight><AbsValue val="14"/></FontHeight>
+	</FontString>
+	<FontString name="AddonManagerCategoryLabelTemplate" inherits="GameTitleFont" justifyH="LEFT" virtual="true">
+		<Anchors>
+			<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+				<Offset>
+					<AbsDimension x="5" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<FontHeight>
+			<AbsValue val="15"/>
+		</FontHeight>
+		<Color r="0.2" g="0.5" b="0.8"/>
+	</FontString>
+	<Frame name="AddonManagerFrame" inherits="UIPanelTabShortFrameTemplate" parent="UIParent" hidden="true" id="1" enableMouse="true">
+		<Anchors>
+			<Anchor point="LEFT">
+				<Offset>
+					<AbsDimension x="0" y="-35"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Frame name="$parentTitleFrame" inherits="UIPanelTitleFrameTemplate" frameStrata="HIGH">
+				<Size>
+					<AbsDimension x="310" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT"/>
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString name="$parentText" inherits="GameTitleFont" text="Addons">
+							<Size>
+								<AbsDimension y="25" x="80"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOP" relativePoint="TOP">
+									<Offset>
+										<AbsDimension x="8" y="3"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			<Button name="$parentCloseButton" inherits="UIPanelCloseButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-12" y="6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<!-- Tabs -->
+			<Button name="$parentTabAddons" inherits="AddonManagerTabTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="16" y="29"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTabMapButtons" inherits="AddonManagerTabTemplate" id="2">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentTabAddons" relativePoint="TOPRIGHT">
+						<Offset><AbsDimension x="2" y="0"/></Offset>
+					</Anchor>
+				</Anchors>
+			</Button>			
+			<Button name="$parentTabSettings" inherits="AddonManagerTabTemplate" id="3">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentTabMapButtons" relativePoint="TOPRIGHT">
+						<Offset><AbsDimension x="2" y="0"/></Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Frame name="$parentPageAddons">
+				<Frames>
+					<Frame name="AddonManagerAddonButton1" inherits="AddonButtonTemplate" id="1">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AddonManagerFrame">
+								<Offset>
+									<AbsDimension x="35" y="67"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="AddonManagerAddonButton2" inherits="AddonButtonTemplate" id="2">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AddonManagerAddonButton1" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="10"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="AddonManagerAddonButton3" inherits="AddonButtonTemplate" id="3">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AddonManagerAddonButton2" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="10"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="AddonManagerAddonButton4" inherits="AddonButtonTemplate" id="4">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AddonManagerAddonButton3" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="10"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="AddonManagerAddonButton5" inherits="AddonButtonTemplate" id="5">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AddonManagerAddonButton4" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="10"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="AddonManagerAddonButton6" inherits="AddonButtonTemplate" id="6">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AddonManagerAddonButton1" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="20" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="AddonManagerAddonButton7" inherits="AddonButtonTemplate" id="7">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AddonManagerAddonButton2" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="20" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="AddonManagerAddonButton8" inherits="AddonButtonTemplate" id="8">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AddonManagerAddonButton3" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="20" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="AddonManagerAddonButton9" inherits="AddonButtonTemplate" id="9">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AddonManagerAddonButton4" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="20" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="AddonManagerAddonButton10" inherits="AddonButtonTemplate" id="10">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AddonManagerAddonButton5" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="20" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<!-- End Buttons -->
+					<!-- Paging bar -->
+					<Frame name="$parentPagingBar">
+						<Size>
+							<AbsDimension x="295" y="29"/>
+						</Size>
+						<Anchors>
+							<Anchor point="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="25" y="-38"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<Texture name="$parentLeftBar" file="Interface\Buttons\PanelFloatBar">
+									<Size>
+										<AbsDimension x="17" y="29"/>
+									</Size>
+									<Anchors>
+										<Anchor point="LEFT"/>
+									</Anchors>
+									<TexCoords left="0" right="0.2656" top="0" bottom="0.9062"/>
+								</Texture>
+								<Texture name="$parentRightBar" file="Interface\Buttons\PanelFloatBar">
+									<Size>
+										<AbsDimension x="17" y="29"/>
+									</Size>
+									<Anchors>
+										<Anchor point="RIGHT"/>
+									</Anchors>
+									<TexCoords left="0.5156" right="0.7656" top="0" bottom="0.9062"/>
+								</Texture>
+								<Texture file="Interface\Buttons\PanelFloatBar">
+									<Anchors>
+										<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parentLeftBar"/>
+										<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMLEFT" relativeTo="$parentRightBar"/>
+									</Anchors>
+									<TexCoords left="0.25" right="0.5" top="0" bottom="0.9062"/>
+								</Texture>
+								<FontString name="$parentPage" inherits="Font_ItemButton_Desc" justifyH="CENTER" justifyV="MIDDLE">
+									<Anchors>
+										<Anchor point="CENTER"/>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Frames>
+							<Button name="$parentLeftPage" inherits="SkillBookLeftPageButton" text="C_LAST_PAGE" hidden="true">
+								<Anchors>
+									<Anchor point="LEFT">
+										<Offset>
+											<AbsDimension x="10" y="0"/>
+										</Offset>
+									</Anchor>
+								</Anchors>
+								<Scripts>
+									<OnClick>
+                                        AddonManager.TurnPageBack(this)
+                                    </OnClick>
+								</Scripts>
+							</Button>
+							<Button name="$parentRightPage" inherits="SkillBookRightPageButton" text="C_NEXT_PAGE">
+								<Anchors>
+									<Anchor point="RIGHT">
+										<Offset>
+											<AbsDimension x="-10" y="0"/>
+										</Offset>
+									</Anchor>
+								</Anchors>
+								<Scripts>
+									<OnClick>
+                                        AddonManager.TurnPageForward(this)
+                                    </OnClick>
+								</Scripts>
+							</Button>
+						</Frames>
+					</Frame>
+					<!-- End Paging bar -->
+					<Frame name="AddonManagerCategoryFilter" inherits="UIDropDownMenuTemplate">
+						<Anchors>
+							<Anchor point="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="23" y="-13"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+				</Frames>
+			</Frame>
+			<Frame name="$parentPageSettings" hidden="true">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="50"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<Frame name="$parentMainCategory">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="15" y="15"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString inherits="AddonManagerCategoryLabelTemplate" name="$parentLabel"/>
+							</Layer>
+						</Layers>
+					</Frame>
+					<CheckButton name="AddonManagerConfig_ToggleMovePassiveToBack" inherits="UIPanelCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentMainCategory" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="15"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString name="$parentLabel" inherits="AddonManagerLabelTemplate"/>
+							</Layer>
+						</Layers>
+					</CheckButton>
+					<CheckButton name="AddonManagerConfig_ToggleShowSlashCmdInsteadOfCat" inherits="UIPanelCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AddonManagerConfig_ToggleMovePassiveToBack" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="25"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString name="$parentLabel" inherits="AddonManagerLabelTemplate"/>
+							</Layer>
+						</Layers>
+					</CheckButton>
+					<CheckButton name="AddonManagerConfig_ToggleShowMinimapButton" inherits="UIPanelCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AddonManagerConfig_ToggleShowSlashCmdInsteadOfCat" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="25"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString name="$parentLabel" inherits="AddonManagerLabelTemplate"/>
+							</Layer>
+						</Layers>
+					</CheckButton>
+					<CheckButton name="AddonManagerConfig_ToggleClassBasedEnable" inherits="UIPanelCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AddonManagerConfig_ToggleShowMinimapButton" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="25"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString name="$parentLabel" inherits="AddonManagerLabelTemplate"/>
+							</Layer>
+						</Layers>
+					</CheckButton>
+					<Frame name="$parentMiniCategory">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AddonManagerConfig_ToggleClassBasedEnable" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="35"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString inherits="AddonManagerCategoryLabelTemplate" name="$parentLabel"/>
+							</Layer>
+						</Layers>
+					</Frame>
+					<CheckButton name="AddonManagerConfig_ToggleShowMiniBar" inherits="UIPanelCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentMiniCategory" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="15"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString name="$parentLabel" inherits="AddonManagerLabelTemplate"/>
+							</Layer>
+						</Layers>
+					</CheckButton>
+					<CheckButton name="AddonManagerConfig_ToggleShowOnlyNamesInMiniBar" inherits="UIPanelCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AddonManagerConfig_ToggleShowMiniBar" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="25"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString name="$parentLabel" inherits="AddonManagerLabelTemplate"/>
+							</Layer>
+						</Layers>
+					</CheckButton>
+					<CheckButton name="AddonManagerConfig_ToggleShowMiniBarBorder" inherits="UIPanelCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AddonManagerConfig_ToggleShowOnlyNamesInMiniBar" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="25"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString name="$parentLabel" inherits="AddonManagerLabelTemplate"/>
+							</Layer>
+						</Layers>
+					</CheckButton>
+					<CheckButton name="AddonManagerConfig_ToggleAutoHideMiniBar" inherits="UIPanelCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AddonManagerConfig_ToggleShowMiniBarBorder" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="25"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString name="$parentLabel" inherits="AddonManagerLabelTemplate"/>
+							</Layer>
+						</Layers>
+					</CheckButton>
+					<CheckButton name="AddonManagerConfig_ToggleLockMiniBar" inherits="UIPanelCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AddonManagerConfig_ToggleAutoHideMiniBar" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="25"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString name="$parentLabel" inherits="AddonManagerLabelTemplate"/>
+							</Layer>
+						</Layers>
+					</CheckButton>
+					<Button name="AddonManagerSaveSettingsButton" inherits="UIPanelButtonTemplate" text="OBJ_SAVE">
+						<Size>
+							<AbsDimension x="82" y="24"/>
+						</Size>
+						<Anchors>
+							<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT">
+								<Offset>
+									<AbsDimension x="-30" y="-75"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+                                AddonManager.SaveSettings()
+                            </OnClick>
+						</Scripts>
+					</Button>
+				</Frames>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>AddonManager.OnLoad(this)</OnLoad>
+			<OnShow>AddonManager.OnShow( this )</OnShow>
+			<OnEvent>AddonManager.OnEvent(this, event)</OnEvent>
+		</Scripts>
+	</Frame>
+</Ui>

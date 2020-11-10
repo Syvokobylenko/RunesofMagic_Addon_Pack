@@ -1,0 +1,14 @@
+tag d6aa81e80634a31e4795580112e769a5bfb8b508 v7.4.0
+Author:	McBen <viertelvor12@gmx.net>
+Date:	Sun Mar 29 21:06:50 2020 +0200
+
+v7.4.0
+
+commit 20cdfb825a2474da2a1d51a68792bafacbfea7da
+Author: McBen <viertelvor12@gmx.net>
+Date:   Sun Mar 29 12:46:12 2020 +0200
+
+    patch 7.4.0.2904 (new items)items
+    
+    todo: check voctable changes
+

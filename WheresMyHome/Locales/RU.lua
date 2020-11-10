@@ -1,0 +1,43 @@
+local locales = {}
+--Translation missing 
+-- locales["ADDON_DESCRIPTION"] = "A plugin for ZZInfoBar showing where you registered your recall point."
+--Translation missing 
+-- locales["ADDON_LOADED"] = "Addon loaded"
+--Translation missing 
+-- locales["ALT_LEFT_MOUSEBUTTON"] = "Alt + Left click"
+--Translation missing 
+-- locales["ALT_RIGHT_MOUSEBUTTON"] = "Alt + Right click"
+--Translation missing 
+-- locales["BUTTON"] = "ZZIB Button"
+--Translation missing 
+-- locales["CTRL_LEFT_MOUSEBUTTON"] = "Ctrl + Left click"
+--Translation missing 
+-- locales["CTRL_RIGHT_MOUSEBUTTON"] = "Ctrl + Right click"
+--Translation missing 
+-- locales["LEFT_MOUSEBUTTON"] = "Left click"
+--Translation missing 
+-- locales["REVERSECODEX"] = "Reverse black codex order"
+--Translation missing 
+-- locales["RIGHT_MOUSEBUTTON"] = "Right click"
+--Translation missing 
+-- locales["SHIFT_LEFT_MOUSEBUTTON"] = "Shift + Left click"
+--Translation missing 
+-- locales["SHIFT_RIGHT_MOUSEBUTTON"] = "Shift + Right click"
+--Translation missing 
+-- locales["TRANSPORTACTION1"] = "open RoM transportbook"
+--Translation missing 
+-- locales["TRANSPORTACTION2"] = "open transportdropdown"
+--Translation missing 
+-- locales["TRANSPORTACTION3"] = "open WheresMyHome transportframe"
+--Translation missing 
+-- locales["TRANSPORTBOOK_ADD_ENTRY"] = "Mark Transport Point"
+--Translation missing 
+-- locales["TRANSPORTBOOK_FULL"] = "Your transportbook is full. Please delete unnecessary entries first."
+--Translation missing 
+-- locales["TRANSPORTBOOKSORT"] = "Sort transportbook by alphabetical order"
+--Translation missing 
+-- locales["TRANSPORTMODE"] = "Left-click action"
+--Translation missing 
+-- locales["WRITTEN_BY"] = "Written by"
+
+return locales

@@ -1,0 +1,23 @@
+local locales = {}
+locales["ADDON_DESCRIPTION"] = "A plugin for ZZInfoBar showing where you registered your recall point."
+locales["ADDON_LOADED"] = "Addon loaded"
+locales["ALT_LEFT_MOUSEBUTTON"] = "Alt + Left click"
+locales["ALT_RIGHT_MOUSEBUTTON"] = "Alt + Right click"
+locales["BUTTON"] = "ZZIB Button"
+locales["CTRL_LEFT_MOUSEBUTTON"] = "Ctrl + Left click"
+locales["CTRL_RIGHT_MOUSEBUTTON"] = "Ctrl + Right click"
+locales["LEFT_MOUSEBUTTON"] = "Left click"
+locales["REVERSECODEX"] = "Reverse black codex order"
+locales["RIGHT_MOUSEBUTTON"] = "Right click"
+locales["SHIFT_LEFT_MOUSEBUTTON"] = "Shift + Left click"
+locales["SHIFT_RIGHT_MOUSEBUTTON"] = "Shift + Right click"
+locales["TRANSPORTACTION1"] = "open RoM transportbook"
+locales["TRANSPORTACTION2"] = "open transportdropdown"
+locales["TRANSPORTACTION3"] = "open WheresMyHome transportframe"
+locales["TRANSPORTBOOK_ADD_ENTRY"] = "Mark Transport Point"
+locales["TRANSPORTBOOK_FULL"] = "Your transportbook is full. Please delete unnecessary entries first."
+locales["TRANSPORTBOOKSORT"] = "Sort transportbook by alphabetical order"
+locales["TRANSPORTMODE"] = "Left-click action"
+locales["WRITTEN_BY"] = "Written by"
+
+return locales

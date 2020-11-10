@@ -1,0 +1,33 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/
+UI.xsd">
+
+<!-- labelTextKey, listEntries, configKey, -->
+<Frame name="yGather_LabeledListBoxTemplate" virtual="true">
+    <Frames>
+        <Frame name="$parent_Label">
+            <Anchors><Anchor point="LEFT"/></Anchors>
+            <Layers>
+                <Layer>
+                    <FontString name="$parent_Text" inherits="GameTitleFont" text="">
+                        <Anchors>
+                            <Anchor point="LEFT"/>
+                        </Anchors>
+                    </FontString>
+                </Layer>
+            </Layers>
+        </Frame>
+        <Frame name="$parent_DropDown"  inherits="UIDropDownMenuTemplate">
+            <Anchors>
+                <Anchor point="RIGHT"/>
+            </Anchors>
+        </Frame>
+    </Frames>
+    <Scripts>
+        <OnShow>
+            yGather.templates.listBox.OnShow(this);
+        </OnShow>
+    </Scripts>
+</Frame>
+
+    
+</Ui>

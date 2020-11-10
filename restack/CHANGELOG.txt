@@ -1,0 +1,8 @@
+==== Version 1.0.1 ====
+
+* [mod] will delete the collected database with every patch
+
+
+== Version 1.0.0 ==
+
+* [inf] initial release

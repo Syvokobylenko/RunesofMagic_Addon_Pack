@@ -1,0 +1,528 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ ../../worldxml/ui.xsd">
+	<Frame name="CPSearchItemTemplate" enableMouse="true" virtual="true">
+		<Size>
+			<AbsDimension x="650" y="34" />
+		</Size>
+		<Layers>
+			<Layer>
+			<FontString name="$parentName" inherits="GameFontLabel" justifyH="LEFT">
+				<Size>
+					<AbsDimension x="216" y="14"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset><AbsDimension x="40" y="0"/></Offset></Anchor>
+				</Anchors>
+				<FontHeight><AbsValue val="12"></AbsValue></FontHeight>
+			</FontString>
+			<FontString name="$parentSet" inherits="GameFontNormal" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="200" y="14"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentName" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				<FontHeight><AbsValue val="10"></AbsValue></FontHeight>
+				<Color r="0.6" g="0.4" b="0.2" />
+				</FontString>
+			<FontString name="$parentLevel" inherits="GameFontLabel" justifyH="CENTER">
+				<Size>
+					<AbsDimension x="24" y="14"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentName" relativePoint="TOPRIGHT">
+						<Offset><AbsDimension y="0" x="2"></AbsDimension></Offset>
+					</Anchor>
+				</Anchors>
+				<FontHeight><AbsValue val="12"></AbsValue></FontHeight>
+			</FontString>
+			<FontString name="$parentEffect" inherits="GameFontNormal" justifyH="LEFT">
+				<Size><AbsDimension x="75" y="34"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentName" relativePoint="TOPRIGHT">
+						<Offset><AbsDimension x="30" y="0" /></Offset>
+					</Anchor>
+				</Anchors>
+				<FontHeight><AbsValue val="10"></AbsValue></FontHeight>
+			</FontString>
+			<FontString name="$parentBoni" inherits="GameFontGreen" justifyH="LEFT">
+				<Size><AbsDimension x="160" y="34"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentEffect" relativePoint="TOPRIGHT" />
+				</Anchors>
+				<FontHeight><AbsValue val="10"></AbsValue></FontHeight>
+			</FontString>
+			<FontString name="$parentBoni2" inherits="GameFontGreen" justifyH="LEFT">
+				<Size><AbsDimension x="118" y="34"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentBoni" relativePoint="TOPRIGHT" ><Offset>
+						<AbsDimension x="2" y="0"></AbsDimension></Offset></Anchor>
+				</Anchors>
+				<FontHeight><AbsValue val="10"></AbsValue></FontHeight>
+			</FontString>
+			</Layer>
+			<Layer level="BACKGROUND">
+			<Texture name="$parentHighlight" file="Interface\AuctionFrame\AuctionFrameItem-Highlight" alphaMode="ADD" hidden="true">
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset><AbsDimension x="-2" y="0"></AbsDimension></Offset></Anchor>
+					<Anchor point="BOTTOMRIGHT"><Offset><AbsDimension x="-10" y="-1"></AbsDimension></Offset></Anchor>
+				</Anchors>
+			</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentItem" inherits="ItemButtonTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset><AbsDimension x="0" y="0" /></Offset>
+                    </Anchor>
+                </Anchors>
+				<Scripts>
+					<OnEnter>Charplan.Search.OnItemEnter(this:GetParent())</OnEnter>
+					<OnLeave>Charplan.Search.OnItemLeave(this:GetParent())</OnLeave>
+			        <OnClick>Charplan.Search.OnItemClick(this:GetParent(),key)</OnClick>
+			        <OnDoubleClick>Charplan.Search.OnItemDblClick(this:GetParent())</OnDoubleClick>
+                    <OnLoad>this:RegisterForClicks("LeftButton", "RightButton")</OnLoad>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnClick>Charplan.Search.OnItemClick(this,key)</OnClick>
+			<OnDoubleClick>Charplan.Search.OnItemDblClick(this)</OnDoubleClick>
+			<OnMouseWheel>UIPanelScrollBar_OnMouseWheel(CPSearchItemsSB, delta)</OnMouseWheel>
+            <OnLoad> this:RegisterForClicks("LeftButton", "RightButton")</OnLoad>
+		</Scripts>
+	</Frame>
+
+	<Button name="CPSearchHeaderButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="64" y="20"/>
+		</Size>
+		<Layers>
+			<Layer>
+				<Texture name="$parentSortIcon">
+					<Size>
+						<AbsDimension x="8" y="8"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>Charplan.Search.HeaderClicked(this)</OnClick>
+		</Scripts>
+		<NormalText inherits="GameFontYellow"/>
+		<PushedTextOffset>
+			<AbsDimension x="1" y="1"/>
+		</PushedTextOffset>
+	</Button>
+
+	<CheckButton name="CPSearchCheckbox" inherits="CPCheckbox" virtual="true">
+		<Scripts>
+			<OnClick>Charplan.Search.FindItems()</OnClick>
+		</Scripts>
+	</CheckButton>
+
+	<Frame name="CPSearch" parent="CPFrame"  inherits="UICommonFrameTemplate">
+		<Size>
+			<AbsDimension x="680" y="550"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" relativePoint="TOP" >
+				<Offset>
+					<AbsDimension x="0" y="-60"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<!-- Filter stuff !-->
+			<Frame name="$parentFilter">
+				<Size><AbsDimension y="100" x="680"></AbsDimension></Size>
+				<Anchors><Anchor point="TOP"></Anchor></Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<FontString name="$parentNameLabel" inherits="GameFontHighlight"><Anchors>
+							<Anchor point="TOPLEFT"><Offset><AbsDimension x="150" y="46"></AbsDimension></Offset></Anchor>
+						</Anchors></FontString>
+						<FontString name="$parentLevelLabel" inherits="GameFontHighlight"><Anchors>
+							<Anchor point="TOPLEFT"><Offset><AbsDimension x="150" y="70"></AbsDimension></Offset></Anchor>
+						</Anchors></FontString>
+						<FontString inherits="GameFontLabel" text="-">
+							<Anchors>
+								<Anchor point="TOPLEFT"><Offset><AbsDimension x="245" y="68"></AbsDimension></Offset></Anchor>
+							</Anchors>
+						</FontString>
+						<FontString inherits="GameFontLabel" text="&gt;">
+							<Anchors>
+								<Anchor point="TOPLEFT"><Offset><AbsDimension x="204" y="97" /></Offset></Anchor>
+							</Anchors>
+						</FontString>
+						<FontString inherits="GameFontLabel" text="&lt;">
+							<Anchors>
+								<Anchor point="TOPLEFT"><Offset><AbsDimension x="254" y="97" /></Offset></Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="$parentStatsLabel" inherits="GameFontHighlight"><Anchors>
+							<Anchor point="TOPLEFT"><Offset><AbsDimension x="60" y="100"></AbsDimension></Offset></Anchor>
+						</Anchors></FontString>
+						<FontString name="CPSearchPimpPlus" inherits="GameFontHighlight"><Anchors>
+							<Anchor point="TOPLEFT"><Offset><AbsDimension x="515" y="29"></AbsDimension></Offset></Anchor>
+						</Anchors></FontString>
+						<FontString name="CPSearchPimpTier" inherits="GameFontHighlight"><Anchors>
+							<Anchor point="TOPLEFT"><Offset><AbsDimension x="585" y="29"></AbsDimension></Offset></Anchor>
+						</Anchors></FontString>
+					</Layer>
+				</Layers>
+
+				<Frames>
+					<EditBox name="$parentName" inherits="UIPanelEditBoxTemplate">
+						<Size><AbsDimension x="120" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="190" y="45" /></Offset></Anchor>
+						</Anchors>
+						<Scripts>
+							<OnEnterPressed>Charplan.Search.OnTab(this)</OnEnterPressed>
+							<OnTabPressed>Charplan.Search.OnTab(this)</OnTabPressed>
+							<OnTextChanged>Charplan.Search.FindItems()</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="$parentLevelMin" inherits="UIPanelEditBoxTemplate" numeric="true" letters="3">
+						<Size><AbsDimension x="40" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT"><Offset><AbsDimension x="200" y="65" /></Offset></Anchor>
+						</Anchors>
+						<Scripts>
+							<OnEnterPressed>Charplan.Search.OnTab(this)</OnEnterPressed>
+							<OnTabPressed>Charplan.Search.OnTab(this)</OnTabPressed>
+							<OnTextChanged>Charplan.Search.FindItems()</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="$parentLevelMax" inherits="UIPanelEditBoxTemplate" numeric="true" letters="3">
+						<Size><AbsDimension x="40" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentLevelMin" relativePoint="TOPRIGHT"><Offset><AbsDimension x="12" y="0" /></Offset></Anchor>
+						</Anchors>
+						<Scripts>
+							<OnEnterPressed>Charplan.Search.OnTab(this)</OnEnterPressed>
+							<OnTabPressed>Charplan.Search.OnTab(this)</OnTabPressed>
+							<OnTextChanged>Charplan.Search.FindItems()</OnTextChanged>
+						</Scripts>
+					</EditBox>
+                    <Frame name="$parentRarity" inherits="UIDropDownMenuTemplate">
+                        <Size>
+                            <AbsDimension x="132" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="344" y="35"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnLoad>Charplan.Search.FilterRarityMenu_OnLoad(this)</OnLoad>
+                        </Scripts>
+                    </Frame>
+                    <Frame name="$parentFilter" inherits="UIDropDownMenuTemplate">
+                        <Size>
+                            <AbsDimension x="132" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="344" y="68"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnLoad>Charplan.Search.FilterFilterMenu_OnLoad(this)</OnLoad>
+                        </Scripts>
+                    </Frame>
+                    <CheckButton name="CPSearchPowerModify" inherits="CPSearchCheckbox">
+                        <Anchors>
+                            <Anchor point="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="530" y="74"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </CheckButton>
+					<Frame name="$parentType" inherits="UIDropDownMenuTemplate">
+						<Size>
+							<AbsDimension x="132" y="24"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="18" y="64"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>Charplan.Search.FilterTypeMenu_OnLoad(this)</OnLoad>
+						</Scripts>
+					</Frame>
+					<Frame name="$parentSlot" inherits="UIDropDownMenuTemplate">
+						<Size>
+							<AbsDimension x="132" y="24"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="18" y="35"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>Charplan.Search.FilterSlotMenu_OnLoad(this)</OnLoad>
+						</Scripts>
+					</Frame>
+					<Frame name="$parentPlus" inherits="UIDropDownMenuTemplate">
+						<Size>
+							<AbsDimension x="40" y="24"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="510" y="45"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>Charplan.Search.PlusMenu_OnLoad(this)</OnLoad>
+						</Scripts>
+					</Frame>
+					<Frame name="$parentTier" inherits="UIDropDownMenuTemplate">
+						<Size>
+							<AbsDimension x="40" y="24"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset><AbsDimension x="580" y="45"/></Offset>
+							</Anchor>
+							</Anchors>
+						<Scripts>
+							<OnLoad>Charplan.Search.TierMenu_OnLoad(this)</OnLoad>
+						</Scripts>
+					</Frame>
+					<EditBox name="$parentStats" inherits="UIPanelEditBoxTemplate">
+						<Size><AbsDimension x="100" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset><AbsDimension x="100" y="95" /></Offset></Anchor>
+							</Anchors>
+						<Scripts>
+							<OnEnterPressed>Charplan.Search.OnTab(this)</OnEnterPressed>
+							<OnTabPressed>Charplan.Search.OnTab(this)</OnTabPressed>
+							<OnTextChanged>Charplan.Search.FindItems()</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="$parentStatsMin" inherits="UIPanelEditBoxTemplate" numeric="true" letters="5">
+						<Size><AbsDimension x="40" y="20"/></Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parentStats" relativePoint="RIGHT">
+								<Offset><AbsDimension x="14" y="0" /></Offset></Anchor>
+						</Anchors>
+						<Scripts>
+							<OnEnterPressed>Charplan.Search.OnTab(this)</OnEnterPressed>
+							<OnTabPressed>Charplan.Search.OnTab(this)</OnTabPressed>
+							<OnTextChanged>Charplan.Search.FindItems()</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="$parentStatsMax" inherits="UIPanelEditBoxTemplate" numeric="true" letters="5">
+						<Size><AbsDimension x="40" y="20"/></Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parentStatsMin" relativePoint="RIGHT">
+								<Offset><AbsDimension x="12" y="0" /></Offset></Anchor>
+						</Anchors>
+						<Scripts>
+							<OnEnterPressed>Charplan.Search.OnTab(this)</OnEnterPressed>
+							<OnTabPressed>Charplan.Search.OnTab(this)</OnTabPressed>
+							<OnTextChanged>Charplan.Search.FindItems()</OnTextChanged>
+						</Scripts>
+					</EditBox>
+				</Frames>
+			</Frame>
+
+			<!-- item list !-->
+			<Frame name="CPSearchItems">
+				<Size>
+					<AbsDimension x="660"  y="368"></AbsDimension>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="120" /></Offset></Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\Tooltip-border">
+				    <EdgeSize><AbsValue val="8"/></EdgeSize>
+				</Backdrop>
+				<Frames>
+					<Button name="CPSearchHead1" inherits="CPSearchHeaderButtonTemplate" id="1">
+						<Size><AbsDimension x="100" y="20"></AbsDimension></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT"><Offset><AbsDimension x="40" y="1"/></Offset></Anchor>
+						</Anchors>
+					</Button>
+					<Button name="CPSearchHead2" inherits="CPSearchHeaderButtonTemplate" id="2">
+						<Size><AbsDimension x="50" y="20"></AbsDimension></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT"><Offset><AbsDimension x="240" y="1"/></Offset></Anchor>
+						</Anchors>
+					</Button>
+					<Button name="CPSearchHead3" inherits="CPSearchHeaderButtonTemplate" id="3">
+						<Size><AbsDimension x="50" y="20"></AbsDimension></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT"><Offset><AbsDimension x="290" y="1"/></Offset></Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<Texture name="$parentSortIcon2">
+									<Size><AbsDimension x="8" y="8"/></Size>
+									<Anchors>
+										<Anchor point="LEFT" relativePoint="RIGHT">
+											<Offset>
+												<AbsDimension x="4" y="0"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</Texture>
+							</Layer>
+						</Layers>
+					</Button>
+                    <Button name="CPSearchHead4" inherits="CPSearchHeaderButtonTemplate" id="4">
+						<Size><AbsDimension x="50" y="20"></AbsDimension></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT"><Offset><AbsDimension x="400" y="1"/></Offset></Anchor>
+						</Anchors>
+					</Button>
+					<Frame name="CPSearchItem1" inherits="CPSearchItemTemplate" id="1">
+						<Anchors>
+							<Anchor point="TOPLEFT"><Offset><AbsDimension x="2" y="22" /></Offset></Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPSearchItem2" inherits="CPSearchItemTemplate" id="2">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="CPSearchItem1" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="CPSearchItem3" inherits="CPSearchItemTemplate" id="3">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="CPSearchItem2" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="CPSearchItem4" inherits="CPSearchItemTemplate" id="4">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="CPSearchItem3" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="CPSearchItem5" inherits="CPSearchItemTemplate" id="5">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="CPSearchItem4" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="CPSearchItem6" inherits="CPSearchItemTemplate" id="6">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="CPSearchItem5" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="CPSearchItem7" inherits="CPSearchItemTemplate" id="7">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="CPSearchItem6" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="CPSearchItem8" inherits="CPSearchItemTemplate" id="8">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="CPSearchItem7" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="CPSearchItem9" inherits="CPSearchItemTemplate" id="9">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="CPSearchItem8" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="CPSearchItem10" inherits="CPSearchItemTemplate" id="10">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="CPSearchItem9" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Slider name="$parentSB" inherits="UIPanelScrollBarTemplate">
+						<Anchors>
+							<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT"><Offset><AbsDimension x="-1" y="19"/></Offset></Anchor>
+							<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT"><Offset><AbsDimension x="-1" y="-19"/></Offset></Anchor>
+						</Anchors>
+						<Scripts>
+							<OnValueChanged>
+								UIPanelScrollBar_OnValueChanged(this, arg1)
+								Charplan.Search.UpdateList()
+							</OnValueChanged>
+						</Scripts>
+					</Slider>
+					<!-- Context menue -->
+					<Frame name="CPSearchItemMenu" inherits="UIDropDownMenuTemplate">
+						<Scripts>
+							<OnLoad>
+								UIDropDownMenu_Initialize(this, Charplan.Search.ShowContextMenu, "MENU")
+							</OnLoad>
+						</Scripts>
+					</Frame>
+				</Frames>
+			</Frame>
+			<Button name="CPSearchTakeIt1" inherits="UIPanelButtonTemplate">
+				<Size>
+					<AbsDimension x="100" y="24"></AbsDimension>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOM"><Offset>
+						<AbsDimension x="-250" y="-24"></AbsDimension>
+					</Offset></Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>Charplan.Search.OnTakeIt(1)</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="CPSearchTakeIt1Item" inherits="ItemButtonTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="CPSearchTakeIt1" relativePoint="RIGHT"><Offset><AbsDimension x="8" y="0"></AbsDimension></Offset></Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnter>Charplan.Search.OnTakeItEnter(this, 1)</OnEnter>
+					<OnLeave>Charplan.Search.OnTakeItLeave(1)</OnLeave>
+					<OnClick>Charplan.Search.OnTakeIt(1)</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="CPSearchTakeIt2" inherits="UIPanelButtonTemplate">
+				<Size>
+					<AbsDimension x="100" y="24"></AbsDimension>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOM"><Offset>
+						<AbsDimension x="-50" y="-24"></AbsDimension>
+					</Offset></Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>Charplan.Search.OnTakeIt(2)</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="CPSearchTakeIt2Item" inherits="ItemButtonTemplate">
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="CPSearchTakeIt2" relativePoint="LEFT"><Offset><AbsDimension x="-8" y="0"></AbsDimension></Offset></Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnter>Charplan.Search.OnTakeItEnter(this, 2)</OnEnter>
+					<OnLeave>Charplan.Search.OnTakeItLeave(2)</OnLeave>
+					<OnClick>Charplan.Search.OnTakeIt(2)</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="CPSearchCancel" inherits="UIPanelButtonTemplate" text="CANCEL">
+				<Size>
+					<AbsDimension x="130" y="24"></AbsDimension>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOM"><Offset>
+						<AbsDimension x="150" y="-24"></AbsDimension>
+					</Offset></Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>Charplan.Search.OnCancel()</OnClick>
+				</Scripts>
+			</Button>
+
+		</Frames>
+		<Scripts>
+			<OnLoad>Charplan.Search.OnLoad(this)</OnLoad>
+			<OnShow>Charplan.Search.OnShow(this)</OnShow>
+			<OnHide>Charplan.Search.OnHide()</OnHide>
+		</Scripts>
+	</Frame>
+</Ui>

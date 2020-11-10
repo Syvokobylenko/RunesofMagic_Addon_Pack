@@ -1,0 +1,46 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+
+	<Frame name="restackFrame" parent="UIParent">
+		<Scripts>
+		  <OnLoad>
+			restack.onLoad(this)
+		  </OnLoad>
+		  <OnUpdate>
+			restack.onUpdate(this, elapsedTime)
+		  </OnUpdate>
+		  <OnEvent>
+			restack.onEvent(event, this);
+		  </OnEvent>
+		</Scripts>
+	</Frame>
+
+
+	<Button name="RestackButton" inherits="MinimapButtonTemplate" parent="UIParent">
+		<Size><AbsDimension x="24" y="24"/></Size>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="MinimapViewFrame" relativePoint="BOTTOMLEFT">
+			<Offset><AbsDimension x="0" y="0"/></Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer level="HIGHLIGHT">
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>
+				restack.doit();
+			</OnClick>
+			<OnEnter>
+				restack.setTooltip(this);
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide();
+			</OnLeave>
+		</Scripts>
+		<NormalTexture file="Interface\addons\restack\gfx\restack-normal"/>
+		<PushedTexture file="Interface\addons\restack\gfx\restack-depress"/>
+		<DisabledTexture file="Interface\addons\restack\gfx\restack-disable"/>
+		<HighlightTexture file="Interface\Buttons\PanelSmallButtonHighlight" alphaMode="ADD"/>
+	</Button>
+</Ui>
+

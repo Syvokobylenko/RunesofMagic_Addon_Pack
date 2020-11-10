@@ -1,0 +1,10 @@
+## Title: AutoBattleGround
+## Version: 2.1.1
+## Notes: Automatically enters, leaves and rejoins battleground
+## Author: Achandos / Akastos
+
+libs/LibStub.lua
+libs/WaitTimer.lua
+
+AutoBattleGround.lua
+AutoBattleGround.xml

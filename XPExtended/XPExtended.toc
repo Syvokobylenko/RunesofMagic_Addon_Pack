@@ -1,0 +1,11 @@
+## Interface: 5.0.10.2634
+## Title: XPExtended
+## Author: Zilvermoon, bronislav84, Pristerofgodness
+## Version: v0.4.6i
+## Release-Date: 15/5-2013
+## Notes: Show additional information on the Exp-bar.
+## X-Website: http://forum.runesofmagic.com/showthread.php?t=31760
+## X-Category: Interface Enhancements
+## SavedVariables: 
+
+XPExtended.xml

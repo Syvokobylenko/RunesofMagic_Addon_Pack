@@ -1,0 +1,46 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+
+	<Script file="SendViaChat.lua"/>
+
+	<Frame name="SendVC_Frame" hidden="true">
+		<Scripts>
+			<OnLoad>
+				SendVC.OnLoad(this)
+			</OnLoad>
+			<OnEvent>
+				SendVC.OnEvent(event, arg1, arg2, arg3, arg4)
+			</OnEvent>
+		</Scripts>
+	</Frame>
+	<Button name="SendVC_Button" hidden="false" inherits="MinimapButtonTemplate" parent="UIParent">
+		<Size>
+			<AbsDimension y="24" x="24"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="MinimapViewFrame" relativePoint="CENTER">
+				<Offset>
+					<RelDimension x="-85" y="-2.5"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Frame name="SendVC_Menu" inherits="UIDropDownMenuTemplate" hidden="true">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="SendVC_Button" relativePoint="TOP"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>UIDropDownMenu_Initialize(this, SendVC.MenuOnShow, "MENU")</OnLoad>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<Scripts>
+            <OnLoad>this:RegisterForClicks("LeftButton","RightButton")</OnLoad>
+			<OnClick>SendVC.ButtonOnClick(this, key)</OnClick>
+			<OnEnter>SendVC.ButtonOnEnter(this)</OnEnter>
+			<OnLeave>SendVC.ButtonOnLeave(this)</OnLeave>
+		</Scripts>
+		<NormalTexture file="interface/AddOns/SendViaChat/img/icon_on"/>
+		<PushedTexture file="interface/AddOns/SendViaChat/img/icon_off"/>
+		<HighlightTexture file="interface/minimap/minimapbutton_highlight" alphaMode="ADD"/>
+	</Button>
+</Ui>

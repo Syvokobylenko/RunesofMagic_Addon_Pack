@@ -1,0 +1,5 @@
+debug.lua
+Lib/LibStub.lua
+Lib/Sol.lua
+ExtendedMacroIcon.lua
+ExtendedMacroIcon.xml

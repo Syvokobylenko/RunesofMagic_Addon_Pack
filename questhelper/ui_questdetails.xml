@@ -1,0 +1,591 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ ../../worldxml/ui.xsd">
+	<Button name="QHSectionTitleTemplate" virtual="true">
+		<Size><AbsDimension x="400" y="20"/></Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture file="interface/achievementtitleframe/atf_listitemhighlight">
+					<Size><AbsDimension x="410" y="18"/></Size>
+					<Anchors>
+						<Anchor point="TOPLEFT"><Offset><AbsDimension y="0" x="-5"/></Offset></Anchor>
+					</Anchors>
+					<Color g="1" r="1" b="1" a="0.3"/>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<Texture name="$parentIndicator" file="interface/actionbarframe/actionpagedown-normal">
+					<Size><AbsDimension x="16" y="16"/></Size>
+					<Anchors>
+						<Anchor point="TOPLEFT"><Offset>
+							<AbsDimension y="2" x="0"/>
+						</Offset></Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="$parentText" inherits="Font_Kraft_Text">
+					<Anchors><Anchor point="TOPLEFT">
+						<Offset><AbsDimension x="19" y="3"/></Offset>
+					</Anchor></Anchors>
+					<FontHeight><AbsValue val="12"/></FontHeight>
+					<Color r="0.12" g="0.11" b="0.11"/>
+				</FontString>
+				<Texture file="interface/tooltips/tooltip-separator">
+					<Size><AbsDimension y="4" x="330"/></Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentText" relativePoint="RIGHT"><Offset><AbsDimension y="0" x="3"/></Offset></Anchor>
+						<Anchor point="RIGHT" relativePoint="RIGHT"><Offset><AbsDimension y="0" x="-5"/></Offset></Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>QH.DetailDialog.OnTitleClick(this)</OnClick>
+			<OnMouseWheel>UIPanelScrollFrame_OnMouseWheel(QHQuestDetailsScrollFrame, delta)</OnMouseWheel>
+		</Scripts>
+	</Button>
+	<Frame name="QHNpcInfoTemplate" enableMouse="true" virtual="true">
+		<Size><AbsDimension x="400" y="20"/></Size>
+		<Frames>
+			<Frame name="$parentText" enableMouse="true">
+				<Size><AbsDimension x="300" y="20"/></Size>
+				<Anchors><Anchor point="LEFT"/></Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentName" inherits="Font_Kraft_Text" justifyH="LEFT">
+							<Size><AbsDimension x="140" y="20"/></Size>
+							<Anchors>
+								<Anchor point="LEFT"><Offset><AbsDimension x="10" y="0"/></Offset></Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="$parentPos"  inherits="Font_Socal_Text" justifyH="LEFT">
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="LEFT"><Offset><AbsDimension x="160" y="0"/></Offset></Anchor>
+							</Anchors>
+							<FontHeight>
+								<AbsValue val="11"/>
+							</FontHeight>
+							<Color g="0.3" r="0.3" b="0.3" />
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnEnter>QH.DetailDialog.OnNPCEnter(this:GetParent())</OnEnter>
+					<OnLeave>QH.DetailDialog.OnNPCLeave()</OnLeave>
+					<OnClick>QH.DetailDialog.OnNPCClicked(this:GetParent())</OnClick>
+					<OnLoad>this:RegisterForClicks("LeftButton", "RightButton")</OnLoad>
+				</Scripts>
+			</Frame>
+			<Button name="$parentSearch" inherits="UIPanelButtonTemplate" text="C_SEARCH">
+				<Size><AbsDimension x="70" y="16"/></Size>
+				<Anchors><Anchor point="RIGHT"/></Anchors>
+				<Scripts>
+					<OnClick>QH.DetailDialog.OnNPCSearch(this:GetParent())</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+	</Frame>
+	<Frame name="QHPosInfoTemplate" enableMouse="true" virtual="true">
+		<Size><AbsDimension x="400" y="19"/></Size>
+		<Frames>
+			<Frame name="$parentText" enableMouse="true">
+				<Size><AbsDimension x="300" y="18"/></Size>
+				<Anchors><Anchor point="LEFT"/></Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentName" inherits="Font_Socal_Text" justifyH="LEFT">
+							<Size><AbsDimension x="140" y="20"/></Size>
+							<Anchors>
+								<Anchor point="LEFT"><Offset><AbsDimension x="10" y="0"/></Offset></Anchor>
+							</Anchors>
+							<FontHeight><AbsValue val="12"/></FontHeight>
+							<Color r="0.28" g="0.20" b="0.13"/>
+						</FontString>
+						<FontString name="$parentPos"  inherits="Font_Socal_Text" justifyH="LEFT">
+							<Size><AbsDimension x="150" y="18"/></Size>
+							<Anchors>
+								<Anchor point="LEFT"><Offset><AbsDimension x="160" y="0"/></Offset></Anchor>
+							</Anchors>
+							<FontHeight><AbsValue val="11"/></FontHeight>
+							<Color g="0.3" r="0.3" b="0.3" />
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			<Button name="$parentMap" inherits="UIPanelButtonTemplate" text="UI_WORLDMAP_ZONE">
+				<Size><AbsDimension x="70" y="16"/></Size>
+				<Anchors><Anchor point="RIGHT"/></Anchors>
+				<Scripts>
+					<OnClick>QH.DetailDialog.OnShowMap(this:GetParent())</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+	</Frame>
+	<FontString name="QHRequestFrameItemTemplate" inherits="Font_Kraft_Text" justifyH="LEFT" virtual="true">
+		<Size>
+			<AbsDimension x="400" y="0"/>
+		</Size>
+	</FontString>
+	<Frame name="QHRequestFrameTemplate" virtual="true">
+		<Size><AbsDimension x="390" y="0"/></Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parent1" inherits="QHRequestFrameItemTemplate">
+					<Anchors><Anchor point="TOPLEFT">
+						<Offset><AbsDimension y="0" x="10"/></Offset>
+					</Anchor></Anchors>
+				</FontString>
+				<FontString name="$parent2" inherits="QHRequestFrameItemTemplate">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent1" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="0" y="4"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent3" inherits="QHRequestFrameItemTemplate">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent2" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="0" y="4"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent4" inherits="QHRequestFrameItemTemplate">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent3" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="0" y="4"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent5" inherits="QHRequestFrameItemTemplate">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent4" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="0" y="4"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent6" inherits="QHRequestFrameItemTemplate">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent5" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="0" y="4"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent7" inherits="QHRequestFrameItemTemplate">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent6" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="0" y="4"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent8" inherits="QHRequestFrameItemTemplate">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent7" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="0" y="4"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent9" inherits="QHRequestFrameItemTemplate">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent8" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="0" y="4"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent10" inherits="QHRequestFrameItemTemplate">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent9" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="0" y="4"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent11" inherits="QHRequestFrameItemTemplate">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent10" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="0" y="4"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent12" inherits="QHRequestFrameItemTemplate">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent11" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="0" y="4"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent13" inherits="QHRequestFrameItemTemplate">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent12" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="0" y="4"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent14" inherits="QHRequestFrameItemTemplate">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent13" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="0" y="4"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent15" inherits="QHRequestFrameItemTemplate">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent14" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="0" y="4"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+	<Frame name="QHQuestDetailsShortTemplate" virtual="true">
+		<Size><AbsDimension x="400" y="0"/></Size>
+		<Frames>
+			<MessageFrame name="$parentDesc" inherits="QuestBookMessageFrameTemplate">
+				<Anchors><Anchor point="TOPLEFT"/></Anchors>
+			</MessageFrame>
+			<Frame name="$parentItem" inherits="QHRequestFrameTemplate">
+				<Anchors><Anchor point="TOPLEFT" relativeTo="$parentDesc" relativePoint="BOTTOMLEFT"><Offset>
+					<AbsDimension y="8" x="0"/>
+				</Offset></Anchor></Anchors>
+			</Frame>
+			<Button name="$parentHint" inherits="UIPanelButtonTemplate">
+				<Size><AbsDimension x="50" y="16"/></Size>
+				<Anchors><Anchor point="BOTTOMRIGHT"/></Anchors>
+				<Scripts>
+					<OnClick>QH.QDB.ShowHint(this)</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+	</Frame>
+	<Frame name="QHPrerequisitTemplate" virtual="true">
+		<Layers>
+			<Layer>
+				<FontString name="$parentWarning" inherits="Font_Kraft_Text" justifyH="LEFT">
+					<Size><AbsDimension x="200" y="20"/></Size>
+					<Anchors><Anchor point="TOPLEFT"/></Anchors>
+					<Color g="0.1" r="1" b="0.1"/>
+				</FontString>
+				<FontString name="$parentText" inherits="Font_Kraft_Text" justifyH="LEFT">
+					<Anchors><Anchor point="TOPLEFT">
+						<Offset><AbsDimension x="0" y="42"/></Offset></Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="$parentNPC">
+				<Size><AbsDimension x="400" y="100" /></Size>
+				<Anchors><Anchor point="TOPLEFT" relativeTo="$parentWarning" relativePoint="BOTTOMLEFT">
+					<Offset><AbsDimension x="0" y="0"/></Offset></Anchor>
+				</Anchors>
+				<Frames>
+					<Frame name="$parent1" inherits="QHNpcInfoTemplate"/>
+					<Frame name="$parent2" inherits="QHNpcInfoTemplate">
+							<Anchors><Anchor point="TOPLEFT" relativeTo="$parent1" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="$parent3" inherits="QHNpcInfoTemplate">
+							<Anchors><Anchor point="TOPLEFT" relativeTo="$parent2" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="$parent4" inherits="QHNpcInfoTemplate">
+							<Anchors><Anchor point="TOPLEFT" relativeTo="$parent3" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="$parent5" inherits="QHNpcInfoTemplate">
+							<Anchors><Anchor point="TOPLEFT" relativeTo="$parent4" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+				</Frames>
+			</Frame>
+		</Frames>
+	</Frame>
+	<Frame name="QHPositionsTemplate" virtual="true">
+		<Layers>
+			<Layer>
+				<FontString name="$parentTitle1" inherits="Font_Kraft_Text" justifyH="LEFT"/>
+				<FontString name="$parentTitle2" inherits="Font_Kraft_Text" justifyH="LEFT"/>
+				<FontString name="$parentTitle3" inherits="Font_Kraft_Text" justifyH="LEFT"/>
+				<FontString name="$parentTitle4" inherits="Font_Kraft_Text" justifyH="LEFT"/>
+				<FontString name="$parentTitle5" inherits="Font_Kraft_Text" justifyH="LEFT"/>
+				<FontString name="$parentTitle6" inherits="Font_Kraft_Text" justifyH="LEFT"/>
+				<FontString name="$parentTitle7" inherits="Font_Kraft_Text" justifyH="LEFT"/>
+				<FontString name="$parentTitle8" inherits="Font_Kraft_Text" justifyH="LEFT"/>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="$parentPos1" inherits="QHPosInfoTemplate" />
+			<Frame name="$parentPos2" inherits="QHPosInfoTemplate" />
+			<Frame name="$parentPos3" inherits="QHPosInfoTemplate" />
+			<Frame name="$parentPos4" inherits="QHPosInfoTemplate" />
+			<Frame name="$parentPos5" inherits="QHPosInfoTemplate" />
+			<Frame name="$parentPos6" inherits="QHPosInfoTemplate" />
+			<Frame name="$parentPos7" inherits="QHPosInfoTemplate" />
+			<Frame name="$parentPos8" inherits="QHPosInfoTemplate" />
+			<Frame name="$parentPos9" inherits="QHPosInfoTemplate" />
+			<Frame name="$parentPos10" inherits="QHPosInfoTemplate" />
+			<Frame name="$parentPos11" inherits="QHPosInfoTemplate" />
+			<Frame name="$parentPos12" inherits="QHPosInfoTemplate" />
+		</Frames>
+	</Frame>
+	<Button name="QHRewardButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="38" y="38"/>
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parent_Texture">
+					<Size>
+						<AbsDimension x="32" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension y="2" x="3"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer>
+				<Texture name="$parent_Border" file="Interface\Buttons\QuickSlotYellow-Normal">
+					<Size>
+						<AbsDimension y="64" x="64"/>
+					</Size>
+					<Anchors>
+						<Anchor point="CENTER" relativePoint="TOPLEFT">
+							<Offset>
+								<AbsDimension x="18" y="18"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="$parent_Count" inherits="NumberFontNormal" justifyH="RIGHT" hidden="true">
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" relativeTo="$parent_Texture">
+							<Offset>
+								<AbsDimension x="-5" y="-2"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnEnter>QH.DetailDialog.OnEnter_QuestRewardButton( this )</OnEnter>
+			<OnClick>QH.DetailDialog.OnClick_QuestRewardButton( this )</OnClick>
+			<OnLeave>QH.DetailDialog.OnLeave_QuestRewardButton( this )</OnLeave>
+		</Scripts>
+	</Button>
+	<Frame name="QHRewardItemsTemplate" virtual="true">
+		<Size><AbsDimension x="200" y="50"/></Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parentTitle" inherits="Font_Kraft_Text" justifyH="LEFT">
+					<Anchors>
+						<Anchor point="TOPLEFT"><Offset><AbsDimension x="0" y="0"/></Offset></Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parent_Item1" inherits="QHRewardButtonTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentTitle" relativePoint="BOTTOMLEFT"><Offset><AbsDimension x="1" y="0"/></Offset></Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parent_Item2" inherits="QHRewardButtonTemplate" id="2">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_Item1" relativePoint="TOPRIGHT">
+						<Offset><AbsDimension x="6" y="0"/></Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parent_Item3" inherits="QHRewardButtonTemplate" id="3">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_Item2" relativePoint="TOPRIGHT">
+						<Offset><AbsDimension x="6" y="0"/></Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parent_Item4" inherits="QHRewardButtonTemplate" id="4">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_Item3" relativePoint="TOPRIGHT">
+						<Offset><AbsDimension x="6" y="0"/></Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+		</Frames>
+	</Frame>
+	<Frame name="QHRewardTemplate"  virtual="true">
+		<Layers>
+			<Layer>
+				<FontString name="$parentXPName" inherits="Font_Kraft_Text" justifyH="LEFT">
+					<Size><AbsDimension x="60" y="14"/></Size>
+					<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension y="30" x="10"/></Offset></Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentXP" inherits="Font_Kraft_Text" justifyH="LEFT">
+					<Size><AbsDimension x="160" y="14"/></Size>
+					<Anchors><Anchor point="TOPLEFT" relativeTo="$parentXPName" relativePoint="TOPRIGHT"/></Anchors>
+				</FontString>
+				<FontString name="$parentMoneyName" inherits="Font_Kraft_Text" justifyH="LEFT">
+					<Size><AbsDimension x="100" y="14"/></Size>
+					<Anchors><Anchor point="TOP"><Offset><AbsDimension y="30" x="150"/></Offset></Anchor></Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="$parentNPC" inherits="QHNpcInfoTemplate">
+				<Anchors><Anchor point="TOPLEFT"/></Anchors>
+			</Frame>
+			<Frame name="$parentMoney" inherits="MoneyFrameTemplate">
+				<Size><AbsDimension x="100" y="14"/></Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
+					<Offset><AbsDimension y="30" x="-10"/></Offset>
+				</Anchor></Anchors>
+			</Frame>
+			<Frame name="$parentChoiceItems" inherits="QHRewardItemsTemplate">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension y="50" x="200"/></Offset></Anchor></Anchors>
+			</Frame>
+			<Frame name="$parentItems" inherits="QHRewardItemsTemplate">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension y="50" x="10"/></Offset></Anchor></Anchors>
+			</Frame>
+		</Frames>
+	</Frame>
+
+	<Frame name="QHQuestDetails" parent="UIParent" inherits="UICommonFrameTemplate">
+		<Size><AbsDimension x="480" y="552"/></Size>
+		<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="QHQuestList"/></Anchors>
+		<Frames>
+			<Frame inherits="UIPanelBackdropFrame">
+				<Size>
+					<AbsDimension x="490" y="505"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-8" y="2"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<Texture name="$parentTexture" file="Interface\SpeakFrame\SpeakFrame_Kraft">
+							<Size>
+								<AbsDimension x="450" y="505"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="-5" y="25"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords top="0" left="0" right="1" bottom="1"/>
+						</Texture>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnLoad>UIPanelBackdropFrame_SetTexture( this, "Interface/Common/PanelListFrame", 128 , 128 )</OnLoad>
+				</Scripts>
+			</Frame>
+			<ScrollFrame name="$parentScrollFrame" inherits="UIPanelScrollFrameTemplate" hidden="false" frameLevel="1">
+				<Size><AbsDimension x="437" y="450"/></Size>
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="20" y="56"/></Offset></Anchor></Anchors>
+				<ScrollChild>
+					<Frame>
+						<Frames>
+							<Button name="QHQuestDetailsShortTitle" inherits="QHSectionTitleTemplate">
+								<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="9" y="0"/></Offset></Anchor></Anchors>
+							</Button>
+							<Frame name="QHQuestDetailsShort" inherits="QHQuestDetailsShortTemplate">
+								<Anchors><Anchor point="TOPLEFT" relativeTo="QHQuestDetailsShortTitle" relativePoint="BOTTOMLEFT"/></Anchors>
+							</Frame>
+							<Button name="QHPrerequisitTitle" inherits="QHSectionTitleTemplate">
+								<Anchors><Anchor point="TOPLEFT" relativeTo="QHQuestDetailsShort" relativePoint="BOTTOMLEFT"/></Anchors>
+							</Button>
+							<Frame name="QHPrerequisit" inherits="QHPrerequisitTemplate">
+								<Size><AbsDimension x="420" y="50"/></Size>
+								<Anchors><Anchor point="TOPLEFT" relativeTo="QHPrerequisitTitle" relativePoint="BOTTOMLEFT"/></Anchors>
+							</Frame>
+							<Button name="QHPositionstTitle" inherits="QHSectionTitleTemplate">
+								<Anchors><Anchor point="TOPLEFT" relativeTo="QHPrerequisit" relativePoint="BOTTOMLEFT"/></Anchors>
+							</Button>
+							<Frame name="QHPositions" inherits="QHPositionsTemplate">
+								<Size><AbsDimension x="420" y="50"/></Size>
+								<Anchors><Anchor point="TOPLEFT" relativeTo="QHPositionstTitle" relativePoint="BOTTOMLEFT"/></Anchors>							</Frame>
+							<Button name="QHQuestDetailsFullTitle" inherits="QHSectionTitleTemplate">
+								<Anchors><Anchor point="TOPLEFT" relativeTo="QHPositions" relativePoint="BOTTOMLEFT"/></Anchors>
+							</Button>
+							<MessageFrame name="QHQuestDetailsFullDesc" inherits="QuestBookMessageFrameTemplate">
+								<Anchors>
+									<Anchor point="TOPLEFT" relativeTo="QHQuestDetailsFullTitle" relativePoint="BOTTOMLEFT">
+										<Offset>
+											<AbsDimension x="0" y="0"/>
+										</Offset>
+									</Anchor>
+								</Anchors>
+							</MessageFrame>
+							<Button name="QHRewardlTitle" inherits="QHSectionTitleTemplate">
+								<Anchors><Anchor point="TOPLEFT" relativeTo="QHQuestDetailsFullDesc" relativePoint="BOTTOMLEFT"/></Anchors>
+							</Button>
+							<Frame name="QHReward" inherits="QHRewardTemplate">
+								<Size><AbsDimension x="420" y="50"/></Size>
+								<Anchors><Anchor point="TOPLEFT" relativeTo="QHRewardlTitle" relativePoint="BOTTOMLEFT"/></Anchors>							</Frame>
+						</Frames>
+					</Frame>
+				</ScrollChild>
+			</ScrollFrame>
+			<Button name="$parentAbortQuest" inherits="UIPanelButtonTemplate" text="QUEST_GIVE_UP">
+				<Size><AbsDimension x="120" y="22"/></Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT"><Offset><AbsDimension x="-40" y="-8"/></Offset></Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>QH.DetailDialog.OnQuestGiveUp()</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentQuestList" inherits="UIPanelButtonTemplate">
+				<Size><AbsDimension x="16" y="16"/></Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT"><Offset><AbsDimension x="20" y="-8"/></Offset></Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>QH.DetailDialog.OnQuestList()</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\PageLeftButton-Normal"><TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/></NormalTexture>
+				<PushedTexture file="Interface\Buttons\PageLeftButton-Depress"><TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/></PushedTexture>
+				<HighlightTexture file="Interface\Buttons\PanelLeftButton-Highlight" alphaMode="ADD"/>
+			</Button>			
+		</Frames>
+		<Scripts>
+			<OnLoad>QH.DetailDialog.OnLoad(this)</OnLoad>
+			<OnShow>QH.DetailDialog.OnShow(this)</OnShow>
+			<OnHide>QH.DetailDialog.OnHide(this)</OnHide>
+			<OnEvent>QH.DetailDialog.OnEvent()</OnEvent>
+		</Scripts>
+	</Frame>
+</Ui>

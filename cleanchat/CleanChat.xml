@@ -1,0 +1,173 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Frame name="CleanChat_Frame" parent="UIParent">
+		<Scripts>
+			<OnLoad>
+				CleanChat_OnLoad();
+			</OnLoad>
+			<OnEvent>
+				CleanChat_OnEvent( event );
+			</OnEvent>
+		</Scripts>
+	</Frame>
+
+	<EditBox name="CleanChat_EditboxTemplate" virtual="true" autoFocus="false">
+		<Backdrop bgFile="Interface\SocialFrame\SocialFrame_Contextborder_bg" edgeFile="Interface\Tooltips\Tooltip-border" tile="true">
+			<BackgroundInsets><AbsInset top="3" left="4" bottom="3" right="4" /></BackgroundInsets>
+			<EdgeSize><AbsValue val="10" /></EdgeSize>
+			<TileSize><AbsValue val="10" /></TileSize>
+		</Backdrop>
+		<FontString name="$parent_Text" inherits="GameTooltipFont" justifyH="LEFT"><FontHeight><AbsValue val="15" /></FontHeight></FontString>
+		<TextInsets><AbsInset left="8" right="8" top="6" bottom="6" /></TextInsets>
+		<Scripts>
+			<OnEscapePressed>
+				this:ClearFocus();
+			</OnEscapePressed>
+		</Scripts>
+	</EditBox>
+
+	<Frame name="CleanChat_FiltersFrame" inherits="UICommonFrameTemplate" parent="UIParent" hidden="true" frameStrata="HIGH">
+		<Size><AbsDimension x="300" y="200" /></Size>
+		<Anchors><Anchor point="CENTER" relativeTo="UIParent" relativePoint="CENTER"/></Anchors>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Title" inherits="GameTitleFont" text="">
+					<Size><AbsDimension y="25" x="256" /></Size>
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset><AbsDimension x="-8" y="0" /></Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer>
+				<FontString name="$parent_ActiveLabel" inherits="GameTitleFont" text="Active">
+					<Size><AbsDimension x="90" y="20" /></Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+							<Offset><AbsDimension x="5" y="75" /></Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="$parent_Dropdown" inherits="UIDropDownMenuTemplate" enableMouse="true">
+				<Size><AbsDimension x="210"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+						<Offset><AbsDimension x="20" y="40" /></Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						a, b = this:GetSize();
+						UIDropDownMenu_SetWidth( this, 210 );
+						this:SetSize( a, b );
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Button name="$parent_New" inherits="UIPlusButtonTemplate">
+				<Size><AbsDimension x="22" y="21" /></Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parent_Dropdown" relativePoint="RIGHT">
+						<Offset><AbsDimension x="4" y="0" /></Offset>
+					</Anchor>
+				</Anchors>
+				<FontHeight><AbsValue val="30" /></FontHeight>
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner( this, "ANCHOR_LEFT", 4, 0 ); <!-- Set Owner -->
+						GameTooltip:ClearLines(); <!-- Clear tooltip -->
+						GameTooltip:AddLine( CleanChat.Locales.FiltersAdd, 0.75, 0.75, 0.75 ); <!-- Set tooltip -->
+						GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+					<OnClick>
+						CleanChat.NewFilter();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_Remove" inherits="UIMinusButtonTemplate">
+				<Size><AbsDimension x="22" y="21" /></Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parent_New" relativePoint="RIGHT">
+						<Offset><AbsDimension x="2" y="0" /></Offset>
+					</Anchor>
+				</Anchors>
+				<FontHeight><AbsValue val="30" /></FontHeight>
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner( this, "ANCHOR_LEFT", 4, 0 ); <!-- Set Owner -->
+						GameTooltip:ClearLines(); <!-- Clear tooltip -->
+						GameTooltip:AddLine( CleanChat.Locales.FiltersRemove, 0.75, 0.75, 0.75 ); <!-- Set tooltip -->
+						GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+					<OnClick>
+						CleanChat.RemoveFilter();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<CheckButton name="$parent_Active" inherits="UIPanelCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parent_ActiveLabel" relativePoint="RIGHT">
+						<Offset><AbsDimension x="0" y="0" /></Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						CleanChat_Settings["Filters"][CleanChat_Settings.CurrentFilter]["Active"] = this:IsChecked();
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<Frame name="$parent_ChatDropdown" inherits="UIDropDownMenuTemplate" enableMouse="true">
+				<Size><AbsDimension x="140"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+						<Offset><AbsDimension x="143" y="72" /></Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						a, b = this:GetSize();
+						UIDropDownMenu_SetWidth( this, 140 );
+						this:SetSize( a, b );
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<EditBox name="$parent_Text" inherits="CleanChat_EditboxTemplate" multiLine="true">
+				<Size><AbsDimension x="260" y="70" /></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_ActiveLabel" relativePoint="BOTTOMLEFT">
+						<Offset><AbsDimension x="18" y="10" /></Offset>
+					</Anchor>
+				</Anchors>
+				<FontString inherits="Font_Socal_Text"/>
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner( this, "ANCHOR_LEFT", 4, 0 ); <!-- Set Owner -->
+						GameTooltip:ClearLines(); <!-- Clear tooltip -->
+						GameTooltip:AddLine( CleanChat.Locales.FiltersExplain, 0.75, 0.75, 0.75 ); <!-- Set tooltip -->
+						GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+					<OnKeyUp>
+						CleanChat_Settings.Filters[CleanChat_Settings.CurrentFilter]["Text"] = this:GetText();
+						UIDropDownMenu_SetText( CleanChat_FiltersFrame_Dropdown, CleanChat.FilterName( CleanChat_Settings.CurrentFilter ) );
+					</OnKeyUp>
+				</Scripts>
+			</EditBox>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				UIPanelBackdropFrame_SetTexture( this, "Interface/Common/PanelCommonFrame", 256, 256 );
+			</OnLoad>
+		</Scripts>
+	</Frame>
+</Ui>

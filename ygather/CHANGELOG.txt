@@ -1,0 +1,67 @@
+
+<h3>v7.4.0</h3>
+<ul>
+<li>[add] new zone "Chassizz"</li>
+</ul>
+<h3>v7.3.0</h3>
+<ul>
+<li>[add] new zone "Vortis"</li>
+</ul>
+<h3>v7.2.0</h3>
+<ul>
+<li>[add] new zone "Enoch"</li>
+</ul>
+<h3>v7.1.0</h3>
+<ul>
+<li>[add] new zone "Korris"</li>
+</ul>
+<h3>v7.0.2</h3>
+<ul>
+<li>[add] new zone "Tasuq"</li>
+</ul>
+<h3>v6.5.6</h3>
+<ul>
+<li>[add] new zone "The Moorlands of Farsitan"</li>
+</ul>
+<h3>v6.4.1</h3>
+<ul>
+<li>[loc] localization update Spanish (thx to SathaRidire)</li>
+</ul>
+<h3>v6.4.0</h3>
+<ul>
+<li>[add] new zone "Splitwater Coast"</li>
+</ul>
+<h3>v6.3.0</h3>
+<ul>
+<li>[mod] just new naming in accordance with supported ROM-Version</li>
+</ul>
+<h3>v1.6.5</h3>
+<ul>
+<li>[add] new zone "Kashaylan"</li>
+</ul>
+<h3>v1.6.3</h3>
+<ul>
+<li>[loc] localization update Italian (thx to Retcha88)</li>
+</ul>
+<h3>v1.6.2</h3>
+<ul>
+<li>[add] new zone "Salioca Basin"</li>
+</ul>
+<h3>v1.6.1</h3>
+<ul>
+<li>[fix] small fix to show Ygather in Ystra on Worldmap correctly</li>
+</ul>
+<h3>v1.6</h3>
+<ul>
+<li>[mod] update to chapter 6.1.0</li>
+<li>[mod] code improvements/updates</li>
+<li>[loc] localisation update</li>
+<li>[fix] ressources corrected</li>
+<li>[fix] Ress icons and non-Ress icons corrected (thx to Unknown3383)</li>
+<li>[fix] Ystra Worldmap corrected</li>
+</ul>
+<h3>v1.5</h3>
+<ul>
+<li>[add] added scaling data for Coast of Opportunity, Xaviera, Land of Malevolence, Redhill Mountains (thx arnefi)</li>
+<li>[add] added level 61, 63 and 69 resources</li>
+</ul>

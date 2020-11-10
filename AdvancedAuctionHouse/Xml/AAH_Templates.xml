@@ -1,0 +1,254 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ ../../../worldxml/ui.xsd">
+	<!-- NB: AAH_Tooltip is used by 3rd-party addons to hook aah tooltip !-->
+	<GameTooltip name="AAH_Tooltip" frameStrata="TOOLTIP" hidden="true" inherits="GameTooltipTemplate" parent="UIParent"/>
+	<GameTooltip name="AAH_PriceHistoryTooltip" frameStrata="DIALOG" hidden="true" inherits="GameTooltipTemplate" parent="UIParent">
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeTo="GameTooltip" relativePoint="BOTTOMLEFT"/>
+		</Anchors>
+		<Scripts>
+			<OnUpdate>
+				AAH.ToolsPriceHistoryTooltip_OnUpdate(this, elapsedTime)
+			</OnUpdate>
+		</Scripts>
+	</GameTooltip>
+
+	<Frame name="AAH_MoneyTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="68" y="20"/>
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parentLabel" inherits="GameFontYellow">
+					<Anchors>
+						<Anchor point="RIGHT" relativePoint="LEFT">
+							<Offset>
+								<AbsDimension x="-4" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<EditBox name="$parentAccount" inherits="MoneyEditBoxTemplate" letters="8" historyLines="0" numeric="false" hidden="true">
+				<Size>
+					<AbsDimension x="70" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT"/>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture file="Interface\MoneyFrame\MoneyIcons">
+							<Size>
+								<AbsDimension x="16" y="16"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="RIGHT">
+									<Offset>
+										<AbsDimension x="1" y="1"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0.03125" right="0.0625" top="0" bottom="1"/>
+						</Texture>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnTabPressed>AAH.MoneyFrame.OnTab(this)</OnTabPressed>
+					<OnEnterPressed>this:ClearFocus()</OnEnterPressed>
+					<OnTextChanged>AAH.MoneyFrame.OnTextChanged(this:GetParent())</OnTextChanged>
+				</Scripts>
+				<FontString inherits="NumberFontNormal"/>
+			</EditBox>
+			<EditBox name="$parentGold" inherits="MoneyEditBoxTemplate" letters="16" historyLines="0" numeric="false">
+				<Size>
+					<AbsDimension x="70" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT"/>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture file="Interface\MoneyFrame\MoneyIcons">
+							<Size>
+								<AbsDimension x="16" y="16"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="RIGHT">
+									<Offset>
+										<AbsDimension x="1" y="1"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0" right="0.03125" top="0" bottom="1"/>
+						</Texture>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnTabPressed>AAH.MoneyFrame.OnTab(this)</OnTabPressed>
+					<OnEnterPressed>this:ClearFocus()</OnEnterPressed>
+					<OnTextChanged>AAH.MoneyFrame.OnTextChanged(this:GetParent())</OnTextChanged>
+				</Scripts>
+				<FontString inherits="NumberFontNormal"/>
+			</EditBox>
+		</Frames>
+	</Frame>
+
+	<Button name="AAH_TemplateAuctionFrameTab" inherits="UIPanelBottomTabTemplate" virtual="true">
+		<Scripts>
+			<OnClick>
+				PlaySoundByPath("sound\\interface\\ui_tab_click.mp3")
+				AAH.Main.ClickTab(this:GetID())
+			</OnClick>
+			<OnShow>
+				PanelTemplates_TabResize(this, 20)
+			</OnShow>
+		</Scripts>
+	</Button>
+	<Button name="AAH_TemplateHeaderButton" virtual="true">
+		<Size>
+			<AbsDimension x="64" y="20"/>
+		</Size>
+		<Layers>
+			<Layer>
+				<Texture name="$parentSortIcon">
+					<Size>
+						<AbsDimension x="8" y="8"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>this:SetWidth(this:GetTextWidth() + 12)</OnLoad>
+		</Scripts>
+		<NormalText inherits="GameFontYellow"/>
+		<PushedTextOffset>
+			<AbsDimension x="1" y="1"/>
+		</PushedTextOffset>
+	</Button>
+	<Button name="AAH_TemplateListItem" virtual="true">
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentSeparateLeft" file="Interface\AuctionFrame\AuctionSeparate-HorizontalLine">
+					<Size>
+						<AbsDimension x="16" y="4"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="-6" y="-4"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0" right="0.25" top="0" bottom="1"/>
+				</Texture>
+				<Texture name="$parentSeparateRight" file="Interface\AuctionFrame\AuctionSeparate-HorizontalLine">
+					<Size>
+						<AbsDimension x="16" y="4"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="6" y="-4"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.75" right="1" top="0" bottom="1"/>
+				</Texture>
+				<Texture name="$parentSeparateCenter" file="Interface\AuctionFrame\AuctionSeparate-HorizontalLine">
+					<Size>
+						<AbsDimension x="1" y="4"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentSeparateLeft" relativePoint="RIGHT"/>
+						<Anchor point="RIGHT" relativeTo="$parentSeparateRight" relativePoint="LEFT"/>
+					</Anchors>
+					<TexCoords left="0.25" right="0.75" top="0" bottom="1"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="$parentBidMoney" inherits="MoneyFrameTemplate">
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-4" y="3"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString name="$parentText" inherits="GameFontNormal" text="AUCTION_HIGHEST_PRICE_COLON">
+							<Anchors>
+								<Anchor point="RIGHT" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="-4" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnLoad>
+						MoneyFrameTemplate_SetMode(this, "copper")
+						MoneyFrameTemplate_SetType(this, "AUCTION")
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame name="$parentBuyoutMoney" inherits="MoneyFrameTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-4" y="-3"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString name="$parentText" inherits="GameFontNormal" text="AUCTION_BUYOUT">
+							<Anchors>
+								<Anchor point="RIGHT" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="-4" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnLoad>
+						MoneyFrameTemplate_SetMode(this, "copper")
+						MoneyFrameTemplate_SetType(this, "AUCTION")
+					</OnLoad>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<HighlightTexture file="Interface\AuctionFrame\AuctionFrameItem-Highlight" alphaMode="ADD">
+			<Size>
+				<AbsDimension x="1" y="38"/>
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT">
+					<Offset>
+						<AbsDimension x="36" y="0"/>
+					</Offset>
+				</Anchor>
+				<Anchor point="RIGHT">
+					<Offset>
+						<AbsDimension x="2" y="0"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+		</HighlightTexture>
+	</Button>
+</Ui>

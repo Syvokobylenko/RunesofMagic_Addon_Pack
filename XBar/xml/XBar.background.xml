@@ -1,0 +1,123 @@
+﻿<?xml version="1.0"?><Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="../../worldxml/ui.xsd">
+<!-- Background Frames --> 
+	<Frame name="XBarFrame" parent="UIParent" frameStrata="BACKGROUND">
+		<Size><AbsDimension x="32" y="32"/></Size>
+		<Anchors>
+			<Anchor point="BOTTOMLEFT"/>
+			<Anchor point="BOTTOMRIGHT"/>
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parent_BgndL" file="Interface\Addons\XBar\img\bar\AdPanel\BarU_BgndL">
+					<Size><AbsDimension x="64" y="32"/></Size>
+					<Anchors><Anchor point="LEFT"/></Anchors>
+				</Texture>
+				<Texture name="$parent_BgndM" file="Interface\Addons\XBar\img\bar\AdPanel\BarU_BgndM">
+					<Size><AbsDimension x="8" y="32"/></Size>
+					<Anchors>
+						<Anchor point="LEFT"><Offset><AbsDimension x="64" y="0"/></Offset></Anchor>
+						<Anchor point="RIGHT"><Offset><AbsDimension x="-64" y="0"/></Offset></Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="$parent_BgndR" file="Interface\Addons\XBar\img\bar\AdPanel\BarU_BgndR">
+					<Size><AbsDimension x="64" y="32"/></Size>
+					<Anchors><Anchor point="RIGHT"/></Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				this:RegisterEvent("VARIABLES_LOADED")
+				this:RegisterEvent("SCREEN_RESIZE")
+				SaveVariables("XBSet")
+			</OnLoad>
+			<OnEvent>XBar.OnEvent(event)</OnEvent>
+		</Scripts>
+	</Frame>
+	<Button name="XBarMain" parent="UIParent" frameStrata="BACKGROUND" frameLevel="1">
+		<Size><AbsDimension x="28" y="28"/></Size>
+		<Anchors><Anchor point="LEFT" relativeTo="XBarFrame"><Offset>
+			<AbsDimension x="26" y="0"/></Offset></Anchor></Anchors>
+		<NormalTexture file="Interface\Addons\XBar\img\btns\CfgBtn_Normal"/>
+		<PushedTexture file="Interface\Addons\XBar\img\btns\CfgBtn_Pushed"/>
+		<HighlightTexture file="Interface\Addons\XBar\img\btns\AllBtn_Enlight" alphaMode="ADD"/>
+		<Scripts>
+			<OnLoad>this:RegisterForClicks("LeftButton","RightButton","MiddleButton") this:RegisterForDrag("RightButton")</OnLoad>
+			<OnDragStart>XBar.MoveStart(this)</OnDragStart>
+			<OnDragStop>XBar.MoveEnd(this)</OnDragStop>
+			<OnClick>
+				if key=="LBUTTON" then XBar.ToggleUI(XAddonMngr)
+				elseif key=="RBUTTON" then if not IsShiftKeyDown() then XBar.AM_PopClick(this) end
+				else ToggleAutoRun() end
+			</OnClick>
+			<OnEnter>
+				XBar.TooltipMod(this)
+				GameTooltip:SetText(XBar.Lng["Ttip"]["CfgBtn1"])
+				GameTooltip:AddLine(UIPANELANCHORFRAME_TOOLTIP.."\n"..XBar.Lng["Ttip"]["CfgBtn2"],0,.7,.9)
+			</OnEnter>
+			<OnLeave>GameTooltip:Hide()</OnLeave>
+		</Scripts>
+	</Button>
+	<Button name="XBarMenu" parent="UIParent" frameStrata="BACKGROUND" frameLevel="1">
+		<Size><AbsDimension x="28" y="28"/></Size>
+		<Anchors><Anchor point="LEFT" relativeTo="XBarMain" relativePoint="RIGHT"><Offset>
+			<AbsDimension x="-3" y="0"/></Offset></Anchor></Anchors>
+		<NormalTexture file="Interface\Addons\XBar\img\btns\SysBtn_Normal"/>
+		<PushedTexture file="Interface\Addons\XBar\img\btns\SysBtn_Pushed"/>
+		<HighlightTexture file="Interface\Addons\XBar\img\btns\AllBtn_Enlight" alphaMode="ADD"/>
+		<Scripts>
+			<OnLoad>this:RegisterForClicks("LeftButton","RightButton","MiddleButton")</OnLoad>
+			<OnClick>XBar.RoMMenu(this, key)</OnClick>
+			<OnEnter>
+				XBar.TooltipMod(this)
+				GameTooltip:SetText(XBar.Lng["Ttip"]["SysBtn1"])
+				GameTooltip:AddLine(XBar.Lng["Ttip"]["SysBtn2"],0,.7,.9)
+			</OnEnter>
+			<OnLeave>GameTooltip:Hide()</OnLeave>
+		</Scripts>
+	</Button>
+	<Button name="XBarDsp" parent="UIParent" frameStrata="BACKGROUND" frameLevel="1">
+		<Size><AbsDimension x="28" y="28"/></Size>
+		<Anchors><Anchor point="LEFT" relativeTo="XBarMenu" relativePoint="RIGHT"><Offset>
+			<AbsDimension x="-3" y="0"/></Offset></Anchor></Anchors>
+		<NormalTexture name="$parent_nTex" file="Interface\Addons\XBar\img\btns\DspBtn_Normal"/>
+		<PushedTexture file="Interface\Addons\XBar\img\btns\DspBtn_Pushed"/>
+		<HighlightTexture file="Interface\Addons\XBar\img\btns\AllBtn_Enlight" alphaMode="ADD"/>
+		<Scripts>
+			<OnLoad>this:RegisterForClicks("LeftButton","RightButton","MiddleButton")</OnLoad>
+			<OnClick>
+				if key=="LBUTTON" then XBar.ToggleUI(TeleportBook)
+				elseif key=="RBUTTON" then XBar.ToggleUI(WorldMapFrame)
+				else XBar.ToggleDisplay() end
+			</OnClick>
+			<OnEnter>
+				XBar.TooltipMod(this)
+				GameTooltip:SetText(GAME_MENU_DISPLAYOPTION)
+				GameTooltip:AddLine(XBar.Lng["Ttip"]["DspBtn1"],0,.7,.9)
+			</OnEnter>
+			<OnLeave>GameTooltip:Hide()</OnLeave>
+		</Scripts>
+	</Button>
+	<Button name="XBarSnd" parent="UIParent" frameStrata="BACKGROUND" frameLevel="1">
+		<Size><AbsDimension x="28" y="28"/></Size>
+		<Anchors><Anchor point="LEFT" relativeTo="XBarDsp" relativePoint="RIGHT"><Offset>
+			<AbsDimension x="-3" y="0"/></Offset></Anchor></Anchors>
+		<NormalTexture name="$parent_nTex" file="Interface\Addons\XBar\img\btns\SndBtn_Normal"/>
+		<PushedTexture file="Interface\Addons\XBar\img\btns\SndBtn_Pushed"/>
+		<HighlightTexture file="Interface\Addons\XBar\img\btns\AllBtn_Enlight" alphaMode="ADD"/>
+		<Scripts>
+			<OnLoad>this:RegisterForClicks("LeftButton","RightButton","MiddleButton")</OnLoad>
+			<OnClick>
+				if key=="LBUTTON" then XBar.ToggleUI(NpcTrackFrame)
+				elseif key=="RBUTTON" then XBar.ToggleUI(InstanceRecordFrame)
+				else XBar.ToggleSound() end
+			</OnClick>
+			<OnEnter>
+				XBar.TooltipMod(this)
+				GameTooltip:SetText(GAME_MENU_MUSICOPTION)
+				GameTooltip:AddLine(XBar.Lng["Ttip"]["SndBtn1"],0,.7,.9)
+			</OnEnter>
+			<OnLeave>GameTooltip:Hide()</OnLeave>
+		</Scripts>
+	</Button>
+</Ui>

@@ -1,0 +1,118 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/..\..\WorldXML\UI.xsd">
+	<Frame name="DungeonLoot_WM_POI_Tex_Template" virtual="true">
+		<Size>
+			<AbsDimension x="20" y="20"/>
+		</Size>		
+		<Layers>
+			<Layer level="OVERLAY">
+				<Texture name="$parentTex">
+					<Size>
+						<AbsDimension x="20" y="20"/>
+					</Size>
+					<!--<TexCoords top="0" left="0" bottom="1" right="1"/>-->
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentHighlight" file="Interface\Minimap\MinimapButton_Highlight" hidden="true">
+					<Size>
+						<AbsDimension x="10" y="10"/>
+					</Size>	
+					<!--<TexCoords top="0" left="0" bottom="1" right="1"/>-->
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>				
+				</Texture>	
+			</Layer>
+			<Layer level="HIGHLIGHT">
+				<Texture name="$parentTeleport" file="Interface\Addons\DungeonLoots\images\tp_border.tga" hidden="true">
+					<Size>
+						<AbsDimension x="20" y="20"/>
+					</Size>	
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>				
+				</Texture>			
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForClicks("LeftButton", "RightButton")
+			</OnLoad>
+			<OnClick>
+				DL.worldmap.OnClick(this, key)
+			</OnClick>
+			<OnEnter>
+				_G[this:GetName().."Highlight"]:Show()
+				DL.worldmap.OnEnter(this)
+			</OnEnter>
+			<OnLeave>
+				_G[this:GetName().."Highlight"]:Hide()
+				GameTooltip:Hide()
+	        </OnLeave>
+		</Scripts>
+	</Frame>
+	<Frame name="DungeonLoot_WM_POI_Tex1"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="1" frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex2"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="2" frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex3"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="3" frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex4"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="4" frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex5"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="5" frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex6"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="6"  frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex7"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="7"  frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex8"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="8"  frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex9"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="9"  frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex10"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="10"  frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex11"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="11"  frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex12"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="12"  frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex13"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="13"  frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex14"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="14"  frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex15"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="15"  frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex16"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="16"  frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex17"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="17"  frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex18"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="18"  frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex19"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="19"  frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex20"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="20"  frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex21"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="21"  frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex22"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="22"  frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex23"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="23"  frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex24"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="24"  frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex25"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="25"  frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex26"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="26"  frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex27"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="27"  frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex28"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="28"  frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex29"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="29"  frameLevel="1" frameStrata="LOW"/>
+	<Frame name="DungeonLoot_WM_POI_Tex30"  parent="WorldMapViewFrame" inherits="DungeonLoot_WM_POI_Tex_Template" hidden="true" enableMouse="true" id="30"  frameLevel="1" frameStrata="LOW"/>
+
+	<Button name="DL_WorldMap_Setting_DropdownButton" inherits="UIPanelButtonTemplate" parent="WorldMapViewFrame" text = "UI_WORLDMAP_SETUP">
+		<Size>
+			<AbsDimension x="120" y="22"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset>
+					<AbsDimension x="20" y="-22"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnClick>
+				ToggleDropDownMenu( DL_WorldMap_Setting_Dropdown, 1, nil, this:GetName(), 1 ,1 )				
+			</OnClick>
+		</Scripts>
+	</Button>
+	<Frame name="DL_WorldMap_Instance_Dropdown" inherits="UIDropDownMenuTemplate" hidden="true"/>
+	<Frame name="DL_WorldMap_Boss_Dropdown" inherits="UIDropDownMenuTemplate" hidden="true"/>
+	<Frame name="DL_WorldMap_Setting_Dropdown" inherits="UIDropDownMenuTemplate" hidden="true" parent="WorldMapViewFrame"/>
+</Ui>

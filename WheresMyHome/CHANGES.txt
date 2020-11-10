@@ -1,0 +1,12 @@
+tag b4020f015484ef428607241b1412b4d55efeb767 2.8
+Author:	Amurilon <jan-wendler@gmx.de>
+Date:	Fri Sep 29 21:32:12 2017 +0200
+
+Tagging as 2.8
+
+commit afacefb6ce5362e9471b7bda193a0894b32a63ba
+Author: Amurilon <jan-wendler@gmx.de>
+Date:   Fri Sep 29 21:28:56 2017 +0200
+
+    added lvl 100 instance
+

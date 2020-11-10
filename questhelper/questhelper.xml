@@ -1,0 +1,29 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+
+<Frame name="QuestHelperFrame" parent="UIParent">
+    <Scripts>
+        <OnLoad>QH.OnLoad(this)</OnLoad>
+        <OnEvent>QH.OnEvent(event)</OnEvent>
+    </Scripts>
+</Frame>
+
+<!-- Minimap Button -->
+<Button name="QuestHelperMinimapButton" hidden="true" inherits="MinimapButtonTemplate" parent="UIParent" >
+    <Size>
+        <AbsDimension y="24" x="24"/>
+    </Size>
+    <Anchors>
+        <Anchor point="CENTER" relativeTo="MinimapViewFrame" relativePoint="CENTER">
+            <Offset>
+                <RelDimension x="-85" y="-2.5"/>
+            </Offset>
+        </Anchor>
+    </Anchors>
+    <Scripts>
+        <OnClick>ToggleUIFrame(QHQuestList)</OnClick>
+    </Scripts>
+    <NormalTexture file="Interface/Addons/questhelper/textures/icon_mini"/>
+    <PushedTexture file="Interface/Addons/questhelper/textures/icon_mini_push"/>
+    <HighlightTexture file="interface/minimap/minimapbutton_highlight" alphaMode="ADD"/>
+	</Button>
+</Ui>

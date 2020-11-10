@@ -1,0 +1,241 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Frame name="AAH_AuctionFrame" parent="UIParent" enableMouse="true" hidden="true">
+		<Size>
+			<AbsDimension x="846" y="489"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+                <Offset>
+                    <AbsDimension x="0" y="-150"/>
+                </Offset>
+            </Anchor>
+		</Anchors>
+		<HitRectInsets>
+			<AbsInset left="0" right="24" top="0" bottom="26"/>
+		</HitRectInsets>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface\AuctionFrame\AuctionFrame-TopLeft">
+					<Size>
+						<AbsDimension x="256" y="256"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+					</Anchors>
+					<TexCoords left="0" right="1" top="0" bottom="1"/>
+				</Texture>
+				<Texture file="Interface\AuctionFrame\AuctionFrame-Top">
+					<Size>
+						<AbsDimension x="334" y="256"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP"/>
+					</Anchors>
+					<TexCoords left="0" right="1" top="0" bottom="1"/>
+				</Texture>
+				<Texture file="Interface\AuctionFrame\AuctionFrame-TopRight">
+					<Size>
+						<AbsDimension x="256" y="256"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT"/>
+					</Anchors>
+					<TexCoords left="0" right="0.92" top="0" bottom="1"/>
+				</Texture>
+				<Texture name="AAH_AuctionFrameBottomLeft" file="Interface\AuctionFrame\AuctionFrame-BotLeft">
+					<Size>
+						<AbsDimension x="256" y="233"/>
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT"/>
+					</Anchors>
+					<TexCoords left="0" right="1" top="0" bottom="0.91"/>
+				</Texture>
+				<Texture name="AAH_AuctionFrameBottomCenter" file="Interface\AuctionFrame\AuctionFrame-Bot">
+					<Size>
+						<AbsDimension x="334" y="233"/>
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOM"/>
+					</Anchors>
+					<TexCoords left="0" right="1" top="0" bottom="0.91"/>
+				</Texture>
+				<Texture name="AAH_AuctionFrameBottomRight" file="Interface\AuctionFrame\AuctionFrame-BotRight">
+					<Size>
+						<AbsDimension x="256" y="233"/>
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT"/>
+					</Anchors>
+					<TexCoords left="0" right="0.92" top="0" bottom="0.91"/>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="AAH_AuctionTitleText" inherits="GameTitleFont" text="AUCTION">
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="-16" y="9"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="AAH_AuctionTitleFrame" inherits="UIPanelTitleFrameTemplate">
+				<Size>
+					<AbsDimension x="560" y="29"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP"/>
+				</Anchors>
+			</Frame>
+			<Frame name="AAH_AuctionPlayerGold" inherits="MoneyFrameTemplate">
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-75" y="9"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+			<Button name="AAH_AuctionForumsButton" inherits="UIPanelButtonTemplate" text="forums" hidden="true">
+				<Size>
+					<AbsDimension x="100" y="22"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="35" y="7"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						StaticPopupDialogs["OPEN_WEBROWER"].link = "http://rom.curseforge.com/addons/advancedauctionhouse/forum/"
+						StaticPopup_Show("OPEN_WEBROWER")
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_LEFT", 4, 0)
+						GameTooltip:SetText(AAHLocale.Messages.AUCTION_FORUMS_BUTTON_TOOLTIP_HEADER, 1, 1, 1)
+						GameTooltip:AddLine(AAHLocale.Messages.AUCTION_FORUMS_BUTTON_TOOLTIP_TEXT, 0, 0.75, 0.95)
+						GameTooltip:Show()
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+			</Button>
+			<Button name="AAH_AuctionCloseButton" inherits="UIPanelCloseButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-6" y="6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="AAH_AuctionEnlargeButton">
+				<Size>
+					<AbsDimension x="16" y="16"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-12" y="-24"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						AAH_SavedSettings.Resize = AAH_SavedSettings.Resize + 1
+						AAH.Main.ResizeFrame(AAH_SavedSettings.Resize)
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\ScrollBar-DownButton-Normal"/>
+				<PushedTexture file="Interface\Buttons\ScrollBar-DownButton-Depress"/>
+				<DisabledTexture file="Interface\Buttons\ScrollBar-DownButton-Disable"/>
+				<HighlightTexture file="Interface\Buttons\ScrollBar-UpButton-Highlight" alphaMode="ADD"/>
+			</Button>
+			<Button name="AAH_AuctionReduceButton">
+				<Size>
+					<AbsDimension x="16" y="16"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="AAH_AuctionEnlargeButton" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-25"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						AAH_SavedSettings.Resize = AAH_SavedSettings.Resize - 1
+						AAH.Main.ResizeFrame(AAH_SavedSettings.Resize)
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\ScrollBar-UpButton-Normal"/>
+				<PushedTexture file="Interface\Buttons\ScrollBar-UpButton-Depress"/>
+				<DisabledTexture file="Interface\Buttons\ScrollBar-UpButton-Disable"/>
+				<HighlightTexture file="Interface\Buttons\ScrollBar-UpButton-Highlight" alphaMode="ADD"/>
+			</Button>
+			<Button name="AAH_AuctionFrameTab1" inherits="AAH_TemplateAuctionFrameTab" id="1" text="BROWSE">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="24" y="-6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="AAH_AuctionFrameTab2" inherits="AAH_TemplateAuctionFrameTab" id="2" text="BIDS">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="AAH_AuctionFrameTab1" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="AAH_AuctionFrameTab3" inherits="AAH_TemplateAuctionFrameTab" id="3" text="AUCTIONS">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="AAH_AuctionFrameTab2" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="AAH_AuctionFrameTab4" inherits="AAH_TemplateAuctionFrameTab" id="4" text="FOCUSFRAME_OPTION">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-24" y="-6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>AAH.Main.OnLoad(this)</OnLoad>
+			<OnEvent>AAH.Events[event](this)</OnEvent>
+			<OnShow>AAH.Main.OnShow(this)</OnShow>
+			<OnHide>AAH.Main.OnHide(this)</OnHide>
+		</Scripts>
+	</Frame>
+	<Button name="AAHMiniButton" hidden="true" inherits="UIPanelButtonTemplate" parent="AddonManagerMiniFrame">
+		<Size>
+			<AbsDimension y="24" x="24"/>
+		</Size>
+		<Scripts>
+			<OnClick>AddonManager.MiniButton_OnClick(this)</OnClick>
+			<OnEnter>AddonManager.MiniButton_OnEnter(this)</OnEnter>
+			<OnLeave>AddonManager.MiniButton_OnLeave(this)</OnLeave>
+		</Scripts>
+		<NormalTexture file="Interface/Addons/AdvancedAuctionHouse/Textures/AAHIcon.tga"/>
+		<PushedTexture file="Interface/Addons/AdvancedAuctionHouse/Textures/AAHIcon.tga"/>
+		<HighlightTexture file="Interface\Buttons\PanelSmallButtonHighlight" alphaMode="ADD"/>
+	</Button>
+</Ui>
+

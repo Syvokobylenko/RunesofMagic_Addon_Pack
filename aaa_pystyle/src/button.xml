@@ -1,0 +1,128 @@
+<Ui xmlns="http://www.runewaker.com/" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/
+../WorldXml/UI.xsd">
+  <Button name="PyStyleCloseButtonTemplate" enableMouse="true" virtual="true">
+    <Size>
+      <AbsDimension x="24" y="24"/>
+    </Size>
+
+    <NormalTexture file="interface/addons/aaa_pystyle/res/close-button-normal" />
+    <PushedTexture file="interface/addons/aaa_pystyle/res/close-button-pressed"/>
+    <HighlightTexture file="interface/addons/aaa_pystyle/res/close-button-highlight" alphaMode="ADD"/>
+  </Button>
+  <Button name="PyStyleButtonTemplate" inherits="UIPanelButtonScriptTemplate" virtual="true">
+    <NormalText inherits="PyStyleFontNormal">
+      <Size>
+        <AbsDimension x="0" y="16"/>
+      </Size>
+      <Anchors>
+        <Anchor point="CENTER">
+          <Offset>
+            <AbsDimension x="-1" y="-1"/>
+          </Offset>
+        </Anchor>
+      </Anchors>
+    </NormalText>
+    <DisabledText inherits="PyStyleFontDisabled">
+      <Size>
+        <AbsDimension x="0" y="16"/>
+      </Size>
+      <Anchors>
+        <Anchor point="CENTER">
+          <Offset>
+            <AbsDimension x="-1" y="-1"/>
+          </Offset>
+        </Anchor>
+      </Anchors>
+    </DisabledText>
+    <HighlightText inherits="PyStyleFontHighlight">
+      <Size>
+        <AbsDimension x="0" y="16"/>
+      </Size>
+      <Anchors>
+        <Anchor point="CENTER">
+          <Offset>
+            <AbsDimension x="-1" y="0"/>
+          </Offset>
+        </Anchor>
+      </Anchors>
+    </HighlightText>
+    <NormalTexture inherits="UIPanelButtonNormalTexture"/>
+    <PushedTexture inherits="UIPanelButtonDepressTexture"/>
+    <DisabledTexture inherits="UIPanelButtonDisabledTexture"/>
+    <HighlightTexture inherits="UIPanelButtonHighlightTexture" alphaMode="ADD"/>
+  </Button>
+  <CheckButton name="PyStyleCheckButtonTemplate" virtual="true">
+    <Size>
+      <AbsDimension x="20" y="20"/>
+    </Size>
+    <NormalTexture file="Interface\Buttons\CheckBox-Normal"/>
+    <PushedTexture file="Interface\Buttons\CheckBox-Depress"/>
+    <HighlightTexture file="Interface\Buttons\CheckBox-Highlight" alphaMode="ADD"/>
+    <CheckedTexture file="Interface\Buttons\CheckBox-Checked"/>
+    <DisabledCheckedTexture file="Interface\Buttons\CheckBox-Checked-Disabled"/>
+    <NormalText inherits="PyStyleFontNormal">
+      <Size>
+        <AbsDimension x="0" y="16"/>
+      </Size>
+      <Anchors>
+        <Anchor point="LEFT" relativePoint="RIGHT">
+          <Offset>
+            <AbsDimension x="0" y="-1"/>
+          </Offset>
+        </Anchor>
+      </Anchors>
+    </NormalText>
+    <DisabledText inherits="PyStyleFontDisabled">
+      <Size>
+        <AbsDimension x="0" y="16"/>
+      </Size>
+      <Anchors>
+        <Anchor point="LEFT" relativePoint="RIGHT">
+          <Offset>
+            <AbsDimension x="0" y="-1"/>
+          </Offset>
+        </Anchor>
+      </Anchors>
+    </DisabledText>
+  </CheckButton>
+
+  <Button name="PyStyleButtonTextTemplate" virtual="true">
+    <NormalText inherits="PyStyleFontNormal">
+      <Size>
+        <AbsDimension x="0" y="16"/>
+      </Size>
+      <Anchors>
+        <Anchor point="CENTER">
+          <Offset>
+            <AbsDimension x="-1" y="-1"/>
+          </Offset>
+        </Anchor>
+      </Anchors>
+    </NormalText>
+    <DisabledText inherits="PyStyleFontDisabled">
+      <Size>
+        <AbsDimension x="0" y="16"/>
+      </Size>
+      <Anchors>
+        <Anchor point="CENTER">
+          <Offset>
+            <AbsDimension x="-1" y="-1"/>
+          </Offset>
+        </Anchor>
+      </Anchors>
+    </DisabledText>
+    <HighlightText inherits="PyStyleFontHighlight">
+      <Size>
+        <AbsDimension x="0" y="16"/>
+      </Size>
+      <Anchors>
+        <Anchor point="CENTER">
+          <Offset>
+            <AbsDimension x="-1" y="0"/>
+          </Offset>
+        </Anchor>
+      </Anchors>
+    </HighlightText>
+  </Button>
+</Ui>

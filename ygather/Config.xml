@@ -1,0 +1,442 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Frame name="yGather_ConfigDialogFrame" parent="UIParent" inherits="UICommonFrameTemplate" enableMouse="true"
+            hidden="true" frameStrata="DIALOG">
+		<Size>
+			<AbsDimension x="440" y="400"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER"/>
+		</Anchors>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="yGather_ConfigTitleText" inherits="GameTitleFont" text="yGather Configuration">
+					<Anchors><Anchor point="TOP"><Offset><AbsDimension x="-24" y="7"/></Offset></Anchor></Anchors>
+                </FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+            <Button inherits="UIPanelButtonTemplate" text="Confirm">
+                <Size><AbsDimension x="80" y="24"/></Size>
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT">
+                        <Offset><AbsDimension x="30" y="-12"/></Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        yGather.settings.ApplyTemporary();
+                        this:GetParent():Hide();
+                    </OnClick>
+                    <OnShow>
+                        this:SetText(yGather.translate("button/confirm"));
+                    </OnShow>
+                </Scripts>
+            </Button>
+            <Button inherits="UIPanelButtonTemplate" text="Cancel">
+                <Size><AbsDimension x="80" y="24"/></Size>
+                <Anchors>
+                    <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT">
+                        <Offset><AbsDimension x="-30" y="-12"/></Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        <!-- reseting temporary settings is done in OnHide of the dialog; this also handles, when the
+                        user uses the x button instead of cancel -->
+                        this:GetParent():Hide();
+                    </OnClick>
+                    <OnShow>
+                        this:SetText(yGather.translate("button/cancel"));
+                    </OnShow>
+                </Scripts>
+            </Button>
+            
+            <Frame name="yGather_ConfigFrame" inherits="UIPanelBackdropFrame">
+                <Anchors>
+                    <Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="50"/></Offset></Anchor>
+                    <Anchor point="BOTTOMRIGHT"><Offset><AbsDimension x="-10" y="-50"/></Offset></Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnLoad>
+                        UIPanelBackdropFrame_SetTexture(this, "Interface/Common/PanelCommonBorder", 64 , 64);
+                    </OnLoad>
+                </Scripts>
+                <Frames>
+                
+                    <!-- Misc config begin -->
+                    <Button name="yGather_ConfigTabMisc"  text="miscellaneous" inherits="yGather_ConfigTabTemplate" id="1">
+                        <Anchors>
+                            <Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
+                                <Offset><AbsDimension x="4" y="9"/></Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnShow>
+                                yGather.config:ResetTabs(this);
+                                this:SetText(yGather.translate("config/tabTitle/misc"));
+                            </OnShow>
+                        </Scripts>
+                    </Button>
+                    
+                    <Frame name="yGather_ConfigTabFrameMisc" inherits="yGather_ConfigTabFrameTemplate" id="1" hidden="false">
+                        <Frames>
+                            <Frame name="yGather_ConfigMiscLanguage" inherits="yGather_LabeledListBoxTemplate">
+                                <Size>
+                                    <AbsDimension x="120" y="20"/>
+                                </Size>
+                                <Anchors>
+                                    <Anchor point="TOPLEFT">
+                                        <Offset><AbsDimension x="15" y="20"/></Offset>
+                                    </Anchor>
+                                    <Anchor point="TOPRIGHT">
+                                        <Offset><AbsDimension x="-15" y="20"/></Offset>
+                                    </Anchor>
+                                </Anchors>
+                                <Scripts>
+                                    <OnLoad>
+										yGather.config.miscFrame.OnLoad(this);
+                                    </OnLoad>
+                                </Scripts>
+                            </Frame>
+						
+                        </Frames>
+                    </Frame>
+                    <!-- Misc config end -->
+
+                    <!-- Worldmap config begin -->
+                    <Button name="yGather_ConfigTabWorldmap" text="worldmap" inherits="yGather_ConfigTabTemplate" id="2">
+                        <Anchors>
+                            <Anchor point="LEFT" relativeTo="yGather_ConfigTabMisc" relativePoint="RIGHT">
+                                <Offset>
+                                    <AbsDimension x="-2" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnShow>
+                                this:SetText(yGather.translate("config/tabTitle/worldmap"));
+                            </OnShow>
+                        </Scripts>
+                    </Button>
+                    
+                    <Frame name="yGather_ConfigTabFrameWorldmap" inherits="yGather_ConfigTabFrameTemplate" id="2" hidden="false">
+                        <Frames>
+                            <CheckButton name="yGather_ConfigWorldmapShowResources" inherits="yGather_ConfigCheckButtonTemplate">
+                                <Anchors>
+                                    <Anchor point="TOPLEFT">
+                                        <Offset><AbsDimension x="15" y="15"/></Offset>
+                                    </Anchor>
+                                </Anchors>
+                                <Scripts>
+                                    <OnLoad>
+                                        this.labelTextKey = "config/worldmap/showResources";
+                                        this.configKey = "worldmap/showResources";
+                                    </OnLoad>
+                                </Scripts>
+                            </CheckButton>
+                            <Frame name="yGather_ConfigWorldmapIconMode" inherits="yGather_ConfigListBoxTemplate">
+                                <Anchors>
+                                    <Anchor point="TOPLEFT"><Offset><AbsDimension x="21" y="60"/></Offset></Anchor>
+                                </Anchors>
+                                <Scripts>
+                                    <OnLoad>
+                                        this.listBoxLabel = "config/iconSet";
+                                        this.configKey = "worldmap/iconSet";
+                                        local iconSets = yGather.iconsets.GetNames();
+                                        this.listEntries = {};
+                                        for _, name in ipairs(iconSets) do
+                                            this.listEntries[name] = {"config/iconSet/" .. name}
+                                        end
+                                        yGather.config:InitializeListBox(this);
+                                    </OnLoad>
+                                </Scripts>
+                            </Frame>
+                            
+                            <Button name="yGather_ConfigWorldmapIconColorOre" inherits="yGather_ConfigIconColorTemplate">
+                                <Anchors>
+                                    <Anchor point="LEFT" relativePoint="RIGHT" relativeTo="yGather_ConfigWorldmapIconMode">
+                                        <Offset><AbsDimension x="5" y="0"/></Offset>
+                                    </Anchor>
+                                </Anchors>
+                                <Scripts>
+                                    <OnLoad>
+                                        this.configKey = "worldmap/iconOreColor";
+                                        this.textKey = "common/ore";
+                                        yGather.settings.AddListener(this,
+                                                yGather.config.GetColorShowHideFunction(this, "worldmap/iconSet"));
+                                    </OnLoad>
+                                </Scripts>
+                            </Button>
+                            <Button name="yGather_ConfigWorldmapIconColorHerbs" inherits="yGather_ConfigIconColorTemplate">
+                                <Anchors>
+                                    <Anchor point="LEFT" relativePoint="RIGHT" relativeTo="yGather_ConfigWorldmapIconColorOre">
+                                        <Offset><AbsDimension x="5" y="0"/></Offset>
+                                    </Anchor>
+                                </Anchors>
+                                <Scripts>
+                                    <OnLoad>
+                                        this.configKey = "worldmap/iconHerbsColor";
+                                        this.textKey = "common/herbs";
+                                        yGather.settings.AddListener(this,
+                                                yGather.config.GetColorShowHideFunction(this, "worldmap/iconSet"));
+                                    </OnLoad>
+                                </Scripts>
+                            </Button>
+                            <Button name="yGather_ConfigWorldmapIconColorWood" inherits="yGather_ConfigIconColorTemplate">
+                                <Anchors>
+                                    <Anchor point="LEFT" relativePoint="RIGHT" relativeTo="yGather_ConfigWorldmapIconColorHerbs">
+                                        <Offset><AbsDimension x="5" y="0"/></Offset>
+                                    </Anchor>
+                                </Anchors>
+                                <Scripts>
+                                    <OnLoad>
+                                        this.configKey = "worldmap/iconWoodColor";
+                                        this.textKey = "common/wood";
+                                        yGather.settings.AddListener(this,
+                                                yGather.config.GetColorShowHideFunction(this, "worldmap/iconSet"));
+                                    </OnLoad>
+                                </Scripts>
+                            </Button>
+                            <Slider name="yGather_ConfigWorldmapIconTransparency" inherits="yGather_ConfigSliderTemplate"
+                                    minValue="0" maxValue="0.8">
+                                <Anchors>
+                                    <Anchor point="TOPRIGHT" relativePoint="TOP">
+                                        <Offset><AbsDimension x="-25" y="110"/></Offset>
+                                    </Anchor>
+                                </Anchors>
+                                <Scripts>
+                                    <OnLoad>
+                                        this.topText = "config/transparency";
+                                        this.leftText = 0;
+                                        this.rightText = 0.8;
+                                        this.configKey = "worldmap/iconTransparency";
+                                    </OnLoad>
+                                </Scripts>
+                            </Slider>
+                            <Slider name="yGather_ConfigWorldmapIconSize" inherits="yGather_ConfigSliderTemplate"
+                                    minValue="3" maxValue="24">
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativePoint="TOP">
+                                        <Offset><AbsDimension x="25" y="110"/></Offset>
+                                    </Anchor>
+                                </Anchors>
+                                <Scripts>
+                                    <OnLoad>
+                                        this.topText = "config/iconSize";
+                                        this.leftText = "config/iconSizeSmall";
+                                        this.rightText = "config/iconSizeBig";
+                                        this.configKey = "worldmap/iconSize";
+                                    </OnLoad>
+                                </Scripts>
+                            </Slider>
+                        </Frames>
+                    </Frame>
+                    <!-- Worldmap config end -->
+
+                    <!-- Minimap config begin -->
+                    <Button name="yGather_ConfigTabMinimap" text="minimap" inherits="yGather_ConfigTabTemplate" id="3">
+                        <Anchors>
+                            <Anchor point="LEFT" relativeTo="yGather_ConfigTabWorldmap" relativePoint="RIGHT">
+                                <Offset>
+                                    <AbsDimension x="-2" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnShow>
+                                this:SetText(yGather.translate("config/tabTitle/minimap"));
+                            </OnShow>
+                        </Scripts>
+                    </Button>
+                    <Frame inherits="yGather_ConfigTabFrameTemplate" id="3" hidden="false">
+                        <Frames>
+                            <CheckButton inherits="yGather_ConfigCheckButtonTemplate">
+                                <Anchors>
+                                    <Anchor point="TOPLEFT">
+                                        <Offset><AbsDimension x="15" y="15"/></Offset>
+                                    </Anchor>
+                                </Anchors>
+                                <Scripts>
+                                    <OnLoad>
+                                        this.labelTextKey = "config/minimap/showResources";
+                                        this.configKey = "minimap/showResources";
+                                    </OnLoad>
+                                </Scripts>
+                            </CheckButton>
+                            <Frame name="yGather_ConfigMinimapIconMode" inherits="yGather_ConfigListBoxTemplate">
+                                <Anchors>
+                                    <Anchor point="TOPLEFT"><Offset><AbsDimension x="21" y="60"/></Offset></Anchor>
+                                </Anchors>
+                                <Scripts>
+                                    <OnLoad>
+                                        this.listBoxLabel = "config/iconSet";
+                                        this.configKey = "minimap/iconSet";
+                                        local iconSets = yGather.iconsets.GetNames();
+                                        this.listEntries = {};
+                                        for _, name in ipairs(iconSets) do
+                                            this.listEntries[name] = {"config/iconSet/" .. name}
+                                        end
+                                        yGather.config:InitializeListBox(this);
+                                    </OnLoad>
+                                </Scripts>
+                            </Frame>
+                            <Button name="yGather_ConfigMinimapIconColorOre" inherits="yGather_ConfigIconColorTemplate">
+                                <Anchors>
+                                    <Anchor point="LEFT" relativePoint="RIGHT" relativeTo="yGather_ConfigMinimapIconMode">
+                                        <Offset><AbsDimension x="5" y="0"/></Offset>
+                                    </Anchor>
+                                </Anchors>
+                                <Scripts>
+                                    <OnLoad>
+                                        this.configKey = "minimap/iconOreColor";
+                                        this.textKey = "common/ore";
+                                        yGather.settings.AddListener(this,
+                                            yGather.config.GetColorShowHideFunction(this, "minimap/iconSet"));
+                                    </OnLoad>
+                                </Scripts>
+                            </Button>
+                            <Button name="yGather_ConfigMinimapIconColorHerbs" inherits="yGather_ConfigIconColorTemplate">
+                                <Anchors>
+                                    <Anchor point="LEFT" relativePoint="RIGHT" relativeTo="yGather_ConfigMinimapIconColorOre">
+                                        <Offset><AbsDimension x="5" y="0"/></Offset>
+                                    </Anchor>
+                                </Anchors>
+                                <Scripts>
+                                    <OnLoad>
+                                        this.configKey = "minimap/iconHerbsColor";
+                                        this.textKey = "common/herbs";
+                                        yGather.settings.AddListener(this,
+                                            yGather.config.GetColorShowHideFunction(this, "minimap/iconSet"));
+                                    </OnLoad>
+                                </Scripts>
+                            </Button>
+                            <Button name="yGather_ConfigMinimapIconColorWood" inherits="yGather_ConfigIconColorTemplate">
+                                <Anchors>
+                                    <Anchor point="LEFT" relativePoint="RIGHT" relativeTo="yGather_ConfigMinimapIconColorHerbs">
+                                        <Offset><AbsDimension x="5" y="0"/></Offset>
+                                    </Anchor>
+                                </Anchors>
+                                <Scripts>
+                                    <OnLoad>
+                                        this.configKey = "minimap/iconWoodColor";
+                                        this.textKey = "common/wood";
+                                        yGather.settings.AddListener(this,
+                                            yGather.config.GetColorShowHideFunction(this, "minimap/iconSet"));
+                                    </OnLoad>
+                                </Scripts>
+                            </Button>
+                            <Slider name="yGather_ConfigMinimapIconTransparency" inherits="yGather_ConfigSliderTemplate"
+                                    minValue="0" maxValue="0.8">
+                                <Anchors>
+                                    <Anchor point="TOPRIGHT" relativePoint="TOP">
+                                        <Offset><AbsDimension x="-25" y="110"/></Offset>
+                                    </Anchor>
+                                </Anchors>
+                                <Scripts>
+                                    <OnLoad>
+                                        this.topText = "config/transparency";
+                                        this.leftText = 0;
+                                        this.rightText = 0.8;
+                                        this.configKey = "minimap/iconTransparency";
+                                    </OnLoad>
+                                </Scripts>
+                            </Slider>
+                            <Slider name="yGather_ConfigMinimapIconSize" inherits="yGather_ConfigSliderTemplate"
+                                    minValue="3" maxValue="24">
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativePoint="TOP">
+                                        <Offset><AbsDimension x="25" y="110"/></Offset>
+                                    </Anchor>
+                                </Anchors>
+                                <Scripts>
+                                    <OnLoad>
+                                        this.topText = "config/iconSize";
+                                        this.leftText = "config/iconSizeSmall";
+                                        this.rightText = "config/iconSizeBig";
+                                        this.configKey = "minimap/iconSize";
+                                    </OnLoad>
+                                </Scripts>
+                            </Slider>
+                        </Frames>
+                    </Frame>
+                    <!-- Minimap config end -->
+					
+					<!-- Delete config begin -->
+                    <Button name="yGather_ConfigTabDelete" text="Delete Data" inherits="yGather_ConfigTabTemplate" id="4">
+                        <Anchors>
+                            <Anchor point="LEFT" relativeTo="yGather_ConfigTabMinimap" relativePoint="RIGHT">
+                                <Offset>
+                                    <AbsDimension x="-2" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnShow>
+                                this:SetText(yGather.translate("config/tabTitle/delete"));
+                            </OnShow>
+                        </Scripts>
+                    </Button>
+                    <Frame inherits="yGather_ConfigTabFrameTemplate" id="4" hidden="false">
+                    <Frames>	
+						<!--Clear-->
+						<Button name="yGather_ConfigTabDelete_ClearButton1" inherits="UIPanelButtonTemplate" text="Delete actual zone date">
+							<Size>
+								<AbsDimension x="200" y="25"/>
+								</Size>
+								<Anchors>
+								<Anchor point="TOPLEFT">
+								<Offset><AbsDimension x="10" y="200"/></Offset>
+								</Anchor>
+								</Anchors>
+								<Scripts>
+								<OnClick>
+									yGather.database.ClearZone()
+								</OnClick>
+								<OnShow>
+									this:SetText(yGather.translate("config/clear"));
+								</OnShow>
+							</Scripts>
+						</Button>
+						<Button name="yGather_ConfigTabDelete_ClearButton2" inherits="UIPanelButtonTemplate" text="Delete all collected data!">
+								<Size>
+									<AbsDimension x="200" y="25"/>
+								</Size>
+								<Anchors>
+									<Anchor point="TOPLEFT">
+									<Offset><AbsDimension x="10" y="240"/></Offset>
+									</Anchor>
+								</Anchors>
+								<Scripts>
+									<OnClick>
+										yGather.database.Clearall();
+									</OnClick>
+								<OnShow>
+									this:SetText(yGather.translate("config/clearall"));
+								</OnShow>
+								</Scripts>
+						</Button>
+						<!--Clear End-->	
+				 				  
+                        </Frames>
+                    </Frame>
+                    <!-- Delete config end -->
+					
+                    
+                </Frames>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+                UIPanelBackdropFrame_SetTexture(this, "Interface/Common/PanelCommonFrame", 256, 256);
+                yGather.config:SetConfigDialog(this);
+			</OnLoad>
+			<OnShow>
+				yGather.config:ConfigDialogFrame_OnShow(this);				
+			</OnShow>
+			<OnHide>
+                <!-- reset config changes -->
+                yGather.settings.ClearTemporary();
+			</OnHide>
+		</Scripts>
+	</Frame>
+</Ui>

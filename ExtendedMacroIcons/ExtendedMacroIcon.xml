@@ -1,0 +1,1214 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<CheckButton name="EMI_MacroButtonTemplate" virtual="true" autoChecked="false">
+		<Size>
+			<AbsDimension x="36" y="36"/>
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface\Buttons\QuickSlot-Normal">
+					<Size>
+						<AbsDimension x="64" y="64"/>
+					</Size>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="BORDER">
+				<Texture name="$parentIcon">
+					<Size>
+						<AbsDimension x="32" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parentName" inherits="GameFontNormal">
+					<Size>
+						<AbsDimension x="32" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOM">
+							<Offset>
+								<AbsDimension x="0" y="1"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<HighlightTexture file="Interface\Buttons\QuickSlot-Highlight" alphaMode="ADD"/>
+		<CheckedTexture file="Interface\Buttons\QuickSlot-Checked" alphaMode="ADD"/>
+	</CheckButton>
+	<CheckButton name="EMI_MacroFrameButtonTemplate" inherits="EMI_MacroButtonTemplate" virtual="true">
+		<Scripts>
+			<OnEnter>
+				local icon, name, body = GetMacroInfo(this:GetID())
+				if HasMacro(this:GetID()) and name ~="" then
+					GameTooltip:SetOwner(this, "ANCHOR_TOPLEFT", 0, 0);
+					GameTooltip:SetText(name);
+					GameTooltip:Show();
+				end
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+			<OnClick>
+				ExtendedMacroIcons.func.MacroFrame.OnClick(this);
+			</OnClick>
+			<OnDragStart>
+				PickupMacroItem(this:GetID());
+			</OnDragStart>
+			<OnReceiveDrag>
+				PickupMacroItem(this:GetID());
+				ExtendedMacroIcons.func.MacroFrame.Update()
+			</OnReceiveDrag>
+		</Scripts>
+	</CheckButton>
+
+
+	<CheckButton name="EMI_MacroPopupIconButtonTemplate" inherits="EMI_MacroButtonTemplate" virtual="true">
+		<Scripts>
+			<OnClick>
+				ExtendedMacroIcons.func.MacroPopupIconButton.OnClick(this);
+			</OnClick>
+			<OnMouseWheel>
+				UIPanelScrollBar_OnMouseWheel(EMI_MacroPopupIconScrollBar, delta);
+			</OnMouseWheel>
+			<OnEnter>
+				if IsShiftKeyDown() then
+					GameTooltip:SetOwner(this, "ANCHOR_TOPLEFT", 0, 0)
+					GameTooltip:SetText(this.path)
+					GameTooltip:Show()
+				end
+			</OnEnter>
+			<OnLeave>
+			GameTooltip:Hide()
+			</OnLeave>
+
+		</Scripts>
+	</CheckButton>
+
+
+
+	<Frame name="ExtendedMacroIconsFrame" parent="UIParent" hidden="true">
+		<Scripts>
+			<OnLoad>
+				this:RegisterEvent("VARIABLES_LOADED")
+			</OnLoad>
+			<OnEvent>
+				ExtendedMacroIcons.func.OnEvent(this,event,arg1, arg2, arg3, arg4)
+			</OnEvent>
+		</Scripts>
+	</Frame>
+
+
+	<Frame name="EMI_MacroFrame" inherits="UIPanelFrameTemplate" parent="UIParent" hidden="true">
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset>
+					<AbsDimension x="0" y="104"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<CheckButton name="EMI_MacroButton1" inherits="EMI_MacroFrameButtonTemplate" id="1"/>
+			<CheckButton name="EMI_MacroButton2" inherits="EMI_MacroFrameButtonTemplate" id="2"/>
+			<CheckButton name="EMI_MacroButton3" inherits="EMI_MacroFrameButtonTemplate" id="3"/>
+			<CheckButton name="EMI_MacroButton4" inherits="EMI_MacroFrameButtonTemplate" id="4"/>
+			<CheckButton name="EMI_MacroButton5" inherits="EMI_MacroFrameButtonTemplate" id="5"/>
+			<CheckButton name="EMI_MacroButton6" inherits="EMI_MacroFrameButtonTemplate" id="6"/>
+			<CheckButton name="EMI_MacroButton7" inherits="EMI_MacroFrameButtonTemplate" id="7"/>
+			<CheckButton name="EMI_MacroButton8" inherits="EMI_MacroFrameButtonTemplate" id="8"/>
+			<CheckButton name="EMI_MacroButton9" inherits="EMI_MacroFrameButtonTemplate" id="9"/>
+			<CheckButton name="EMI_MacroButton10" inherits="EMI_MacroFrameButtonTemplate" id="10"/>
+			<CheckButton name="EMI_MacroButton11" inherits="EMI_MacroFrameButtonTemplate" id="11"/>
+			<CheckButton name="EMI_MacroButton12" inherits="EMI_MacroFrameButtonTemplate" id="12"/>
+			<CheckButton name="EMI_MacroButton13" inherits="EMI_MacroFrameButtonTemplate" id="13"/>
+			<CheckButton name="EMI_MacroButton14" inherits="EMI_MacroFrameButtonTemplate" id="14"/>
+			<CheckButton name="EMI_MacroButton15" inherits="EMI_MacroFrameButtonTemplate" id="15"/>
+			<CheckButton name="EMI_MacroButton16" inherits="EMI_MacroFrameButtonTemplate" id="16"/>
+			<CheckButton name="EMI_MacroButton17" inherits="EMI_MacroFrameButtonTemplate" id="17"/>
+			<CheckButton name="EMI_MacroButton18" inherits="EMI_MacroFrameButtonTemplate" id="18"/>
+			<CheckButton name="EMI_MacroButton19" inherits="EMI_MacroFrameButtonTemplate" id="19"/>
+			<CheckButton name="EMI_MacroButton20" inherits="EMI_MacroFrameButtonTemplate" id="20"/>
+			<CheckButton name="EMI_MacroButton21" inherits="EMI_MacroFrameButtonTemplate" id="21"/>
+			<CheckButton name="EMI_MacroButton22" inherits="EMI_MacroFrameButtonTemplate" id="22"/>
+			<CheckButton name="EMI_MacroButton23" inherits="EMI_MacroFrameButtonTemplate" id="23"/>
+			<CheckButton name="EMI_MacroButton24" inherits="EMI_MacroFrameButtonTemplate" id="24"/>
+			<CheckButton name="EMI_MacroButton25" inherits="EMI_MacroFrameButtonTemplate" id="25"/>
+			<CheckButton name="EMI_MacroButton26" inherits="EMI_MacroFrameButtonTemplate" id="26"/>
+			<CheckButton name="EMI_MacroButton27" inherits="EMI_MacroFrameButtonTemplate" id="27"/>
+			<CheckButton name="EMI_MacroButton28" inherits="EMI_MacroFrameButtonTemplate" id="28"/>
+			<CheckButton name="EMI_MacroButton29" inherits="EMI_MacroFrameButtonTemplate" id="29"/>
+			<CheckButton name="EMI_MacroButton30" inherits="EMI_MacroFrameButtonTemplate" id="30"/>
+			<CheckButton name="EMI_MacroButton31" inherits="EMI_MacroFrameButtonTemplate" id="31"/>
+			<CheckButton name="EMI_MacroButton32" inherits="EMI_MacroFrameButtonTemplate" id="32"/>
+			<CheckButton name="EMI_MacroButton33" inherits="EMI_MacroFrameButtonTemplate" id="33"/>
+			<CheckButton name="EMI_MacroButton34" inherits="EMI_MacroFrameButtonTemplate" id="34"/>
+			<CheckButton name="EMI_MacroButton35" inherits="EMI_MacroFrameButtonTemplate" id="35"/>
+			<CheckButton name="EMI_MacroButton36" inherits="EMI_MacroFrameButtonTemplate" id="36"/>
+			<CheckButton name="EMI_MacroButton37" inherits="EMI_MacroFrameButtonTemplate" id="37"/>
+			<CheckButton name="EMI_MacroButton38" inherits="EMI_MacroFrameButtonTemplate" id="38"/>
+			<CheckButton name="EMI_MacroButton39" inherits="EMI_MacroFrameButtonTemplate" id="39"/>
+			<CheckButton name="EMI_MacroButton40" inherits="EMI_MacroFrameButtonTemplate" id="40"/>
+			<CheckButton name="EMI_MacroButton41" inherits="EMI_MacroFrameButtonTemplate" id="41"/>
+			<CheckButton name="EMI_MacroButton42" inherits="EMI_MacroFrameButtonTemplate" id="42"/>
+			<CheckButton name="EMI_MacroButton43" inherits="EMI_MacroFrameButtonTemplate" id="43"/>
+			<CheckButton name="EMI_MacroButton44" inherits="EMI_MacroFrameButtonTemplate" id="44"/>
+			<CheckButton name="EMI_MacroButton45" inherits="EMI_MacroFrameButtonTemplate" id="45"/>
+			<CheckButton name="EMI_MacroButton46" inherits="EMI_MacroFrameButtonTemplate" id="46"/>
+			<CheckButton name="EMI_MacroButton47" inherits="EMI_MacroFrameButtonTemplate" id="47"/>
+			<CheckButton name="EMI_MacroButton48" inherits="EMI_MacroFrameButtonTemplate" id="48"/>
+			<CheckButton name="EMI_MacroButton49" inherits="EMI_MacroFrameButtonTemplate" id="49"/>
+			<CheckButton name="EMI_MacroButton50" inherits="EMI_MacroFrameButtonTemplate" id="50"/>
+			<CheckButton name="EMI_MacroButton51" inherits="EMI_MacroFrameButtonTemplate" id="51"/>
+			<CheckButton name="EMI_MacroButton52" inherits="EMI_MacroFrameButtonTemplate" id="52"/>
+			<CheckButton name="EMI_MacroButton53" inherits="EMI_MacroFrameButtonTemplate" id="53"/>
+			<CheckButton name="EMI_MacroButton54" inherits="EMI_MacroFrameButtonTemplate" id="54"/>
+			<CheckButton name="EMI_MacroButton55" inherits="EMI_MacroFrameButtonTemplate" id="55"/>
+			<CheckButton name="EMI_MacroButton56" inherits="EMI_MacroFrameButtonTemplate" id="56"/>
+
+			<Button name="EMI_MacroEditButton" inherits="UIPanelButtonTemplate" text="MACRO_CONTENT">
+				<Size>
+					<AbsDimension x="72" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="36" y="-96"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						ExtendedMacroIcons.func.MacroEditButton.OnClick();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="EMI_MacroResetButton" inherits="UIPanelButtonTemplate" text="MACRO_RESET">
+				<Size>
+					<AbsDimension x="72" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="EMI_MacroEditButton" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="16" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						ExtendedMacroIcons.func.MacroResetButton.OnClick(this);
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="EMI_MacroCancelButton" inherits="UIPanelButtonTemplate" text="C_CANCEL">
+				<Size>
+					<AbsDimension x="72" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="230" y="-96"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						HideUIPanel(EMI_MacroFrame);
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				ExtendedMacroIcons.func.MacroFrame.OnLoad(this);
+			</OnLoad>
+			<OnEvent>
+				ExtendedMacroIcons.func.MacroFrame.OnEvent(this, event);
+			</OnEvent>
+			<OnShow>
+				ExtendedMacroIcons.func.MacroFrame.OnShow(this);
+			</OnShow>
+			<OnHide>
+				EMI_MacroPopupFrame:Hide();
+				EMI_MacroPopupIconFrame:Hide();
+			</OnHide>
+		</Scripts>
+	</Frame>
+
+	<Frame name="EMI_MacroPopupFrame" inherits="UIPanelFrameTemplate" parent="EMI_MacroFrame" hidden="true">
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeTo="EMI_MacroFrame" relativePoint="TOPRIGHT">
+				<Offset>
+					<AbsDimension x="-30" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface\Common\PanelSeparate-HorizontalLine">
+					<Size>
+						<AbsDimension x="298" y="4"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="20" y="116"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parentContent" inherits="GameFontNormal" text="MACRO_CONTENT_LENGTH">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="32" y="102"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="EMI_MacroSelectIconButton">
+				<Size>
+					<AbsDimension x="16" y="38"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="74" y="56"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						EMI_MacroPopupIconFrame:Show();
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\MacroFrame\ChangeIconButton-normal">
+					<TexCoords left="0" right="1" top="0" bottom="0.59375"/>
+				</NormalTexture>
+				<PushedTexture file="Interface\MacroFrame\ChangeIconButton-depress">
+					<TexCoords left="0" right="1" top="0" bottom="0.59375"/>
+				</PushedTexture>
+				<HighlightTexture file="Interface\MacroFrame\ChangeIconButton-Highlight" alphaMode="ADD">
+					<TexCoords left="0" right="1" top="0" bottom="0.59375"/>
+				</HighlightTexture>
+			</Button>
+			<Button name="EMI_MacroPopupIconButton">
+				<Size>
+					<AbsDimension x="36" y="36"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="EMI_MacroSelectIconButton" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture file="Interface\Buttons\QuickSlot-Normal">
+							<Size>
+								<AbsDimension x="64" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="CENTER"/>
+							</Anchors>
+						</Texture>
+					</Layer>
+					<Layer level="BORDER">
+						<Texture name="$parentIcon">
+							<Size>
+								<AbsDimension x="32" y="32"/>
+							</Size>
+							<Anchors>
+								<Anchor point="CENTER"/>
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Button>
+			<EditBox name="EMI_MacroPopupNameEdit" letters="32">
+				<Size>
+					<AbsDimension x="120" y="34"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="EMI_MacroPopupIconButton" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture file="Interface\MacroFrame\MacroButtonNameEdit-border">
+							<Size>
+								<AbsDimension x="128" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="CENTER"/>
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+				<FontString inherits="GameEditFont"/>
+				<TextInsets>
+					<AbsInset left="6" right="6" top="8" bottom="6"/>
+				</TextInsets>
+			</EditBox>
+			<EditBox name="EMI_MacroPopupBodyEdit" inherits="UIMultiEditBoxTemplate" multiLine="true" letters="767">
+				<Size>
+					<AbsDimension x="280" y="248"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="24" y="124"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<HitRectInsets>
+					<AbsInset left="4" right="4" top="4" bottom="4"/>
+				</HitRectInsets>
+				<FontString inherits="GameEditFont"/>
+			</EditBox>
+			<Button name="EMI_MacroPopupSaveButton" inherits="UIPanelButtonTemplate" text="MACRO_SAVE_CHANGE">
+				<Size>
+					<AbsDimension x="72" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="36" y="-96"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						ExtendedMacroIcons.func.MacroPopupSaveButton.OnClick(this);
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="EMI_MacroPopupItemLinkButton" inherits="UIPanelButtonTemplate" text="Item">
+				<Size>
+					<AbsDimension x="36" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+							<AbsDimension x="-18" y="-96"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_TOPRIGHT", 0, 0);
+						GameTooltip:SetText("Inserts itemlink of item in bagpositon 1 on cursorposition");
+						GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+					<OnClick>
+						local num = GetBagItemInfo(1)
+						EMI_MacroPopupBodyEdit:InsertText(GetBagItemLink(num))
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="EMI_MacroPopupNameLinkButton" inherits="UIPanelButtonTemplate" text="Name">
+				<Size>
+					<AbsDimension x="36" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+							<AbsDimension x="18" y="-96"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_TOPRIGHT", 0, 0);
+						GameTooltip:SetText("Inserts cklickable namelink into macrotext");
+						GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+					<OnClick>
+						EMI_MacroPopupBodyEdit:ClearFocus()
+						ToggleUIFrame(EMI_MacroPopupNameFrame)
+					</OnClick>
+				</Scripts>
+			</Button>
+
+			<Button name="EMI_MacroPopupCancelButton" inherits="UIPanelButtonTemplate" text="C_CANCEL">
+				<Size>
+					<AbsDimension x="72" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="230" y="-96"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						HideUIPanel(EMI_MacroPopupFrame);
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Frame name="EMI_MacroPopupNameFrame" inherits="UICommonFrameTemplate" hidden="true" enableMouse="false">
+				<Size>
+					<AbsDimension x="256" y="128"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" />
+				</Anchors>
+				<Frames>
+					<EditBox name="$parentEdit" letters="32">
+						<Size>
+							<AbsDimension x="120" y="34"/>
+						</Size>
+						<Anchors>
+							<Anchor point="CENTER" relativePoint="CENTER">
+								<Offset>
+									<AbsDimension x="6" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture file="Interface\MacroFrame\MacroButtonNameEdit-border">
+									<Size>
+										<AbsDimension x="128" y="64"/>
+									</Size>
+									<Anchors>
+										<Anchor point="CENTER"/>
+									</Anchors>
+								</Texture>
+							</Layer>
+						</Layers>
+						<FontString inherits="GameEditFont"/>
+						<TextInsets>
+							<AbsInset left="6" right="6" top="8" bottom="6"/>
+						</TextInsets>
+					</EditBox>
+					<Button name="$parentOKButton" inherits="UIPanelButtonTemplate" text="Okay">
+						<Size>
+							<AbsDimension x="72" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parentEdit">
+								<Offset>
+									<AbsDimension x="0" y="5"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								local text=EMI_MacroPopupNameFrameEdit:GetText()
+								EMI_MacroPopupBodyEdit:InsertText("|Hplayer:"..text.."|h["..text.."]|r|h")
+								this:GetParent():Hide()
+							</OnClick>
+						</Scripts>
+					</Button>
+				</Frames>
+				<Scripts>
+					<OnShow>
+						EMI_MacroPopupNameFrameTitle:SetText("Create Namelink")
+						EMI_MacroPopupNameFrameEdit:SetText("")
+						this:ClearAllAnchors()
+						this:SetAnchor("TOPLEFT","TOPRIGHT","$parent",-30,5)
+					</OnShow>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				EMI_MacroPopupFrameTitleText:SetText(MACRO_CONTENT);
+				local a,b = string.find(MACRO_CONTENT_LENGTH,"%d+")
+				local text =string.sub(MACRO_CONTENT_LENGTH,1,a-1).."767"..string.sub(MACRO_CONTENT_LENGTH,b+1)
+				EMI_MacroPopupFrameContent:SetText(text)
+			</OnLoad>
+			<OnShow>
+				ExtendedMacroIcons.func.MacroPopupFrame.OnShow(this);
+			</OnShow>
+			<OnHide>
+				EMI_MacroPopupIconFrame:Hide();
+				EMI_MacroPopupNameFrame:Hide();
+			</OnHide>
+		</Scripts>
+	</Frame>
+
+	<Frame name="EMI_MacroPopupIconFrame" parent="EMI_MacroPopupFrame" hidden="true" enableMouse="true">
+		<Size>
+			<AbsDimension x="410" y="295"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupFrame" relativePoint="TOPRIGHT">
+				<Offset>
+					<AbsDimension x="-30" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface\Addons\ExtendedMacroIcons\gfx\macropopupiconframe-border">
+					<Size>
+						<AbsDimension x="512" y="512"/>
+					</Size>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="EMI_MacroPopupIconFrameTitle" inherits="GameTitleFont" text="MACRO_ICON_FRAME">
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="-4" y="8"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="EMI_CatFrame" enableMouse="true" framestrata="HIGH" frameLevel="1000">
+				<Size>
+					<AbsDimension x="150" y="12"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP" relativePoint="TOP">
+						<Offset>
+							<AbsDimension x="0" y="31"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<Button name="$parentButtonLeft" parent="EMI_CatFrame" hidden="false" enableMouse="true">
+						<Size>
+							<AbsDimension x="12" y="12"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT" />
+						</Anchors>
+						<NormalTexture file="Interface\Addons\ExtendedMacroIcons\gfx\arrowleft.png"/>
+						<HighlightTexture file="Interface\Addons\ExtendedMacroIcons\gfx\arrowleft.png" alphaMode="ADD" />
+						<Scripts>
+							<OnClick>
+								ExtendedMacroIcons.func.CatButtonOnClick(this)
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button name="$parentButtonRight" parent="EMI_CatFrame" hidden="false" enableMouse="true" >
+						<Size>
+							<AbsDimension x="12" y="12"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" />
+						</Anchors>
+						<NormalTexture file="Interface\Addons\ExtendedMacroIcons\gfx\arrowright.png"/>
+						<HighlightTexture file="Interface\Addons\ExtendedMacroIcons\gfx\arrowright.png" alphaMode="ADD" />
+						<Scripts>
+							<OnClick>
+								ExtendedMacroIcons.func.CatButtonOnClick(this)
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button name="$parentButtonDropdown" parent="EMI_CatFrame" hidden="false" enableMouse="true" >
+						<Size>
+							<AbsDimension x="126" y="12"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativePoint="TOP" />
+						</Anchors>
+						<Layers>
+							<Layer level ="OVERLAY">
+								<FontString name="$parentText" inherits="GameTitleFont" text="Test" justifyH="CENTER">
+									<FontHeight>
+										<AbsValue val="12"/>
+									</FontHeight>
+									<Anchors>
+										<Anchor point="TOPLEFT" relativePoint="TOPLEFT"/>
+										<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT"/>										
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if awsmDropdown and awsmDropdown.GetBuildNumber() >= 20130814132956 then
+									ExtendedMacroIcons.func.Dropdown.Update(this:GetParent())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+
+				</Frames>
+			</Frame>
+			<Button name="EMI_MacroPopupIconCloseButton" inherits="UIPanelCloseButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-11" y="6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Frame name="EMI_MacroPopupSelectIconFrame" enableMouse="true">
+				<Size>
+					<AbsDimension x="372" y="249"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="33"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<!--
+					<Layer>
+						<Texture file="Interface\Common\Block-Fill"/>
+					</Layer>
+					-->
+					<Layer level="BORDER">
+						<Texture name="$parentTop" file="Interface\Common\PanelScrollBar-Broder">
+							<Size>
+								<AbsDimension x="16" y="16"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPRIGHT">
+									<Offset>
+										<AbsDimension x="-7" y="11"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0" right="1" top="0" bottom="0.25"/>
+						</Texture>
+						<Texture name="$parentBottom" file="Interface\Common\PanelScrollBar-Broder">
+							<Size>
+								<AbsDimension x="16" y="16"/>
+							</Size>
+							<Anchors>
+								<Anchor point="BOTTOMRIGHT">
+									<Offset>
+										<AbsDimension x="-7" y="-48"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0" right="1" top="0.75" bottom="1"/>
+						</Texture>
+						<Texture name="$parentMiddle" file="Interface\Common\PanelScrollBar-Broder">
+							<Size>
+								<AbsDimension x="16" y="1"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOP" relativeTo="$parentTop" relativePoint="BOTTOM"/>
+								<Anchor point="BOTTOM" relativeTo="$parentBottom" relativePoint="TOP"/>
+							</Anchors>
+							<TexCoords left="0" right="1" top="0.25" bottom="0.75"/>
+						</Texture>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Slider name="EMI_MacroPopupIconScrollBar" inherits="UIPanelScrollBarTemplate">
+						<Size>
+							<AbsDimension x="16" y="1"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parentMiddle">
+								<Offset>
+									<AbsDimension x="0" y="3"/>
+								</Offset>
+							</Anchor>
+							<Anchor point="BOTTOM" relativeTo="$parentMiddle">
+								<Offset>
+									<AbsDimension x="0" y="-3"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this:SetValueStepMode("INT");
+							</OnLoad>
+							<OnValueChanged>
+								ExtendedMacroIcons.func.MacroPopupIconScrollBar.OnValueChanged(this, arg1);
+							</OnValueChanged>
+						</Scripts>
+					</Slider>
+					<CheckButton name="EMI_MacroPopupIconButton1" inherits="EMI_MacroPopupIconButtonTemplate" id="1">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="8" y="12"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton2" inherits="EMI_MacroPopupIconButtonTemplate" id="2">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton1" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton3" inherits="EMI_MacroPopupIconButtonTemplate" id="3">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton2" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton4" inherits="EMI_MacroPopupIconButtonTemplate" id="4">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton3" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton5" inherits="EMI_MacroPopupIconButtonTemplate" id="5">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton4" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton6" inherits="EMI_MacroPopupIconButtonTemplate" id="6">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton5" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton7" inherits="EMI_MacroPopupIconButtonTemplate" id="7">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton6" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton8" inherits="EMI_MacroPopupIconButtonTemplate" id="8">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton7" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton9" inherits="EMI_MacroPopupIconButtonTemplate" id="9">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton8" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+
+					<CheckButton name="EMI_MacroPopupIconButton10" inherits="EMI_MacroPopupIconButtonTemplate" id="10">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton1" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton11" inherits="EMI_MacroPopupIconButtonTemplate" id="11">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton10" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton12" inherits="EMI_MacroPopupIconButtonTemplate" id="12">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton11" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton13" inherits="EMI_MacroPopupIconButtonTemplate" id="13">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton12" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton14" inherits="EMI_MacroPopupIconButtonTemplate" id="14">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton13" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton15" inherits="EMI_MacroPopupIconButtonTemplate" id="15">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton14" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton16" inherits="EMI_MacroPopupIconButtonTemplate" id="16">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton15" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton17" inherits="EMI_MacroPopupIconButtonTemplate" id="17">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton16" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton18" inherits="EMI_MacroPopupIconButtonTemplate" id="18">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton17" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+
+					<CheckButton name="EMI_MacroPopupIconButton19" inherits="EMI_MacroPopupIconButtonTemplate" id="19">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton10" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton20" inherits="EMI_MacroPopupIconButtonTemplate" id="20">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton19" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton21" inherits="EMI_MacroPopupIconButtonTemplate" id="21">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton20" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton22" inherits="EMI_MacroPopupIconButtonTemplate" id="22">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton21" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton23" inherits="EMI_MacroPopupIconButtonTemplate" id="23">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton22" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton24" inherits="EMI_MacroPopupIconButtonTemplate" id="24">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton23" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton25" inherits="EMI_MacroPopupIconButtonTemplate" id="25">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton24" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton26" inherits="EMI_MacroPopupIconButtonTemplate" id="26">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton25" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton27" inherits="EMI_MacroPopupIconButtonTemplate" id="27">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton26" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+
+					<CheckButton name="EMI_MacroPopupIconButton28" inherits="EMI_MacroPopupIconButtonTemplate" id="28">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton19" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton29" inherits="EMI_MacroPopupIconButtonTemplate" id="29">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton28" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton30" inherits="EMI_MacroPopupIconButtonTemplate" id="30">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton29" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton31" inherits="EMI_MacroPopupIconButtonTemplate" id="31">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton30" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton32" inherits="EMI_MacroPopupIconButtonTemplate" id="32">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton31" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton33" inherits="EMI_MacroPopupIconButtonTemplate" id="33">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton32" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton34" inherits="EMI_MacroPopupIconButtonTemplate" id="34">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton33" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton35" inherits="EMI_MacroPopupIconButtonTemplate" id="35">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton34" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton36" inherits="EMI_MacroPopupIconButtonTemplate" id="36">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton35" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+
+					<CheckButton name="EMI_MacroPopupIconButton37" inherits="EMI_MacroPopupIconButtonTemplate" id="37">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton28" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton38" inherits="EMI_MacroPopupIconButtonTemplate" id="38">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton37" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton39" inherits="EMI_MacroPopupIconButtonTemplate" id="39">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton38" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton40" inherits="EMI_MacroPopupIconButtonTemplate" id="40">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton39" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton41" inherits="EMI_MacroPopupIconButtonTemplate" id="41">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton40" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton42" inherits="EMI_MacroPopupIconButtonTemplate" id="42">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton41" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton43" inherits="EMI_MacroPopupIconButtonTemplate" id="43">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton42" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton44" inherits="EMI_MacroPopupIconButtonTemplate" id="44">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton43" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EMI_MacroPopupIconButton45" inherits="EMI_MacroPopupIconButtonTemplate" id="45">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EMI_MacroPopupIconButton44" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<Button name="EMI_MacroPopupIconOkayButton" inherits="UIPanelButtonTemplate" text="C_SURE">
+						<Size>
+							<AbsDimension x="68" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="12" y="220"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								ExtendedMacroIcons.func.MacroPopupIconOkayButton.OnClick(this);
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button name="EMI_MacroPopupIconCancelButton" inherits="UIPanelButtonTemplate" text="C_CANCEL">
+						<Size>
+							<AbsDimension x="68" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="96" y="220"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								EMI_MacroPopupIconFrame:Hide();
+							</OnClick>
+						</Scripts>
+					</Button>
+				</Frames>
+				<Scripts>
+					<OnMouseWheel>
+						UIPanelScrollBar_OnMouseWheel(EMI_MacroPopupIconScrollBar, delta);
+					</OnMouseWheel>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				local maxNums = GetNumMacroIcons();
+				if ( maxNums > NUM_MACRO_ICONS_SHOWN ) then
+					EMI_MacroPopupIconScrollBar:SetMaxValue( math.ceil((maxNums - NUM_MACRO_ICONS_SHOWN - 1) / NUM_MACRO_ICONS_SHOWN) );
+				else
+					EMI_MacroPopupIconScrollBar:SetMaxValue(0);
+				end
+			</OnLoad>
+			<OnShow>
+				ExtendedMacroIcons.func.MacroPopupIconFrame.OnShow(this);
+			</OnShow>
+		</Scripts>
+	</Frame>
+</Ui>

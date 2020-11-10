@@ -1,0 +1,16 @@
+## Title: CleanChat
+## Author: Rycerzodie
+## Version: 1.0
+## Notes: CleanChat is a tool to simplify customizing the chat and to get rid of annoying messages.
+## X-Category: Chat
+## SavedVariables: CleanChat
+
+libs/Sol/LibStub.lua
+libs/Sol/Sol.lua
+
+CleanChat.lua
+CleanChat.xml
+-- X-Curse-Packaged-Version: v1.0
+-- X-Curse-Project-Name: CleanChat
+-- X-Curse-Project-ID: cleanchat
+-- X-Curse-Repository-ID: rom/cleanchat/mainline

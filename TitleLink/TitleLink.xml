@@ -1,0 +1,14 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Frame name="TitleLink" parent="UIParent" hidden="true">
+		<Scripts>
+			<OnLoad>
+				TitleLink_OnLoad(this)
+			</OnLoad>
+			<OnEvent>
+				TitleLink_OnEvent(this, event)
+			</OnEvent>
+		</Scripts>
+	</Frame>
+
+	<GameTooltip name="TitleLink_Tooltip" hidden="true" inherits="GameTooltipTemplate"/>
+</Ui>

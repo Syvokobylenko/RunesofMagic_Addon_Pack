@@ -1,0 +1,17 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="..\..\worldxml\ui.xsd">
+
+	<Frame name="autoTradeFrame" parent="UIParent">
+		<Scripts>
+		  <OnLoad>
+			AutoTrade_OnLoad(this)
+		  </OnLoad>
+		  <OnUpdate>
+			AutoTrade_OnUpdate(this, elapsedTime)
+		  </OnUpdate>
+		  <OnEvent>
+			AutoTrade_OnEvent(event, this);
+		  </OnEvent>
+		</Scripts>
+	</Frame>
+
+</Ui>

@@ -1,0 +1,34 @@
+## QuestHelper
+## Author: McBen
+## based on ideas by Luivatra (QuestWiz) and nconantj (WoW - Questhelper)
+
+rom_workaround.lua
+
+## libs
+libs/LibStub.lua
+libs/Nyx.lua
+libs/Waittimer.lua
+libs/color.lua
+
+QuestHelper.lua
+api.lua
+db.lua
+db_quest.lua
+map.lua
+qb.lua
+qt.lua
+ui_map.lua
+ui_questtracker.lua
+ui_navi.lua
+ui_questlist.lua
+ui_questdetails.lua
+ui_options.lua
+
+## xml stuff
+QuestHelper.xml
+ui_questtracker.xml
+ui_navi.xml
+ui_questlist.xml
+ui_questdetails.xml
+ui_options.xml
+

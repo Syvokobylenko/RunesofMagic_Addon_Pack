@@ -1,0 +1,13 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Script file="CraftCalc.lua"/>
+	<StatusBar name="CraftCalc" parent="UIParent" hidden="true">
+		<Scripts>
+			<OnLoad>
+				CraftCalc_OnLoad(this);
+			</OnLoad>
+			<OnEvent>
+				CraftCalc_OnEvent(this, event);
+			</OnEvent>
+		</Scripts>
+	</StatusBar>
+</Ui>

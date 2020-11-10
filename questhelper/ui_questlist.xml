@@ -1,0 +1,503 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ ../../worldxml/ui.xsd">
+	<Frame name="QHQuestItemTempl" enableMouse="true" virtual="true">
+		<Size>
+			<AbsDimension x="470" y="18" />
+		</Size>
+		<Layers>
+			<Layer>
+			<FontString name="$parentName" inherits="GameFontLabel" justifyH="LEFT">
+				<Size>
+					<AbsDimension x="220" y="14"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT"><Offset><AbsDimension x="36" y="0"/></Offset></Anchor>
+				</Anchors>
+				<FontHeight><AbsValue val="12"/></FontHeight>
+			</FontString>
+			<Texture name="$parentRepeat" file="interface\addons\questhelper\textures\repeat" hidden="true">
+				<Size>
+					<AbsDimension x="16" y="16"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT">
+						<Offset><AbsDimension y="0" x="260"/></Offset>
+					</Anchor>
+				</Anchors>
+			</Texture>
+			<FontString name="$parentLevel" inherits="GameFontLabel" justifyH="CENTER">
+				<Size>
+					<AbsDimension x="24" y="14"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT">
+						<Offset><AbsDimension y="0" x="280"/></Offset>
+					</Anchor>
+				</Anchors>
+				<FontHeight><AbsValue val="12"/></FontHeight>
+			</FontString>
+			<FontString name="$parentZone" inherits="GameFontLabel" justifyH="LEFT">
+				<Size>
+					<AbsDimension x="156" y="14"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentLevel" relativePoint="TOPRIGHT">
+						<Offset><AbsDimension y="0" x="3"/></Offset>
+					</Anchor>
+				</Anchors>
+				<FontHeight><AbsValue val="12"/></FontHeight>
+			</FontString>
+			</Layer>
+			<Layer level="BACKGROUND">
+			<Texture name="$parentHighlight" file="interface\Buttons\ListItemHighlight" alphaMode="ADD" hidden="true">
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset><AbsDimension x="-2" y="0"/></Offset></Anchor>
+					<Anchor point="BOTTOMRIGHT"><Offset><AbsDimension x="-2" y="-1"/></Offset></Anchor>
+				</Anchors>
+			</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentBtnPrio">
+				<Size><AbsDimension x="12" y="16"/></Size>
+				<Anchors><Anchor point="LEFT"><Offset>
+					<AbsDimension y="0" x="1"/>
+				</Offset></Anchor></Anchors>
+				<Scripts>
+					<OnClick>QH.ListDialog.Item_OnBtnPrio(this:GetParent())</OnClick>
+				</Scripts>
+				<NormalTexture file="interface\addons\questhelper\textures\prio_item">
+						<TexCoords left="0" right="0.125" top="0" bottom="1"/>
+				</NormalTexture>
+			</Button>
+			<Button name="$parentBtnBack" hidden="true">
+				<Size><AbsDimension x="12" y="15"/></Size>
+				<Anchors><Anchor point="LEFT"><Offset>
+					<AbsDimension y="4" x="14"/>
+				</Offset></Anchor></Anchors>
+				<Scripts>
+					<OnClick>QH.ListDialog.Item_OnBtnBack(this:GetParent())</OnClick>
+					<OnDoubleClick>QH.ListDialog.Item_OnBtnBackDbl(this:GetParent())</OnDoubleClick>
+				</Scripts>
+				<NormalTexture file="interface\buttons\pageleftbutton-normal"><TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/></NormalTexture>
+				<PushedTexture file="interface\buttons\pageleftbutton-depress"><TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/></PushedTexture>
+				<HighlightTexture file="Interface\GuildFrame\guildnodebutton-highlight" alphaMode="ADD"/>
+				<DisabledTexture file="interface\buttons\pageleftbutton-disable"><TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/></DisabledTexture>
+			</Button>
+			<Button name="$parentBtnFor" hidden="true">
+				<Size><AbsDimension x="12" y="16"/></Size>
+				<Anchors><Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parentBtnBack">
+					<Offset><AbsDimension y="0" x="-2"/></Offset>
+				</Anchor></Anchors>
+				<Scripts>
+					<OnClick>QH.ListDialog.Item_OnBtnFor(this:GetParent())</OnClick>
+					<OnDoubleClick>QH.ListDialog.Item_OnBtnForDbl(this:GetParent())</OnDoubleClick>
+				</Scripts>
+				<NormalTexture file="interface\buttons\pagerightbutton-normal"><TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/></NormalTexture>
+				<PushedTexture file="interface\buttons\pagerightbutton-depress"><TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/></PushedTexture>
+				<HighlightTexture file="Interface\GuildFrame\guildnodebutton-highlight" alphaMode="ADD"/>
+				<DisabledTexture file="interface\buttons\pagerightbutton-disable"><TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/></DisabledTexture>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnMouseWheel>UIPanelScrollBar_OnMouseWheel(QHQuestListItemsSB, delta)</OnMouseWheel>
+			<OnClick>QH.ListDialog.Item_OnClick(this)</OnClick>
+		</Scripts>
+	</Frame>
+	<Button name="QHHeaderButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="64" y="20"/>
+		</Size>
+		<Layers>
+			<Layer>
+				<Texture name="$parentSortIcon">
+					<Size>
+						<AbsDimension x="8" y="8"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>QH.ListDialog.List_Header_OnClick(this)</OnClick>
+		</Scripts>
+		<NormalText inherits="GameFontYellow"/>
+		<PushedTextOffset>
+			<AbsDimension x="1" y="1"/>
+		</PushedTextOffset>
+	</Button>
+	<CheckButton name="QHCheckBoxTemplate" inherits="UIPanelCheckButtonTemplate" virtual="true">
+		<Size><AbsDimension x="20" y="20"/></Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parentLabel" inherits="GameFontHighlight" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="140" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</CheckButton>
+	<Button name="QHListTabTemplate" virtual="true">
+		<Size><AbsDimension x="80" y="20"/></Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentActive" file="Interface\CharacterFrame\CharacterFrame-Tab-Active" hidden="true">
+					<Size><AbsDimension x="80" y="20"/></Size>
+					<TexCoords top="0" right="0" left="1" bottom="1" />
+				</Texture>
+				<Texture name="$parentInactive" file="Interface\CharacterFrame\CharacterFrame-Tab-Inactive">
+					<Size><AbsDimension x="80" y="20"/></Size>
+					<TexCoords top="0" right="0" left="0.8" bottom="1" />
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>QH.ListDialog.OnTabClick(this)</OnClick>
+		</Scripts>
+		<NormalText inherits="GameFontLabel">
+			<Size>
+				<AbsDimension x="0" y="12"/>
+			</Size>
+			<Anchors>
+				<Anchor point="CENTER">
+					<Offset>
+						<AbsDimension x="-1" y="0"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<FontHeight><AbsValue val="12"/></FontHeight>
+		</NormalText>
+	</Button>
+
+	<Frame name="QHQuestList" parent="UIParent" inherits="UICommonFrameTemplate">
+		<Size>
+			<AbsDimension x="500" y="552"/>
+		</Size>
+		<Anchors><Anchor point="LEFT"><Offset><AbsDimension x="5" y="-20"/></Offset></Anchor></Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface\characterframe\characterframe-border">
+					<Size>
+						<AbsDimension x="360" y="65"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT"><Offset>
+							<AbsDimension x="80" y="29"/>
+						</Offset></Anchor>
+					</Anchors>
+					<TexCoords left="0.3125" right="0.88" top="0.05" bottom="0.84"/>
+				</Texture>
+
+				<FontString name="QHQuestListCounts"  inherits="GameFontLabel" justifyH="LEFT">
+				<Size>
+					<AbsDimension x="120" y="18"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT"><Offset>
+						<AbsDimension x="20" y="-10"/>
+					</Offset></Anchor>
+				</Anchors>
+				<FontHeight><AbsValue val="12"/></FontHeight>
+				</FontString>
+				<FontString name="QHQuestNameLabel"  inherits="GameFontLabel" justifyH="LEFT">
+				<Size>
+					<AbsDimension x="80" y="18"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT"><Offset>
+						<AbsDimension x="20" y="-40"/>
+					</Offset></Anchor>
+				</Anchors>
+				<FontHeight><AbsValue val="12"/></FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<!-- Filter stuff !-->
+			<Button name="$parentTab1" inherits="QHListTabTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="30"/></Offset></Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab2" inherits="QHListTabTemplate" id="2">
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="50"/></Offset></Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab3" inherits="QHListTabTemplate" id="3">
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="70"/></Offset></Anchor>
+				</Anchors>
+			</Button>
+			<CheckButton name="QHQuestListFilterLowLevel" inherits="QHCheckBoxTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset><AbsDimension x="130" y="30"/></Offset></Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>QH.ListDialog.RebuildItemList()</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="QHQuestListFilterHighLevel" inherits="QHCheckBoxTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset><AbsDimension x="130" y="50"/></Offset></Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>QH.ListDialog.RebuildItemList()</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="QHQuestListFilterLooped" inherits="QHCheckBoxTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset><AbsDimension x="130" y="70"/></Offset></Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>QH.ListDialog.RebuildItemList()</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="QHQuestListFilterLowLevel2" inherits="QHCheckBoxTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset><AbsDimension x="280" y="30"/></Offset></Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>QH.ListDialog.RebuildItemList()</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="QHQuestListFilterUnavailable" inherits="QHCheckBoxTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset><AbsDimension x="280" y="50"/></Offset></Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>QH.ListDialog.RebuildItemList()</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="QHQuestListFilterFinished" inherits="QHCheckBoxTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset><AbsDimension x="280" y="70"/></Offset></Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>QH.ListDialog.RebuildItemList()</OnClick>
+				</Scripts>
+			</CheckButton>
+			<Frame name="QHQuestListFilterZone" inherits="UIDropDownMenuTemplate">
+				<Size><AbsDimension x="110" y="24"/></Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT"><Offset><AbsDimension x="300" y="-40"/></Offset></Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>QH.ListDialog.FilterZone_OnLoad(this)</OnLoad>
+				</Scripts>
+			</Frame>
+
+			<!-- item list !-->
+			<Frame name="QHQuestListItems">
+				<Size>
+					<AbsDimension x="486"  y="384"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset><AbsDimension x="7" y="100" /></Offset></Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\Tooltip-border">
+				    <EdgeSize><AbsValue val="8"/></EdgeSize>
+				</Backdrop>
+				<Frames>
+					<Frame name="$parentHead">
+						<Anchors>
+							<Anchor point="TOPLEFT"><Offset><AbsDimension x="8" y="0" /></Offset></Anchor>
+						</Anchors>
+						<Frames>
+							<Button name="$parentName" inherits="QHHeaderButtonTemplate" id="1">
+								<Anchors>
+									<Anchor point="TOPLEFT"><Offset><AbsDimension x="34" y="3"/></Offset></Anchor>
+								</Anchors>
+							</Button>
+							<Button name="$parentLevel" inherits="QHHeaderButtonTemplate" id="2">
+								<Anchors>
+									<Anchor point="TOPLEFT"><Offset><AbsDimension x="260" y="3"/></Offset></Anchor>
+								</Anchors>
+							</Button>
+							<Button name="$parentZone" inherits="QHHeaderButtonTemplate" id="3">
+								<Anchors>
+									<Anchor point="TOPLEFT"><Offset><AbsDimension x="320" y="3"/></Offset></Anchor>
+								</Anchors>
+							</Button>
+						</Frames>
+					</Frame>
+					<Frame name="$parent1" inherits="QHQuestItemTempl" id="1">
+						<Anchors>
+							<Anchor point="TOPLEFT"><Offset><AbsDimension x="6" y="22" /></Offset></Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="$parent2" inherits="QHQuestItemTempl" id="2">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent1" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="$parent3" inherits="QHQuestItemTempl" id="3">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent2" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="$parent4" inherits="QHQuestItemTempl" id="4">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent3" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="$parent5" inherits="QHQuestItemTempl" id="5">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent4" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="$parent6" inherits="QHQuestItemTempl" id="6">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent5" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="$parent7" inherits="QHQuestItemTempl" id="7">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent6" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="$parent8" inherits="QHQuestItemTempl" id="8">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent7" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="$parent9" inherits="QHQuestItemTempl" id="9">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent8" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="$parent10" inherits="QHQuestItemTempl" id="10">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent9" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="$parent11" inherits="QHQuestItemTempl" id="11">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent10" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="$parent12" inherits="QHQuestItemTempl" id="12">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent11" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="$parent13" inherits="QHQuestItemTempl" id="13">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent12" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="$parent14" inherits="QHQuestItemTempl" id="14">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent13" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="$parent15" inherits="QHQuestItemTempl" id="15">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent14" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="$parent16" inherits="QHQuestItemTempl" id="16">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent15" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="$parent17" inherits="QHQuestItemTempl" id="17">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent16" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="$parent18" inherits="QHQuestItemTempl" id="18">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent17" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="$parent19" inherits="QHQuestItemTempl" id="19">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent18" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Frame name="$parent20" inherits="QHQuestItemTempl" id="20">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parent19" relativePoint="BOTTOMLEFT"/></Anchors>
+					</Frame>
+					<Slider name="$parentSB" inherits="UIPanelScrollBarTemplate">
+						<Anchors>
+							<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT"><Offset><AbsDimension x="-1" y="19"/></Offset></Anchor>
+							<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT"><Offset><AbsDimension x="-1" y="-19"/></Offset></Anchor>
+						</Anchors>
+						<Scripts>
+							<OnValueChanged>
+								UIPanelScrollBar_OnValueChanged(this, arg1)
+								QH.ListDialog.UpdateList()
+							</OnValueChanged>
+						</Scripts>
+					</Slider>
+				</Frames>
+			</Frame>
+
+		    <EditBox name="QHQuestListName" inherits="UIPanelEditBoxTemplate">
+				<Size><AbsDimension x="120" y="20"/></Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="QHQuestNameLabel" relativePoint="RIGHT">
+						<Offset><AbsDimension x="10" y="0" /></Offset></Anchor>
+				</Anchors>
+				<Scripts>
+					<OnTextChanged>QH.ListDialog.OnNameSearchChange()</OnTextChanged>
+					<OnEnterPressed>QH.ListDialog.OnNameSearchDo()</OnEnterPressed>
+				</Scripts>
+			</EditBox>
+			<Button name="QHQuestListNamePrev">
+				<Size><AbsDimension y="22" x="22"/></Size>
+				<Anchors><Anchor point="LEFT" relativeTo="QHQuestListName" relativePoint="RIGHT">
+					<Offset><AbsDimension y="0" x="2"/></Offset></Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>QH.ListDialog.OnNameSearchPrev()</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\PageLeftButton-Normal">
+					<TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/>
+				</NormalTexture>
+				<PushedTexture file="Interface\Buttons\PageLeftButton-Depress">
+					<TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/>
+				</PushedTexture>
+				<DisabledTexture file="Interface\Buttons\PageLeftButton-Disable">
+					<TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/>
+				</DisabledTexture>
+				<HighlightTexture file="Interface\Buttons\PanelLeftButton-Highlight" alphaMode="ADD"/>
+			</Button>
+			<Button name="QHQuestListNameNext">
+				<Size><AbsDimension y="22" x="22"/></Size>
+				<Anchors><Anchor point="LEFT" relativeTo="QHQuestListNamePrev" relativePoint="LEFT">
+					<Offset><AbsDimension y="0" x="24"/></Offset></Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>QH.ListDialog.OnNameSearchNext()</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\PageRightButton-Normal">
+					<TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/>
+				</NormalTexture>
+				<PushedTexture file="Interface\Buttons\PageRightButton-Depress">
+					<TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/>
+				</PushedTexture>
+				<DisabledTexture file="Interface\Buttons\PageRightButton-Disable">
+					<TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/>
+				</DisabledTexture>
+				<HighlightTexture file="Interface\Buttons\PanelRightButton-Highlight" alphaMode="ADD"/>
+			</Button>
+
+			<Button name="$parentQuestLog" inherits="UIPanelButtonTemplate">
+				<Size><AbsDimension x="15" y="15"/></Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT"><Offset><AbsDimension x="-10" y="28"/></Offset></Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>QH.ListDialog.OnShowQuestLog()</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\PanelUpButton-Normal"><TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/></NormalTexture>
+				<PushedTexture file="Interface\Buttons\PanelUpButton-Depress"><TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/></PushedTexture>
+				<HighlightTexture file="Interface\Buttons\PanelUpButton-Highlight" alphaMode="ADD"/>
+			</Button>
+			<Button name="$parentAbortQuest" inherits="UIPanelButtonTemplate" text="QUEST_GIVE_UP">
+				<Size><AbsDimension x="120" y="22"/></Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT"><Offset><AbsDimension x="-140" y="-8"/></Offset></Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>QH.ListDialog.OnQuestGiveUp()</OnClick>
+				</Scripts>
+			</Button>
+
+			<Button name="$parentOptions" inherits="UIPanelButtonTemplate" text="Options">
+				<Size><AbsDimension x="100" y="22"/></Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT"><Offset><AbsDimension x="-20" y="-8"/></Offset></Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>ToggleUIFrame( QH_OptionFrame )</OnClick>
+				</Scripts>
+			</Button>
+
+		</Frames>
+		<Scripts>
+			<OnShow>QH.ListDialog.OnShow(this)</OnShow>
+			<OnEvent>QH.ListDialog.OnEvent(event)</OnEvent>
+			<OnHide>QH.ListDialog.OnHide(this)</OnHide>
+		</Scripts>
+	</Frame>
+</Ui>

@@ -1,0 +1,133 @@
+<!--
+pbInfo - Xml/ConfigTemplates.xml
+	v0.51-fix
+	by p.b. a.k.a. novayuna
+	released under the Creative Commons License By-Nc-Sa: http://creativecommons.org/licenses/by-nc-sa/3.0/
+-->
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="../../worldxml/ui.xsd">
+	<!-- CheckButton and label Template -->
+	<CheckButton name="pbInfoConfig_CheckButton_Template" inherits="UIPanelCheckButtonTemplate" virtual="true">
+		<Layers>
+			<Layer>
+				<FontString name="$parent_Text" inherits="GameTitleFont" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="400" y="20"/>
+					</Size>
+					<FontHeight>
+						<AbsValue val="16"/>
+					</FontHeight>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parent" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</CheckButton>
+	<!-- EditBox and label Template -->
+	<EditBox name="pbInfoConfig_EditBox_Template" inherits="UIPanelEditBoxTemplate" numeric="true" letters="3" historyLines="0" autoFocus="false" multiLine="false" virtual="true">
+		<Size>
+			<AbsDimension x="32" y="20"/>
+		</Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parent_Text" inherits="GameTitleFont" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="400" y="20"/>
+					</Size>
+					<FontHeight>
+						<AbsValue val="16"/>
+					</FontHeight>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parent" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</EditBox>
+	<!-- Slider and label Template -->
+	<Slider name="pbInfoConfig_Slider_Template" inherits="GCF_SliderTemp" virtual="true">
+		<!-- fixed slider size because GCF_SliderTemp increased width -->
+        <Size>
+            <AbsDimension x="100" y="20"/>
+        </Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parent_Text" inherits="GameTitleFont" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="400" y="20"/>
+					</Size>
+					<FontHeight>
+						<AbsValue val="16"/>
+					</FontHeight>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+							<Offset>
+								<AbsDimension x="-275" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Slider>
+	<!-- ColorPicker and Label Template -->
+	<Frame name="pbInfoConfig_Colorpicker_Template" virtual="true">
+		<Size>
+			<AbsDimension x="164" y="24"/>
+		</Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Text" inherits="GameTitleFont" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="400" y="16"/>
+					</Size>
+					<FontHeight>
+						<AbsValue val="16"/>
+					</FontHeight>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="24" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentButton">
+				<Size>
+					<AbsDimension x="20" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<Texture file="Interface\Common\UIColorBorder"/>
+					</Layer>
+					<Layer level="BACKGROUND">
+						<Texture name="$parentBlock" file="Interface\Common\Block-Fill"/>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+						pbInfo.Config.LoadColorPicker(this);
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+	</Frame>
+</Ui>

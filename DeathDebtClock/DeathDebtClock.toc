@@ -1,0 +1,6 @@
+## Title: Death Debt Clock
+## Version: 1.1
+## Notes: Displays a clock with how many minutes until death debt is cleared at the guild library
+## Author: ZTrek
+
+DeathDebtClock.xml

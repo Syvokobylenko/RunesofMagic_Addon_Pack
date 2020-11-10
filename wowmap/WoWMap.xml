@@ -1,0 +1,183 @@
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~ WoWMap v4
+~~
+~~ written by McBen, DaKhaa, Dusk03, Mavoc and PetraAreon
+~~ released under the GNU General Public License version 3 (GPLv3)
+~~
+~~ Get the current version at:   http://rom.curse.com/downloads/rom-addons/details/wowmap.aspx
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ file:///E:/Temp/rom_out/interface/worldxml/ui.xsd">
+	<Frame name="WoWMapFrame" parent="WorldMapViewFrame" enableMouse="false" frameStrata="DIALOG" hidden="false">
+		<Frames>
+			<Frame name="WoWMapPlayerCursorFrame" frameLevel="1">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<Layers>
+					<Layer>
+						<Texture name="WoWMapPlayerCursorTexture" file="Interface\\Minimap\\MinimapPlayerCursor">
+							<Size>
+								<AbsDimension x="32" y="32"/>
+							</Size>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Frame>
+			<Frame name="WoWMapOverlayFrame" frameLevel="2"  hidden="true">
+				<Layers>
+					<Layer level="OVERLAY">
+						<Texture name="WoWMapOverlay"/>
+					</Layer>
+				</Layers>
+			</Frame>
+			<Frame name="WoWMapHighlightFrame" frameLevel="2">
+				<Layers>
+					<Layer level="OVERLAY">
+						<Texture name="WoWMapHighlight" hidden="true">
+							<Size>
+								<AbsDimension x="128" y="128"/>
+							</Size>
+							<Anchors>
+								<Anchor point="CENTER"/>
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>WoWMap.OnLoad(this)</OnLoad>
+			<OnEvent>WoWMap.OnEvent(this, event)</OnEvent>
+		</Scripts>
+	</Frame>
+	<Frame name="WoWMapUIFrame" parent="WorldMapFrame" enableMouse="true">
+		<Size>
+			<AbsDimension x="250" y="22"/>
+		</Size>
+		<Anchors>
+			<Anchor point="BOTTOMLEFT">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Slider name="WoWMapAlphaSlider" orientation="HORIZONTAL">
+				<Size>
+					<AbsDimension x="75" y="12"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="60" y="-5"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<Texture file="Interface\BagFrame\BagFrame-Slider-Border"/>
+					</Layer>
+					<Layer level="ARTWORK">
+						<FontString inherits="GameFontHighlight" text="Alpha:">
+							<Anchors>
+								<Anchor point="RIGHT" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="-2" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnLoad>
+                        WoWMap.OnLoadAlphaSlider(this)
+                    </OnLoad>
+					<OnMouseWheel>
+                        WoWMap.OnAlphaSliderWheel(WoWMapAlphaSlider,delta)
+                    </OnMouseWheel>
+					<OnValueChanged>
+                        WoWMap.OnAlphaSliderChanged(this,arg1)
+                    </OnValueChanged>
+				</Scripts>
+				<ThumbTexture file="Interface\BagFrame\BagFrame-Slider-Knob">
+					<Size>
+						<AbsDimension x="16" y="16"/>
+					</Size>
+				</ThumbTexture>
+			</Slider>
+		</Frames>
+		<Scripts>
+			<OnMouseWheel>
+                WoWMap.OnAlphaSliderWheel(WoWMapAlphaSlider,delta)
+            </OnMouseWheel>
+		</Scripts>
+	</Frame>
+	<Frame name="WoWMapClientVersionWarning" parent="WorldMapFrame" frameLevel="-1">
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeTo="WorldMapFrame"/>
+			<Anchor point="BOTTOMRIGHT" relativeTo="WorldMapFrame"/>
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="WoWMapDebugHeader" inherits="GameFontRed" justifyH="CENTER" justifyV="MIDDLE" text="ERROR: Map File Missing">
+					<Anchors>
+						<Anchor point="TOP" relativeTo="WorldMapViewFrame" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="0" y="25"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="55"/>
+					</FontHeight>
+				</FontString>
+				<FontString name="WoWMapDebugNote1" inherits="GameFontHighlight" justifyH="LEFT" justifyV="MIDDLE" text="Please install |cffffooooWoWMap_Instances|r.">
+					<Size>
+						<AbsDimension x="974" y="0"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP" relativeTo="WorldMapViewFrame" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="0" y="100"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="40"/>
+					</FontHeight>
+				</FontString>
+				<FontString name="WoWMapDebugNote2" inherits="GameFontHighlight" justifyH="LEFT" justifyV="MIDDLE" text="If this doesn't help please contact us with the infos below.">
+					<Size>
+						<AbsDimension x="974" y="0"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP" relativeTo="WoWMapDebugNote1" relativePoint="BOTTOM">
+							<Offset>
+								<AbsDimension x="0" y="10"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="40"/>
+					</FontHeight>
+				</FontString>
+				<FontString name="WoWMapDebugInfo" inherits="GameFontHighlight" justifyH="LEFT" justifyV="MIDDLE" text="temp">
+					<Size>
+						<AbsDimension x="974" y="0"/>
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOM" relativeTo="WorldMapViewFrame" relativePoint="BOTTOM">
+							<Offset>
+								<AbsDimension x="0" y="-25"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="30"/>
+					</FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+</Ui>

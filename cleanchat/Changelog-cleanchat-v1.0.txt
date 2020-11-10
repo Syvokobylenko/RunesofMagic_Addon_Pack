@@ -1,0 +1,36 @@
+tag v1.0
+deff5747d8db8837616adc46c7770bc7687e1c15
+Maciej Gryniuk <maciejka45@gmail.com>
+2016-10-27 00:58:53 +0200
+
+This is the initial release of the addon.
+
+
+--------------------
+
+Maciej Gryniuk:
+	- - some additional texts from Varanas
+	- - changelog for version 1.0
+	- - description of addon
+	- - remove filter only if it is not predefined
+	- - cleanup loop in main check for predefined filters
+	- - some cleanup
+	- - add new custom filter if deleted last custom
+	- - keywording predefined filters at once
+	- - some cleanup
+	- - fixed sorting of predefined filters categories
+	- - disable remove button when current filter is predefined
+	- - moved LoadUI function on top of file
+	- - Arcanium Chamber
+	- - additional text to Pumpkin Festival
+	- - Varanas
+	- - Siege War
+	- - Magic Cavy
+	- - predefined filters: "Others" category
+	- - Pumpkin Festival
+	- - PL and EN localization from CurseForge
+	- - initial files
+	- - locales
+	- - initial database
+	- - icon
+	- - Sol library

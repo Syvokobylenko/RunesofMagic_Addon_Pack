@@ -1,0 +1,11 @@
+##--------------------------------------------------------------------------------------------------------
+## WoWMap Instances
+## for use with WoWMap v4 or newer
+##
+## written by McBen and PetraAreon
+## released under the GNU General Public License version 3 (GPLv3)
+##
+## Get the current version at:   http://rom.curse.com/downloads/rom-addons/details/wowmap-instances.aspx
+## Get the current WoWMap at:    http://rom.curse.com/downloads/rom-addons/details/wowmap.aspx
+##--------------------------------------------------------------------------------------------------------
+WoWMapInstances.lua

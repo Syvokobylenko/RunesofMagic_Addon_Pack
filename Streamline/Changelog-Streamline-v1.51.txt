@@ -1,0 +1,87 @@
+------------------------------------------------------------------------
+r18 | alleris2_0 | 2009-06-08 23:43:41 +0000 (Mon, 08 Jun 2009) | 4 lines
+Changed paths:
+   A /tags/v1.51 (from /trunk:17)
+
+Fixed several DE localization bugs (horses, teleports, recipes)
+Added option to change class with one click on the maid
+Added option to contribute to guild with one click
+Added option to create an auction with one click
+------------------------------------------------------------------------
+r17 | alleris2_0 | 2009-06-08 23:41:56 +0000 (Mon, 08 Jun 2009) | 1 line
+Changed paths:
+   M /trunk/Locale/Streamline.loc.EN.lua
+   M /trunk/StreamlineConfig.xml
+
+Rearranged options; added bags tab
+------------------------------------------------------------------------
+r16 | alleris2_0 | 2009-06-08 22:59:57 +0000 (Mon, 08 Jun 2009) | 4 lines
+Changed paths:
+   M /trunk/Locale/Streamline.loc.DE.lua
+   M /trunk/Locale/Streamline.loc.EN.lua
+   M /trunk/Streamline.lua
+   M /trunk/StreamlineConfig.lua
+   M /trunk/StreamlineConfig.xml
+
+Fixed several DE localization bugs (horses, teleports, recipes)
+Added option to change class with one click on the maid
+Added option to contribute to guild with one click
+Added option to create an auction with one click
+------------------------------------------------------------------------
+r15 | alleris2_0 | 2009-05-14 12:16:48 +0000 (Thu, 14 May 2009) | 2 lines
+Changed paths:
+   M /trunk/Locale/Streamline.loc.DE.lua
+   M /trunk/Locale/Streamline.loc.EN.lua
+   M /trunk/Locale/Streamline.loc.PL.lua
+   M /trunk/Streamline.lua
+
+New German translations
+Fixed bug with German version - Recipe window not staying open
+------------------------------------------------------------------------
+r14 | alleris2_0 | 2009-05-14 10:22:34 +0000 (Thu, 14 May 2009) | 1 line
+Changed paths:
+   M /trunk/Locale/Streamline.loc.IT.lua
+   M /trunk/Streamline.lua
+
+New Italian translations
+------------------------------------------------------------------------
+r12 | alleris2_0 | 2009-05-09 12:59:02 +0000 (Sat, 09 May 2009) | 5 lines
+Changed paths:
+   M /trunk/Locale/Streamline.loc.DE.lua
+   M /trunk/Locale/Streamline.loc.EN.lua
+   M /trunk/Locale/Streamline.loc.IT.lua
+   M /trunk/Locale/Streamline.loc.PL.lua
+   M /trunk/Streamline.lua
+   M /trunk/Streamline.toc
+   M /trunk/StreamlineConfig.lua
+   M /trunk/StreamlineConfig.xml
+
+Added option to send an attachement by alt+clicking a bag item
+Added option to enter house by alt/shift/ctrl (customizable) clicking house NPC
+Added option to move items between bag I and II by alt+clicking them
+Added ability to choose between alt/shift/ctrl clicking to open bank at house NPC
+Major refactoring of the xml and reorganizing of the lua
+------------------------------------------------------------------------
+r10 | alleris2_0 | 2009-05-08 12:32:38 +0000 (Fri, 08 May 2009) | 4 lines
+Changed paths:
+   M /trunk/Locale/Streamline.loc.EN.lua
+   M /trunk/Streamline.lua
+   M /trunk/Streamline.toc
+   M /trunk/Streamline.xml
+   M /trunk/StreamlineConfig.lua
+   M /trunk/StreamlineConfig.xml
+
+Fixed some bugs 
+Added option to show more than the default 2 windows at a time
+Added option to open bank box when talking to house NPC
+Added option to close bank and mail boxes when attempting to enter house
+------------------------------------------------------------------------
+r9 | alleris2_0 | 2009-04-09 04:35:54 +0000 (Thu, 09 Apr 2009) | 1 line
+Changed paths:
+   A /trunk/.pkgmeta
+   D /trunk/Libs
+   M /trunk/Streamline.lua
+   M /trunk/Streamline.toc
+
+Added .pkgmeta
+------------------------------------------------------------------------

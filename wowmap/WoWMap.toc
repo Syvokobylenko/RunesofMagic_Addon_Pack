@@ -1,0 +1,12 @@
+##--------------------------------------------------------------------------------------------------------
+## WoWMap v4
+##
+## written by McBen, DaKhaa, Dusk03, Mavoc and PetraAreon
+## released under the GNU General Public License version 3 (GPLv3)
+##
+## Get the current version at:   http://rom.curse.com/downloads/rom-addons/details/wowmap.aspx
+##--------------------------------------------------------------------------------------------------------
+WoWMap.lua
+WoWMap_data.lua
+WoWMap_poi.lua
+WoWMap.xml

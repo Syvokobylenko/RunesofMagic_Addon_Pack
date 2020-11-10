@@ -1,0 +1,593 @@
+<?xml version="1.0"?><!DOCTYPE Ui []><Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="../../worldxml/ui.xsd">
+<!--############## XAddon Manager-->
+	<Frame name="XAddonMngr" inherits="UIPanelBackdropFrame" parent="UIParent" enableMouse="true" hidden="true">
+		<Size><AbsDimension x="777" y="555"/></Size>
+		<Anchors><Anchor point="CENTER"/></Anchors>
+		<Scripts>
+			<OnDragStart>this:StartMoving()</OnDragStart>
+			<OnDragStop>this:StopMovingOrSizing()</OnDragStop>
+			<OnShow>XBar.AM_OnShow(this)</OnShow>
+			<OnHide>XBar.AM_OnHide()</OnHide>
+		</Scripts>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Header" inherits="TitleFontNormal">
+					<Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="6"/></Offset></Anchor></Anchors>
+					<Color r=".7" g=".7" b=".7"/>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parent_Close" inherits="UIPanelCloseButtonTemplate">
+				<Anchors><Anchor point="TOPRIGHT"><Offset>
+					<AbsDimension x="-3" y="3"/></Offset></Anchor></Anchors>
+			</Button>
+<!--Addon-Infos-->
+			<Frame name="$parent_Header">
+				<Size><AbsDimension x="612" y="32"/></Size>
+				<Anchors><Anchor point="TOPLEFT"><Offset>
+					<AbsDimension x="163" y="24"/></Offset></Anchor></Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parentLeft" file="Interface\Common\UIPanel-TabBottom-Active">
+							<Size><AbsDimension x="16" y="32"/></Size>
+							<Anchors><Anchor point="TOPLEFT"/></Anchors>
+							<TexCoords left="0" right="0.25" top="0" bottom="1"/>
+						</Texture>
+						<Texture name="$parentRight" file="Interface\Common\UIPanel-TabBottom-Active">
+							<Size><AbsDimension x="16" y="32"/></Size>
+							<Anchors><Anchor point="TOPRIGHT"/></Anchors>
+							<TexCoords left="0.75" right="1" top="0" bottom="1"/>
+						</Texture>
+						<Texture file="Interface\Common\UIPanel-TabBottom-Active">
+							<Size><AbsDimension x="32" y="32"/></Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT"/>
+								<Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT"/>
+							</Anchors>
+							<TexCoords left="0.25" right="0.75" top="0" bottom="1"/>
+						</Texture>
+					</Layer>
+					<Layer level="ARTWORK">
+						<FontString name="$parent_Name" inherits="WarningFont" justifyH="LEFT">
+							<Anchors><Anchor point="LEFT"><Offset>
+								<AbsDimension x="10" y="0"/></Offset></Anchor></Anchors>
+							<Color r=".7" g=".7" b="1"/>
+						</FontString>
+						<FontString name="$parent_Version" inherits="WarningFont" justifyH="RIGHT">
+							<Anchors><Anchor point="RIGHT"><Offset>
+								<AbsDimension x="-10" y="0"/></Offset></Anchor></Anchors>
+							<Color r="1" g=".7" b="0"/>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+<!--ContentFrame-->
+			<Frame name="$parent_Content">
+				<Size><AbsDimension x="612" y="503"/></Size>
+				<Anchors><Anchor point="TOPLEFT"><Offset>
+					<AbsDimension x="163" y="50"/></Offset></Anchor></Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\Tooltip-Border" bgFile="Interface\Tooltips\Tooltip-Background">
+					<BackgroundInsets><AbsInset top="4" left="4" bottom="4" right="4"/></BackgroundInsets>
+					<EdgeSize><AbsValue val="16"/></EdgeSize>
+					<TileSize><AbsValue val="16"/></TileSize>
+				</Backdrop>
+			</Frame>
+<!--MenuScrollFrame-->
+			<Frame name="$parent_Menu">
+				<Size><AbsDimension x="165" y="529"/></Size>
+				<Anchors><Anchor point="TOPLEFT"><Offset>
+					<AbsDimension x="2" y="24"/></Offset></Anchor></Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\Tooltip-Border" bgFile="Interface\Tooltips\Tooltip-Background">
+					<BackgroundInsets><AbsInset top="4" left="4" bottom="4" right="4"/></BackgroundInsets>
+					<EdgeSize><AbsValue val="16"/></EdgeSize>
+					<TileSize><AbsValue val="16"/></TileSize>
+				</Backdrop>
+				<Frames>
+					<Slider name="$parent_ScrollBar" inherits="UIPanelScrollBarTemplate">
+						<Anchors>
+							<Anchor point="TOPRIGHT"><Offset><AbsDimension x="-4" y="32"/></Offset></Anchor>
+							<Anchor point="BOTTOMRIGHT"><Offset><AbsDimension x="-4" y="-32"/></Offset></Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>this:SetValueStepMode("INT")</OnLoad>
+							<OnValueChanged>
+								UIPanelScrollBar_OnValueChanged(this,arg1)
+								XBar.AM_ListBtn_Update("scroll")
+							</OnValueChanged>
+						</Scripts>
+					</Slider>
+				</Frames>
+			</Frame>
+			<Frame name="$parent_List">
+				<Size><AbsDimension x="138" y="500"></AbsDimension></Size>
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPLEFT"><Offset>
+					<AbsDimension x="149" y="39"></AbsDimension></Offset></Anchor></Anchors>
+				<Frames>
+					<Button name="$parent_Btn1" inherits="XAddonMngr_ListButtonTemp" id="1">
+						<Anchors><Anchor point="TOPRIGHT"/></Anchors>
+					</Button>
+					<Button name="$parent_Btn2" inherits="XAddonMngr_ListButtonTemp" id="2">
+						<Anchors><Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent_Btn1"/></Anchors>
+					</Button>
+					<Button name="$parent_Btn3" inherits="XAddonMngr_ListButtonTemp" id="3">
+						<Anchors><Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent_Btn2"/></Anchors>
+					</Button>
+					<Button name="$parent_Btn4" inherits="XAddonMngr_ListButtonTemp" id="4">
+						<Anchors><Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent_Btn3"/></Anchors>
+					</Button>
+					<Button name="$parent_Btn5" inherits="XAddonMngr_ListButtonTemp" id="5">
+						<Anchors><Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent_Btn4"/></Anchors>
+					</Button>
+					<Button name="$parent_Btn6" inherits="XAddonMngr_ListButtonTemp" id="6">
+						<Anchors><Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent_Btn5"/></Anchors>
+					</Button>
+					<Button name="$parent_Btn7" inherits="XAddonMngr_ListButtonTemp" id="7">
+						<Anchors><Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent_Btn6"/></Anchors>
+					</Button>
+					<Button name="$parent_Btn8" inherits="XAddonMngr_ListButtonTemp" id="8">
+						<Anchors><Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent_Btn7"/></Anchors>
+					</Button>
+					<Button name="$parent_Btn9" inherits="XAddonMngr_ListButtonTemp" id="9">
+						<Anchors><Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent_Btn8"/></Anchors>
+					</Button>
+					<Button name="$parent_Btn10" inherits="XAddonMngr_ListButtonTemp" id="10">
+						<Anchors><Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent_Btn9"/></Anchors>
+					</Button>
+					<Button name="$parent_Btn11" inherits="XAddonMngr_ListButtonTemp" id="11">
+						<Anchors><Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent_Btn10"/></Anchors>
+					</Button>
+					<Button name="$parent_Btn12" inherits="XAddonMngr_ListButtonTemp" id="12">
+						<Anchors><Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent_Btn11"/></Anchors>
+					</Button>
+					<Button name="$parent_Btn13" inherits="XAddonMngr_ListButtonTemp" id="13">
+						<Anchors><Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent_Btn12"/></Anchors>
+					</Button>
+					<Button name="$parent_Btn14" inherits="XAddonMngr_ListButtonTemp" id="14">
+						<Anchors><Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent_Btn13"/></Anchors>
+					</Button>
+					<Button name="$parent_Btn15" inherits="XAddonMngr_ListButtonTemp" id="15">
+						<Anchors><Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent_Btn14"/></Anchors>
+					</Button>
+					<Button name="$parent_Btn16" inherits="XAddonMngr_ListButtonTemp" id="16">
+						<Anchors><Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent_Btn15"/></Anchors>
+					</Button>
+					<Button name="$parent_Btn17" inherits="XAddonMngr_ListButtonTemp" id="17">
+						<Anchors><Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent_Btn16"/></Anchors>
+					</Button>
+					<Button name="$parent_Btn18" inherits="XAddonMngr_ListButtonTemp" id="18">
+						<Anchors><Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent_Btn17"/></Anchors>
+					</Button>
+					<Button name="$parent_Btn19" inherits="XAddonMngr_ListButtonTemp" id="19">
+						<Anchors><Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent_Btn18"/></Anchors>
+					</Button>
+					<Button name="$parent_Btn20" inherits="XAddonMngr_ListButtonTemp" id="20">
+						<Anchors><Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent_Btn19"/></Anchors>
+					</Button>
+				</Frames>
+			</Frame>
+		</Frames>
+	</Frame>
+<!--XAddonMngr About ############-->
+	<Frame name="XAddonMngr_Info" parent="XAddonMngr_Content" hidden="true">
+		<Size><AbsDimension x="591" y="483"/></Size>
+		<Anchors><Anchor point="TOPLEFT"/></Anchors>
+		<Layers>
+			<Layer>
+				<Texture file="Interface\Addons\XBar\img\logo">
+					<Size><AbsDimension x="256" y="256"/></Size>
+					<Anchors><Anchor point="CENTER"/></Anchors>
+					<Color a=".5"/>
+				</Texture>
+				<FontString name="$parent_Title" inherits="XBarCBFont">
+					<Anchors><Anchor point="TOP"><Offset>
+						<AbsDimension x="10" y="14"/></Offset></Anchor></Anchors>
+				</FontString>
+				<FontString name="$parent_Description" inherits="XBarCBFont" justifyH="LEFT">
+					<Size><AbsDimension x="581" y="300"/></Size>
+					<Anchors><Anchor point="CENTER"><Offset>
+						<AbsDimension x="25" y="0"/></Offset></Anchor></Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+<!--XBar Config Main ################-->
+	<Frame name="XBarCfg" parent="XAddonMngr_Content" enableMouse="true" hidden="true">
+		<Size><AbsDimension x="595" y="487"/></Size>
+		<Anchors><Anchor point="TOPLEFT"><Offset>
+			<AbsDimension x="10" y="10"/></Offset></Anchor></Anchors>
+		<Scripts>
+			<OnShow>XBar.Cfg_Show()</OnShow>
+		</Scripts>
+		<Frames>
+			<Button name="$parent_SaveButton" inherits="UIPanelButtonTemplate" text="OBJ_SAVE">
+				<Size><AbsDimension x="110" y="30"/></Size>
+				<Anchors><Anchor point="BOTTOMRIGHT"/></Anchors>
+				<Scripts>
+					<OnClick>XBar.Cfg_Save()</OnClick>
+				</Scripts>
+			</Button>
+				<Frame name="$parent_Info" hidden="true">
+				<Anchors><Anchor point="TOPLEFT"/></Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parent_Text" inherits="XBarCBFont" justifyH="LEFT">
+							<Anchors><Anchor point="CENTER"/></Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+<!--General Page ############-->
+			<Frame name="$parent_G" hidden="true">
+				<Size><AbsDimension x="595" y="487"/></Size>
+				<Anchors><Anchor point="TOPLEFT"/></Anchors>
+				<Frames>
+<!--XBar Frame-->
+					<Button name="$parent_Default" inherits="UIPanelButtonTemplate" text="DEFAULT">
+						<Anchors><Anchor point="BOTTOMLEFT"/></Anchors>
+						<Size><AbsDimension x="120" y="30"/></Size>
+						<Scripts><OnClick>XBar.Default()</OnClick></Scripts>
+					</Button>
+					<CheckButton name="$parent_CB_XE" inherits="XBarCfgCheckTemp">
+						<Anchors><Anchor point="TOPLEFT"><Offset>
+							<AbsDimension x="5" y="5"/></Offset></Anchor></Anchors>
+					</CheckButton>
+					<RadioButton name="$parent_CB_XE_T" inherits="XBarCfgRadioTemp" groupId="1">
+						<Anchors><Anchor point="TOPLEFT"><Offset>
+							<AbsDimension x="35" y="40"/></Offset></Anchor></Anchors>
+					</RadioButton>
+					<RadioButton name="$parent_CB_XE_B" inherits="XBarCfgRadioTemp" groupId="1">
+						<Anchors><Anchor point="TOPLEFT"><Offset>
+							<AbsDimension x="215" y="40"/></Offset></Anchor></Anchors>
+					</RadioButton>
+					<RadioButton name="$parent_CB_MB_4" inherits="XBarCfgRadioTemp" groupId="2">
+						<Anchors><Anchor point="TOPLEFT"><Offset>
+							<AbsDimension x="12" y="80"/></Offset></Anchor></Anchors>
+					</RadioButton>
+					<RadioButton name="$parent_CB_MB_2" inherits="XBarCfgRadioTemp" groupId="2">
+						<Anchors><Anchor point="TOPLEFT"><Offset>
+							<AbsDimension x="12" y="110"/></Offset></Anchor></Anchors>
+					</RadioButton>
+					<RadioButton name="$parent_CB_MB_0" inherits="XBarCfgRadioTemp" groupId="2">
+						<Anchors><Anchor point="TOPLEFT"><Offset>
+							<AbsDimension x="12" y="140"/></Offset></Anchor></Anchors>
+					</RadioButton>
+<!--ExpBar Frame-->
+					<CheckButton name="$parent_CB_EF" inherits="XBarCfgCheckTemp">
+						<Anchors><Anchor point="TOPLEFT"><Offset>
+							<AbsDimension x="5" y="175"/></Offset></Anchor></Anchors>
+					</CheckButton>
+<!--EQDame Frame-->
+					<CheckButton name="$parent_CB_DF" inherits="XBarCfgCheckTemp">
+						<Anchors><Anchor point="TOPLEFT"><Offset>
+							<AbsDimension x="5" y="205"/></Offset></Anchor></Anchors>
+					</CheckButton>
+<!--XBar Design-->
+					<Frame name="$parent_Style" inherits="UIDropDownMenuTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset>
+							<AbsDimension x="37" y="260"/></Offset></Anchor></Anchors>
+						<Layers><Layer>
+								<FontString name="$parent_Text" inherits="XBarCBFont" justifyH="LEFT">
+									<Anchors><Anchor point="LEFT" relativePoint="RIGHT"><Offset>
+										<AbsDimension x="5" y="0"/></Offset></Anchor></Anchors>
+								</FontString>
+							</Layer></Layers>
+					</Frame>
+					<Button name="$parent_Switch">
+						<NormalTexture file="interface\CharacterFrame\EquipSwapButton-Normal"/>
+						<PushedTexture file="interface\CharacterFrame\EquipSwapButton-Depress"/>
+						<HighlightTexture file="interface\CharacterFrame\EquipSwapButton-Normal" alphaMode="ADD"/>
+						<Size><AbsDimension x="20" y="20"/></Size>
+						<Anchors>
+							<Anchor point="RIGHT" relativePoint="LEFT" relativeTo="$parent_Style">
+								<Offset><AbsDimension x="-6" y="0"/></Offset></Anchor></Anchors>
+						<Scripts>
+							<OnClick>XBar.ToggleBgnd()</OnClick>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_BOTTOM")
+								GameTooltip:SetText(XBar.Lng["Config"]["Style"])
+							</OnEnter>
+							<OnLeave>GameTooltip:Hide()</OnLeave>
+						</Scripts>
+					</Button>
+<!--Bgnd Slider-->
+					<Slider name="$parent_SR_Alpha" orientation="HORIZONTAL">
+						<Size><AbsDimension x="575" y="10"/></Size>
+						<Anchors><Anchor point="TOPLEFT"><Offset>
+							<AbsDimension x="10" y="320"/></Offset></Anchor></Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture name="$parentLeft" file="Interface\BagFrame\BagFrame-Slider-Border">
+									<Size><AbsDimension x="8" y="16"/></Size>
+									<Anchors><Anchor point="LEFT"/></Anchors>
+									<TexCoords left="0" right=".2" top="0" bottom="1"/>
+								</Texture>
+								<Texture name="$parentRight" file="Interface\BagFrame\BagFrame-Slider-Border">
+									<Size><AbsDimension x="8" y="16"/></Size>
+									<Anchors><Anchor point="RIGHT"/></Anchors>
+									<TexCoords left=".8" right="1" top="0" bottom="1"/>
+								</Texture>
+								<Texture file="Interface\BagFrame\BagFrame-Slider-Border">
+									<Size><AbsDimension x="48" y="16"/></Size>
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT"/>
+										<Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT"/>
+									</Anchors>
+									<TexCoords left=".2" right=".8" top="0" bottom="1"/>
+								</Texture>
+							</Layer>
+							<Layer level="ARTWORK">
+								<FontString name="$parentValue" inherits="GameFontHighlight">
+									<Anchors><Anchor point="BOTTOM" relativePoint="TOP"/></Anchors>
+								</FontString>
+								<FontString name="$parent_Text" inherits="XBarCBFont" justifyH="TOP" text="UI_WORLDMAP_ALPHA">
+									<Anchors><Anchor point="RIGHT" relativeTo="$parentValue" relativePoint="LEFT"><Offset>
+										<AbsDimension x="-160" y="0"/></Offset></Anchor></Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnLoad>
+								this:SetValueStepMode("FLOAT")
+								this:SetMinMaxValues(0,1)
+								this:SetValue(0.6)
+							</OnLoad>
+							<OnValueChanged>
+								local value=string.format("%.2f",this:GetValue())
+								XBarCfg_G_SR_AlphaValue:SetText(value)
+								XBarFrame:SetAlpha(value)
+								XBSet["Alpha"]=tonumber(value)
+							</OnValueChanged>
+							<OnMouseWheel>delta=delta/math.abs(delta) this:SetValue(this:GetValue()+delta*.01)</OnMouseWheel>
+						</Scripts>
+						<ThumbTexture file="Interface\BagFrame\BagFrame-Slider-Knob">
+							<Size><AbsDimension x="16" y="16"/></Size>
+						</ThumbTexture>
+					</Slider>
+				</Frames>
+			</Frame>
+<!--XButtons ############-->
+			<Frame name="$parent_B_Ammo" inherits="XButtonCfgTemp">
+				<Scripts>
+					<OnShow>XBar.Legend_OnShow("Ammo")</OnShow>
+				</Scripts>
+			</Frame>
+			<Frame name="$parent_B_Bag" inherits="XButtonCfgTemp">
+				<Scripts>
+					<OnShow>XBar.Legend_OnShow("Bag")</OnShow>
+				</Scripts>
+			</Frame>
+			<Frame name="$parent_B_Class" inherits="XButtonCfgTemp">
+				<Scripts>
+					<OnShow>XBar.Legend_OnShow("Class")</OnShow>
+				</Scripts>
+			</Frame>
+			<Frame name="$parent_B_Clock" hidden="true">
+				<Size><AbsDimension x="595" y="487"/></Size>
+				<Anchors><Anchor point="TOPLEFT"/></Anchors>
+				<Frames>
+					<CheckButton name="$parent_Show" inherits="XBarCfgCheckTemp">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="5" y="5"/></Offset></Anchor></Anchors>
+					</CheckButton>
+					<CheckButton name="$parent_Text1" inherits="XBarCfgCheckTemp">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="5" y="40"/></Offset></Anchor></Anchors>
+					</CheckButton>
+					<EditBox name="$parent_Value1" inherits="XBarCfgLabelTemp">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="95"/></Offset></Anchor></Anchors>
+					</EditBox>
+					<EditBox name="$parent_Value2" inherits="XBarCfgLabelTemp">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="140"/></Offset></Anchor></Anchors>
+					</EditBox>
+					<EditBox name="$parent_Value3" inherits="XBarCfgLabelTemp">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="185"/></Offset></Anchor></Anchors>
+					</EditBox>
+					<CheckButton name="$parent_Text2" inherits="XBarCfgCheckTemp">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="5" y="235"/></Offset></Anchor></Anchors>
+					</CheckButton>
+					<EditBox name="$parent_Value4" inherits="XBarCfgLabelTemp">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="290"/></Offset></Anchor></Anchors>
+					</EditBox>
+					<EditBox name="$parent_Value5" inherits="XBarCfgLabelTemp">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="335"/></Offset></Anchor></Anchors>
+					</EditBox>
+				</Frames>
+				<Scripts>
+					<OnShow>XBar.Legend_OnShow("Clock")</OnShow>
+					<OnHide>XBarCfg_Legend:Hide()</OnHide>
+				</Scripts>
+			</Frame>
+			<Frame name="$parent_B_Craft" inherits="XButtonCfgTemp">
+				<Scripts>
+					<OnShow>XBar.Legend_OnShow("Craft")</OnShow>
+				</Scripts>
+			</Frame>
+			<Frame name="$parent_B_Dps" inherits="XButtonCfgTemp">
+				<Scripts>
+					<OnShow>XBar.Legend_OnShow("Dps")</OnShow>
+				</Scripts>
+			</Frame>
+			<Frame name="$parent_B_Exp" inherits="XButtonCfgTemp">
+				<Scripts>
+					<OnShow>XBar.Legend_OnShow("Exp")</OnShow>
+				</Scripts>
+			</Frame>
+			<Frame name="$parent_B_Friend" inherits="XButtonCfgTemp">
+				<Scripts>
+					<OnShow>XBar.Legend_OnShow("Friend")</OnShow>
+				</Scripts>
+			</Frame>
+			<Frame name="$parent_B_Guild" inherits="XButtonCfgTemp">
+				<Scripts>
+					<OnShow>XBar.Legend_OnShow("Guild")</OnShow>
+				</Scripts>
+			</Frame>
+			<Frame name="$parent_B_Mail" inherits="XButtonCfgTemp">
+				<Scripts>
+					<OnShow>XBar.Legend_OnShow("Mail")</OnShow>
+				</Scripts>
+			</Frame>
+			<Frame name="$parent_B_Money" inherits="XButtonCfgTemp">
+				<Scripts>
+					<OnShow>XBar.Legend_OnShow("Money")</OnShow>
+				</Scripts>
+			</Frame>
+			<Frame name="$parent_B_Ping" inherits="XButtonCfgTemp">
+				<Scripts>
+					<OnShow>XBar.Legend_OnShow("Ping")</OnShow>
+				</Scripts>
+			</Frame>
+		</Frames>
+	</Frame>
+<!--XBar PopupMenu #############-->
+	<Frame name="XBar_PopupMenu" parent="UIParent" enableMouse="true" frameStrata="TOOLTIP" hidden="true">
+		<Size><AbsDimension x="205" y="200"/></Size>
+		<Backdrop edgeFile="Interface\Tooltips\Tooltip-border" bgFile="Interface\Tooltips\Tooltip-background">
+			<BackgroundInsets><AbsInset top="3" left="3" bottom="3" right="3"/></BackgroundInsets>
+			<EdgeSize><AbsValue val="16"/></EdgeSize>
+			<TileSize><AbsValue val="16"/></TileSize>
+		</Backdrop>
+		<Frames>
+			<Button name="$parent_Button1" inherits="XBarPopupButtonTemp" id="1">
+				<Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="10"/></Offset></Anchor></Anchors>
+			</Button>
+			<Button name="$parent_Button2" inherits="XBarPopupButtonTemp" id="2">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Button1" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Button3" inherits="XBarPopupButtonTemp" id="3">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Button2" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Button4" inherits="XBarPopupButtonTemp" id="4">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Button3" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Button5" inherits="XBarPopupButtonTemp" id="5">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Button4" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Button6" inherits="XBarPopupButtonTemp" id="6">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Button5" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Button7" inherits="XBarPopupButtonTemp" id="7">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Button6" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Button8" inherits="XBarPopupButtonTemp" id="8">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Button7" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Button9" inherits="XBarPopupButtonTemp" id="9">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Button8" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Button10" inherits="XBarPopupButtonTemp" id="10">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Button9" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Button11" inherits="XBarPopupButtonTemp" id="11">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Button10" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Button12" inherits="XBarPopupButtonTemp" id="12">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Button11" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Button13" inherits="XBarPopupButtonTemp" id="13">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Button12" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Button14" inherits="XBarPopupButtonTemp" id="14">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Button13" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Button15" inherits="XBarPopupButtonTemp" id="15">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Button14" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Button16" inherits="XBarPopupButtonTemp" id="16">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Button15" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Button17" inherits="XBarPopupButtonTemp" id="17">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Button16" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Button18" inherits="XBarPopupButtonTemp" id="18">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Button17" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Button19" inherits="XBarPopupButtonTemp" id="19">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Button18" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Button20" inherits="XBarPopupButtonTemp" id="20">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Button19" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Button21" inherits="XBarPopupButtonTemp" id="21">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Button20" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Button22" inherits="XBarPopupButtonTemp" id="22">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Button21" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Button23" inherits="XBarPopupButtonTemp" id="23">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Button22" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Button24" inherits="XBarPopupButtonTemp" id="24">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Button23" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Button25" inherits="XBarPopupButtonTemp" id="25">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Button24" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnShow>XBar.PopupMenu_OnShow()</OnShow>
+		</Scripts>
+	</Frame>
+<!--Button Legend ############-->
+	<Frame name="XBarCfg_Legend" parent="XBarCfg" hidden="true">
+		<Size><AbsDimension x="210" y="430"/></Size>
+		<Anchors><Anchor point="TOPRIGHT"><Offset>
+			<AbsDimension x="-10" y="10"/></Offset></Anchor></Anchors>
+		<Backdrop edgeFile="Interface\Tooltips\Tooltip-Border" bgFile="Interface\Tooltips\SayBubble-Background">
+			<BackgroundInsets><AbsInset top="4" left="4" bottom="4" right="4"/></BackgroundInsets>
+			<EdgeSize><AbsValue val="16"/></EdgeSize>
+			<TileSize><AbsValue val="16"/></TileSize>
+		</Backdrop>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Head" inherits="XBarButtonFont" justifyH="LEFT" justifyV="TOP">
+					<Size><AbsDimension x="200" y="390"/></Size>
+					<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="10"/></Offset></Anchor></Anchors>
+				</FontString>
+				<FontString name="$parent_Keys" inherits="XBarButtonFont" justifyH="LEFT" justifyV="TOP" bytes="1024">
+					<Size><AbsDimension x="200" y="390"/></Size>
+					<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="35"/></Offset></Anchor></Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+	<MessageFrame name="ChatScrollFrame" parent="WorldFrame" enableMouse="true" frameStrata="BACKGROUND" frameLevel="1">
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeTo="ChatFrame1"/>
+			<Anchor point="BOTTOMRIGHT" relativeTo="ChatFrame1"/>
+		</Anchors>
+		<Scripts>
+			<OnLoad>
+				SELECTED_CHAT_FRAME = DEFAULT_CHAT_FRAME
+			</OnLoad>
+			<OnMouseWheel>
+				if delta>=120 then
+					if IsCtrlKeyDown() then
+						SELECTED_CHAT_FRAME:ScrollTop()
+					elseif IsShiftKeyDown() then
+						for i=1, 5 do
+							SELECTED_CHAT_FRAME:ScrollUp()
+						end
+					else
+						SELECTED_CHAT_FRAME:ScrollUp()
+					end
+				else
+					if IsCtrlKeyDown() then
+						SELECTED_CHAT_FRAME:ScrollBottom()
+					elseif IsShiftKeyDown() then
+						for i=1, 5 do
+							SELECTED_CHAT_FRAME:ScrollDown()
+						end
+					else
+						SELECTED_CHAT_FRAME:ScrollDown()
+					end
+				end
+			</OnMouseWheel>
+		</Scripts>
+	</MessageFrame>
+	<Frame name="XBarIIIFrame" parent="UIParent">
+		<Scripts>
+			<OnLoad>this:RegisterEvent("PET_CRAFT_END") UIParent:UnregisterEvent("WARNING_MEMORY")</OnLoad>
+			<OnEvent>XBar.III_OnEvent()</OnEvent>
+		</Scripts>
+	</Frame>
+</Ui>

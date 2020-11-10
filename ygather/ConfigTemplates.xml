@@ -1,0 +1,166 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/
+UI.xsd">
+	<Button name="yGather_ConfigTabTemplate" inherits="UIPanelTopTabTemplate" virtual="true">
+		<Scripts>
+			<OnClick>
+				yGather.config:OnTabClick(this);
+			</OnClick>
+			<OnLoad>
+				PanelTemplates_TabResize(this, 20);
+                yGather.config:AddTab(this);
+			</OnLoad>
+		</Scripts>
+	</Button>
+    
+    <Frame name="yGather_ConfigTabFrameTemplate" virtual="true" hidden="false">
+        <Anchors>
+            <Anchor point="TOPLEFT"/>
+            <Anchor point="BOTTOMRIGHT"/>
+        </Anchors>
+        <Scripts>
+            <OnLoad>
+                yGather.config:AddTabFrame(this);
+            </OnLoad>
+        </Scripts>
+    </Frame>
+
+    <FontString name="yGather_ConfigCheckButtonLabelTemplate" inherits="GameTitleFont" justifyH="LEFT" virtual="true">
+        <FontHeight>
+            <AbsValue val="14"/>
+        </FontHeight>
+        <Anchors>
+            <Anchor point="LEFT" relativePoint="RIGHT" />
+        </Anchors>
+    </FontString>
+
+    <CheckButton name="yGather_ConfigCheckButtonTemplate" inherits="UIPanelCheckButtonTemplate" virtual="true">
+        <Size><AbsDimension y="24" x="24"/></Size>
+        <Layers>
+            <Layer>
+                <FontString name="$parent_Text" inherits="yGather_ConfigCheckButtonLabelTemplate"/>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnShow>
+                _G[this:GetName() .. "_Text"]:SetText(yGather.translate(this.labelTextKey));
+                this:SetChecked(yGather.settings.GetValue(this.configKey));
+            </OnShow>
+            <OnClick>
+                yGather.settings.SetTemporaryValue(this.configKey, this:IsChecked());
+            </OnClick>
+        </Scripts>
+    </CheckButton>
+    
+    <Frame name="yGather_ConfigListBoxTemplate" inherits="UIDropDownMenuTemplate" virtual="true">
+        <Layers>
+            <Layer>
+                <FontString name="$parent_LabelText" inherits="GameTitleFont" text="">
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
+                            <Offset><AbsDimension x="-3" y="-2"/></Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnShow>
+                _G[this:GetName() .. "_LabelText"]:SetText(yGather.translate(this.listBoxLabel));
+                local currentValue = yGather.settings.GetValue(this.configKey);
+                if (currentValue ~= nil) then
+                    UIDropDownMenu_SetText(this, yGather.translate(this.listEntries[currentValue][1]));
+                end
+            </OnShow>
+        </Scripts>
+    </Frame>
+
+    <Button name="yGather_ConfigIconColorTemplate" virtual="true">
+        <Size><AbsDimension x="50" y="20"/></Size>
+        <Layers>
+            <Layer level="ARTWORK">
+                <Texture name="$parent_Left" file="Interface\Common\UIColorBorder">
+                    <Size><AbsDimension x="4" y="20"/></Size>
+                    <TexCoords left="0" right="0.15625" top="0" bottom="1" />
+                </Texture>
+                <Texture  name="$parent_Middle" file="Interface\Common\UIColorBorder">
+                    <Size><AbsDimension x="42" y="20"/></Size>
+                    <TexCoords left="0.2" right="0.3" top="0" bottom="1" />
+                    <Anchors>
+                        <Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_Left"/>
+                    </Anchors>
+                </Texture>
+                <Texture  name="$parent_Right" file="Interface\Common\UIColorBorder">
+                    <Size><AbsDimension x="4" y="20"/></Size>
+                    <TexCoords left="31.84375" right="32" top="0" bottom="1" />
+                    <Anchors>
+                        <Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_Middle"/>
+                    </Anchors>
+                </Texture>
+                <FontString name="$parent_Text" inherits="GameTitleFont">
+                    <Anchors>
+                        <Anchor point="CENTER" relativePoint="CENTER">
+                            <!--Offset><AbsDimension x="-3" y="-2"/></Offset-->
+                        </Anchor>
+                    </Anchors>
+                    <FontHeight><AbsValue val="10"/></FontHeight>
+                </FontString>
+            </Layer>
+            <Layer level="BACKGROUND">
+                <Texture name="$parent_Color" file="Interface\Common\Block-Fill"/>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnShow>
+                _G[this:GetName() .. "_Color"]:SetColor(unpack(yGather.settings.GetValue(this.configKey)));
+                _G[this:GetName() .. "_Text"]:SetText(yGather.translate(this.textKey));
+            </OnShow>
+            <OnClick>
+                ColorPickerFrame:SetFrameStrata("DIALOG");
+                yGather.config:OpenColorPicker(this);
+            </OnClick>
+        </Scripts>
+    </Button>
+
+    <Slider name="yGather_ConfigSliderTemplate" orientation="HORIZONTAL" virtual="true">
+        <Size>
+            <AbsDimension x="100" y="10"/>
+        </Size>
+        <Layers>
+            <Layer>
+                <Texture file="Interface\BagFrame\BagFrame-Slider-Border"/>
+            </Layer>
+            <Layer level="ARTWORK">
+                <FontString  name="$parent_TopText" inherits="GameFontHighlight">
+                    <Anchors>
+                        <Anchor point="BOTTOM" relativePoint="TOP">
+                            <Offset><AbsDimension x="0" y="-4"/></Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+                <FontString name="$parent_LeftText" inherits="GameFontHighlight">
+                    <Anchors><Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT"/></Anchors>
+                </FontString>
+                <FontString  name="$parent_RightText" inherits="GameFontHighlight">
+                    <Anchors><Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT"/></Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <ThumbTexture file="Interface\BagFrame\BagFrame-Slider-Knob">
+            <Size><AbsDimension x="16" y="16"/></Size>
+        </ThumbTexture>
+        <Scripts>
+            <OnShow>
+                _G[this:GetName() .. "_TopText"]:SetText(yGather.translate(this.topText));
+                _G[this:GetName() .. "_LeftText"]:SetText(yGather.translate(this.leftText));
+                _G[this:GetName() .. "_RightText"]:SetText(yGather.translate(this.rightText));
+                this:SetValue(yGather.settings.GetValue(this.configKey));
+            </OnShow>
+            <OnValueChanged>
+                if (this.configKey ~= nil) then
+                    yGather.settings.SetTemporaryValue(this.configKey, this:GetValue());
+                end
+            </OnValueChanged>
+        </Scripts>
+    </Slider>
+    
+</Ui>

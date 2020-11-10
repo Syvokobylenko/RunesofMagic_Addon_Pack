@@ -1,0 +1,72 @@
+
+@project-version@
+	- Added function
+		- pylib.lib.table.DeleteDuplicate
+			- Deletes duplicate entries in a numeric table (only 1 dimensional)
+		- pylib.lib.table.Translate
+			- Sets Values of a table as keys
+Version 1.2.6
+	- Added function
+		- pylib.lib.color.GetColorListByItemRarity
+			- returns same as pylib.lib.color.GetColorByItemRarity but as a list {r,g,b}
+	- Changed pylib.lib.color.GetColorByName
+		- it now returns the itemcolor for a given itemrarity
+	- Added a function which checks for 2 tables if they are identical:
+		- pylib.lib.table.Compare(tbl1, tbl2)
+	- Known Issue:
+		Sorting tables with pylib.lib.table.SortBig doesn't work correctly
+Version 1.2.5
+	- Added functions:
+		- pylib.ClearEventHandler()
+			- Deletes all Eventhandler and returns the old list.
+		- pylib.ReapplyEventHandler(list)
+			- Reapplies the event handler given by list.
+		- pylib.lib.helper.GetBagItemIndexByID(itemID)
+			- returns the first slot containing itemid (bagid, index[1-180], itemCount)
+		- pylib.lib.helper.FindEmptyBagSlot(num)
+			- returns up to num empty bagslots. [bagid]
+		- pylib.lib.helper.SwitchBagSlot(bagid1, bagid2)
+			- switches items in bagid1 with bagid2
+		- pylib.lib.helper.SplitBagSlot(source, num, target)
+			- splits num items in source to target
+		- pylib.lib.helper.ResetFusion()
+			- Resets Fusion Process
+		- pylib.lib.helper.Fusion(callback, secure, ...)
+			- callback: function called when fusion finished. -> Exit Codes in lib.helper.lua
+			- secure: block all mouse inputs while fusion is active
+			- ...: int BagIndex [1,180] or {BagIndex[1,180], amount}
+		- pylib.lib.hook.ClearHooks()
+			- returns list with current hooks and deletes them
+		- pylib.lib.hook.ReapplyHooks(list)
+			- reapply hooklist
+		- pylib.lib.item.GetItemDB(id)
+			- returns the itemDatabase of a given id.
+		- pylib.lib.item.GetIDRangesByDB(name)
+			- return id ranges of a given database-> list of lists
+		- pylib.lib.item.GetItemValuesFromHyperlink(str)
+			- returns a table which contains item informations
+Version 1.2.4
+	- Fixed a bug which caused errors when plussing an Item
+Version 1.2.3
+	- Fixed a bug which caused :GetTableRoot to return wrong table.
+	- Added Modul to calculate Vectors
+Version 1.2.2
+	- Bugfixes
+Version 1.2.1
+	- Fixed a bug which caused hooks to not reset
+Version 1.2.0
+	- Reorganised Code
+	- Fixed a bug which caused problems when ReloadUI was used
+	- Codefixes
+Version 1.1.3
+	- Added Function to sort big tables without lags.
+		- table.SortBig(key, tbl, sort_fn, callback, comparisons)
+Version 1.1.2
+	- Added an Event which is triggered after Variables loaded
+Version 1.1.1
+	- Fixed an issue which caused a loading problem on ReloadUI/Characterswitch, Serverswitch
+Version: 1.1
+	- bugfixes
+	- Added Basics for Colorblind mode (/pylib color)
+Version: 1.0
+	Initial Release 

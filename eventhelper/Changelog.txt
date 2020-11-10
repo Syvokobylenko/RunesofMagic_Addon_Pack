@@ -1,0 +1,38 @@
+
+- @project-version@
+	- Own Messageframe
+	- Basic Settings
+		- Enable/Disable Addon
+		- Enable/Disable Script
+		- Messages
+			- Show in Eventhelperframe
+			- Show in Systemmessageframe if systemmessage
+			- Show in Warningmessageframe if warningmessage
+			- Show in Chatframe (decideable in which)
+		- ChatMessages
+			- Send to Chat
+			- Show in Chatframe (decideable in which)
+	- Some preparations for Debugger
+	- Loca fallback fix for cursebugs
+	- Updated Scripts to the changes
+
+- v0.16-beta
+	- bugfix; Scripts are now only enabled, if the player is in the right zone
+	- curse loca import
+	- Added Minimapbutton
+	- Added functionality to the Filter-Editbox
+	- some small tweaks
+
+0.15
+	- curse initial beta
+
+0.12
+	- added localisation
+	- added pcall for save script calls
+	- bugfixes
+
+0.11
+	- initial version
+		- Core
+		- basic UI
+		- Ravenheart, Vale of Rites, Crypt of Eternity, Bone Peak, Color weave festival

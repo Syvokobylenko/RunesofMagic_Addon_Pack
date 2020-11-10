@@ -1,0 +1,1 @@
+to use bindings you have to move the worldxml directory to /interfaces.

@@ -1,0 +1,700 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+  <!-- $Rev: 133 $ -->
+  <Button name="StatRatingConfigTabTemplate" inherits="UIPanelBottomTabTemplate" virtual="true" hidden="true">
+		<Size>
+      <AbsDimension x="80" y="22"/>
+    </Size>
+    <Scripts>
+			<OnClick>
+				PlaySoundByPath("sound\\interface\\ui_tab_click.mp3");
+				StatRatingConfigTab_OnClick(this:GetID());
+			</OnClick>
+		</Scripts>
+	</Button>
+  
+  <CheckButton name="SRC_CBTemp" inherits="UIPanelCheckButtonTemplate" virtual="true">
+    <Size>
+			<AbsDimension x="20" y="20"/>
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+        <FontString name="$parentText" inherits="GameFontNormal">
+          <Anchors>
+            <Anchor point="LEFT" relativePoint="RIGHT">
+              <Offset>
+								<AbsDimension x="0" y="0"/> <!-- UI Workaround, damit Lua das nicht in die Linke obere Ecke legt -->
+							</Offset>
+						</Anchor>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+  </CheckButton>
+  
+	<Frame name="StatRatingConfigColorPad" virtual="true">
+		<Size>
+			<AbsDimension x="80" y="40"/>
+		</Size>
+	</Frame>
+  
+  <Button name="StatRatingConfigMiniButton" hidden="true" inherits="UIPanelButtonTemplate" parent="AddonManagerMiniFrame">
+		<Size>
+			<AbsDimension y="24" x="24"/>
+		</Size>
+		<Scripts>
+			<OnClick>
+				AddonManager.MiniButton_OnClick(this)
+			</OnClick>
+			<OnEnter>
+				AddonManager.MiniButton_OnEnter(this);
+			</OnEnter>
+			<OnLeave>
+				AddonManager.MiniButton_OnLeave(this);
+			</OnLeave>
+		</Scripts>
+	  <NormalTexture file="Interface\Addons\StatRating\gfx\chart-64x64"/>
+	  <PushedTexture file="Interface\Addons\StatRating\gfx\chart-64x64"/>
+	  <HighlightTexture file="Interface\Addons\StatRating\gfx\chart-64x64_highlight" alphaMode="ADD" />
+	</Button>
+
+	<Frame name="StatRatingConfig" parent="UIParent" inherits="UICommonFrameTemplate" hidden="true" enableMouse="true">
+		<Size>
+			<AbsDimension x="420" y="570"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER"/>
+		</Anchors>
+		<Frames>
+    
+			<Frame name="StatRatingConfigBackdropFrame" inherits="UIPanelBackdropFrame">
+				<Size>
+					<AbsDimension x="397" y="505"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="32"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						UIPanelBackdropFrame_SetTexture( this, "Interface/Common/PanelCommonBorder", 64 , 64 );
+				    StatRatingConfig_OnLoad(this);
+					</OnLoad>
+          <OnMouseDown>
+            this:StartMoving("TOPLEFT");
+          </OnMouseDown>
+          <OnMouseUp>
+            this:StopMovingOrSizing();
+            SRC_VARS["window"] = {};
+            SRC_VARS["window"]["x"], SRC_VARS["window"]["y"] = this:GetPos();
+            SaveVariables("SRC_VARS");
+          </OnMouseUp>
+          <OnEscapePressed>
+            this:ClearFocus();
+            StatRatingConfig:Hide();
+          </OnEscapePressed>
+        </Scripts>
+      </Frame>
+      
+      <Frame name="$parentCharacterNameDropDown" inherits="UIDropDownMenuTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentBackdropFrame" relativPoint="TOPLEFT">
+            <Offset>
+              <AbsDimension x="15" y="20"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Layers>
+          <Layer level="BACKGROUND">
+            <FontString name="$parentDesc" inherits="GameFontHighlight">
+              <Anchors>
+                <Anchor point="LEFT" relativePoint="RIGHT" />
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>
+      </Frame>
+      
+      <Button name="$parentSaveConfig" inherits="UIPanelButtonTemplate">
+        <Size>
+          <AbsDimension x="160" y="22"/>
+        </Size>
+        <Anchors>
+          <Anchor point="LEFT" relativeTo="$parentCharacterNameDropDownDesc" relativPoint="RIGHT">
+            <Offset>
+              <AbsDimension x="60" y="0"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            StatRatingConfig_SaveConfig(UIDropDownMenu_GetSelectedName(StatRatingConfigCharacterNameDropDown));
+          </OnClick>
+        </Scripts>
+      </Button>
+      
+      <Frame name="$parentTabGeneral" hidden="true">
+        <Frames>
+          <CheckButton name="$parentActiveRate" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="StatRatingConfigCharacterNameDropDown" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="35"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          
+          <CheckButton name="$parentActiveRateOnALTPressed" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentActiveRate" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="20" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          
+          <CheckButton name="$parentShowSummary" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentActiveRateOnALTPressed" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="-20" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          
+          <CheckButton name="$parentColorFix" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentShowSummary" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+
+          <CheckButton name="$parentDuraMod" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentColorFix" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+
+          <CheckButton name="$parentDuraModAllways" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentDuraMod" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="20" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+        </Frames>
+        <Layers>
+          <Layer level="ARTWORK">        
+            <FontString name="$parentCredits" inherits="GameFontLabel" maxLines="8" justifyH="LEFT">
+              <Size><AbsDimension x="320" y="100"/></Size>
+              <Anchors>                
+                <Anchor point="LEFT" relativeTo="StatRatingConfigCharacterNameDropDown" relativPoint="BOTTOMLEFT">						  
+                  <Offset>
+                    <AbsDimension x="20" y="380"/>
+                  </Offset>
+                </Anchor>
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>           
+        <Layers>
+          <Layer level="ARTWORK">        
+            <FontString name="$parentDPS" inherits="GameFontLabel" maxLines="8" justifyH="LEFT" text="Theoric white damage">
+              <Size><AbsDimension x="320" y="50"/></Size>
+              <Anchors>                
+                <Anchor point="LEFT" relativeTo="StatRatingConfigCharacterNameDropDown" relativPoint="BOTTOMLEFT">						  
+                  <Offset>
+                    <AbsDimension x="20" y="280"/>
+                  </Offset>
+                </Anchor>
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>     
+      </Frame>
+      
+      <Frame name="$parentTabEffects" hidden="true">
+        <Layers>
+          <Layer level="ARTWORK">
+            <FontString name="$parentTitleEff" inherits="GameFontLabel">
+              <Anchors>
+                <Anchor point="LEFT" relativeTo="StatRatingConfigCharacterNameDropDown" relativPoint="BOTTOMLEFT">
+                  <Offset>
+                  <AbsDimension x="0" y="35"/>
+                  </Offset>
+                </Anchor>
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>      
+        <Frames>
+          <CheckButton name="$parentAbility1" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentTitleEff" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          
+          <CheckButton name="$parentAbility2" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbility1" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          
+          <CheckButton name="$parentAbility3" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbility2" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          
+          <CheckButton name="$parentAbility4" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbility3" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          
+          <CheckButton name="$parentAbility5" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbility4" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          
+          <CheckButton name="$parentAbility6" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbility5" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          
+          <CheckButton name="$parentAbility7" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbility6" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          
+          <CheckButton name="$parentAbility8" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbility7" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          
+          <CheckButton name="$parentAbility9" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbility8" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          
+          <CheckButton name="$parentAbility10" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbility9" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          
+          <CheckButton name="$parentAbility11" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbility10" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          
+          <CheckButton name="$parentAbility12" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbility11" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          
+          <CheckButton name="$parentAbility13" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbility12" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          
+          <CheckButton name="$parentAbility14" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbility13" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          
+          <CheckButton name="$parentAbility15" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbility14" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          
+          <CheckButton name="$parentAbility16" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbility15" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          
+          <CheckButton name="$parentAbility17" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbility16" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          
+          <CheckButton name="$parentAbility18" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbility17" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          
+          <CheckButton name="$parentAbility19" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbility18" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+        </Frames>
+      </Frame>
+      
+      <Frame name="$parentTabSummary" hidden="true">
+        <Layers>
+          <Layer level="ARTWORK">
+            <FontString name="$parentTitle" inherits="GameFontLabel">
+              <Anchors>
+                <Anchor point="LEFT" relativeTo="StatRatingConfigCharacterNameDropDown" relativPoint="BOTTOMLEFT">
+                  <Offset>
+                  <AbsDimension x="0" y="35"/>
+                  </Offset>
+                </Anchor>
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>
+                
+        <Frames> 
+          <CheckButton name="$parentAbilityStamina" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentTitle" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>          
+          <CheckButton name="$parentAbilityStrength" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbilityStamina" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="180" y="0"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>          
+          <CheckButton name="$parentAbilityDexterity" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbilityStamina" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          <CheckButton name="$parentAbilityIntelligence" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbilityStrength" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>          
+          <CheckButton name="$parentAbilityWisdom" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbilityDexterity" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+  
+          <CheckButton name="$parentAbilityHP" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbilityWisdom" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="30"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          <CheckButton name="$parentAbilityHP5" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbilityHP" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="180" y="0"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>          
+          <CheckButton name="$parentAbilityMP" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbilityHP" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>          
+          <CheckButton name="$parentAbilityMP5" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbilityMP" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="180" y="0"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>     
+          
+          <CheckButton name="$parentAbilityPDef" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbilityMP" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="30"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>  		  
+          <CheckButton name="$parentAbilityPDod" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbilityPDef" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="180" y="0"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>                  
+          <CheckButton name="$parentAbilityMDef" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbilityPDef" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          
+          <CheckButton name="$parentAbilityPAtt" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbilityMDef" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="30"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          <CheckButton name="$parentAbilityPDmg" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbilityPAtt" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="180" y="0"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          <CheckButton name="$parentAbilityPAcc" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbilityPAtt" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          <CheckButton name="$parentAbilityMAtt" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbilityPAcc" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>  
+          <CheckButton name="$parentAbilityMDmg" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbilityMAtt" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="180" y="0"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>           
+          <CheckButton name="$parentAbilityHeal" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbilityMAtt" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="180" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>       
+          
+          <CheckButton name="$parentAbilityDPS" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbilityMAtt" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="50"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>
+          <CheckButton name="$parentAbilityEFFD" inherits="SRC_CBTemp">
+            <Anchors>
+              <Anchor point="LEFT" relativeTo="$parentAbilityDPS" relativPoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="20"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </CheckButton>		  
+
+        </Frames>
+      </Frame>
+      
+      
+      
+      <!--<Frame name="$parentTextColorButton" inherits="StatRatingConfigColorPad">
+        <Anchors>
+          <Anchor point="LEFT" relativeTo="$parentTextColorDesc" relativPoint="BOTTOMLEFT"/>
+        </Anchors>
+        <Scripts>
+					<OnClick>
+            StatRatingConfig_OpenColorPicker(this);
+					</OnClick>
+        </Scripts>
+      </Frame>-->
+      <!--<Button name="$parentTextColorChoose" inherits="ListItemButtonTemplate" hidden="false"/>-->
+      
+			<Button name="$parentTab1" inherits="StatRatingConfigTabTemplate" id="1">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="25" y="-18"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+        <Scripts>
+          <OnLoad>
+            PanelTemplates_TabResize( this, 60 );
+          </OnLoad>
+        </Scripts>
+			</Button>
+			<Button name="$parentTab2" inherits="StatRatingConfigTabTemplate" id="2">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab1" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+        <Scripts>
+          <OnLoad>
+            PanelTemplates_TabResize( this, 45 );
+          </OnLoad>
+        </Scripts>
+			</Button>
+			<Button name="$parentTab3" inherits="StatRatingConfigTabTemplate" id="3">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab2" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+        <Scripts>
+          <OnLoad>
+            PanelTemplates_TabResize( this, 100 );
+          </OnLoad>
+        </Scripts>
+			</Button>
+      
+		</Frames>
+	</Frame>
+</Ui>

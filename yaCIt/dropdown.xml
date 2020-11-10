@@ -1,0 +1,30 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	
+	<Button name="DropDownList1Button33" parent="DropDownList1" inherits="UIDropDownMenuButtonTemplate" hidden="true" id="33"/>
+	<Button name="DropDownList1Button34" parent="DropDownList1" inherits="UIDropDownMenuButtonTemplate" hidden="true" id="34"/>
+	<Button name="DropDownList1Button35" parent="DropDownList1" inherits="UIDropDownMenuButtonTemplate" hidden="true" id="35"/>
+	<Button name="DropDownList1Button36" parent="DropDownList1" inherits="UIDropDownMenuButtonTemplate" hidden="true" id="36"/>
+	<Button name="DropDownList1Button37" parent="DropDownList1" inherits="UIDropDownMenuButtonTemplate" hidden="true" id="37"/>
+	<Button name="DropDownList1Button38" parent="DropDownList1" inherits="UIDropDownMenuButtonTemplate" hidden="true" id="38"/>
+	<Button name="DropDownList1Button39" parent="DropDownList1" inherits="UIDropDownMenuButtonTemplate" hidden="true" id="39"/>
+	<Button name="DropDownList1Button40" parent="DropDownList1" inherits="UIDropDownMenuButtonTemplate" hidden="true" id="40"/>
+	
+	<Button name="DropDownList2Button33" parent="DropDownList2" inherits="UIDropDownMenuButtonTemplate" hidden="true" id="33"/>
+	<Button name="DropDownList2Button34" parent="DropDownList2" inherits="UIDropDownMenuButtonTemplate" hidden="true" id="34"/>
+	<Button name="DropDownList2Button35" parent="DropDownList2" inherits="UIDropDownMenuButtonTemplate" hidden="true" id="35"/>
+	<Button name="DropDownList2Button36" parent="DropDownList2" inherits="UIDropDownMenuButtonTemplate" hidden="true" id="36"/>
+	<Button name="DropDownList2Button37" parent="DropDownList2" inherits="UIDropDownMenuButtonTemplate" hidden="true" id="37"/>
+	<Button name="DropDownList2Button38" parent="DropDownList2" inherits="UIDropDownMenuButtonTemplate" hidden="true" id="38"/>
+	<Button name="DropDownList2Button39" parent="DropDownList2" inherits="UIDropDownMenuButtonTemplate" hidden="true" id="39"/>
+	<Button name="DropDownList2Button40" parent="DropDownList2" inherits="UIDropDownMenuButtonTemplate" hidden="true" id="40"/>
+	
+	<Button name="DropDownList3Button33" parent="DropDownList3" inherits="UIDropDownMenuButtonTemplate" hidden="true" id="33"/>
+	<Button name="DropDownList3Button34" parent="DropDownList3" inherits="UIDropDownMenuButtonTemplate" hidden="true" id="34"/>
+	<Button name="DropDownList3Button35" parent="DropDownList3" inherits="UIDropDownMenuButtonTemplate" hidden="true" id="35"/>
+	<Button name="DropDownList3Button36" parent="DropDownList3" inherits="UIDropDownMenuButtonTemplate" hidden="true" id="36"/>
+	<Button name="DropDownList3Button37" parent="DropDownList3" inherits="UIDropDownMenuButtonTemplate" hidden="true" id="37"/>
+	<Button name="DropDownList3Button38" parent="DropDownList3" inherits="UIDropDownMenuButtonTemplate" hidden="true" id="38"/>
+	<Button name="DropDownList3Button39" parent="DropDownList3" inherits="UIDropDownMenuButtonTemplate" hidden="true" id="39"/>
+	<Button name="DropDownList3Button40" parent="DropDownList3" inherits="UIDropDownMenuButtonTemplate" hidden="true" id="40"/>
+	
+</Ui>

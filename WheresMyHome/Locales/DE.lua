@@ -1,0 +1,23 @@
+local locales = {}
+locales["ADDON_DESCRIPTION"] = "Ein plugin für ZZInfoBar welches zeigt, wo du deinen Rückrufpunkt gesetzt hast."
+locales["ADDON_LOADED"] = "Addon geladen"
+locales["ALT_LEFT_MOUSEBUTTON"] = "Alt + Linksklick"
+locales["ALT_RIGHT_MOUSEBUTTON"] = "Alt + Rechtsklick"
+locales["BUTTON"] = "ZZIB Button"
+locales["CTRL_LEFT_MOUSEBUTTON"] = "Strg + Linksklick"
+locales["CTRL_RIGHT_MOUSEBUTTON"] = "Strg + Rechtsklick"
+locales["LEFT_MOUSEBUTTON"] = "Linksklick"
+locales["REVERSECODEX"] = "Schwarzer Kodex Sortierung umkehren"
+locales["RIGHT_MOUSEBUTTON"] = "Rechtsklick"
+locales["SHIFT_LEFT_MOUSEBUTTON"] = "Umschalt + Linksklick"
+locales["SHIFT_RIGHT_MOUSEBUTTON"] = "Umschalt + Rechtsklick"
+locales["TRANSPORTACTION1"] = "Standard Transportbuch öffnen"
+locales["TRANSPORTACTION2"] = "Transportpunkte als Dropdownmenu öffnen"
+locales["TRANSPORTACTION3"] = "WheresMyHome Transportframe öffnen"
+locales["TRANSPORTBOOK_ADD_ENTRY"] = "Transportpunkt aufzeichnen"
+locales["TRANSPORTBOOK_FULL"] = "Dein Transportbuch ist voll. Bitte erst nicht mehr benötigte Einträge löschen."
+locales["TRANSPORTBOOKSORT"] = "Transportbuch alphabetisch sortieren"
+locales["TRANSPORTMODE"] = "Aktion bei Linksklick"
+locales["WRITTEN_BY"] = "Geschrieben von"
+
+return locales

@@ -1,0 +1,67 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ ../../worldxml/ui.xsd">
+	<Frame name="AddonManagerMiniFrame" hidden="true" parent="UIParent" frameStrata="LOW" frameLevel="1000" enableMouse="true">
+		<Size>
+			<AbsDimension x="18" y="34"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER"/>
+		</Anchors>
+		<Frames>
+			<Frame name="AddonManagerMiniFrameBorder" frameStrata="BACKGROUND">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT"/>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT"/>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\Tooltip-border">
+					<EdgeSize>
+						<AbsValue val="16"/>
+					</EdgeSize>
+				</Backdrop>
+			</Frame>
+			<Frame name="AddonManagerMiniFrame_Corner" frameStrata="LOW"  enableMouse="true">
+				<Size>
+					<AbsDimension x="16" y="16"/>
+				</Size>
+				<Backdrop bgFile="Interface\WorldMap\WorldMap-TitlebarSwitch-Normal">
+					<TileSize>
+						<AbsValue val="4"/>
+					</TileSize>
+				</Backdrop>
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_LEFT", 4, 0)
+						GameTooltip:SetText("")
+						GameTooltip:AddLine(UIPANELANCHORFRAME_TOOLTIP, 0, 0.75, 0.95)
+						GameTooltip:Show()
+						AddonManager.Mini.OnEnter()
+                    </OnEnter>
+					<OnLeave>
+                        GameTooltip:Hide()
+                        AddonManager.Mini.OnLeave()
+                    </OnLeave>
+					<OnMouseDown>
+						UIPanelAnchorFrame_OnMouseDown( this:GetParent(), key )
+					</OnMouseDown>
+					<OnMouseUp>
+						UIPanelAnchorFrame_OnMouseUp( this:GetParent(), key )
+					</OnMouseUp>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnShow>UIPanelAnchorFrame_OnShow( this )</OnShow>
+			<OnEnter>AddonManager.Mini.OnEnter()</OnEnter>
+			<OnLeave>AddonManager.Mini.OnLeave()</OnLeave>
+		</Scripts>
+	</Frame>
+	
+	<Button name="AddonManagerMiniHidden" hidden="true" parent="UIParent" frameStrata="LOW" frameLevel="1000">
+		<Size><AbsDimension y="32" x="16"></AbsDimension></Size>
+		<Scripts>
+			<OnEnter>AddonManager.Mini.OnEnterHidden()</OnEnter>
+		</Scripts>
+		<NormalTexture file="Interface\\CraftFrame\\PushMaterialIntoQueue_Normal">
+			<TexCoords left="0" right="0.6875" top="0" bottom="1"/>
+		</NormalTexture>			
+	</Button>
+</Ui>

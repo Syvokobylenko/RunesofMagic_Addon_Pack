@@ -1,0 +1,46 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Frame name="XBarFriend" parent="UIParent" frameStrata="BACKGROUND" frameLevel="1">
+		<Size><AbsDimension x="128" y="32"/></Size>
+		<Anchors><Anchor point="LEFT" relativeTo="XBarFrame"><Offset>
+			<AbsDimension x="690" y="0"/></Offset></Anchor></Anchors>
+		<Scripts>
+			<OnEvent>XBar.Friend_OnEvent(this,event)</OnEvent>
+			<OnShow>XBar.Friend_OnEvent(this,"LOADED")</OnShow>
+			<OnHide>this:UnregisterEvent("RESET_FRIEND")</OnHide>
+		</Scripts>
+	</Frame>
+	<Frame name="XBarFriend_BG" inherits="XButton_BGTemp" parent="XBarFrame">
+		<Anchors><Anchor point="LEFT" relativeTo="XBarFriend"><Offset>
+			<AbsDimension x="-28" y="0"/></Offset></Anchor></Anchors>
+	</Frame>
+	<Button name="XBarFriend_B" inherits="XButton_BTemp" parent="XBarFriend">
+		<Anchors><Anchor point="LEFT"/></Anchors>
+		<NormalTexture file="Interface/Icons/Emo_Wave"/>
+		<PushedTexture file="Interface/Icons/Emo_Laugh"/>
+		<HighlightTexture file="Interface/Icons/Emo_Laugh" alphaMode="ADD"/>
+		<Scripts>
+			<OnClick>
+				if key=="LBUTTON" then
+					PlaySoundByPath("sound/interface/ui_generic_click.mp3")
+					XBar.Friend_OnClick()
+				else
+					XBar.ToggleUI(SocialFrame)
+				end
+			</OnClick>
+			<OnDragStart>XBar.MoveStart(XBarFriend)</OnDragStart>
+			<OnDragStop>XBar.MoveEnd(XBarFriend)</OnDragStop>
+			<OnEnter>
+				XBar.Friend_OnEvent(XBarFriend,"LOADED",true)
+				XBar.TooltipMod(this)
+				GameTooltip:SetText(C_RELATION_FRIEND)
+				GameTooltip:AddLine(XBar.Lng["Ttip"]["Friend1"],0,.7,.9)
+				GameTooltip:AddSeparator()
+				GameTooltip:AddDoubleLine("|cffFFE855"..XBar.Lng["Ttip"]["Friend2"].."|r",XBar.Friend_Info("OnlineCount").."/"..XBar.Friend_Info("FriendCount"))
+			</OnEnter>
+		</Scripts>
+	</Button>
+	<Frame name="XBarFriend_F" inherits="XButton_FTemp" parent="XBarFriend">
+		<Anchors><Anchor point="LEFT"><Offset>
+			<AbsDimension x="26" y="3"/></Offset></Anchor></Anchors>
+	</Frame>
+</Ui>

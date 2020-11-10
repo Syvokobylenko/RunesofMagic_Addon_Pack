@@ -1,0 +1,44 @@
+tag 0.60
+9529ade16fa2f7118f2b3aa922a2a24664567242
+odie2 <maciejka45@gmail.com>
+2012-10-25 01:33:25 +0200
+
+- Locale PL done and fix
+
+- Added Russian locale ( 2010, by SilverWF )
+- Added ( test ) Show crit chance on mob tooltip ( code tasquer )
+- Added color to new classes in player tooltip
+- Changed icon
+
+Known bugs:
+- hide progress - doesn't working
+- mayby crit chance is wrong show
+
+
+--------------------
+
+odie2:
+	- - Locale PL done and fix
+	- Added Russian locale ( 2010, by SilverWF )
+	- Added ( test ) Show crit chance on mob tooltip ( code tasquer )
+	- Added color to new classes in player tooltip
+	- Changed icon
+	
+	Known bugs:
+	- hide progress - doesn't working
+	- mayby crit chance is wrong show
+	- - Locale PL done and fix
+	- Added Russian locale ( 2010, by SilverWF )
+	- Added ( test ) Show crit chance on mob tooltip ( code tasquer )
+	- Added color to new classes in player tooltip
+	- Changed icon
+	- - Locale PL done and fix
+	- Added Russian locale ( 2010, by SilverWF )
+	- Added ( test ) Show crit chance on mob tooltip ( code tasquer )
+	- Added color to new classes in player tooltip
+	- - Locale PL done and fix
+	- Added Russian locale ( 2010, by SilverWF )
+	- Added ( test ) Show crit chance on mob tooltip ( code tasquer )
+	- Added color to new classes in player tooltip
+	- language polish
+	- First release in repository

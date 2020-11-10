@@ -1,0 +1,15 @@
+## Title: Sol
+## Description: All-purpose library for RoM addon development
+## Notes: See http://theromwiki.com/index.php/Sol
+## Author: Alleris
+
+LibStub.lua
+Sol.lua
+-- X-Curse-Packaged-Version: v1.34
+-- X-Curse-Project-Name: Sol
+-- X-Curse-Project-ID: sol
+-- X-Curse-Repository-ID: rom/sol/mainline
+-- X-Curse-Packaged-Version: v0.61-2-g151502d
+-- X-Curse-Project-Name: RuneCraft
+-- X-Curse-Project-ID: runecraft
+-- X-Curse-Repository-ID: rom/runecraft/mainline

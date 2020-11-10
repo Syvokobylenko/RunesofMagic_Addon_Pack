@@ -1,0 +1,13 @@
+To Do list:
+- Add Guild Bank slots to UI (with warning that it will get out of sync when other guild members use the guild bank, it's a limitation of the game)
+- Add MailBox items (may be a problem if it drops the time the item is allowed to stay in the mail from 30 tays to 3 days or whatever).
+- Add option to use default RoM border colors to match in-game ones. Apparently the character Frame had them (but I think they look dull) so we'll add an option to use those colors for consistency.
+- Add Search/filter function: Could you make a search/filter function, similar to the one AdvancedAuctionHouse has? - just for the bags, so it would highlight itemslots that match criterias?  I have quite a few fusion/mana stones, so being able to search/filter them with 3 strings, would be BRILLIANT. :) 
+- Add option to have IV not gather any data unless the user manually enables it for a character (or Account/Server/Character exclusion list).
+- Add option to show item count totals across all accounts in the tooltips.
+- Fix The Inventory Viewer value in the tooltip is often 1 less than the actual mats. For instance if I have 24 Zinc Ore in total it shows as Zinc Ore 20|0|19. The pbInfo dev says it's because Inventory Viewer is slower to update and so shows the older value. (Gooch's Note: Maybe we're not detecting items being gathered until something else in the bag changes?)
+- Fix The Inventory Viewer still shows totals on tooltips when that feature is disabled.  It shouldn't update anything on any tooltips when this feature is disabled.
+- The tooltip solution to show which char/account has how much rubys, gold, charges is a bit cluttered. I would like to differ between things, i.e. display only gold if i'm hovering over the total gold, only charges, if i'm hovering over the total charges, etc.
+- Switching accounts in the IV user interface can be a bit cumbersome. A Dropdownlist that opens on a right mouse click over the current account name would be helpful indeed.
+- The IV saves the items for every name (e.g. it saves for Srinus and saves it extra for sRinUs,...). 
+- Add a fake "Favorites" account that can show favorite characters from multiple accounts for easy comparisons and quick access.

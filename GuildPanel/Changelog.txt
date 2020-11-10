@@ -1,0 +1,128 @@
+0.34
+- Aktualisierung der französischen Übersetzung (Danke farfadetfarceur)
+- Färbung für die Zwergen-Klassen eingefügt.
+
+0.33
+- Französische Übersetzung vervollständigt (Danke skouat!)
+
+0.32
+- Gildenstatus und -funktionen jetzt bis Stufe 11
+- Während das Popup zum Anführerwechsel sichtbar ist, kann kein anderes Gildenmitglied angewählt werden.
+- Weitere Änderungen beim Ernennen eines neuen Gildenanführers
+
+
+0.31
+- Fehlerhaftes Aktualisieren der Gildenliste während sie geöffnet ist, findet nun nicht mehr statt.
+- Neue Version des Ernennens eines Gildenleiters (danke an alle Versuchsgilden-Mitglieder-Twinks)
+- Traditionelle chinesische Übersetzung eingefügt (danke an vvenice)
+
+
+0.30
+- Überlappende Anzeige von Gold und Rubinen im Spendenfenster wieder auseinander gezogen
+- Möglicher Fix für das Problem, dass ein ernannter Gildenanführer seinen Status nicht annehmen konnte
+- Die Mitgliederliste aktualisiert sich nun auch, wenn ein Mitglied aus der Gilde entfernt oder eingeladen wurde. (Diese Funktionalität war in der ersten Version defekt, Bugfix ist mittlerweile verfügbar.)
+
+
+0.29
+- Polnische Übersetzung von dr4cul4
+
+
+0.28
+- Koreanische Übersetzung von dandyclubs
+
+
+0.27
+- Fehlende Übersetzung für den Status der Gildenfunktionen (Ja/Nein) hinzugefügt.
+- Anzeigefehler der Gildenfunktionen für Gildenstufe 9 (derzeitiges Maximum) behoben, dort wird nun keine weitere Stufe mehr angezeigt.
+- Gildenressourcen zeigen bei maximaler Gildenstufe (derzeit 9) nicht mehr aktuell / ... an, sondern nur noch die aktuellen Rohstoffe
+- Russische Übersetzung (danke an SilverWF!) 
+
+
+0.26
+- Fehler beim Laden des Addons behoben, der durch eine verspätete Variablenbelegung seitens RuneWaker ausgelöst wurde (bitte ausführlich testen!)
+- Fehler, die beim Laden der Spielframes auftauchen, werden nun abgefangen
+
+
+0.25
+- Fehler behoben, dass eine Debug-Meldung angezeigt wurde, wenn die Beitragsliste geöffnet wurde
+- Kleine Code-Änderungen
+
+
+0.24
+- Zusätzliche Überprüfung der Sortierfunktionen auf fehlerhafte Daten durch die RoM-API
+ (Fehlermeldung: "... line: [string"?"]:159: attempt to perform arithmetic on nil value")
+- Ausgetretene Gildenmitglieder haben Fehlermeldungen verursacht, wenn das Ressourcenfenster geöffnet wurde
+- Der Farbentausch für Druide und Bewahrer funktioniert nun auch im Raid-Fenster.
+- Checkbox für die Anzeige der abgemeldeten Mitglieder nach unten links verschoben.
+- Buttons zum Einladen und für die Funktionen des Gildenanführers nach oben verschoben.
+
+
+0.23
+- Schaltfläche eingefügt, um direkt zu den Einstellungen zu gelangen
+- Beim Anklicken eines Eintrags in der Ressourcenliste wird die Liste gefiltert, dass nur noch das angeklickte Mitglied sichtbar ist
+- Rechtsklick-Option eingefügt, um direkt zu den Beiträgen des Mitglieds zu gelangen
+- Nicht angemeldete Mitglieder können nun vollständig ausgeblendet werden (Checkbox über der Liste)
+
+
+0.22
+- Klassenfarben für Druide und Bewahrer können nun optional auf die Farben, die das Spiel dafür vorgibt, umgestellt werden.
+- Fehler behoben, dass Einstellungen nicht gespeichert wurden
+- Das Einstellungsfenster öffnet sich nun immer über dem Hauptfenster
+
+
+0.21
+- Spanische Übersetzung hinzugefügt (Danke an Intar!)
+- Die Übersetzungsdateien werden nun nur noch on demand geladen.
+- Integration in den AddonManager, wenn dieser verfügbar ist, wird die Meldung beim Starten unterdrückt (Danke für das Icon an Intar!)
+- Fehlende Übersetzungsdaten werden nun per default aus der englischen Sprachdatei geladen.
+- Das Rohstoff-Fenster ist nun in das Gildenfenster integriert (Achtung: Die Übersicht der Beiträge muss zu Beginn des Spiels und nach jedem Beitrag einige Sekunden laden. Das lässt sich leider nicht vermeiden, weil die API-Funktionen des Spiels unzulänglich sind. Sortierung und weitere Auflistungen kommen in einer der nächsten Versionen)
+- Einige Schaltflächen sind umgezogen an den unteren Rand des Fensters.
+- Die Gildendetails sollten nun schneller auf Aktualisierungen reagieren.
+
+
+0.20
+- Fehler behoben, dass der Text "Mitgliederliste" nicht als Lokalisierungsvariable verfügbar war
+- Fehler behoben, dass eine Gilde nicht verlassen werden konnte
+- Vollständige Lokalisation der Konfiguration für DE und EN (FR ist unvollständig)
+- Temporäre Klassenfarben für Druide und Bewahrer
+- Französische Übersetzung verfügbar (Danke an Juki!)
+- Angemeldete Mitglieder können optional immer in der Liste nach oben sortiert werden (ändern im Einstellungsfenster)
+- Das Addon lädt nun erst, wenn der Ladevorgang beendet ist (ein weiterer Versuch, fehlerhafte Ladevorgänge zu minimieren)
+- Versionsanzeige im Einstellungsmenü (/gp bzw. /guildpanel)
+- Befehl zum Öffnen der Einstellungen wird nach dem Ladevorgang angezeigt
+
+
+0.19
+- Lokalisierungsfehler beim Sortierungs-Dropdown behoben
+- Konfigurationseinstellungen sind nun verfügbar: Aufrufen über /gp oder /guildpanel
+- Anzeigeoption für die letzte Spalte der Gildenübersicht: Rang oder Kommandeurshinweis
+- Färbemöglichkeiten nach Klasse oder Mitgliedsrang (Auswahl der Farben wird möglicherweise noch geändert)
+- Offline-Mitglieder können aus der Färbung ausgeschlossen werden
+- Zum temporären Deaktivieren ist nun die Eingabe /gp toggle erforderlich
+- Das Addon wird nun erst geladen, wenn das Spiel alle Variablen geladen hat. Dies behebt möglicherweise einige Anzeigefehler (wie fehlende Onlinezeiten [99:99:99] oder das fehlende Laden das gesamten Addons)
+- Sortierung nach Klassen hinzugefügt
+
+
+0.18
+- Das Rangänderungsmenü sollte nun nur noch für berechtigte Mitglieder angezeigt werden
+- Die eingestellte Sortierung wird nun übernommen, wenn das Spiel neu gestartet wird
+
+
+0.17
+- GuildPanel ist ab sofort inaktiv, wenn ein Charakter nicht in einer Gilde ist
+- LUA-Fehler behoben, der bei der neuen Version 2.1.1.1909 auftrat
+- Die Gildenliste verschluckt jetzt nicht mehr die letzten beiden Einträge
+- Die Gildenankündigung wird nun nicht mehr nur beim Starten des Spiels, sondern immer beim Öffnen des Fensters neu abgefragt.   (Hinweis: die Ankündigung ist nicht sofort über die API verfügbar, wenn sie geändert wurde, das kann einige Minuten dauern)
+- Die Sortierung nach Klassen sortiert jetzt erst nach Zweitklassen (wenn vorhanden), und erst danach alphabetisch
+- Die Schaltflächen für Gildenressourcen, Schlachten (ehemals Kriegs-Info) und das Schwarze Brett können nun die jeweiligen Fenster mit einem weitern Klick wieder schließen
+- [Workaround] Das Rangänderungsmenü wird bis der Fehler gefunden ist, für alle Mitglieder angezeigt. Mitglieder, die keine Berechtigung haben, können etwas auswählen, aber das wird dann spielintern nicht übernommen.
+
+0.16
+- Version übersprungen
+
+0.15
+- Fehlermeldung bei weniger als 16 Mitgliedern sollte nun behoben sein
+- Die Ankündigung bleibt nun in ihrem festgelegten Rahmen, wenn sie größer als das Fenster ist
+- Ein Klick auf die Ankündigung öffnet das Schwarze Brett der Gilde
+- Gildendetails (Stufe, Anführer) in die Titelleiste gepackt, um mehr Platz für die Ankündigung zu haben
+- Buttons rechts angeordnet

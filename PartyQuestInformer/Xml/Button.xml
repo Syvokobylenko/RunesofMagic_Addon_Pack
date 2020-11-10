@@ -1,0 +1,23 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<!-- Definition of Addon Manager mini frame button -->
+		 *********************************************
+	<Button name="PQIButton" hidden="true" parent="AddonManagerMiniFrame">
+		<Size>
+			<AbsDimension y="24" x="24"/>
+		</Size>
+		<Scripts>
+			<OnClick>
+                AddonManager.MiniButton_OnClick(this)
+			</OnClick>
+			<OnEnter>
+                AddonManager.MiniButton_OnEnter(this)
+			</OnEnter>
+			<OnLeave>
+				AddonManager.MiniButton_OnLeave(this)
+			</OnLeave>
+		</Scripts>
+	    <NormalTexture file="Interface\Addons\PartyQuestInformer\Images\PQIOFF" />
+		<PushedTexture file="Interface\Addons\PartyQuestInformer\Images\PQION" />
+		<HighlightTexture file="Interface\Buttons\PanelSmallButtonHighlight" alphaMode="ADD" />
+	</Button>	
+</Ui>

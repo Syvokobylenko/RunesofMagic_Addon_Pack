@@ -1,0 +1,52 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/..\..\WorldXML\UI.xsd">
+	<Script file="src/MinimapButton.lua"/>
+	<Button name="EventHelper_Minimap_Template" virtual="true" inherits="MinimapButtonTemplate" hidden="false">
+		<Size>
+			<AbsDimension y="24" x="24"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="MinimapViewFrame" relativePoint="CENTER">
+				<Offset>
+					<RelDimension x="-80" y="90"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Frame name="$parent_Ring">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER"/>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parent_red" file="Interface\Minimap\MinimapButton_Flash" alphaMode="ADD">
+							<Color r="1" g="0" b="0"/>
+						</Texture>
+						<Texture name="$parent_green" file="Interface\Minimap\MinimapButton_Flash" alphaMode="ADD">
+							<Color r="0" g="1" b="0"/>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnClick>
+				ev.ui.minimap.OnClick(this, key)
+			</OnClick>
+			<OnEnter>
+				ev.ui.minimap.OnEnter(this)
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+			<OnLoad>
+				this:RegisterForClicks("LeftButton", "RightButton")
+			</OnLoad>
+		</Scripts>
+		<NormalTexture file="interface/addons/eventhelper/img/icon.tga"/>
+		<PushedTexture file="interface/addons/eventhelper/img/icon_pushed.tga"/>
+		<HighlightTexture file="interface/minimap/minimapbutton_highlight.tga" alphaMode="ADD"/>
+	</Button>
+</Ui>

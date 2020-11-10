@@ -1,0 +1,17 @@
+tag v1
+945a86d1d69a9cdaa38b4db5f839ec0aa395af19
+McBen <viertelvor12@gmx.net>
+2012-04-07 08:31:45 +0200
+
+v1
+
+
+--------------------
+
+McBen:
+	- clean up
+	- changed default options
+	- fixed quests with special chars in name
+	- option menu
+	- working
+	- init

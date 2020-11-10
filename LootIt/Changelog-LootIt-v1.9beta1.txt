@@ -1,0 +1,13 @@
+tag v1.9beta1
+d2473f644e08c184bbd321abb0f292526ebbc073
+Tinsus <tinsus@t-online.de>
+2016-07-02 16:34:38 +0200
+
+bugfixing bad behavior of autogreed, autoneed and autopass (thx for reporting to Crytec and Sammy82)
+
+
+--------------------
+
+Tinsus:
+	- fixing curseforge-site mistype that prevents correct implementation for Brazilian localization
+	- try fixing error with switched qualitys for autoloot / autogreed and autopass

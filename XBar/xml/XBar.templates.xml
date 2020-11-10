@@ -1,0 +1,268 @@
+<?xml version="1.0"?><Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="../../worldxml/ui.xsd"> 
+<!-- XButton Font -->
+	<FontString name="XBarButtonFont" inherits="MSFont" weight="THIN" virtual="true">
+		<FontHeight><AbsValue val="12"/></FontHeight>
+	</FontString>
+	<FontString name="XBarLBFont" spacing="1.5" weight="THIN" inherits="MSFont" virtual="true">
+		<FontHeight><AbsValue val="14"/></FontHeight>
+		<Color r=".8" g=".8" b=".8"/>
+	</FontString>
+	<FontString name="XBarCBFont" spacing="1.5" weight="BOLD" inherits="MSFont" virtual="true">
+		<FontHeight><AbsValue val="14"/></FontHeight>
+		<Color r=".7" g=".7" b=".6"/>
+	</FontString>
+	<CheckButton name="XBarCfgCheckTemp" inherits="UIPanelCheckButtonTemplate" virtual="true">
+		<Layers><Layer>
+				<FontString name="$parent_Text" inherits="XBarCBFont" justifyH="LEFT" text="GCF_VISIBLE">
+					<Anchors><Anchor point="LEFT" relativePoint="RIGHT"/></Anchors>
+				</FontString>
+			</Layer></Layers>
+	</CheckButton>
+	<RadioButton name="XBarCfgRadioTemp" inherits="UIPanelRadioButtonTemplate" virtual="true">
+		<Layers><Layer level="ARTWORK">
+				<FontString name="$parent_Text" inherits="XBarCBFont">
+					<Anchors><Anchor point="LEFT" relativePoint="RIGHT"><Offset><AbsDimension x="3" y="1"/></Offset></Anchor></Anchors>
+				</FontString>
+			</Layer></Layers>
+	</RadioButton>
+	<EditBox name="XBarCfgLabelTemp" enableMouse="true" virtual="true">
+		<Size><AbsDimension x="350" y="32"/></Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentLeft" file="Interface\Common\PanelEditBoxBorder">
+					<Size><AbsDimension x="8" y="32"/></Size>
+					<Anchors><Anchor point="LEFT"/></Anchors>
+					<TexCoords left="0" right=".25" top="0" bottom=".625"/>
+				</Texture>
+				<Texture name="$parentRight" file="Interface\Common\PanelEditBoxBorder">
+					<Size><AbsDimension x="8" y="32"/></Size>
+					<Anchors><Anchor point="RIGHT"/></Anchors>
+					<TexCoords left=".75" right="1" top="0" bottom=".625"/>
+				</Texture>
+				<Texture file="Interface\Common\PanelEditBoxBorder">
+					<Size><AbsDimension x="1" y="32"/></Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT"/>
+						<Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT"/>
+					</Anchors>
+					<TexCoords left=".25" right=".75" top="0" bottom=".625"/>
+				</Texture>
+			</Layer>
+			<Layer>
+				<FontString name="$parent_Text" inherits="XBarCBFont" justifyH="LEFT">
+					<Anchors><Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT"/></Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnEscapePressed>this:ClearFocus()</OnEscapePressed>
+			<OnEditFocusLost>this:HighlightText(0,0)</OnEditFocusLost>
+			<OnEditFocusGained>this:HighlightText()</OnEditFocusGained>
+		</Scripts>
+		<FontString inherits="XBarLBFont"/>
+		<TextInsets><RelInset left="5" right="2" top="8" bottom="2"/></TextInsets>
+	</EditBox>
+	<Frame name="XButtonCfgTemp" hidden="true" virtual="true">
+		<Size><AbsDimension x="595" y="487"/></Size>
+		<Anchors><Anchor point="TOPLEFT"/></Anchors>
+		<Frames>
+			<CheckButton name="$parent_Show" inherits="XBarCfgCheckTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="5" y="5"/></Offset></Anchor></Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Text1" inherits="XBarCfgCheckTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="5" y="40"/></Offset></Anchor></Anchors>
+			</CheckButton>
+			<EditBox name="$parent_Value1" inherits="XBarCfgLabelTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="95"/></Offset></Anchor></Anchors>
+			</EditBox>
+			<CheckButton name="$parent_Text2" inherits="XBarCfgCheckTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="5" y="145"/></Offset></Anchor></Anchors>
+			</CheckButton>
+			<EditBox name="$parent_Value2" inherits="XBarCfgLabelTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="200"/></Offset></Anchor></Anchors>
+			</EditBox>
+		</Frames>
+		<Scripts>
+			<OnHide>XBarCfg_Legend:Hide()</OnHide>
+		</Scripts>
+	</Frame>
+<!-- XBar PopupMenu -->
+	<Button name="XBarPopupButtonTemp" virtual="true">
+		<Size><AbsDimension x="200" y="22"/></Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parentIcon">
+					<Size><AbsDimension x="20" y="20"/></Size>
+					<Anchors><Anchor point="LEFT"><Offset>
+						<AbsDimension x="8" y="0"/></Offset></Anchor></Anchors>
+				</Texture>
+				<FontString name="$parentText" inherits="GameTitleFont" justifyH="LEFT">
+					<Anchors><Anchor point="LEFT" relativeTo="$parentIcon" relativePoint="RIGHT"><Offset>
+						<AbsDimension x="6" y="0"/></Offset></Anchor></Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<HighlightTexture file="Interface\Common\Bar\Steel" alphaMode="ADD">
+			<Size><AbsDimension x="200" y="22"/></Size>
+			<Color r="0" g=".7" b=".9"/>
+		</HighlightTexture>
+		<Scripts>
+			<OnLoad>this:RegisterForClicks("LeftButton","RightButton")</OnLoad>
+			<OnMouseWheel>
+				GameTooltip:Hide()
+				local info=XBar_PopupMenu.Buttons[this:GetID()]
+				if info.OnScroll then info.OnScroll(delta) end
+				XBar.PopupButton_OnEnter(this)
+			</OnMouseWheel>
+			<OnClick>
+				local info=XBar_PopupMenu.Buttons[this:GetID()]
+				if info.OnClick then info.OnClick(this,key) end
+				XBar_PopupMenu:Hide()
+			</OnClick>
+			<OnEnter>XBar.PopupButton_OnEnter(this) XBar_PopupMenu:Show()</OnEnter>
+			<OnLeave>GameTooltip:Hide() XBar_PopupMenu:Hide()</OnLeave>
+		</Scripts>
+	</Button>
+	<Button name="XBarEQDmgButtonTemp" virtual="true">
+		<Size><AbsDimension x="28" y="38"/></Size>
+		<Layers>
+			<Layer>
+				<Texture name="$parent_Icon" file="Interface\Icons\Geq">
+					<Size><AbsDimension x="28" y="28"/></Size>
+					<Anchors><Anchor point="TOP"/></Anchors>
+				</Texture>
+				<Texture name="$parent_Low" file="Interface\Buttons\QuickSlot-QualityBorder01" alphaMode="ADD" hidden="true">
+					<Size><AbsDimension x="64" y="64"/></Size>
+					<Anchors><Anchor point="CENTER" relativeTo="$parent_Icon"/></Anchors>
+					<Color r="1" g=".2" b=".2"/>
+				</Texture>
+				<FontString name="$parent_Text" inherits="GameFontNormalSmall">
+					<Anchors><Anchor point="BOTTOM"/></Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<HighlightTexture file="Interface\Buttons\QuickSlot-QualityBorder01" alphaMode="ADD">
+			<Size><AbsDimension x="64" y="64"/></Size>
+			<Anchors><Anchor point="CENTER" relativeTo="$parent_Icon"/></Anchors>
+			<Color r="1" g="1" b=".2"/>
+		</HighlightTexture>
+		<Scripts>
+			<OnClick>PickupEquipmentItem(this:GetID())</OnClick>
+			<OnEnter>
+				GameTooltip:SetOwner(XBarEQDmg,"ANCHOR_TOPLEFT",0,155)
+				GameTooltip:SetInventoryItem("player",this:GetID())
+			</OnEnter>
+			<OnLeave>GameTooltip:Hide()</OnLeave>
+		</Scripts>
+	</Button>
+	<Button name="XBarEQDmgRepairTemp" inherits="XBarEQDmgButtonTemp" hidden="true" virtual="true">
+		<Scripts>
+			<OnClick>UseItemByName(this.name)</OnClick>
+			<OnEnter>
+				GameTooltip:SetOwner(XBarEQDmg,"ANCHOR_TOPLEFT",0,155)
+				GameTooltip:SetBagItem(this.id)
+			</OnEnter>
+			<OnLeave>GameTooltip:Hide()</OnLeave>
+		</Scripts>
+	</Button>
+	<Button name="XBarSwapButtonTemp" virtual="true">
+		<Size><AbsDimension x="20" y="20"/></Size>
+		<NormalText name="$parent_Text" inherits="GameFontHighlight">
+			<Anchors><Anchor point="CENTER"/></Anchors>
+		</NormalText>
+		<NormalTexture file="interface\CharacterFrame\EquipSwapButton-Normal"/>
+		<PushedTexture file="interface\CharacterFrame\EquipSwapButton-Depress"/>
+		<HighlightTexture file="interface\CharacterFrame\EquipSwapButton-Normal" alphaMode="ADD"/>
+		<DisabledTexture file="interface\CharacterFrame\EquipSwapButton-Normal"><Color a=".5"/></DisabledTexture>
+		<Scripts>
+			<OnLoad>this:SetText(this:GetID()+1)</OnLoad>
+			<OnClick>
+				SwapEquipmentItem(this:GetID())
+				for i = 1, 6 do
+					local b = _G["XBarEQDmg_Swap"..i]
+					if not b:IsEnable() then
+						b:Enable()
+						break
+					end
+				end
+				this:Disable()
+			</OnClick>
+			<OnEnter>
+				GameTooltip:SetOwner(this, "ANCHOR_BOTTOM", 0, 0)
+				GameTooltip:SetText(SWAP_EQUIPMENT_TOOLTIP)
+			</OnEnter>
+			<OnLeave>GameTooltip:Hide()</OnLeave>
+		</Scripts>
+	</Button>
+	<Button name="XAddonMngr_ListButtonTemp" hidden="true" virtual="true">
+		<Size><AbsDimension x="135" y="25"/></Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parent_ExpandArrow" file="Interface\Buttons\UIMenu_State" hidden="true">
+					<Size><AbsDimension x="16" y="16"/></Size>
+					<Anchors><Anchor point="LEFT"><Offset>
+						<AbsDimension x="7" y="0"/></Offset></Anchor></Anchors>
+					<Color r=".7" g=".7" b=".1"/>
+					<TexCoords left=".5" right=".75" top="0" bottom="1"/>
+				</Texture>
+				<Texture name="$parent_OpenedArrow" file="Interface\Buttons\UIMenu_State" hidden="true">
+					<Size><AbsDimension x="16" y="16"/></Size>
+					<Anchors><Anchor point="LEFT"><Offset>
+						<AbsDimension x="7" y="0"/></Offset></Anchor></Anchors>
+					<Color r=".5" g=".4" b=".4"/>
+					<TexCoords left="0" right=".25" top="0" bottom="1"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>XBar.AM_ListBtn_OnClick(this)</OnClick>
+			<OnMouseWheel>UIPanelScrollBar_OnMouseWheel(XAddonMngr_Menu_ScrollBar,delta) XBar.AM_ListBtn_Update()</OnMouseWheel>
+		</Scripts>
+		<NormalText inherits="GameFontNormal" justifyH="LEFT">
+			<Anchors><Anchor point="LEFT"><Offset>
+				<AbsDimension x="21" y="0"/></Offset></Anchor></Anchors>
+		</NormalText>
+		<HighlightText inherits="GameFontHighlight" justifyH="LEFT">
+			<Anchors><Anchor point="LEFT"><Offset>
+				<AbsDimension x="21" y="1"/></Offset></Anchor></Anchors>
+		</HighlightText>
+		<DisabledText inherits="GameFontDisable" justifyH="LEFT">
+			<Anchors><Anchor point="LEFT"><Offset>
+				<AbsDimension x="21" y="0"/></Offset></Anchor></Anchors>
+		</DisabledText>
+		<NormalTexture file="Interface\Buttons\UIPanelButton-Normal">
+			<TexCoords left="0" right="1" top="-.01" bottom=".71875"/>
+		</NormalTexture>
+		<HighlightTexture file="Interface\Buttons\UIPanelButton-Depress">
+			<TexCoords left="0" right="1" top="-.01" bottom=".71875"/>
+			<Color r=".7" g=".5" b=".5" a="1"/>
+		</HighlightTexture>
+		<DisabledTexture file="Interface\Buttons\UIPanelButton-Disable">
+			<TexCoords left="0" right="1" top="-.01" bottom=".71875"/>
+		</DisabledTexture>
+	</Button>
+	<Frame name="XButton_BGTemp" virtual="true">
+		<Size><AbsDimension x="128" y="32"/></Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parent_T" file="Interface\Addons\XBar\img\bar\AdPanel\Bar_Btn"/>
+			</Layer>
+		</Layers>
+	</Frame>
+	<Frame name="XButton_BTemp" virtual="true">
+		<Size><AbsDimension x="20" y="20"/></Size>
+		<Scripts>
+			<OnLoad>this:RegisterForClicks("LeftButton","RightButton") this:RegisterForDrag("RightButton")</OnLoad>
+			<OnLeave>GameTooltip:Hide()</OnLeave>
+		</Scripts>
+	</Frame>
+	<Frame name="XButton_FTemp" virtual="true">
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_S" inherits="XBarButtonFont" justifyH="LEFT" text="init..">
+					<Size><AbsDimension x="256" y="24"/></Size>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+</Ui>

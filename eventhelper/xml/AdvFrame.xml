@@ -1,0 +1,214 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/..\..\WorldXML\UI.xsd">
+	<Script file="src/AdvFrame.lua"/>
+	<Frame name="EventHelper_AdvFrame_Template" virtual="true" inherits="UICommonFrameTemplate" enableMouse="true" hidden="true">
+		<Anchors>
+			<Anchor point="TOPLEFT" relativePoint="TOPRIGHT"/>
+		</Anchors>
+		<Size>
+			<AbsDimension x="300" y="500"/>
+		</Size>
+		<Frames>
+			<Frame name="$parent_debug" hidden="true">
+				<Frames>
+				</Frames>
+			</Frame>
+			<Frame name="$parent_config" hidden="true">
+				<Frames>
+					<CheckButton name="$parent_Active" inherits="EventHelper_CheckLabelTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+								<Offset>
+									<AbsDimension x="10" y="40" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this.func = function() ev.ui.advframe.CheckButtonClick(this:IsChecked(), "active") end
+								_G[this:GetName() .. "_Label"]:SetSize(200,20)
+							</OnLoad>
+						</Scripts>
+					</CheckButton>
+
+					<CheckButton name="$parent_MessagesToOwn" inherits="EventHelper_CheckLabelTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Active">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this.func = function() ev.ui.advframe.CheckButtonClick(this:IsChecked(), "MessagesToOwn") end
+								_G[this:GetName() .. "_Label"]:SetSize(200,20)
+							</OnLoad>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_MessagesToSystem" inherits="EventHelper_CheckLabelTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_MessagesToOwn"/>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this.func = function() ev.ui.advframe.CheckButtonClick(this:IsChecked(), "MessagesToSystem") end
+								_G[this:GetName() .. "_Label"]:SetSize(200,20)
+							</OnLoad>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_MessagesToWarning" inherits="EventHelper_CheckLabelTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_MessagesToSystem"/>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this.func = function() ev.ui.advframe.CheckButtonClick(this:IsChecked(), "MessagesToWarning") end
+								_G[this:GetName() .. "_Label"]:SetSize(200,20)
+							</OnLoad>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_MessagesToChat" inherits="EventHelper_CheckLabelTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_MessagesToWarning"/>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this.func = function() ev.ui.advframe.CheckButtonClick(this:IsChecked(), "MessagesToChat") end
+								_G[this:GetName() .. "_Label"]:SetSize(200,20)
+							</OnLoad>
+						</Scripts>
+					</CheckButton>
+					<Button name="$parent_MessagesToChatButton" inherits="UIPanelButtonTemplate" text = "UI_WORLDMAP_SETUP">
+						<Size>
+							<AbsDimension x="200" y="22"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_MessagesToChat"/>
+						</Anchors>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								ToggleDropDownMenu( _G[this:GetParent():GetName().."_MessageToChatDropdown"] , 1, nil, this:GetName(), 1 ,1 )				
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Frame name="$parent_MessageToChatDropdown" inherits="UIDropDownMenuTemplate" hidden="true"/>
+
+	
+					<CheckButton name="$parent_ChatMessages" inherits="EventHelper_CheckLabelTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_MessagesToChat">
+								<Offset>
+									<AbsDimension x="0" y="10" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this.func = function() ev.ui.advframe.CheckButtonClick(this:IsChecked(), "ChatMessages") end
+								_G[this:GetName() .. "_Label"]:SetSize(200,20)
+							</OnLoad>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_ChatMessagesToChat" inherits="EventHelper_CheckLabelTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_ChatMessages"/>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this.func = function() ev.ui.advframe.CheckButtonClick(this:IsChecked(), "ChatMessagesToChat") end
+								_G[this:GetName() .. "_Label"]:SetSize(200,20)
+							</OnLoad>
+						</Scripts>
+					</CheckButton>
+					<Button name="$parent_ChatMessagesToChatButton" inherits="UIPanelButtonTemplate" text = "UI_WORLDMAP_SETUP">
+						<Size>
+							<AbsDimension x="200" y="22"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_ChatMessagesToChat"/>
+						</Anchors>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								ToggleDropDownMenu( _G[this:GetParent():GetName().."_ChatMessageToChatDropdown"] , 1, nil, this:GetName(), 1 ,1 )				
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Frame name="$parent_ChatMessageToChatDropdown" inherits="UIDropDownMenuTemplate" hidden="true"/>
+					
+					<CheckButton name="$parent_Sound" inherits="EventHelper_CheckLabelTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_ChatMessagesToChat">
+								<Offset>
+									<AbsDimension x="0" y="10" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this.func = function() ev.ui.advframe.CheckButtonClick(this:IsChecked(), "sound") end
+								_G[this:GetName() .. "_Label"]:SetSize(200,20)
+							</OnLoad>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_Debug" inherits="EventHelper_CheckLabelTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Sound">
+								<Offset>
+									<AbsDimension x="0" y="0" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this.func = function() ev.ui.advframe.CheckButtonClick(this:IsChecked(), "debug") end
+								_G[this:GetName() .. "_Label"]:SetSize(200,20)
+							</OnLoad>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_MoveMessage" inherits="EventHelper_CheckLabelTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Debug">
+								<Offset>
+									<AbsDimension x="0" y="0" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this.func = function() ev.ui.advframe.CheckButtonClick(this:IsChecked(), "messagemover") end
+								_G[this:GetName() .. "_Label"]:SetSize(200,20)
+							</OnLoad>
+						</Scripts>
+					</CheckButton>
+				</Frames>
+			</Frame>
+
+			<Frame name="$parent_tabHeader" inherits="EventHelper_TabFrame_Template" frameLevel="1" frameStrata="HIGH">
+				<Size>
+					<AbsDimension x="540" y="342"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="30" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+		</Frames>
+	</Frame>
+</Ui>

@@ -1,0 +1,925 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/..\..\WorldXML\UI.xsd">
+	<Script file="xml/templates.lua"/>
+
+	<Button name="DL_List_HeadButton_Template" virtual="true">
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentLeft" file="Interface\SocialFrame\Column">
+					<Size>
+						<AbsDimension x="8" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+					</Anchors>
+					<TexCoords left="0" right="0.5" top="0" bottom="1"/>
+				</Texture>
+				<Texture name="$parentRight" file="Interface\SocialFrame\Column">
+					<Size>
+						<AbsDimension x="8" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT"/>
+					</Anchors>
+					<TexCoords left="0.5" right="1" top="0" bottom="1"/>
+				</Texture>
+				<Texture name="$parentMiddle" file="Interface\SocialFrame\Column">
+					<Size>
+						<AbsDimension x="1" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT"/>
+						<Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT"/>	
+					</Anchors>
+					<TexCoords left="0.5" right="0.5" top="0" bottom="1"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForClicks("LeftButton", "RightButton")
+			</OnLoad>
+			<OnEnter>
+				if this.ttfunc then
+					this.ttfunc(this,this:GetID(),this.args)
+				else
+					if string.len(this:GetText()) > 33 then
+						GameTooltip:Show();
+						GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT", 0, 0);
+						GameTooltip:SetText(this:GetText())
+					end
+				end
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+			<OnClick>
+				if this.func then
+					this.func(this,this:GetID(),key,this.args)
+				end
+			</OnClick>
+		</Scripts>
+		<NormalText inherits="GameFontLabelYellow" justifyH="CENTER">
+			<Anchors>
+				<Anchor point="TOPLEFT" relativePoint="LEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="4" y="0"/></Offset>
+				</Anchor>
+				<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-4" y="-8"/></Offset>
+				</Anchor>					
+			</Anchors>
+		</NormalText>
+		<HighlightText inherits="GameFontLabel" justifyH="CENTER">
+			<Anchors>
+				<Anchor point="TOPLEFT" relativePoint="LEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="4" y="0"/></Offset>
+				</Anchor>
+				<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-4" y="-8"/></Offset>
+				</Anchor>					
+			</Anchors>
+		</HighlightText>	
+	</Button>
+	
+	<Button name="DL_ListButton_Template" virtual="true" enableMouse="true">
+		<Layers>
+			<Layer>
+				<FontString name="$parent_txt" justifyH="LEFT" inherits="Font_Normal">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="LEFT" relativeTo="$parent">
+							<Offset><AbsDimension x="10" y="-10"/></Offset>
+						</Anchor>
+						<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent">
+							<Offset><AbsDimension x="-30" y="0"/></Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight><AbsValue val="12"/></FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+		<HighlightTexture file="Interface\AuctionFrame\AuctionFrameItem-Highlight" alphaMode="ADD">
+			<Anchors>
+				<Anchor point="TOPLEFT"/>
+				<Anchor point="BOTTOMRIGHT"/>
+			</Anchors>
+		</HighlightTexture>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForClicks("LeftButton", "RightButton")
+			</OnLoad>
+			<OnClick>
+				DL.ui.OnClick(this:GetID(), this, key);
+			</OnClick>
+			<OnDoubleClick>
+				if (DL.ui.listid == 2 and key == "LBUTTON") or DL.ui.listtype == 3 then
+					DL.ui.OnClick(this:GetID(), this, key,true);
+				end
+			</OnDoubleClick>
+			<OnEnter>
+				DL.ui.OnEnter(this, this.id);
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide();
+			</OnLeave>
+			<OnMouseWheel>
+				DL.ui.Scroll(DL_main_frame_ScrollBar,delta);
+			</OnMouseWheel>
+		</Scripts>
+	</Button>
+	<Slider name="DL_ScrollbarTemplate" virtual="true">
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentTop" file="Interface\Common\PanelScrollBar-Broder">
+					<Size><AbsDimension x="16" y="16"/></Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset><AbsDimension x="0" y="-20"/></Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0" right="1" top="0" bottom="0.25"/>
+				</Texture>
+				<Texture name="$parentBottom" file="Interface\Common\PanelScrollBar-Broder">
+					<Size><AbsDimension x="16" y="16"/></Size>
+					<Anchors>
+						<Anchor point="BOTTOM">
+							<Offset><AbsDimension x="0" y="20"/></Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0" right="1" top="0.75" bottom="1"/>
+				</Texture>
+				<Texture name="$parentMiddle" file="Interface\Common\PanelScrollBar-Broder">
+					<Size><AbsDimension x="16" y="1"/></Size>
+					<Anchors>
+						<Anchor point="TOP" relativeTo="$parentTop" relativePoint="BOTTOM"/>
+						<Anchor point="BOTTOM" relativeTo="$parentBottom" relativePoint="TOP"/>
+					</Anchors>
+					<TexCoords left="0" right="1" top="0.25" bottom="0.75"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentScrollUpButton" inherits="UIPanelScrollUpButtonTemplate">
+				<Anchors><Anchor point="BOTTOM" relativePoint="TOP" relativeTo="$parent"/></Anchors>
+			</Button>
+			<Button name="$parentScrollDownButton" inherits="UIPanelScrollDownButtonTemplate">
+				<Anchors><Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent"/></Anchors>
+			</Button>
+		</Frames>
+		<ThumbTexture file="Interface\Buttons\ScrollBar-Knob">
+			<Size><AbsDimension x="16" y="42"/></Size>
+			<TexCoords left="0" right="1" top="0" bottom="0.65625"/>
+		</ThumbTexture>
+	</Slider>
+	<Button name="DL_Tab_Template" inherits="UIPanelTopTabTemplate" frameStrata="HIGH" virtual="true">
+		<Scripts>
+			<OnClick>
+				DL_Tab_Template_OnClick(this,this.override)
+			</OnClick>
+			<OnEnter>
+				DL_Tab_Template_OnEnter(this)
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+			<OnLoad>
+				PanelTemplates_TabResize(this, 30);
+			</OnLoad>
+		</Scripts>
+		<Layers>
+			<Layer>
+				<FontString name="$parent_text" inherits="GameTitleFont" >
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="0" y="8"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Button>
+	<Frame name="DL_TabFrame_Template" virtual="true">
+		<Frames>
+			<Button name="$parentTab1" inherits="DL_Tab_Template" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab2" inherits="DL_Tab_Template" id="2">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab1" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab3" inherits="DL_Tab_Template" id="3">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab2" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab4" inherits="DL_Tab_Template" id="4">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab3" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab5" inherits="DL_Tab_Template" id="5">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab4" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab6" inherits="DL_Tab_Template" id="6">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab5" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab7" inherits="DL_Tab_Template" id="7">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab6" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab8" inherits="DL_Tab_Template" id="8">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab7" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab9" inherits="DL_Tab_Template" id="9">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab8" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab10" inherits="DL_Tab_Template" id="10">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab9" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnShow>
+				DL_Tab_Template_OnShow(this)
+			</OnShow>
+		</Scripts>
+	</Frame>
+	<CheckButton name="DL_CheckLabelTemplate" inherits="UIPanelCheckButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension y="24" x="24"/>
+		</Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parent_Label" inherits="GameFontHighlight" justifyH="LEFT" >
+					<Size>
+						<AbsDimension y="20" x="100"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>
+				DL_CheckLabelTemplate_OnClick(this)
+			</OnClick>
+			<OnEnter>
+				if this.tooltip then
+					GameTooltip:Show();
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT", 0, 0);
+					GameTooltip:SetText(this.tooltip)
+				end
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+		</Scripts>
+	</CheckButton>
+
+	<EditBox name="DL_IDEditBox_Template" inherits="UIPanelEditBoxTemplate" historyLines="0" numeric="true" virtual="true" letters="6">
+		<Size>
+			<AbsDimension x="80" y="18"/>
+		</Size>
+		<Scripts>
+			<OnEnterPressed>
+				this:ClearFocus()
+				if this.func then
+					this.func(this)
+				end
+			</OnEnterPressed>
+			<OnTabPressed>
+				if this.next then
+					this.next:SetFocus()
+				end
+			</OnTabPressed>
+			<OnEnter>
+				if this.tooltip then
+					local tooltip=this.tooltip
+					GameTooltip:Show();
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT", 0, 0);
+					if tooltip[1] then
+						GameTooltip:SetText(tooltip[1])
+					else
+						GameTooltip:SetText("")
+					end
+					if type(tooltip[2]) =="table" then
+						for i=1, #tooltip[2] do
+							GameTooltip:AddLine(tooltip[2][i])
+						end
+					elseif type(tooltip[2]) =="string" then
+						GameTooltip:AddLine(tooltip[2])
+					end
+				end
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+		</Scripts>
+	</EditBox>
+	<EditBox name="DL_EditBox_Template" inherits="UIPanelEditBoxTemplate" historyLines="0" virtual="true">
+		<Size>
+			<AbsDimension x="224" y="18"/>
+		</Size>
+		<Scripts>
+			<OnEnterPressed>
+				this:ClearFocus()
+				if this.func then
+					this.func(this)
+				end
+			</OnEnterPressed>
+			<OnTabPressed>
+				if this.next then
+					this.next:SetFocus()
+				end
+			</OnTabPressed>
+			<OnEnter>
+				if this.tooltip then
+					local tooltip=this.tooltip
+					GameTooltip:Show();
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT", 0, 0);
+					if tooltip[1] then
+						GameTooltip:SetText(tooltip[1])
+					else
+						GameTooltip:SetText("")
+					end
+					if type(tooltip[2]) =="table" then
+						for i=1, #tooltip[2] do
+							GameTooltip:AddLine(tooltip[2][i])
+						end
+					elseif type(tooltip[2]) =="string" then
+						GameTooltip:AddLine(tooltip[2])
+					end
+				end
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+		</Scripts>
+	</EditBox>
+	<EditBox name="DL_NumEditBox_Template" inherits="UIPanelEditBoxTemplate" historyLines="0" virtual="true" numeric="true">
+		<Size>
+			<AbsDimension x="224" y="18"/>
+		</Size>
+		<Scripts>
+			<OnEnterPressed>
+				this:ClearFocus()
+				if this.func then
+					this.func(this)
+				end
+			</OnEnterPressed>
+			<OnTabPressed>
+				if this.next then
+					this.next:SetFocus()
+				end
+			</OnTabPressed>
+			<OnEnter>
+				if this.tooltip then
+					local tooltip=this.tooltip
+					GameTooltip:Show();
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT", 0, 0);
+					if tooltip[1] then
+						GameTooltip:SetText(tooltip[1])
+					else
+						GameTooltip:SetText("")
+					end
+					if type(tooltip[2]) =="table" then
+						for i=1, #tooltip[2] do
+							GameTooltip:AddLine(tooltip[2][i])
+						end
+					elseif type(tooltip[2]) =="string" then
+						GameTooltip:AddLine(tooltip[2])
+					end
+				end
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+		</Scripts>
+	</EditBox>
+
+	<Frame name="DL_EditBox_with_LayerTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="270" y="20" />
+		</Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parent_layer" text="Original Name" inherits="GameFontNormal" justifyH="RIGHT">
+					<Size>
+						<AbsDimension x="100" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="LEFT"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<EditBox name="$parent_Edit" inherits="DL_EditBox_Template">
+				<Size>
+					<AbsDimension x="160" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativePoint="RIGHT"/>
+				</Anchors>
+				<Scripts>
+					<OnEnterPressed>
+						this:ClearFocus()
+						if this:GetParent().func then
+							this:GetParent().func(this:GetParent())
+						end
+					</OnEnterPressed>
+					<OnTabPressed>
+						if this:GetParent().next then
+							this:GetParent().next:SetFocus()
+						end
+					</OnTabPressed>
+					<OnEnter>
+						if this:GetParent().tooltip then
+							local tooltip=this:GetParent().tooltip
+							GameTooltip:Show();
+							GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT", 0, 0);
+							if tooltip[1] then
+								GameTooltip:SetText(tooltip[1])
+							else
+								GameTooltip:SetText("")
+							end
+							if type(tooltip[2]) =="table" then
+								for i=1, #tooltip[2] do
+									GameTooltip:AddLine(tooltip[2][i])
+								end
+							elseif type(tooltip[2]) =="string" then
+								GameTooltip:AddLine(tooltip[2])
+							end
+						end
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+			</EditBox>
+		</Frames>
+	</Frame>
+	<Frame name="DL_NumEditBox_with_LayerTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="270" y="20" />
+		</Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parent_layer" text="Original Name" inherits="GameFontNormal" justifyH="RIGHT">
+					<Size>
+						<AbsDimension x="100" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="LEFT"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<EditBox name="$parent_Edit" inherits="DL_NumEditBox_Template">
+				<Size>
+					<AbsDimension x="160" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativePoint="RIGHT"/>
+				</Anchors>
+				<Scripts>
+					<OnEnterPressed>
+						this:ClearFocus()
+						if this:GetParent().func then
+							this:GetParent().func(this:GetParent())
+						end
+					</OnEnterPressed>
+					<OnTabPressed>
+						if this:GetParent().next then
+							this:GetParent().next:SetFocus()
+						end
+					</OnTabPressed>
+					<OnEnter>
+						if this:GetParent().tooltip then
+							local tooltip=this:GetParent().tooltip
+							GameTooltip:Show();
+							GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT", 0, 0);
+							if tooltip[1] then
+								GameTooltip:SetText(tooltip[1])
+							else
+								GameTooltip:SetText("")
+							end
+							if type(tooltip[2]) =="table" then
+								for i=1, #tooltip[2] do
+									GameTooltip:AddLine(tooltip[2][i])
+								end
+							elseif type(tooltip[2]) =="string" then
+								GameTooltip:AddLine(tooltip[2])
+							end
+						end
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+			</EditBox>
+		</Frames>
+	</Frame>
+	<!-- Colorpicker -->
+	<Frame name="DL_ColorPickerButtons_Template" virtual="true">
+		<Size>
+			<AbsDimension x="40" y="20"/>
+		</Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parentDesc" inherits="GameFontHighlight">
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent">
+							<Offset>
+								<AbsDimension x="2" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentc1" id="1">
+				<Size>
+					<AbsDimension x="20" y="20"/>
+				</Size>
+				<Layers>
+					<Layer level="ARTWORK">
+						<Texture file="Interface\Common\UIColorBorder"/>
+					</Layer>
+					<Layer level="BACKGROUND">
+						<Texture name="$parentBlock" file="Interface\Common\Block-Fill"/>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnEnter>
+						GameTooltip:Show();
+						GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT", 0, 0);
+						GameTooltip:SetText(C_MAIN_COLOR)
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+					<OnClick>
+						DL.ui.OnColorClick(this)
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentc2" id="2">
+				<Size>
+					<AbsDimension x="20" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parentc1">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<Texture file="Interface\Common\UIColorBorder"/>
+					</Layer>
+					<Layer level="BACKGROUND">
+						<Texture name="$parentBlock" file="Interface\Common\Block-Fill"/>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnEnter>
+						GameTooltip:Show();
+						GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT", 0, 0);
+						GameTooltip:SetText(C_SUB_COLOR)
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+					<OnClick>
+						DL.ui.OnColorClick(this)
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+	</Frame>
+	<!-- Model -->
+	<Frame name="DL_modelFrameTemplate" inherits="UICommonFrameTemplate" hidden="true" enableMouse="true" virtual="true">
+		<Size>
+			<AbsDimension x="510" y="620"/>
+		</Size>
+		<Frames>
+			<Model name="$parentModel" targetBone="BODY" inherits="CommonModelTemplate">
+				<Size>
+					<AbsDimension x="200" y="245"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="15" y="35"/>
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-15" y="-35"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this.top="p_name_title";
+						this.bottom="p_down";
+
+						this.bias_default=0.5;
+						this.bias_max	=1.5;
+						this.bias_min	=-0.5;
+
+						this.scale_default=0.44;
+						this.scale_max =3;
+						this.scale_min =0.05;
+
+						this.angleX_default=0;
+						this.angleX_max =89 * math.pi / 180 ;
+						this.angleX_min =-89 * math.pi / 180 ;
+						this.angleY_default=0;
+						this.angleY_max =nil;
+						this.angleY_min =nil;
+
+						this.MouseControlerEnable=true;
+					</OnLoad>
+					<OnMouseWheel>
+						CommonModel_OnMouseWheel(this, delta);
+						local scale=_G[this:GetParent():GetName() .."ScaleSlider"]
+						scale:SetValue(this.scale)
+					</OnMouseWheel>
+				</Scripts>
+			</Model>
+			<Frame frameLevel="-1">
+				<Size>
+					<AbsDimension x="1" y="1"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentModel">
+						<Offset>
+							<AbsDimension x="-4" y="-4"/>
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parentModel">
+						<Offset>
+							<AbsDimension x="4" y="4"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\CharacterFrame\Peperdoll-Backdrop-Border" bgFile="interface\CharacterFrame\Peperdoll-Backdrop-Background">
+					<EdgeSize>
+						<AbsValue val="64"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+				</Backdrop>
+			</Frame>
+			<Button name="$parentTakeOffAllButton" inherits="UIPanelButtonTemplate" text="ITEMPREVIEWFRAME_TAKEOFFALL">
+				<Size>
+					<AbsDimension x="64" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+							<AbsDimension x="-80" y="-5"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						_G[this:GetParent():GetName().."Model"]:TakeOffAll()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentTakeOffWeaponButton" inherits="UIPanelButtonTemplate" text="ITEMPREVIEWFRAME_TAKEOFFWEAPON">
+				<Size>
+					<AbsDimension x="64" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+							<AbsDimension x="0" y="-5"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						_G[this:GetParent():GetName().."Model"]:TakeOffWeapon()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentResetButton" inherits="UIPanelButtonTemplate" text="ITEMPREVIEWFRAME_RESET">
+				<Size>
+					<AbsDimension x="64" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+							<AbsDimension x="80" y="-5"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						local model=_G[this:GetParent():GetName().."Model"]
+						model:SetUnit( "player" , 1 );
+						CommonModel_OnShow(model);
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentResizerButton">
+				<Size>
+					<AbsDimension x="16" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT"/>
+				</Anchors>
+				<Scripts>
+					<OnMouseDown>
+						this:GetParent():StartSizing("BOTTOMRIGHT");
+					</OnMouseDown>
+					<OnMouseUp>
+						this:GetParent():StopMovingOrSizing();
+					</OnMouseUp>
+				</Scripts>
+			</Button>
+			<Slider name="$parentScaleSlider" orientation="HORIZONTAL">
+				<Size>
+					<AbsDimension x="75" y="12"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="60" y="-5"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<Texture file="Interface\BagFrame\BagFrame-Slider-Border"/>
+					</Layer>
+					<Layer level="ARTWORK">
+						<FontString inherits="GameFontHighlight" text="GCF_TEXT_SCALE">
+							<Anchors>
+								<Anchor point="RIGHT" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="-2" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnShow>
+						this:SetValueStepMode("FLOAT")
+						local model=_G[this:GetParent():GetName() .."Model"]
+						this:SetMinMaxValues(model.scale_min, model.scale_max)
+						this:SetValue(model.scale_default)
+						this.loaded=true
+					</OnShow>
+					<OnMouseWheel>
+						local model=_G[this:GetParent():GetName() .."Model"]
+						this:SetValue(model.scale-( delta / 120 * 0.01 ))
+					</OnMouseWheel>
+					<OnValueChanged>
+						if this.loaded then
+							local model=_G[this:GetParent():GetName() .."Model"]
+							model.scale=this:GetValue()
+							CommonModel_Update(model);
+						end
+					</OnValueChanged>
+				</Scripts>
+				<ThumbTexture file="Interface\BagFrame\BagFrame-Slider-Knob">
+					<Size>
+						<AbsDimension x="16" y="16"/>
+					</Size>
+				</ThumbTexture>
+			</Slider>
+			<Slider name="$parentRotateSlider" orientation="HORIZONTAL">
+				<Size>
+					<AbsDimension x="75" y="12"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-30" y="-5"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<Texture file="Interface\BagFrame\BagFrame-Slider-Border"/>
+					</Layer>
+					<Layer level="ARTWORK">
+						<FontString name="$parent_desc" inherits="GameFontHighlight" text="UI_HOUSETOOLTIP_ROTATE">
+							<Anchors>
+								<Anchor point="RIGHT" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="-2" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnLoad>
+						this:SetValueStepMode("FLOAT")
+						this:SetMinMaxValues(0, 1.1)
+					</OnLoad>
+					<OnShow>
+						this:SetValue(0)
+						_G[this:GetName().."_desc"]:SetColor(1,0,0)
+						this.loaded=true
+					</OnShow>
+					<OnMouseWheel>
+						this:SetValue(this:GetValue() -( delta / 120 * 0.01 ))
+					</OnMouseWheel>
+					<OnValueChanged>
+						if this.loaded then
+							if (this:GetValue() or 0) > 0.1 then
+								_G[this:GetName().."_desc"]:SetColor(0,1,0)
+							else
+								_G[this:GetName().."_desc"]:SetColor(1,0,0)
+							end
+						end
+					</OnValueChanged>
+				</Scripts>
+				<ThumbTexture file="Interface\BagFrame\BagFrame-Slider-Knob">
+					<Size>
+						<AbsDimension x="16" y="16"/>
+					</Size>
+				</ThumbTexture>
+			</Slider>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				UIPanelBackdropFrame_SetTexture( this, "Interface/Common/PanelCommonFrame", 256 , 256 );
+				_G[this:GetName() .. "Title" ]:SetText( ITEMPREVIEWFRAME_TITLE );
+			</OnLoad>
+			<OnShow>
+				CommonModel_OnShow(_G[this:GetName() .. "Model"]);
+			</OnShow>
+			<OnUpdate>
+				local val=(_G[this:GetName().."RotateSlider"]:GetValue() or 0)
+				if val > 0.1 then
+					_G[this:GetName().."Model"]:SetTargetRotate(0.1*math.pi*(val-0.1))
+				end
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+</Ui>

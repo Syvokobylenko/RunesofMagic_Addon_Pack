@@ -1,0 +1,87 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="..\..\worldxml\ui.xsd">
+
+	<Frame name="scrutinizer_Submit" inherits="scrutinizer_Backdrop_Template" parent="UIParent" hidden="true" frameStrata="HIGH">
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Size>
+			<AbsDimension x="140" y="50"/>
+		</Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parent_Text" inherits="GameTitleFont" justifyH="CENTER" text="scrutinizer">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="5" y="2"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Size>
+						<AbsDimension x="130" y="12"/>
+					</Size>
+					<FontHeight>
+						<AbsValue val="12"/>
+					</FontHeight>
+				</FontString>
+				<FontString name="$parent_Text2" inherits="GameTitleFont" justifyH="CENTER" text="OBJ_RESET">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Text">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Size>
+						<AbsDimension x="130" y="12"/>
+					</Size>
+					<FontHeight>
+						<AbsValue val="12"/>
+					</FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parent_Ok" inherits="UIPanelButtonTemplate" text="OKAY">
+				<Size>
+					<AbsDimension x="60" y="16"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="5" y="-5"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						scrutinizer:Reset()
+						scrutinizer_Submit:Hide()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_Cancel" inherits="UIPanelButtonTemplate" text="NO">
+				<Size>
+					<AbsDimension x="60" y="16"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" relativeTo="$parent_Ok">
+						<Offset>
+							<AbsDimension x="5" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						scrutinizer_Submit:Hide()
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+	</Frame>
+	
+</Ui>

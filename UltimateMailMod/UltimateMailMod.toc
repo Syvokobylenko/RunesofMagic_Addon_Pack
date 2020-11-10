@@ -1,0 +1,32 @@
+## Interface
+## Title: Ultimate Mail Mod
+## Maintainer: Jagodragon
+## Author: Maxeem
+## Credits: Shardea of Siochain 
+## Version: 7.0.1
+Library/LibStub.lua
+Library/Sol.lua
+Library/Colors.lua
+Library/Tools.lua
+Library/Config.lua
+Library/Templates.lua
+Library/Templates.xml
+Library/ItemDB.lua
+Library/BagManager.lua
+Library/MailManager.lua
+Library/PopUpDialog.lua
+Library/PopUpDialog.xml
+Recipient/Characters.lua
+Recipient/Recipient.lua
+Recipient/Recipient.xml
+Inbox/MailViewer.lua
+Inbox/MailViewer.xml
+Inbox/Inbox.lua
+Inbox/Inbox.xml
+Compose/Compose.lua
+Compose/Compose.xml
+MassSendItems/MassSendItems.lua
+MassSendItems/MassSendItems.xml
+Menu/Menu.lua
+Menu/Menu.xml
+UltimateMailMod.xml

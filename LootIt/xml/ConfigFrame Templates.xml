@@ -1,0 +1,1053 @@
+<!-- last changes     by: Tinsus     at: 2016-04-30T19:18:14Z     project-version: v1.9beta1     hash: df0f57118070eaf0aa0212bf3b8a7d7e373ed07a -->
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ ../../../worldxml/ui.xsd">
+	<!-- Config Frame Templates	-->
+	<Slider name="LootIt_ScrollbarTemplate" orientation="HORIZONTAL" virtual="true" minValue="1" maxValue="1" defaultValue="1" smallStep="1">
+		<Size>
+			<AbsDimension x="330" y="16"/>
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parent_Text" inherits="GameFontHighlightLarge" justifyH="CENTER" justifyV="MIDDLE" text="">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="2" y="-16"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<Texture name="$parent_Left" file="Interface\BagFrame\BagFrame-Slider-Border">
+					<Size>
+						<AbsDimension x="16" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT"/>
+					</Anchors>
+					<TexCoords left="0" right="0.25" top="0" bottom="1"/>
+				</Texture>
+				<Texture name="$parent_Right" file="Interface\BagFrame\BagFrame-Slider-Border">
+					<Size>
+						<AbsDimension x="16" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="RIGHT"/>
+					</Anchors>
+					<TexCoords left="0.75" right="1" top="0" bottom="1"/>
+				</Texture>
+				<Texture name="$parent_Middle" file="Interface\BagFrame\BagFrame-Slider-Border">
+					<Size>
+						<AbsDimension x="1" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parent_Left" relativePoint="RIGHT"/>
+						<Anchor point="RIGHT" relativeTo="$parent_Right" relativePoint="LEFT"/>
+					</Anchors>
+					<TexCoords left="0.25" right="0.75" top="0" bottom="1"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parent_LeftButton">
+				<Size>
+					<AbsDimension x="16" y="16"/>
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativePoint="LEFT" relativeTo="$parent_Left">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnMouseDown>
+						LI.ScrollBar(this:GetParent(), -1)
+					</OnMouseDown>
+				</Scripts>
+				<NormalTexture file="Interface\Login\CharacterCreate\SliderLeft-Normal"/>
+				<PushedTexture file="Interface\Login\CharacterCreate\SliderLeft-Depress"/>
+				<DisabledTexture file="Interface\Login\CharacterCreate\SliderLeft-Disable"/>
+				<HighlightTexture file="Interface\Login\CharacterCreate\SliderLeft-Highlight" alphaMode="ADD"/>
+			</Button>
+			<Button name="$parent_RightButton">
+				<Size>
+					<AbsDimension x="16" y="16"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_Right">
+						<Offset>
+							<AbsDimension x="2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnMouseDown>
+						LI.ScrollBar(this:GetParent(), 1)
+					</OnMouseDown>
+				</Scripts>
+				<NormalTexture file="Interface\Login\CharacterCreate\SliderRight-Normal"/>
+				<PushedTexture file="Interface\Login\CharacterCreate\SliderRight-Depress"/>
+				<DisabledTexture file="Interface\Login\CharacterCreate\SliderRight-Disable"/>
+				<HighlightTexture file="Interface\Login\CharacterCreate\SliderRight-Highlight" alphaMode="ADD"/>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnValueChanged>
+				LI.ScrollBarSwapBar(this)
+			</OnValueChanged>
+			<OnMouseWheel>
+				LI.ScrollBar(this, delta)
+			</OnMouseWheel>
+			<OnShow>
+				LI.ScrollBarShow(this)
+			</OnShow>
+			<OnEnter>
+				LI.ScrollBarEnter(this)
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+		</Scripts>
+		<ThumbTexture file="Interface\BagFrame\BagFrame-Slider-knob">
+			<Size>
+				<AbsDimension x="32" y="16"/>
+			</Size>
+		</ThumbTexture>
+	</Slider>
+	<CheckButton name="LootIt_CheckButton_Template" inherits="UIPanelCheckButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="35" y="35"/>
+		</Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parent_Text" inherits="GameFontHighlight" text="Error" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="130" y="40"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="14"/>
+					</FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>
+				LI.OptionButtonClick(this)
+			</OnClick>
+			<OnEnter>
+				LI.OptionButtonEnter(this)
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+			<OnShow>
+				LI.OptionButtonShow(this)
+			</OnShow>
+		</Scripts>
+	</CheckButton>
+	<CheckButton name="LootIt_RollResultButton_Template" inherits="UIPanelCheckButtonTemplate" virtual="true" hidden="true">
+		<Size>
+			<AbsDimension x="20" y="20"/>
+		</Size>
+		<Scripts>
+			<OnClick>
+				LI.RollResultButtonClick(this)
+			</OnClick>
+			<OnShow>
+				LI.RollResultButtonShow(this)
+			</OnShow>
+			<OnEnter>
+				if string.sub(this:GetName(), string.len(this:GetName())) == "4" then
+					LI.GameTooltip(this, "ANCHOR_LEFT", -2, 0, "ROLLRESULT_TOOLTIP_LOOT")
+
+				elseif string.sub(this:GetName(), string.len(this:GetName())) == "5" then
+					LI.GameTooltip(this, "ANCHOR_LEFT", -2, 0, "ROLLRESULT_TOOLTIP_LOG")
+
+				elseif string.sub(this:GetName(), string.len(this:GetName())) == "6" then
+					LI.GameTooltip(this, "ANCHOR_LEFT", -2, 0, "ROLLRESULT_TOOLTIP_NOLOG")
+				else
+					LI.GameTooltip(this, "ANCHOR_LEFT", -2, 0, "ROLLRESULT_TOOLTIP")
+				end
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+		</Scripts>
+	</CheckButton>
+	<Slider name="LootIt_FilterScrollbarTemplate" virtual="true">
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentTop" file="Interface\Common\PanelScrollBar-Broder">
+					<Size>
+						<AbsDimension x="16" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="-20"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0" right="1" top="0" bottom="0.25"/>
+				</Texture>
+				<Texture name="$parentBottom" file="Interface\Common\PanelScrollBar-Broder">
+					<Size>
+						<AbsDimension x="16" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOM">
+							<Offset>
+								<AbsDimension x="0" y="20"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0" right="1" top="0.75" bottom="1"/>
+				</Texture>
+				<Texture name="$parentMiddle" file="Interface\Common\PanelScrollBar-Broder">
+					<Size>
+						<AbsDimension x="16" y="1"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP" relativeTo="$parentTop" relativePoint="BOTTOM"/>
+						<Anchor point="BOTTOM" relativeTo="$parentBottom" relativePoint="TOP"/>
+					</Anchors>
+					<TexCoords left="0" right="1" top="0.25" bottom="0.75"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentScrollUpButton" inherits="UIPanelScrollUpButtonTemplate">
+				<Anchors>
+					<Anchor point="BOTTOM" relativePoint="TOP"/>
+				</Anchors>
+			</Button>
+			<Button name="$parentScrollDownButton" inherits="UIPanelScrollDownButtonTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				this:SetValueStepMode("INT")
+			</OnLoad>
+			<OnMouseWheel>
+				LI.ScrollBar(this, delta * -1)
+			</OnMouseWheel>
+		</Scripts>
+		<ThumbTexture file="Interface\Buttons\ScrollBar-Knob">
+			<Size>
+				<AbsDimension x="16" y="42"/>
+			</Size>
+			<TexCoords left="0" right="1" top="0" bottom="0.65625"/>
+		</ThumbTexture>
+	</Slider>
+	<Button name="LootIt_FilterButton" virtual="true" enableMouse="true">
+		<Layers>
+			<Layer>
+				<FontString name="$parent_Roll" justifyH="LEFT" inherits="Font_Normal">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="-65" y="-10"/>
+							</Offset>
+						</Anchor>
+						<Anchor point="BOTTOMRIGHT" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="0" y="10"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="12"/>
+					</FontHeight>
+				</FontString>
+				<FontString name="$parent_Loot" justifyH="LEFT" inherits="Font_Normal">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent_Roll">
+							<Offset>
+								<AbsDimension x="-105" y="0"/>
+							</Offset>
+						</Anchor>
+						<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Roll">
+							<Offset>
+								<AbsDimension x="-5" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="12"/>
+					</FontHeight>
+				</FontString>
+				<FontString name="$parent_Name" justifyH="LEFT" inherits="Font_Normal">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="LEFT" relativeTo="$parent">
+							<Offset>
+								<AbsDimension x="10" y="-10"/>
+							</Offset>
+						</Anchor>
+						<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Loot">
+							<Offset>
+								<AbsDimension x="-5" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="12"/>
+					</FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForClicks("LeftButton", "RightButton")
+			</OnLoad>
+			<OnClick>
+				if key == "LBUTTON" then
+					LI.SelectFilterRow(this)
+				else
+					LI.Clicktransfer = this
+					ToggleDropDownMenu(LootIt_ItemFrameDropdown, 1, nil, "cursor", 0, 0)
+				end
+			</OnClick>
+			<OnMouseWheel>
+				LI.ScrollBar(LootIt_ItemFilter_ScrollBar, delta * -1)
+			</OnMouseWheel>
+			<OnEnter>
+				if getglobal(this:GetName().."_Name"):GetColor() == 1 then
+					getglobal(this:GetName().."_Name"):SetColor(1, 0.82, 0)
+					getglobal(this:GetName().."_Loot"):SetColor(1, 0.82, 0)
+					getglobal(this:GetName().."_Roll"):SetColor(1, 0.82, 0)
+				else
+					getglobal(this:GetName().."_Name"):SetColor(0.5, 0.41, 0)
+					getglobal(this:GetName().."_Loot"):SetColor(0.5, 0.41, 0)
+					getglobal(this:GetName().."_Roll"):SetColor(0.5, 0.41, 0)
+				end
+			</OnEnter>
+			<OnLeave>
+				if getglobal(this:GetName().."_Name"):GetColor() == 1 then
+					getglobal(this:GetName().."_Name"):SetColor(1, 1, 1)
+					getglobal(this:GetName().."_Loot"):SetColor(1, 1, 1)
+					getglobal(this:GetName().."_Roll"):SetColor(1, 1, 1)
+				else
+					getglobal(this:GetName().."_Name"):SetColor(0.5, 0.5, 0.5)
+					getglobal(this:GetName().."_Loot"):SetColor(0.5, 0.5, 0.5)
+					getglobal(this:GetName().."_Roll"):SetColor(0.5, 0.5, 0.5)
+				end
+			</OnLeave>
+		</Scripts>
+		<HighlightTexture file="Interface\AuctionFrame\AuctionFrameItem-Highlight" alphaMode="ADD">
+			<Anchors>
+				<Anchor point="TOPLEFT"/>
+				<Anchor point="BOTTOMRIGHT"/>
+			</Anchors>
+		</HighlightTexture>
+	</Button>
+	<Frame name="LootIt_FrameMover_Template" virtual="true">
+		<Size>
+			<AbsDimension x="256" y="64"/>
+		</Size>
+		<HitRectInsets>
+			<AbsInset left="0" right="2" top="0" bottom="6"/>
+		</HitRectInsets>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface\LootFrame\grouplootframe"/>
+			</Layer>
+			<Layer>
+				<Texture name="$parent_Roll" file="Interface\LootFrame\grouploot-dice-normal">
+					<Size>
+						<AbsDimension x="32" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="12" y="13"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="$parent_Greed" file="Interface\LootFrame\grouploot-greed-normal">
+					<Size>
+						<AbsDimension x="32" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="171" y="13"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="$parent_Cancel" file="Interface\LootFrame\grouploot-pass-normal">
+					<Size>
+						<AbsDimension x="32" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="211" y="13"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+	</Frame>
+	<Slider name="LootIt_SliderTemplate" orientation="HORIZONTAL" virtual="true">
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parent_Left" file="Interface\Bagframe\Bagframe-Slider-Border">
+					<Size>
+						<AbsDimension x="16" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT"/>
+					</Anchors>
+					<TexCoords left="0" right="0.25" top="0" bottom="1"/>
+				</Texture>
+				<Texture name="$parent_Right" file="Interface\Bagframe\Bagframe-Slider-Border">
+					<Size>
+						<AbsDimension x="16" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="RIGHT"/>
+					</Anchors>
+					<TexCoords left="0.75" right="1" top="0" bottom="1"/>
+				</Texture>
+				<Texture name="$parent_Middle" file="Interface\Bagframe\Bagframe-Slider-Border">
+					<Size>
+						<AbsDimension x="1" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_Left"/>
+						<Anchor point="RIGHT" relativePoint="LEFT" relativeTo="$parent_Right"/>
+					</Anchors>
+					<TexCoords left="0.25" right="0.75" top="0" bottom="1"/>
+				</Texture>
+			</Layer>
+			<Layer level="BORDER">
+				<FontString name="$parent_Value" inherits="GameFontHighlight">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="5" y="-2"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<ThumbTexture file="Interface\BagFrame\BagFrame-Slider-Knob">
+			<Size>
+				<AbsDimension x="16" y="16"/>
+			</Size>
+		</ThumbTexture>
+	</Slider>
+	<Frame name="LootIt_RollFrameHighlight_Template" enableMouse="false" frameLevel="999" virtual="true">
+		<Size>
+			<AbsDimension x="28" y="28"/>
+		</Size>
+		<Layers>
+			<Layer level="OVERLAY">
+				<Texture name="$parent_Color" file="Interface\Buttons\QuickSlot-Continued" alphaMode="ADD" hidden="false" animationSpeed="8">
+					<Size>
+						<AbsDimension x="28" y="28"/>
+					</Size>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+					<TexCoords top="0" left="0" bottom="0.25" right="0.125"/>
+					<TexCoords top="0" left="0.125" bottom="0.25" right="0.25"/>
+					<TexCoords top="0" left="0.25" bottom="0.25" right="0.375"/>
+					<TexCoords top="0" left="0.375" bottom="0.25" right="0.5"/>
+					<TexCoords top="0" left="0.5" bottom="0.25" right="0.625"/>
+					<TexCoords top="0" left="0.625" bottom="0.25" right="0.75"/>
+					<TexCoords top="0" left="0.75" bottom="0.25" right="0.875"/>
+					<TexCoords top="0" left="0.875" bottom="0.25" right="1"/>
+					<TexCoords top="0.25" left="0" bottom="0.5" right="0.125"/>
+					<TexCoords top="0.25" left="0.125" bottom="0.5" right="0.25"/>
+					<TexCoords top="0.25" left="0.25" bottom="0.5" right="0.375"/>
+					<TexCoords top="0.25" left="0.375" bottom="0.5" right="0.5"/>
+					<TexCoords top="0.25" left="0.5" bottom="0.5" right="0.625"/>
+					<TexCoords top="0.25" left="0.625" bottom="0.5" right="0.75"/>
+					<TexCoords top="0.25" left="0.75" bottom="0.5" right="0.875"/>
+					<TexCoords top="0.25" left="0.875" bottom="0.5" right="1"/>
+					<TexCoords top="0.5" left="0" bottom="0.75" right="0.125"/>
+					<TexCoords top="0.5" left="0.125" bottom="0.75" right="0.25"/>
+					<TexCoords top="0.5" left="0.25" bottom="0.75" right="0.375"/>
+					<TexCoords top="0.5" left="0.375" bottom="0.75" right="0.5"/>
+					<TexCoords top="0.5" left="0.5" bottom="0.75" right="0.625"/>
+					<TexCoords top="0.5" left="0.625" bottom="0.75" right="0.75"/>
+					<TexCoords top="0.5" left="0.75" bottom="0.75" right="0.875"/>
+					<TexCoords top="0.5" left="0.875" bottom="0.75" right="1"/>
+					<TexCoords top="0.75" left="0" bottom="1" right="0.125"/>
+					<TexCoords top="0.75" left="0.125" bottom="1" right="0.25"/>
+					<TexCoords top="0.75" left="0.25" bottom="1" right="0.375"/>
+					<TexCoords top="0.75" left="0.375" bottom="1" right="0.5"/>
+					<TexCoords top="0.75" left="0.5" bottom="1" right="0.625"/>
+					<TexCoords top="0.75" left="0.625" bottom="1" right="0.75"/>
+					<TexCoords top="0.75" left="0.75" bottom="1" right="0.875"/>
+					<TexCoords top="0.75" left="0.875" bottom="1" right="1"/>
+					<Color r="1" g="1" b="0.8"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnShow>
+				LI.HighlightShow(this)
+			</OnShow>
+			<OnUpdate>
+				LI.HighlightUpdate(this, elapsedTime)
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+	<Button name="LootIt_Drop_ButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="24" y="24"/>
+		</Size>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForClicks("LeftButton", "RightButton")
+			</OnLoad>
+			<OnClick>
+				LI.DropTab_Receive(this)
+			</OnClick>
+			<OnEnter>
+				LI.DropTab_Display(this)
+			</OnEnter>
+		</Scripts>
+		<NormalTexture file="Interface\Buttons\QuickSlot-Normal">
+			<Size>
+				<AbsDimension x="48" y="48"/>
+			</Size>
+			<Anchors>
+				<Anchor point="CENTER"/>
+			</Anchors>
+		</NormalTexture>
+		<HighlightTexture file="Interface\Buttons\QuickSlot-Highlight" alphaMode="ADD"/>
+	</Button>
+	<Frame name="LootIt_ChatDrop_Template" enableMouse="true" virtual="true">
+		<Size>
+			<AbsDimension x="164" y="172"/>
+		</Size>
+		<Backdrop edgeFile="Interface\Tooltips\Tooltip-border" bgFile="Interface\SocialFrame\SocialFrame_Contextborder_bg">
+			<BackgroundInsets>
+				<AbsInset top="4" left="4" bottom="4" right="4"/>
+			</BackgroundInsets>
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+		</Backdrop>
+		<Scripts>
+			<OnShow>
+				LI.DropTab_OnShow(this)
+			</OnShow>
+			<OnUpdate>
+				LI.DropTab_OnUpdate(this, elapsedTime)
+			</OnUpdate>
+			<OnHide>
+				this.itemname = nil
+				this.inside = nil
+			</OnHide>
+		</Scripts>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Itemname" justifyH="LEFT" inherits="Font_Normal">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="12" y="10"/>
+							</Offset>
+						</Anchor>
+						<Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="-12" y="25"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="13"/>
+					</FontHeight>
+					<Color r="1" g="1" b="0.5" a="1"/>
+				</FontString>
+				<Texture name="$parent_LootIcon" file="Interface\LootFrame\grouploot-pass-normal">
+					<Size>
+						<AbsDimension x="16" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="10" y="25"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="$parent_LootText" inherits="Font_Normal" text="Looten">
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_LootIcon">
+							<Offset>
+								<AbsDimension x="1" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="11"/>
+					</FontHeight>
+				</FontString>
+				<Texture name="$parent_RollIcon" file="Interface\LootFrame\grouploot-pass-normal">
+					<Size>
+						<AbsDimension x="16" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="-10" y="25"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="$parent_RollText" inherits="Font_Normal" text="Bedarf">
+					<Anchors>
+						<Anchor point="RIGHT" relativePoint="LEFT" relativeTo="$parent_RollIcon">
+							<Offset>
+								<AbsDimension x="-1" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="11"/>
+					</FontHeight>
+				</FontString>
+				<FontString name="$parent_Remove" inherits="Font_Normal" text="Entfernen">
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="LEFT" relativeTo="$parent_LootText">
+							<Offset>
+								<AbsDimension x="-15" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="12"/>
+					</FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="$parent_RollMarker">
+				<Size>
+					<AbsDimension x="30" y="117"/>
+				</Size>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parent_Top" file="Interface/Addons/LootIt/Textures/droptab-marker">
+							<Size>
+								<AbsDimension x="64" y="24"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-18"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0" right="1" top="0" bottom="0.375"/>
+							<Color r="1" g="1" b="0.5" a="0.5"/>
+						</Texture>
+						<Texture name="$parent_Bottom" file="Interface/Addons/LootIt/Textures/droptab-marker">
+							<Size>
+								<AbsDimension x="64" y="24"/>
+							</Size>
+							<Anchors>
+								<Anchor point="BOTTOM">
+									<Offset>
+										<AbsDimension x="0" y="18"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0" right="1" top="0.625" bottom="1"/>
+							<Color r="1" g="1" b="0.5" a="0.5"/>
+						</Texture>
+						<Texture name="$parent_Right" file="Interface/Addons/LootIt/Textures/droptab-marker">
+							<Size>
+								<AbsDimension x="64" y="1"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_Top"/>
+								<Anchor point="BOTTOM" relativePoint="TOP" relativeTo="$parent_Bottom"/>
+							</Anchors>
+							<TexCoords left="0" right="1" top="0.375" bottom="0.625"/>
+							<Color r="1" g="1" b="0.5" a="0.5"/>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Frame>
+			<Frame name="$parent_LootMarker">
+				<Size>
+					<AbsDimension x="147" y="30"/>
+				</Size>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parent_Left" file="Interface/Addons/LootIt/Textures/droptab-marker">
+							<Size>
+								<AbsDimension x="24" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT">
+									<Offset>
+										<AbsDimension x="-18" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0" right="0.375" top="0" bottom="1"/>
+							<Color r="1" g="1" b="0.5" a="0.5"/>
+						</Texture>
+						<Texture name="$parent_Right" file="Interface/Addons/LootIt/Textures/droptab-marker">
+							<Size>
+								<AbsDimension x="24" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="RIGHT">
+									<Offset>
+										<AbsDimension x="18" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0.625" right="1" top="0" bottom="1"/>
+							<Color r="1" g="1" b="0.5" a="0.5"/>
+						</Texture>
+						<Texture name="$parent_Right" file="Interface/Addons/LootIt/Textures/droptab-marker">
+							<Size>
+								<AbsDimension x="1" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_Left"/>
+								<Anchor point="RIGHT" relativePoint="LEFT" relativeTo="$parent_Right"/>
+							</Anchors>
+							<TexCoords left="0.375" right="0.625" top="0" bottom="1"/>
+							<Color r="1" g="1" b="0.5" a="0.5"/>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Frame>
+			<Button name="$parent_00" inherits="LootIt_Drop_ButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="48"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<NormalTexture file="Interface\Buttons\PanelCloseButton-Normal">
+					<Size>
+						<AbsDimension x="18" y="18"/>
+					</Size>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+					<TexCoords left="0" right="0.625" top="0" bottom="0.625"/>
+				</NormalTexture>
+				<HighlightTexture file="Interface\Buttons\PanelCloseButton-Highlight" alphaMode="ADD"/>
+			</Button>
+			<Button name="$parent_01" inherits="LootIt_Drop_ButtonTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_00">
+						<Offset>
+							<AbsDimension x="6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture file="Interface/Addons/LootIt/Textures/roll-pass">
+							<Anchors>
+								<Anchor point="CENTER"/>
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Button>
+			<Button name="$parent_02" inherits="LootIt_Drop_ButtonTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_01">
+						<Offset>
+							<AbsDimension x="6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture file="Interface/Addons/LootIt/Textures/roll-greed">
+							<Anchors>
+								<Anchor point="CENTER"/>
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Button>
+			<Button name="$parent_03" inherits="LootIt_Drop_ButtonTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_02">
+						<Offset>
+							<AbsDimension x="6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture file="Interface/Addons/LootIt/Textures/roll-need">
+							<Anchors>
+								<Anchor point="CENTER"/>
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Button>
+			<Button name="$parent_04" inherits="LootIt_Drop_ButtonTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_03">
+						<Offset>
+							<AbsDimension x="6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture file="Interface/Addons/LootIt/Textures/roll-manual">
+							<Anchors>
+								<Anchor point="CENTER"/>
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Button>
+			<Button name="$parent_10" inherits="LootIt_Drop_ButtonTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_00">
+						<Offset>
+							<AbsDimension x="0" y="6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture file="Interface/Addons/LootIt/Textures/loot-dontloot">
+							<Anchors>
+								<Anchor point="CENTER"/>
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Button>
+			<Button name="$parent_11" inherits="LootIt_Drop_ButtonTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_10">
+						<Offset>
+							<AbsDimension x="6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parent_12" inherits="LootIt_Drop_ButtonTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_11">
+						<Offset>
+							<AbsDimension x="6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parent_13" inherits="LootIt_Drop_ButtonTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_12">
+						<Offset>
+							<AbsDimension x="6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parent_14" inherits="LootIt_Drop_ButtonTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_13">
+						<Offset>
+							<AbsDimension x="6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parent_20" inherits="LootIt_Drop_ButtonTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_10">
+						<Offset>
+							<AbsDimension x="0" y="6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture file="Interface/Addons/lootit/Textures/loot-loot">
+							<Anchors>
+								<Anchor point="CENTER"/>
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Button>
+			<Button name="$parent_21" inherits="LootIt_Drop_ButtonTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_20">
+						<Offset>
+							<AbsDimension x="6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parent_22" inherits="LootIt_Drop_ButtonTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_21">
+						<Offset>
+							<AbsDimension x="6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parent_23" inherits="LootIt_Drop_ButtonTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_22">
+						<Offset>
+							<AbsDimension x="6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parent_24" inherits="LootIt_Drop_ButtonTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_23">
+						<Offset>
+							<AbsDimension x="6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parent_30" inherits="LootIt_Drop_ButtonTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_20">
+						<Offset>
+							<AbsDimension x="0" y="6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture file="Interface/Addons/lootit/Textures/loot-drop">
+							<Anchors>
+								<Anchor point="CENTER"/>
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Button>
+			<Button name="$parent_31" inherits="LootIt_Drop_ButtonTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_30">
+						<Offset>
+							<AbsDimension x="6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parent_32" inherits="LootIt_Drop_ButtonTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_31">
+						<Offset>
+							<AbsDimension x="6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parent_33" inherits="LootIt_Drop_ButtonTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_32">
+						<Offset>
+							<AbsDimension x="6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parent_34" inherits="LootIt_Drop_ButtonTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_33">
+						<Offset>
+							<AbsDimension x="6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+		</Frames>
+	</Frame>
+	<Button name="LootIt_ItemButton" virtual="true" enableMouse="true" hidden="true">
+		<Size>
+			<AbsDimension x="200" y="20"/>
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parent_Name" justifyH="CENTER" inherits="Font_Normal">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+						<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="12"/>
+					</FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForClicks("LeftButton", "RightButton")
+			</OnLoad>
+			<OnClick>
+				if key == "LBUTTON" then
+					LI.ClickItemRow(this)
+				else
+					LI.ItemRow_DelItem(getglobal(this:GetName().."_Name"):GetText(), true, IsShiftKeyDown())
+				end
+			</OnClick>
+			<OnEnter>
+				LI.EnterItemRow(this)
+			</OnEnter>
+			<OnUpdate>
+				LI.UpdateItemRow(this, elapsedTime)
+			</OnUpdate>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+			<OnHide>
+				this.downtime = nil
+			</OnHide>
+		</Scripts>
+		<HighlightTexture file="Interface\AuctionFrame\AuctionFrameItem-Highlight" alphaMode="ADD">
+			<Anchors>
+				<Anchor point="TOPLEFT"/>
+				<Anchor point="BOTTOMRIGHT"/>
+			</Anchors>
+		</HighlightTexture>
+	</Button>
+</Ui>

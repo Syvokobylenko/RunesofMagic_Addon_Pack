@@ -1,0 +1,20 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+
+	<Button name="ItemPreviewResizerButton" parent="ItemPreviewFrame">
+		<Size>
+			<AbsDimension x="16" y="24"/>
+		</Size>
+		<Anchors>
+			<Anchor point="BOTTOMRIGHT"/>
+		</Anchors>
+		<Scripts>
+			<OnMouseDown>
+				ItemPreviewFrame:StartSizing("BOTTOMRIGHT");
+			</OnMouseDown>
+			<OnMouseUp>
+				ItemPreviewFrame:StopMovingOrSizing();
+			</OnMouseUp>
+		</Scripts>
+	</Button>
+
+</Ui>

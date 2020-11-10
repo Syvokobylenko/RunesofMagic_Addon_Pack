@@ -1,0 +1,12 @@
+## Title : PartyQuestInformer v1.4.0
+## Author: Kwitsch
+
+Libs\string.extension.lua
+Libs\table.extension.lua
+Libs\LibStub.lua
+Libs\kwDispatcher.lua
+Libs\kwIO.lua
+
+Lua\PartyQuestInformer.lua
+
+Xml\Button.xml

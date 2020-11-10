@@ -1,0 +1,34 @@
+## ä
+## Title: Advanced Quest Book
+## 
+## Author: Crypton
+## 
+## All code in this addon is strictly
+##       All Rights Reserved
+## unless explicitly stated otherwise.
+## 
+lib/AdvQuestBookPatterns.lua
+lib/AdvQuestBookTooltipFix.lua
+lib/AdvQuestBookCore.lua
+lib/AdvQuestBookMainFrame.lua
+lib/AdvQuestBookMapper.lua
+lib/AdvQuestBookTooltips.lua
+lib/AdvQuestBookShare.lua
+lib/AdvQuestBookDumper.lua
+lib/AdvQuestBookNotes.lua
+xml/AdvQuestBookCore.xml
+xml/AdvQuestBookIndex.xml
+xml/AdvQuestBookFin.xml
+xml/AdvQuestBookItems.xml
+xml/AdvQuestBookShared.xml
+xml/AdvQuestBookAirships.xml
+xml/AdvQuestBookEliteTrainers.xml
+xml/AdvQuestBookDailies.xml
+xml/AdvQuestBookSnoopLocs.xml
+xml/AdvQuestBookMainFrame.xml
+xml/AdvQuestBookConfig.xml
+xml/AdvQuestBookIconConfig.xml
+xml/AdvQuestBookMapper.xml
+xml/AdvQuestBookShare.xml
+xml/AdvQuestBookDumper.xml
+xml/AdvQuestBookNotes.xml

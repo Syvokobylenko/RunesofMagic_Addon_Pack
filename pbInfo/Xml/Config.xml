@@ -1,0 +1,1428 @@
+<!--
+pbInfo - Xml/Config.xml
+	v0.51-fix
+	by p.b. a.k.a. novayuna
+	released under the Creative Commons License By-Nc-Sa: http://creativecommons.org/licenses/by-nc-sa/3.0/
+-->
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="../../worldxml/ui.xsd">
+	<Frame name="pbInfoConfig" inherits="UICommonFrameTemplate" enableMouse="true" hidden="true" parent="UIParent">
+		<Size>
+			<AbsDimension x="400" y="350"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer>
+				<FontString name="pbInfoConfig_Title" inherits="GameTitleFont" text="pbInfo settings">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="0" y="8"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer>
+				<FontString name="pbInfoConfig_Version" inherits="GameTitleFont" text="">
+					<Size>
+						<AbsDimension x="60" y="10"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="pbInfoConfig" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="20" y="-13"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="10"/>
+					</FontHeight>
+				</FontString>
+			</Layer>
+			<!-- Background image -->
+			<Layer>
+				<Texture name="pbInfoConfig_Background" file="Interface\AddOns\pbInfo\Textures\pbInfo.png">
+					<Color r="1" g="1" b="1" a="0.75"/>
+					<Size>
+						<AbsDimension x="128" y="128"/>
+					</Size>
+					<Anchors>
+						<Anchor point="CENTER" relativeTo="pbInfoConfig" relativePoint="CENTER">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<!-- Tabs -->
+			<Frame name="pbInfoConfig_Tabs" parent="pbInfoConfig">
+				<Size>
+					<AbsDimension x="100" y="90"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="pbInfoConfig" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<!-- Tab: General -->
+					<Button name="pbInfoConfig_TabGeneral" parent="pbInfoConfig_Tabs" inherits="UIPanelButtonTemplate" text="General">
+						<Size>
+							<AbsDimension x="100" y="30"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								pbInfo.Config.TabClick();
+								pbInfoConfig_PageGeneral:Show();
+							</OnClick>
+						</Scripts>
+					</Button>
+					<!-- Tab: Tooltip -->
+					<Button name="pbInfoConfig_TabTooltip" parent="pbInfoConfig_Tabs" inherits="UIPanelButtonTemplate" text="Tooltip">
+						<Size>
+							<AbsDimension x="100" y="30"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="pbInfoConfig_TabGeneral" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								pbInfo.Config.TabClick();
+								pbInfoConfig_PageTooltip:Show();
+							</OnClick>
+						</Scripts>
+					</Button>
+					<!-- Tab: Tooltip2 -->
+					<Button name="pbInfoConfig_TabTooltip2" parent="pbInfoConfig_Tabs" inherits="UIPanelButtonTemplate" text="#2">
+						<Size>
+							<AbsDimension x="50" y="30"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPRIGHT" relativeTo="pbInfoConfig_TabTooltip" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								pbInfo.Config.TabClick();
+								pbInfoConfig_PageTooltip2:Show();
+							</OnClick>
+						</Scripts>
+					</Button>
+					<!-- Tab: TargetFrame -->
+					<Button name="pbInfoConfig_TabTargetFrame" parent="pbInfoConfig_Tabs" inherits="UIPanelButtonTemplate" text="TargetFrame">
+						<Size>
+							<AbsDimension x="100" y="30"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="pbInfoConfig_TabTooltip" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								pbInfo.Config.TabClick();
+								pbInfoConfig_PageTargetFrame:Show();
+							</OnClick>
+						</Scripts>
+					</Button>
+					<!-- Tab: BloodBars -->
+<!-- removed until it works again :&
+					<Button name="pbInfoConfig_TabBloodBars" parent="pbInfoConfig_BloodBars" inherits="UIPanelButtonTemplate" text="BloodBars">
+						<Size>
+							<AbsDimension x="100" y="30"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="pbInfoConfig_TabTargetFrame" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								pbInfo.Config.TabClick();
+								pbInfoConfig_PageBloodBars:Show();
+							</OnClick>
+						</Scripts>
+					</Button>
+-->
+					<!-- Tab: ThreatMeter -->
+					<Button name="pbInfoConfig_TabThreatMeter" parent="pbInfoConfig_Tabs" inherits="UIPanelButtonTemplate" text="ThreatMeter">
+						<Size>
+							<AbsDimension x="100" y="30"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="pbInfoConfig_TabTargetFrame" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								pbInfo.Config.TabClick();
+								pbInfoConfig_PageThreatMeter:Show();
+							</OnClick>
+						</Scripts>
+					</Button>
+					<!-- Tab: QuestTracker -->
+					<Button name="pbInfoConfig_TabQuestTracker" parent="pbInfoConfig_Tabs" inherits="UIPanelButtonTemplate" text="QuestTracker">
+						<Size>
+							<AbsDimension x="100" y="30"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="pbInfoConfig_TabThreatMeter" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								pbInfo.Config.TabClick();
+								pbInfoConfig_PageQuestTracker:Show();
+							</OnClick>
+						</Scripts>
+					</Button>
+					<!-- Tab: QuestTracker2 -->
+					<Button name="pbInfoConfig_TabQuestTracker2" parent="pbInfoConfig_Tabs" inherits="UIPanelButtonTemplate" text="#2">
+						<Size>
+							<AbsDimension x="50" y="30"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPRIGHT" relativeTo="pbInfoConfig_TabQuestTracker" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								pbInfo.Config.TabClick();
+								pbInfoConfig_PageQuestTracker2:Show();
+							</OnClick>
+						</Scripts>
+					</Button>
+					<!-- Tab: ChatLog -->
+					<Button name="pbInfoConfig_TabChatLog" parent="pbInfoConfig_Tabs" inherits="UIPanelButtonTemplate" text="ChatLog">
+						<Size>
+							<AbsDimension x="100" y="30"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="pbInfoConfig_TabQuestTracker" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								pbInfo.Config.TabClick();
+								pbInfoConfig_PageChatLog:Show();
+							</OnClick>
+						</Scripts>
+					</Button>
+					<!-- Tab: CastingBar -->
+					<Button name="pbInfoConfig_TabChatFrame" parent="pbInfoConfig_Tabs" inherits="UIPanelButtonTemplate" text="ChatFrame">
+						<Size>
+							<AbsDimension x="100" y="30"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="pbInfoConfig_TabChatLog" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								pbInfo.Config.TabClick();
+								pbInfoConfig_PageChatFrame:Show();
+							</OnClick>
+						</Scripts>
+					</Button>
+					<!-- Tab: ChatFrame -->
+					<Button name="pbInfoConfig_TabCastingBar" parent="pbInfoConfig_Tabs" inherits="UIPanelButtonTemplate" text="CastingBar">
+						<Size>
+							<AbsDimension x="100" y="30"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="pbInfoConfig_TabChatFrame" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								pbInfo.Config.TabClick();
+								pbInfoConfig_PageCastingBar:Show();
+							</OnClick>
+						</Scripts>
+					</Button>
+				</Frames>
+			</Frame>
+			<!-- Option pages -->
+			<!-- Page: General -->
+			<Frame name="pbInfoConfig_PageGeneral" parent="pbInfoConfig">
+				<Size>
+					<AbsDimension x="400" y="350"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="pbInfoConfig" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="25"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<!-- Checkbox and label: ENABLE -->
+					<CheckButton name="pbInfoConfig_SettingEnable" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: SHOWCLOCKTOOLTIP -->
+					<CheckButton name="pbInfoConfig_SettingShowClockTooltip" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="25"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: AUTOREPAIRALL -->
+					<CheckButton name="pbInfoConfig_SettingAutoRepairAll" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="50"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<Frame name="pbInfoConfig_SettingThousandsSeparatorFormat" inherits="UIDropDownMenuTemplate">
+						<Anchors>
+							<Anchor point="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="150" y="-135"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString name="pbInfoConfig_SettingThousandsSeparatorFormat_Text" inherits="GameTitleFont" justifyH="LEFT" text="ThousandsSeparator:">
+									<FontHeight>
+										<AbsValue val="16"/>
+									</FontHeight>
+									<Anchors>
+										<Anchor point="RIGHT" relativeTo="pbInfoConfig_SettingThousandsSeparatorFormat" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="-5" y="0"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnLoad>
+								UIDropDownMenu_SetWidth(this, 100);
+								UIDropDownMenu_Initialize(this, pbInfo.Config.ThousandsSeparatorFormatDropDownShow);
+								UIDropDownMenu_SetSelectedID(this, 1);
+							</OnLoad>
+						</Scripts>
+					</Frame>
+					<Frame name="pbInfoConfig_SettingTimeStampFormat" inherits="UIDropDownMenuTemplate">
+						<Anchors>
+							<Anchor point="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="150" y="-105"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString name="pbInfoConfig_SettingTimeStampFormat_Text" inherits="GameTitleFont" justifyH="LEFT" text="TimeStamp format:">
+									<FontHeight>
+										<AbsValue val="16"/>
+									</FontHeight>
+									<Anchors>
+										<Anchor point="RIGHT" relativeTo="pbInfoConfig_SettingTimeStampFormat" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="-5" y="0"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnLoad>
+								UIDropDownMenu_SetWidth(this, 100);
+								UIDropDownMenu_Initialize(this, pbInfo.Config.TimeStampFormatDropDownShow);
+								UIDropDownMenu_SetSelectedID(this, 1);
+							</OnLoad>
+						</Scripts>
+					</Frame>
+					<Frame name="pbInfoConfig_SettingExtraLanguage" inherits="UIDropDownMenuTemplate">
+						<Anchors>
+							<Anchor point="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="150" y="-75"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString name="pbInfoConfig_SettingExtraLanguage_Text" inherits="GameTitleFont" justifyH="LEFT" text="Language:">
+									<FontHeight>
+										<AbsValue val="16"/>
+									</FontHeight>
+									<Anchors>
+										<Anchor point="RIGHT" relativeTo="pbInfoConfig_SettingExtraLanguage" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="-5" y="0"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnLoad>
+								UIDropDownMenu_SetWidth(this, 100);
+								UIDropDownMenu_Initialize(this, pbInfo.Config.LanguageDropDownShow);
+								UIDropDownMenu_SetSelectedID(this, 1);
+							</OnLoad>
+						</Scripts>
+					</Frame>
+					<Button name="pbInfoConfig_ResetButton" inherits="UIPanelButtonTemplate" text="! Reset pbInfo !">
+						<Size>
+							<AbsDimension x="100" y="30"/>
+						</Size>
+						<Anchors>
+							<Anchor point="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="10" y="-35"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								pbInfo.Config.Reset();
+							</OnClick>
+						</Scripts>
+					</Button>
+				</Frames>
+			</Frame>
+			<!-- Page: Tooltip -->
+			<Frame name="pbInfoConfig_PageTooltip" parent="pbInfoConfig">
+				<Size>
+					<AbsDimension x="400" y="350"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="pbInfoConfig" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="25"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<!-- Checkbox and label: MODIFYTOOLTIP -->
+					<CheckButton name="pbInfoConfig_SettingModifyTooltip" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: HEALTHCOLORFADE -->
+					<CheckButton name="pbInfoConfig_SettingHealthColorFade" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="25"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: SHOWMANA -->
+					<CheckButton name="pbInfoConfig_SettingShowMana" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="50"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: SHOWRACE -->
+					<CheckButton name="pbInfoConfig_SettingTooltipShowRace" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="75"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: SHOWDISTANCE
+					<CheckButton name="pbInfoConfig_SettingShowDistance" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="75"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+dropped since v0.38 'cause RoM doesn't support UnitDistance anymore -->
+					<!-- Checkbox and label: TOOLTIPSHOWPLAYERINFO -->
+					<CheckButton name="pbInfoConfig_SettingTooltipShowPlayerInfo" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="100"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: SHOWMOUSEOVERTARGET -->
+					<CheckButton name="pbInfoConfig_SettingShowMouseoverTarget" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="125"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: ALLNPC -->
+					<CheckButton name="pbInfoConfig_SettingAllNPC" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="150"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+				</Frames>
+			</Frame>
+			<!-- Page: QuestTracker2 -->
+			<Frame name="pbInfoConfig_PageTooltip2" parent="pbInfoConfig">
+				<Size>
+					<AbsDimension x="400" y="350"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="pbInfoConfig" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="25"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<!-- Checkbox and label: SHOWMATERIALINFO -->
+					<CheckButton name="pbInfoConfig_SettingShowMaterialInfo" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: SHOWMATIFOITEMCOUNT -->
+					<CheckButton name="pbInfoConfig_SettingShowMatInfoItemCount" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="25"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: SHOWMATIFOITEMCOUNTBANK -->
+					<CheckButton name="pbInfoConfig_SettingShowMatInfoItemCountBank" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="50" y="50"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: SHOWMATIFOITEMCOUNTIV -->
+					<CheckButton name="pbInfoConfig_SettingShowMatInfoItemCountIV" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="50" y="75"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: STICKYTOOLTIP -->
+					<CheckButton name="pbInfoConfig_SettingStickyTooltip" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="100"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Button: Set Tooltip position -->
+					<Button name="pbInfoConfig_SettingStickyTooltip_Button" inherits="UIPanelButtonTemplate" text="">
+						<Size>
+							<AbsDimension x="100" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="RIGHT" relativeTo="pbInfoConfig_PageTooltip" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="-20" y="120"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								pbInfo.Config.Save();
+								pbInfoTooltipBorder:Show();
+								pbInfo.Config.Hide();
+							</OnClick>
+						</Scripts>
+					</Button>
+					<!-- Checkbox and label: STICKYALLTOOLTIPS -->
+					<CheckButton name="pbInfoConfig_SettingStickyAllTooltips" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="125"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Text field and label: GameTooltipAlpha -->
+					<EditBox name="pbInfoConfig_SettingGameTooltipAlpha" inherits="pbInfoConfig_EditBox_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="155"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</EditBox>
+				</Frames>
+			</Frame>
+			<!-- Page: TargetFrame -->
+			<Frame name="pbInfoConfig_PageTargetFrame" parent="pbInfoConfig">
+				<Size>
+					<AbsDimension x="400" y="350"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="pbInfoConfig" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="25"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<!-- Checkbox and label: MODIFYHEALTHBAR -->
+					<CheckButton name="pbInfoConfig_SettingModifyHealthbar" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: HEALTHBARSHOWPERCENTAGE -->
+					<CheckButton name="pbInfoConfig_SettingHealthbarShowPercentage" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="25"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: HEALTHBARCOLORFADE -->
+					<CheckButton name="pbInfoConfig_SettingHealthbarColorFade" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="50"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+				</Frames>
+			</Frame>
+			<!-- Page: BloodBars -->
+			<Frame name="pbInfoConfig_PageBloodBars" parent="pbInfoConfig">
+				<Size>
+					<AbsDimension x="400" y="350"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="pbInfoConfig" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="25"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<!-- Checkbox and label: MODIFYHEALTHBAR -->
+					<CheckButton name="pbInfoConfig_SettingModifyBloodBars" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: BloodBarsCOLORFADE -->
+					<CheckButton name="pbInfoConfig_SettingBloodBarsColorFade" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="25"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Slider and label: BloodBarsDelay -->
+					<Slider name="pbInfoConfig_SettingBloodBarsDelay" inherits="pbInfoConfig_Slider_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="275" y="65"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Slider>
+				</Frames>
+			</Frame>
+			<!-- Page: ThreatMeter -->
+			<Frame name="pbInfoConfig_PageThreatMeter" parent="pbInfoConfig">
+				<Size>
+					<AbsDimension x="400" y="350"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="pbInfoConfig" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="25"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<!-- Checkbox and label: THREATMETER -->
+					<CheckButton name="pbInfoConfig_SettingThreatMeter" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: THREATMETERSHOWTITLE -->
+					<CheckButton name="pbInfoConfig_SettingThreatMeterShowTitle" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="200" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: THREATMETERRELATIVETOMAXTHREAT -->
+					<CheckButton name="pbInfoConfig_SettingThreatMeterRelativeToMaxThreat" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="25"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: THREATMETERSHOWREALTHREAT -->
+					<CheckButton name="pbInfoConfig_SettingThreatMeterShowRealThreat" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="50"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: THREATMETERHIDEONNOTARGET -->
+					<CheckButton name="pbInfoConfig_SettingThreatMeterHideOnNoTarget" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="75"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: THREATMETERHIDEONNOPARTY -->
+					<CheckButton name="pbInfoConfig_SettingThreatMeterHideOnNoParty" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="100"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: THREATMETERPLAYERONTOP -->
+					<CheckButton name="pbInfoConfig_SettingThreatMeterPlayerOnTop" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="125"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: THREATMETEWARNTARGETTARGETTARGET -->
+					<CheckButton name="pbInfoConfig_SettingThreatMeterWarnTargetTargetTarget" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="150"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnEnter>
+								GameTooltip:ClearAllAnchors();
+								GameTooltip:SetAnchor("TOPLEFT", "TOPLEFT", "pbInfoConfig");
+								GameTooltip["cursor"] = true;
+								GameTooltip:ClearLines();
+								GameTooltip:SetText(pbInfo.Locale["Config"]["SettingThreatMeterWarnTargetTargetTarget"]);
+								GameTooltip:AddLine(pbInfo.Locale["Config"]["TooltipThreatMeterWarnTargetTargetTarget"]);
+								GameTooltip:Show();
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide();
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<!-- Checkbox and label: THREATMETERLOCK -->
+					<CheckButton name="pbInfoConfig_SettingThreatMeterLock" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="175"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Text field and label: ThreatMeterAlpha -->
+					<EditBox name="pbInfoConfig_SettingThreatMeterAlpha" inherits="pbInfoConfig_EditBox_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="205"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</EditBox>
+					<!-- Text field and label: ThreatMeterDisplayLimit -->
+					<EditBox name="pbInfoConfig_SettingThreatMeterDisplayLimit" inherits="pbInfoConfig_EditBox_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="230"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</EditBox>
+					<!-- Slider and label: ThreatMeterDelay -->
+					<Slider name="pbInfoConfig_SettingThreatMeterDelay" inherits="pbInfoConfig_Slider_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="275" y="260"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Slider>
+				</Frames>
+			</Frame>
+			<!-- Page: QuestTracker -->
+			<Frame name="pbInfoConfig_PageQuestTracker" parent="pbInfoConfig">
+				<Size>
+					<AbsDimension x="400" y="350"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="pbInfoConfig" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="25"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<!-- Checkbox and label: QUESTTRACKER -->
+					<CheckButton name="pbInfoConfig_SettingQuestTracker" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: QUESTTRACKERSHOWTITLE -->
+					<CheckButton name="pbInfoConfig_SettingQuestTrackerShowTitle" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="200" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: QUESTTRACKERSORTASC -->
+					<CheckButton name="pbInfoConfig_SettingQuestTrackerSortAsc" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="25"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: QUESTTRACKERSHOWDAILIESCOUNTER-->
+					<CheckButton name="pbInfoConfig_SettingQuestTrackerShowDailiesCounter" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="50"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: QUESTTRACKERPROGRESSCOLORFADE -->
+					<CheckButton name="pbInfoConfig_SettingQuestTrackerProgressColorFade" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="75"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: QUESTTRACKERTOOLTIP -->
+					<CheckButton name="pbInfoConfig_SettingQuestTrackerTooltip" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="100"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: QUESTTRACKERTOOLTIPRIGHT -->
+					<CheckButton name="pbInfoConfig_SettingQuestTrackerTooltipRight" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="50" y="125"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: QUESTTRACKERTOOLTIPDESCRIPTION -->
+					<CheckButton name="pbInfoConfig_SettingQuestTrackerTooltipDescription" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="50" y="150"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: QUESTTRACKERHIGHLIGHTDAILIES-->
+					<CheckButton name="pbInfoConfig_SettingQuestTrackerHighlightDailies" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="175"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: QUESTTRACKEROPENQUESTBOOK-->
+					<CheckButton name="pbInfoConfig_SettingQuestTrackerOpenQuestbook" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="200"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+				</Frames>
+			</Frame>
+			<!-- Page: QuestTracker2 -->
+			<Frame name="pbInfoConfig_PageQuestTracker2" parent="pbInfoConfig">
+				<Size>
+					<AbsDimension x="400" y="350"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="pbInfoConfig" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="25"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<!-- Slider and label: QuestTrackerFontSizesTitle -->
+					<Slider name="pbInfoConfig_SettingQuestTrackerFontSizesTitle" inherits="pbInfoConfig_Slider_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="275" y="25"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Slider>
+					<!-- Slider and label: QuestTrackerFontSizesQuestTitle -->
+					<Slider name="pbInfoConfig_SettingQuestTrackerFontSizesQuestTitle" inherits="pbInfoConfig_Slider_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="275" y="60"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Slider>
+					<!-- Slider and label: QuestTrackerFontSizesQuestItems -->
+					<Slider name="pbInfoConfig_SettingQuestTrackerFontSizesQuestItems" inherits="pbInfoConfig_Slider_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="275" y="95"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Slider>
+					<!-- Button and label: QuestTrackerColor1 (daily quest color) -->
+					<Frame name="pbInfoConfig_SettingQuestTrackerColors1" inherits="pbInfoConfig_Colorpicker_Template" id="1">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="125"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+				</Frames>
+			</Frame>
+			<!-- Page: ChatLog -->
+			<Frame name="pbInfoConfig_PageChatLog" parent="pbInfoConfig">
+				<Size>
+					<AbsDimension x="400" y="350"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="pbInfoConfig" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="25"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<!-- Checkbox and label: CHATLOG -->
+					<CheckButton name="pbInfoConfig_SettingChatLog" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Text field and label: ChatLogMaxLinesPerChat -->
+					<EditBox name="pbInfoConfig_SettingChatLogMaxLinesPerChat" inherits="pbInfoConfig_EditBox_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="30"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</EditBox>
+				</Frames>
+			</Frame>
+			<!-- Page: ChatFrame -->
+			<Frame name="pbInfoConfig_PageChatFrame" parent="pbInfoConfig">
+				<Size>
+					<AbsDimension x="400" y="350"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="pbInfoConfig" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="25"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<!-- Checkbox and label: CHATFRAMEFILTERTITLES -->
+					<CheckButton name="pbInfoConfig_SettingChatFrameFilterTitles" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: CHATFRAMEHIDEXPTP -->
+					<CheckButton name="pbInfoConfig_SettingChatFrameFilterXPTP" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="25"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: CHATFRAMEHIDEXPTPDEBT -->
+					<CheckButton name="pbInfoConfig_SettingChatFrameFilterXPTPDebt" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="50"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- changed feature: hide progress messages -->
+					<!-- Checkbox and label: CHATFRAMEHIDEPROGRESS -->
+					<CheckButton name="pbInfoConfig_SettingChatFrameFilterProgress" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="75"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="pbInfoConfig_SettingChatFrameFilterProgressGather" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="100"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: CHATFRAMESHOWPLAYERINFO -->
+					<CheckButton name="pbInfoConfig_SettingChatFrameShowPlayerInfo" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<!-- changed dimensions instead of anchor -->
+									<AbsDimension x="0" y="125"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: TIMESTAMP -->
+					<CheckButton name="pbInfoConfig_SettingTimeStamp" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="150"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: TIMESTAMPNOTINCOMBATLOG -->
+					<CheckButton name="pbInfoConfig_SettingTimeStampNotInCombatLog" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="175"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+				</Frames>
+			</Frame>
+			<!-- Page: CastingBar -->
+			<Frame name="pbInfoConfig_PageCastingBar" parent="pbInfoConfig">
+				<Size>
+					<AbsDimension x="400" y="350"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="pbInfoConfig" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="25"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<!-- Checkbox and label: CASTINGBARSHOWCASTTIME -->
+					<CheckButton name="pbInfoConfig_SettingCastingBarShowCastTime" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Checkbox and label: CASTINGBARMOVEONLOAD -->
+					<CheckButton name="pbInfoConfig_SettingCastingBarMoveOnLoad" inherits="pbInfoConfig_CheckButton_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="25"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<!-- Button: Set Tooltip position -->
+					<Button name="pbInfoConfig_SettingCastingBar_Button" inherits="UIPanelButtonTemplate" text="Move CastingBar">
+						<Size>
+							<AbsDimension x="150" y="30"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="pbInfoConfig_SettingCastingBarMoveOnLoad" relativePoint="RIGHT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								pbInfo.Config.Save();
+								pbInfoCastingBar_MovingFrame:Show();
+								pbInfo.Config.Hide();
+							</OnClick>
+						</Scripts>
+					</Button>
+				</Frames>
+			</Frame>
+			<!-- Buttons: Save and Close -->
+			<Button name="pbInfoConfig_SaveButton" inherits="UIPanelButtonTemplate" text="Save">
+				<Size>
+					<AbsDimension x="100" y="30"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-110" y="-10"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						pbInfo.Config.Save();
+					--	pbInfoConfig:Hide();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="pbInfoConfig_CloseButton" inherits="UIPanelButtonTemplate" text="Close">
+				<Size>
+					<AbsDimension x="100" y="30"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-10" y="-10"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						pbInfoConfig:Hide();
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				pbInfo.Config.Scripts.OnLoad(this);
+				UIPanelBackdropFrame_SetTexture(this, "Interface/Common/PanelCommonFrame", 256, 256);
+			</OnLoad>
+			<OnShow>
+				pbInfo.Config.TabClick();
+				pbInfoConfig_PageGeneral:Show();
+				pbInfo.Config.Scripts.OnShow();
+			</OnShow>
+			<OnHide>
+				pbInfo.Config.Hide();
+			</OnHide>
+			<OnMouseDown>
+				this:StartMoving("TOPLEFT");
+			</OnMouseDown>
+			<OnMouseUp>
+				this:StopMovingOrSizing();
+			</OnMouseUp>
+		</Scripts>
+	</Frame>
+	<Button name="pbInfoConfigMinimapButton" hidden="false" inherits="MinimapButtonTemplate" parent="UIParent">
+	    <Size>
+	        <AbsDimension y="24" x="24"/>
+	    </Size>
+	    <Anchors>
+	        <Anchor point="CENTER" relativeTo="MinimapViewFrame" relativePoint="CENTER">
+	            <Offset>
+	                <RelDimension x="79.957" y="-2.599"/>
+	            </Offset>
+	        </Anchor>
+	    </Anchors>
+	    <Scripts>
+			<OnLoad>
+				if (AddonManager) then
+					this:Hide();
+				end;
+			</OnLoad>
+	        <OnClick>
+	            pbInfo.Config.Scripts.OnClick_MinimapButton();
+	        </OnClick>
+	        <OnEnter>				
+	            GameTooltip:SetOwner(this, "ANCHOR_LEFT", 4, 0);
+				GameTooltip:ClearLines();
+	            GameTooltip:SetText(pbInfo.Locale["Config"]["Title"], 1, 1, 1);
+	            GameTooltip:AddLine(UI_MINIMAPBUTTON_MOVE, 0, 0.75, 0.95);
+	            GameTooltip:Show();
+	        </OnEnter>
+	        <OnLeave>
+	            GameTooltip:Hide();
+	        </OnLeave>
+	    </Scripts>
+	    <NormalTexture file="Interface\AddOns\pbInfo\Textures\MinimapButton\Normal.tga"/>
+	    <PushedTexture file="Interface\AddOns\pbInfo\Textures\MinimapButton\Pushed.tga"/>
+	    <HighlightTexture file="Interface\Minimap\MinimapButton_Highlight" alphaMode="ADD"/>
+	</Button>
+	<Frame name="pbInfoTooltipBorder" enableMouse="true" hidden="true" parent="UIParent" frameStrata="DIALOG">
+		<Size>
+			<AbsDimension x="250" y="125"/>
+		</Size>
+		<Backdrop bgFile="Interface\Tooltips\Tooltip-Background" edgeFile="Interface\Tooltips\Tooltip-border" tile="true">
+			<BackgroundInsets>
+				<AbsInset top="4" left="4" bottom="4" right="4"/>
+			</BackgroundInsets>
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+		</Backdrop>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer>
+				<FontString name="pbInfoTooltipBorder_Title" inherits="GameTitleFont" text="GameTooltip position">
+					<Size>
+						<AbsDimension x="250" y="40"/>
+					</Size>
+					<FontHeight>
+						<AbsValue val="20"/>
+					</FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame>
+				<Size>
+					<AbsDimension x="250" y="55"/>
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="pbInfoTooltipBorder_Text" inherits="GameTitleFont" text="Drag and drop">
+							<Size>
+								<AbsDimension x="250" y="55"/>
+							</Size>
+							<FontHeight>
+								<AbsValue val="16"/>
+							</FontHeight>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			<Button name="pbInfoTooltipBorder_CloseButton" inherits="UIPanelButtonTemplate" text="Close">
+				<Size>
+					<AbsDimension x="100" y="30"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+							<AbsDimension x="0" y="-10"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						pbInfoTooltipBorder:Hide();
+						pbInfoConfig:Show();pbInfo.Config.TabClick();pbInfoConfig_PageTooltip:Show();
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnMouseDown>
+				this:StartMoving("TOPLEFT");
+			</OnMouseDown>
+			<OnMouseUp>
+				this:StopMovingOrSizing();
+				pbInfoSettings["GameTooltipPosition"] = {this:GetPos()};
+			</OnMouseUp>
+		</Scripts>
+	</Frame>
+</Ui>

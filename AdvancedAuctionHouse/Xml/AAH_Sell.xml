@@ -1,0 +1,1218 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ ../../../worldxml/ui.xsd">
+	<Frame name="AAH_SellItemBrowseItemTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="142" y="22"/>
+		</Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentLeft" inherits="GameFontHighlight" justifyH="LEFT" text="">
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentRight" inherits="GameFontHighlight" justifyH="RIGHT" text="">
+					<Anchors>
+						<Anchor point="RIGHT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+	<Button name="AAH_SellListHeaderTemplate" inherits="AAH_TemplateHeaderButton" virtual="true">
+		<Scripts>
+			<OnClick>AAH.Sell.ListHeader_OnClick(this)</OnClick>
+		</Scripts>
+	</Button>
+
+	<Button name="AAH_SellListItemTemplate" inherits="AAH_TemplateListItem" virtual="true">
+		<Size>
+			<AbsDimension x="598" y="40"/>
+		</Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentName" inherits="GameFontNormal" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="150" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="46" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentLevel" inherits="GameFontNormal">
+					<Size>
+						<AbsDimension x="48" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentName" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="6" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentLeftTime" inherits="GameFontHighlight">
+					<Size>
+						<AbsDimension x="70" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentLevel" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="6" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentStatus" inherits="GameFontHighlight">
+					<Size>
+						<AbsDimension x="86" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentLeftTime" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="98" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentIcon" inherits="ItemButtonTemplate">
+				<Anchors>
+					<Anchor point="LEFT">
+						<Offset>
+							<AbsDimension x="1" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+                        AAH.Sell.List_IconClick(this,key)
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT")
+						GameTooltip:SetAuctionSellItem(AuctionSellList.list[this:GetParent().index].auctionid)
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+			</Button>
+            <Button name="$parentBidder" enableMouse="true">
+                <Size>
+                    <AbsDimension x="86" y="16"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="LEFT" relativeTo="$parentLeftTime" relativePoint="RIGHT">
+                        <Offset>
+                            <AbsDimension x="6" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnLoad>
+                        this:RegisterForClicks("LeftButton", "RightButton")
+                    </OnLoad>
+                    <OnClick>
+                        AAH.Tools.ClickPlayerName(this, key)
+                    </OnClick>
+                </Scripts>
+                <NormalText inherits="GameFontHighlight">
+                    <Size>
+                        <AbsDimension x="0" y="16"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="CENTER">
+                            <Offset>
+                                <AbsDimension x="-1" y="-1"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </NormalText>
+            </Button>
+		</Frames>
+		<Scripts>
+			<OnClick>
+				AAH.Sell.List_SetSelected(this.index)
+			</OnClick>
+			<OnMouseWheel>
+				UIPanelScrollBar_OnMouseWheel(AAH_SellListScrollBar, delta)
+			</OnMouseWheel>
+		</Scripts>
+	</Button>
+
+	<Frame name="AAH_SellFrame" parent="AAH_AuctionFrame" hidden="true">
+		<Layers>
+			<Layer>
+				<FontString name="AAH_SellNumber" inherits="GameFontHighlight" text="">
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT">
+							<Offset>
+								<AbsDimension x="-170" y="-27"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="AAH_SellNumberLabel" inherits="GameFontYellow" text="">
+					<Anchors>
+						<Anchor point="RIGHT" relativeTo="AAH_SellNumber" relativePoint="LEFT">
+							<Offset>
+								<AbsDimension x="-10" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="AAH_SellItemFrame">
+				<Size>
+					<AbsDimension x="800" y="124"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="21" y="32"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\AuctionFrame\AuctionFrame-Tooltip-Border" bgFile="Interface\AuctionFrame\AuctionFrame-Tooltip-Background">
+					<EdgeSize>
+						<AbsValue val="16"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+					<BackgroundInsets>
+						<AbsInset left="16" right="16" top="16" bottom="16"/>
+					</BackgroundInsets>
+				</Backdrop>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture file="Interface\AuctionFrame\AuctionSeparate-HorizontalLine">
+							<Size>
+								<AbsDimension x="1" y="4"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="7" y="21"/>
+									</Offset>
+								</Anchor>
+								<Anchor point="TOPRIGHT">
+									<Offset>
+										<AbsDimension x="-7" y="21"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0.25" right="0.75" top="0" bottom="1"/>
+						</Texture>
+						<Texture file="Interface\AuctionFrame\AuctionSeparate-VerticalLine">
+							<Size>
+								<AbsDimension x="8" y="126"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="154" y="2"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</Texture>
+						<Texture file="Interface\AuctionFrame\AuctionSeparate-VerticalLine">
+							<Size>
+								<AbsDimension x="8" y="126"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="332" y="2"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</Texture>
+						<Texture file="Interface\AuctionFrame\AuctionSeparate-VerticalLine">
+							<Size>
+								<AbsDimension x="8" y="126"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="552" y="2"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</Texture>
+						<Texture file="Interface\AuctionFrame\AuctionSeparate-VerticalLine">
+							<Size>
+								<AbsDimension x="8" y="126"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="702" y="2"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</Texture>
+					</Layer>
+					<Layer level="ARTWORK">
+						<FontString name="AAH_SellPlaceItemLabel" inherits="GameFontYellow" text="AUCTION_GOODS_ICON_PLZ">
+							<Anchors>
+								<Anchor point="TOP" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="89" y="8"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString inherits="GameFontYellow" text="AUCTION_SELL_PRICE">
+							<Anchors>
+								<Anchor point="TOP" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="250" y="8"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="AAH_SellAutoPriceLabel" inherits="GameFontYellow" text="auto price settings">
+							<Anchors>
+								<Anchor point="TOP" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="440" y="8"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString inherits="GameFontYellow" text="AUCTION_SELL_DEADLINE">
+							<Anchors>
+								<Anchor point="TOP" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="633" y="8"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString inherits="GameFontYellow" text="AUCTION_OPERATE">
+							<Anchors>
+								<Anchor point="TOP" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="750" y="8"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Button name="AAH_SellPlaceItemButton">
+						<Size>
+							<AbsDimension x="32" y="32"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="15" y="32"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture file="Interface\Buttons\QuickSlot-Normal">
+									<Size>
+										<AbsDimension x="64" y="64"/>
+									</Size>
+									<Anchors>
+										<Anchor point="CENTER"/>
+									</Anchors>
+								</Texture>
+							</Layer>
+							<Layer level="BORDER">
+								<Texture name="AAH_SellPlaceItemButtonTexture"/>
+								<FontString name="AAH_SellPlaceItemButtonCount" inherits="NumberFontNormal" justifyH="RIGHT">
+									<Anchors>
+										<Anchor point="BOTTOMRIGHT">
+											<Offset>
+												<AbsDimension x="-5" y="-2"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+							<Layer level="ARTWORK">
+								<FontString name="AAH_SellPlaceItemButtonName" inherits="GameFontNormal" justifyH="LEFT" text="">
+									<Size>
+										<AbsDimension x="110" y="32"/>
+									</Size>
+									<Anchors>
+										<Anchor point="LEFT" relativePoint="RIGHT">
+											<Offset>
+												<AbsDimension x="5" y="0"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>AAH.Sell.OnDroppedItem()</OnClick>
+							<OnDragStart>ClickAuctionItemButton()</OnDragStart>
+							<OnReceiveDrag>AAH.Sell.OnDroppedItem()</OnReceiveDrag>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT")
+								if GetAuctionItem() then
+									GameTooltip:SetAuctionItem()
+								else
+									GameTooltip:SetText(AUCTION_GOODS_ICON_PLZ, 1.0, 1.0, 1.0)
+								end
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+						<HighlightTexture alphaMode="ADD" file="Interface\Buttons\QuickSlot-Highlight"/>
+					</Button>
+					<CheckButton name="AAH_SellMoneyAuction" inherits="AAH_SettingsCheckButtonTemplate">
+						<Size>
+							<AbsDimension x="20" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="72"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString name="$parentLabel" inherits="GameFontHighlight" text="AAH_MONEY_AUCTION" justifyH="LEFT">
+									<Anchors>
+										<Anchor point="LEFT" relativePoint="RIGHT">
+											<Offset>
+												<AbsDimension x="0" y="0"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>AAH.Sell.ChangeAuctionType( AAH_SellMoneyAuction:IsChecked() )</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\Buttons\CheckBox-Normal"/>
+						<PushedTexture file="Interface\Buttons\CheckBox-Depress"/>
+						<DisabledTexture file="Interface\Buttons\CheckBox-Disable"/>
+						<HighlightTexture file="Interface\Buttons\CheckBox-Highlight" alphaMode="ADD"/>
+						<CheckedTexture file="Interface\Buttons\CheckBox-Checked"/>
+						<DisabledCheckedTexture file="Interface\Buttons\CheckBox-Checked-Disabled"/>
+					</CheckButton>
+					<Frame name="AAH_SellMoneyMode" inherits="MoneyModeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="40" y="96"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								getglobal(this:GetName().."Button2"):Show()
+								MoneyModeFrame_SetSelected(this, 1)
+								MoneyModeFrame_SetOnValueChangeFunc(this, AAH.Sell.AuctionMoneyTypeChanged)
+							</OnLoad>
+						</Scripts>
+					</Frame>
+					<Frame name="AAH_SellMoneyAmount" hidden="true" inherits="AAH_MoneyTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="56" y="38"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellPriceBid" inherits="AAH_MoneyTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="245" y="28"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellPriceBidPPU" inherits="AAH_MoneyTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellPriceBid" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellPriceBuyout" inherits="AAH_MoneyTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellPriceBidPPU" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellPriceBuyoutPPU" inherits="AAH_MoneyTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellPriceBuyout" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellAutoFillBidDropDown" inherits="UIDropDownMenuTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="345" y="40"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Button name="AAH_SellAutoFillBidDropDownTooltip">
+						<Size>
+							<AbsDimension x="70" y="25"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellAutoFillBidDropDown" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_BOTTOM", 4, 0)
+								GameTooltip:SetText(AAHLocale.Messages.SELL_AUTO_BID_PRICE_TOOLTIP_HEADER, 1, 1, 1)
+								GameTooltip:AddLine(AAHLocale.Messages.SELL_AUTO_BID_PRICE_TOOLTIP_TEXT, 0, 0.75, 0.95)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</Button>
+					<Frame name="AAH_SellAutoFillBuyoutDropDown" inherits="UIDropDownMenuTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellAutoFillBidDropDown" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="9"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Button name="AAH_SellAutoFillBuyoutDropDownTooltip">
+						<Size>
+							<AbsDimension x="70" y="25"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellAutoFillBuyoutDropDown" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_BOTTOM", 4, 0)
+								GameTooltip:SetText(AAHLocale.Messages.SELL_AUTO_BUYOUT_PRICE_TOOLTIP_HEADER, 1, 1, 1)
+								GameTooltip:AddLine(AAHLocale.Messages.SELL_AUTO_BUYOUT_PRICE_TOOLTIP_TEXT, 0, 0.75, 0.95)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</Button>
+					<EditBox name="AAH_SellAutoFillPercentBid" inherits="UIPanelEditBoxTemplate" numeric="true" letters="3" autoFocus="false" multiLine="false" hidden="true">
+						<Size>
+							<AbsDimension x="36" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="AAH_SellAutoFillBidDropDown" relativePoint="RIGHT">
+								<Offset>
+									<AbsDimension x="5" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString name="AAH_SellAutoFillPercentBidLabel" inherits="GameFontYellow" justifyH="LEFT" text="%">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="AAH_SellAutoFillPercentBid" relativePoint="RIGHT">
+											<Offset>
+												<AbsDimension x="0" y="0"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnTextChanged>
+								if this:GetText() == "" then
+									AAH_SavedSettings.SellAutoFillPercentBidValue = 100
+								else
+									AAH_SavedSettings.SellAutoFillPercentBidValue = this:GetText()
+								end
+								AAH.Sell.AutoFillPriceFields()
+							</OnTextChanged>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_BOTTOM", 4, 0)
+								GameTooltip:SetText(AAHLocale.Messages.SELL_AUTO_PRICE_PERCENT_TOOLTIP_HEADER, 1, 1, 1)
+								GameTooltip:AddLine(AAHLocale.Messages.SELL_AUTO_PRICE_PERCENT_TOOLTIP_TEXT, 0, 0.75, 0.95)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</EditBox>
+					<EditBox name="AAH_SellAutoFillFormulaBid" inherits="UIPanelEditBoxTemplate" autoFocus="false" multiLine="false" hidden="true">
+						<Size>
+							<AbsDimension x="100" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="AAH_SellAutoFillBidDropDown" relativePoint="RIGHT">
+								<Offset>
+									<AbsDimension x="5" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>
+								AAH.Sell.AutoFillPriceFields()
+							</OnTextChanged>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_BOTTOM", 4, 0)
+								GameTooltip:SetText(AAHLocale.Messages.SELL_AUTO_PRICE_FORMULA_TOOLTIP_HEADER, 1, 1, 1)
+								GameTooltip:AddLine(AAHLocale.Messages.SELL_AUTO_PRICE_FORMULA_TOOLTIP_TEXT, 0, 0.75, 0.95)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</EditBox>
+					<EditBox name="AAH_SellAutoFillPercentBuyout" inherits="UIPanelEditBoxTemplate" numeric="true" letters="3" autoFocus="false" multiLine="false" hidden="true">
+						<Size>
+							<AbsDimension x="36" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="AAH_SellAutoFillBuyoutDropDown" relativePoint="RIGHT">
+								<Offset>
+									<AbsDimension x="5" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString name="AAH_SellAutoFillPercentBuyoutLabel" inherits="GameFontYellow" justifyH="LEFT" text="%">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="AAH_SellAutoFillPercentBuyout" relativePoint="RIGHT">
+											<Offset>
+												<AbsDimension x="0" y="0"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnTextChanged>
+								if this:GetText() == "" then
+									AAH_SavedSettings.SellAutoFillPercentBuyoutValue = 100
+								else
+									AAH_SavedSettings.SellAutoFillPercentBuyoutValue = this:GetText()
+								end
+								AAH.Sell.AutoFillPriceFields()
+							</OnTextChanged>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_BOTTOM", 4, 0)
+								GameTooltip:SetText(AAHLocale.Messages.SELL_AUTO_PRICE_PERCENT_TOOLTIP_HEADER, 1, 1, 1)
+								GameTooltip:AddLine(AAHLocale.Messages.SELL_AUTO_PRICE_PERCENT_TOOLTIP_TEXT, 0, 0.75, 0.95)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</EditBox>
+					<EditBox name="AAH_SellAutoFillFormulaBuyoutout" inherits="UIPanelEditBoxTemplate" autoFocus="false" multiLine="false" hidden="true">
+						<Size>
+							<AbsDimension x="100" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="AAH_SellAutoFillBuyoutDropDown" relativePoint="RIGHT">
+								<Offset>
+									<AbsDimension x="5" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>
+								AAH.Sell.AutoFillPriceFields()
+							</OnTextChanged>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_BOTTOM", 4, 0)
+								GameTooltip:SetText(AAHLocale.Messages.SELL_AUTO_PRICE_FORMULA_TOOLTIP_HEADER, 1, 1, 1)
+								GameTooltip:AddLine(AAHLocale.Messages.SELL_AUTO_PRICE_FORMULA_TOOLTIP_TEXT, 0, 0.75, 0.95)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</EditBox>
+					<Frame name="AAH_SellDurationDropDown" inherits="UIDropDownMenuTemplate">
+                        <Size>
+                            <AbsDimension x="143" y="25"/>
+                        </Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="578" y="30"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellFeeFrame" inherits="MoneyFrameTemplate" hidden="false">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellDurationDropDown">
+								<Offset>
+									<AbsDimension x="53" y="48"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+                            <Layer level="ARTWORK">
+								<FontString inherits="GameFontYellow" text="AUCTION_TRANSACTION_COST_COLON">
+									<Anchors>
+										<Anchor point="TOP" relativeTo="AAH_SellDurationDropDown">
+											<Offset><AbsDimension x="0" y="32"/></Offset>							
+										</Anchor>
+									</Anchors>
+								</FontString>
+                            </Layer>
+                        </Layers>						
+						<Scripts>
+							<OnLoad>
+								MoneyFrameTemplate_SetMode(this, "copper")
+								MoneyFrameTemplate_SetType(this, "STATIC")
+							</OnLoad>
+						</Scripts>
+					</Frame>
+                    <Frame name="AAH_SellProfitBuyoutFrame" inherits="MoneyFrameTemplate" hidden="false">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="AAH_SellFeeFrame">
+                                <Offset>
+                                    <AbsDimension x="0" y="16"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Layers>
+                            <Layer level="ARTWORK">
+                                <FontString inherits="GameFontYellow" text="+">
+                                    <Anchors>
+                                        <Anchor point="RIGHT" relativePoint="LEFT">
+                                            <Offset>
+                                                <AbsDimension x="-4" y="1"/>
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+                        <Scripts>
+                            <OnLoad>
+                                MoneyFrameTemplate_SetMode(this, "copper")
+                                MoneyFrameTemplate_SetType(this, "STATIC")
+                            </OnLoad>
+                        </Scripts>
+                    </Frame>
+					<Button name="AAH_SellConfirmButton" inherits="UIPanelButtonTemplate" text="AUCTION_SELL_CONFIRM">
+						<Size>
+							<AbsDimension x="66" y="24"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="718" y="30"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								if GetButtonDelayTime() == nil then
+									SetButtonDelayTime()
+									AAH.Sell.ConfirmButton_OnClick(this, key)
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button name="AAH_SellHistoryButton" inherits="UIPanelButtonTemplate" text="AUCTION_HISTORY_PRICE">
+						<Size>
+							<AbsDimension x="66" y="24"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellConfirmButton" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="8"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>AAH.Sell.RequestHistory()</OnClick>
+						</Scripts>
+					</Button>
+                    <Frame name="AAH_SellPayMoneyMode" inherits="MoneyModeFrameTemplate">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="AAH_SellHistoryButton" relativePoint="BOTTOMLEFT">
+                                <Offset>
+                                    <AbsDimension x="-6" y="8"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnLoad>
+                                if ( IsAuctionItemAccountMoneyTrade() ) then
+                                    getglobal(this:GetName().."Button2"):Show()
+                                else
+                                    getglobal(this:GetName().."Button2"):Hide()
+                                end
+                                MoneyModeFrame_SetSelected(this, 1)
+                                MoneyModeFrame_SetOnValueChangeFunc(this, AAH.Sell.AuctionPayMoneyTypeChanged)
+                            </OnLoad>
+                        </Scripts>
+                    </Frame>
+				</Frames>
+			</Frame>
+			<Frame name="AAH_SellItemBrowse" hidden="true">
+				<Size>
+					<AbsDimension x="178" y="295"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AAH_SellItemFrame" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\AuctionFrame\AuctionFrame-Tooltip-Border" bgFile="Interface\AuctionFrame\AuctionFrame-Tooltip-Background">
+					<EdgeSize>
+						<AbsValue val="16"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+					<BackgroundInsets>
+						<AbsInset left="16" right="16" top="16" bottom="16"/>
+					</BackgroundInsets>
+				</Backdrop>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture file="Interface\AuctionFrame\AuctionSeparate-HorizontalLine">
+							<Size>
+								<AbsDimension x="1" y="4"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="7" y="21"/>
+									</Offset>
+								</Anchor>
+								<Anchor point="TOPRIGHT">
+									<Offset>
+										<AbsDimension x="-7" y="21"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0.25" right="0.75" top="0" bottom="1"/>
+						</Texture>
+					</Layer>
+					<Layer level="ARTWORK">
+						<FontString name="AAH_SellItemBrowseLabel" inherits="GameFontYellow" justifyH="CENTER" text="current sale prices">
+							<Anchors>
+								<Anchor point="TOP" relativePoint="TOP">
+									<Offset>
+										<AbsDimension x="0" y="8"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Slider name="AAH_SellItemBrowseScrollBar" inherits="UIPanelScrollBarHaveBackdropTemplate">
+						<Anchors>
+							<Anchor point="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="-6" y="43"/>
+								</Offset>
+							</Anchor>
+							<Anchor point="BOTTOMRIGHT">
+								<Offset>
+									<AbsDimension x="-6" y="-26"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>this:SetValueStepMode("INT")</OnLoad>
+							<OnValueChanged>UIPanelScrollBar_OnValueChanged(this, arg1)</OnValueChanged>
+						</Scripts>
+					</Slider>
+					<Frame name="AAH_SellItemBrowseItem1" inherits="AAH_SellItemBrowseItemTemplate" id="1">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="11" y="25"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellItemBrowseItem2" inherits="AAH_SellItemBrowseItemTemplate" id="2">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellItemBrowseItem1" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellItemBrowseItem3" inherits="AAH_SellItemBrowseItemTemplate" id="3">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellItemBrowseItem2" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellItemBrowseItem4" inherits="AAH_SellItemBrowseItemTemplate" id="4">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellItemBrowseItem3" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellItemBrowseItem5" inherits="AAH_SellItemBrowseItemTemplate" id="5">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellItemBrowseItem4" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellItemBrowseItem6" inherits="AAH_SellItemBrowseItemTemplate" id="6">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellItemBrowseItem5" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellItemBrowseItem7" inherits="AAH_SellItemBrowseItemTemplate" id="7">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellItemBrowseItem6" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellItemBrowseItem8" inherits="AAH_SellItemBrowseItemTemplate" id="8">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellItemBrowseItem7" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellItemBrowseItem9" inherits="AAH_SellItemBrowseItemTemplate" id="9">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellItemBrowseItem8" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellItemBrowseItem10" inherits="AAH_SellItemBrowseItemTemplate" id="10">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellItemBrowseItem9" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellItemBrowseItem11" inherits="AAH_SellItemBrowseItemTemplate" id="11">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellItemBrowseItem10" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellItemBrowseItem12" inherits="AAH_SellItemBrowseItemTemplate" id="12">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellItemBrowseItem11" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellItemBrowseItem13" inherits="AAH_SellItemBrowseItemTemplate" id="13">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellItemBrowseItem12" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellItemBrowseItem14" inherits="AAH_SellItemBrowseItemTemplate" id="14">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellItemBrowseItem13" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellItemBrowseItem15" inherits="AAH_SellItemBrowseItemTemplate" id="15">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellItemBrowseItem14" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellItemBrowseItem16" inherits="AAH_SellItemBrowseItemTemplate" id="16">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellItemBrowseItem15" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellItemBrowseItem17" inherits="AAH_SellItemBrowseItemTemplate" id="17">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellItemBrowseItem16" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellItemBrowseItem18" inherits="AAH_SellItemBrowseItemTemplate" id="18">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellItemBrowseItem17" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellItemBrowseItem19" inherits="AAH_SellItemBrowseItemTemplate" id="19">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellItemBrowseItem18" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellItemBrowseItem20" inherits="AAH_SellItemBrowseItemTemplate" id="20">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellItemBrowseItem19" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellItemBrowseItem21" inherits="AAH_SellItemBrowseItemTemplate" id="21">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellItemBrowseItem20" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Frame>
+					<Frame name="AAH_SellItemBrowseItem22" inherits="AAH_SellItemBrowseItemTemplate" id="22">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellItemBrowseItem21" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Frame>
+				</Frames>
+			</Frame>
+			<Frame name="AAH_SellList">
+				<Size>
+					<AbsDimension x="628" y="295"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AAH_SellItemBrowse" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\AuctionFrame\AuctionFrame-Tooltip-Border" bgFile="Interface\AuctionFrame\AuctionFrame-Tooltip-Background">
+					<EdgeSize>
+						<AbsValue val="16"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+					<BackgroundInsets>
+						<AbsInset left="16" right="16" top="16" bottom="16"/>
+					</BackgroundInsets>
+				</Backdrop>
+				<Frames>
+					<Slider name="AAH_SellListScrollBar" inherits="UIPanelScrollBarHaveBackdropTemplate">
+						<Anchors>
+							<Anchor point="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="-6" y="44"/>
+								</Offset>
+							</Anchor>
+							<Anchor point="BOTTOMRIGHT">
+								<Offset>
+									<AbsDimension x="-6" y="-24"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this:SetValueStepMode("INT")
+							</OnLoad>
+							<OnValueChanged>
+								UIPanelScrollBar_OnValueChanged(this, arg1)
+								AAH.Sell.List_UpdateItems()
+							</OnValueChanged>
+						</Scripts>
+					</Slider>
+					<Button name="AAH_SellHeaderName" inherits="AAH_SellListHeaderTemplate" text="C_ITEM_NAME" id="1">
+						<Anchors>
+							<Anchor point="TOP" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="112" y="6"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_SellHeaderLevel" inherits="AAH_SellListHeaderTemplate" text="C_LEVEL" id="2">
+						<Anchors>
+							<Anchor point="TOP" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="236" y="6"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_SellHeaderLeftTime" inherits="AAH_SellListHeaderTemplate" text="AUCTION_BALANCE_TIME" id="3">
+						<Anchors>
+							<Anchor point="TOP" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="298" y="6"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_SellHeaderBuyer" inherits="AAH_SellListHeaderTemplate" text="AUCTION_BUYER" id="4">
+						<Anchors>
+							<Anchor point="TOP" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="392" y="6"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_SellHeaderPrice" inherits="AAH_SellListHeaderTemplate" text="AUCTION_PRICE" id="6">
+						<Anchors>
+							<Anchor point="TOP" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="540" y="6"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_SellListItem1" inherits="AAH_SellListItemTemplate" id="1">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="28"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_SellListItem2" inherits="AAH_SellListItemTemplate" id="2">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellListItem1" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_SellListItem3" inherits="AAH_SellListItemTemplate" id="3">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellListItem2" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_SellListItem4" inherits="AAH_SellListItemTemplate" id="4">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellListItem3" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_SellListItem5" inherits="AAH_SellListItemTemplate" id="5">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellListItem4" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_SellListItem6" inherits="AAH_SellListItemTemplate" id="6">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellListItem5" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_SellListItem7" inherits="AAH_SellListItemTemplate" id="7">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellListItem6" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_SellListItem8" inherits="AAH_SellListItemTemplate" id="8">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellListItem7" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_SellListItem9" inherits="AAH_SellListItemTemplate" id="9">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellListItem8" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_SellListItem10" inherits="AAH_SellListItemTemplate" id="10">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellListItem9" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_SellListItem11" inherits="AAH_SellListItemTemplate" id="11">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_SellListItem10" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+				</Frames>
+			</Frame>
+			<Button name="AAH_SellListCancelButton" inherits="UIPanelButtonTemplate" text="AUCTION_CANCEL_SELL">
+				<Size>
+					<AbsDimension x="90" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-52" y="-20"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if AuctionSellList.selected then
+							AuctionCancelSell(AuctionSellList.list[AuctionSellList.selected].auctionid)
+						end
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>AAH.Sell.OnLoad(this)</OnLoad>
+            <OnShow>AAH.Sell.OnShow()</OnShow>
+            <OnHide>AAH.Sell.OnHide()</OnHide>
+		</Scripts>
+	</Frame>
+</Ui>

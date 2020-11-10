@@ -1,0 +1,8 @@
+Version: 1.1.1
+	- Time will now be saved as long as the Client is online
+Version: 1.1
+	- Added Addon Manager
+	- Added Slash command to enable/disable use of chat
+	- Bugfixes
+Version: 1.0
+	- Initial Release

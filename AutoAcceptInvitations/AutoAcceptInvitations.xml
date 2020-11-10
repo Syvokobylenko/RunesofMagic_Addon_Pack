@@ -1,0 +1,46 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+
+	<Script file="AutoAcceptInvitations.lua"/>
+
+	<Frame name="AutoAI_Frame" hidden="true">
+		<Scripts>
+			<OnLoad>
+				AutoAI.OnLoad(this)
+			</OnLoad>
+			<OnEvent>
+				AutoAI.OnEvent(event)
+			</OnEvent>
+		</Scripts>
+	</Frame>
+	<Button name="AutoAI_Button" hidden="false" inherits="MinimapButtonTemplate" parent="UIParent">
+		<Size>
+			<AbsDimension y="24" x="24"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="MinimapViewFrame" relativePoint="CENTER">
+				<Offset>
+					<RelDimension x="-85" y="-2.5"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Frame name="AutoAI_Menu" inherits="UIDropDownMenuTemplate" hidden="true">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AutoAI_Button" relativePoint="TOP"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>UIDropDownMenu_Initialize(this, AutoAI.MenuOnShow, "MENU")</OnLoad>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<Scripts>
+            <OnLoad>this:RegisterForClicks("LeftButton","RightButton")</OnLoad>
+			<OnClick>AutoAI.ButtonOnClick(this, key)</OnClick>
+			<OnEnter>AutoAI.ButtonOnEnter(this)</OnEnter>
+			<OnLeave>AutoAI.ButtonOnLeave(this)</OnLeave>
+		</Scripts>
+		<NormalTexture file="interface/AddOns/AutoAcceptInvitations/img/icon_default"/>
+		<PushedTexture file="interface/AddOns/AutoAcceptInvitations/img/icon_light"/>
+		<HighlightTexture file="interface/minimap/minimapbutton_highlight" alphaMode="ADD"/>
+	</Button>
+</Ui>

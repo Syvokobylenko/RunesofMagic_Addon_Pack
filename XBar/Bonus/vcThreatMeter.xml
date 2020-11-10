@@ -1,0 +1,138 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="..\..\worldxml\ui.xsd">
+	<StatusBar name="vcThreatMeter_StatusBarTemplate" virtual="true" minValue="0" maxValue="100">
+		<Size>
+			<AbsDimension x="160" y="12"/>
+		</Size>
+		<Frames>
+			<Frame name="$parentText">
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString name="$parentLeft" inherits="GameTitleFont" justifyH="LEFT" text="">
+							<Size>
+								<AbsDimension x="77" y="12"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT"/>
+							</Anchors>
+							<FontHeight>
+								<AbsValue val="10"/>
+							</FontHeight>
+						</FontString>
+
+						<FontString name="$parentRight" inherits="GameTitleFont" justifyH="RIGHT" text="">
+							<Size>
+								<AbsDimension x="83" y="12"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPRIGHT"/>
+							</Anchors>
+							<FontHeight>
+								<AbsValue val="10"/>
+							</FontHeight>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+		</Frames>
+		<BarTexture file="Interface\Common\Bar\Bantobar"/>
+		<BarColor r="0.5" g="0.5" b="0.5" a="0.5"/>
+	</StatusBar>
+
+
+	<Frame name="vcThreatMeter" hidden="true" parent="UIParent" frameStrata="BACKGROUND">
+		<Size>
+			<AbsDimension x="160" y="72"/>
+		</Size>
+		<Backdrop bgFile="Interface\Tooltips\Tooltip-Background" tile="true">
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+		</Backdrop>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="-400" y="75"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+
+		<Frames>
+			<StatusBar name="$parent_Bar1" inherits="vcThreatMeter_StatusBarTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT"/>
+				</Anchors>
+			</StatusBar>
+			<Frame name="$parent_Move" enableMouse="true">
+				<Size>
+					<AbsDimension x="160" y="12"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT"/>
+				</Anchors>
+				<Scripts>
+					<OnMouseDown>
+						if IsShiftKeyDown() then
+							this:GetParent():StartMoving("TOPLEFT");
+						end
+					</OnMouseDown>
+
+					<OnMouseUp>
+						this:GetParent():StopMovingOrSizing();
+					</OnMouseUp>
+					<OnEnter>
+						GameTooltip:SetOwner(this,"ANCHOR_TOP",0,0);
+						GameTooltip:SetText("vcThreatMeter");
+						GameTooltip:AddLine(UIPANELANCHORFRAME_TOOLTIP,0,.7,.9);
+					</OnEnter>
+					<OnLeave>GameTooltip:Hide();</OnLeave>
+				</Scripts>
+			</Frame>
+
+			<StatusBar name="$parent_Bar2" inherits="vcThreatMeter_StatusBarTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="vcThreatMeter_Bar1" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</StatusBar>
+
+			<StatusBar name="$parent_Bar3" inherits="vcThreatMeter_StatusBarTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="vcThreatMeter_Bar2" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</StatusBar>
+
+			<StatusBar name="$parent_Bar4" inherits="vcThreatMeter_StatusBarTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="vcThreatMeter_Bar3" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</StatusBar>
+
+			<StatusBar name="$parent_Bar5" inherits="vcThreatMeter_StatusBarTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="vcThreatMeter_Bar4" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</StatusBar>
+
+			<StatusBar name="$parent_Bar6" inherits="vcThreatMeter_StatusBarTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="vcThreatMeter_Bar5" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</StatusBar>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				vcThreatMeter_OnLoad(this)
+				vcThreatMeter:SetBackdropTileAlpha(0.5);
+			</OnLoad>
+
+			<OnEvent>
+				vcThreatMeter_OnEvent(this, event)
+			</OnEvent>
+
+			<OnUpdate>
+				-- vcThreatMeter_OnUpdate(this, elapsedTime)
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+
+
+</Ui>

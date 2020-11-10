@@ -1,0 +1,1035 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/..\..\WorldXML\UI.xsd">
+	<Frame name="DL_func" hidden="false">
+		<Scripts>
+			<OnLoad>
+				DL.OnLoad(this)
+			</OnLoad>
+			<OnEvent>
+				DL.OnEvent(event)
+			</OnEvent>
+		</Scripts>
+	</Frame>
+
+	<Button name="DL_Minimap" hidden="false" inherits="MinimapButtonTemplate" parent="UIParent">
+		<Size>
+			<AbsDimension y="24" x="24"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="MinimapViewFrame" relativePoint="CENTER">
+				<Offset>
+					<RelDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnClick>
+				ToggleUIFrame(DL_main_frame)
+			</OnClick>
+			<OnEnter>
+				GameTooltip:Show();
+				GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT", 0, 0);
+				GameTooltip:SetText("DL")
+				GameTooltip:AddSeparator();
+				GameTooltip:AddLine(UI_MINIMAPBUTTON_MOVE, 0, 0.75, 0.95) -- Set move notification --
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+		</Scripts>
+	    <NormalTexture file="Interface\playerframe\playerlooterbutton-normal.tga"/>
+	    <PushedTexture file="Interface\playerframe\playerlooterbutton-depress.tga"/>
+	    <HighlightTexture file="Interface\playerframe\playerlooterbutton-highlight.tga" alphaMode="ADD"/>
+	</Button>
+
+	<Frame name="DL_main_frame" inherits="UICommonFrameTemplate" enableMouse="true" parent="UIParent" hidden="true" frameStrata="HIGH">
+		<Anchors>
+			<Anchor point="CENTER"/>
+		</Anchors>
+		<Size>
+			<AbsDimension x="320" y="500"/>
+		</Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parent_name" inherits="GameTitleFont" >
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="0" y="8"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent_info" inherits="GameFontNormal" >
+					<Anchors>
+						<Anchor point="BOTTOM" relativePoint="BOTTOM">
+							<Offset>
+								<AbsDimension x="0" y="-4"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<EditBox name="$parentSearch" inherits="UIPanelEditBoxTemplate" >
+				<Size>
+					<AbsDimension x="200" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="15" y="35" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnterPressed>
+						this:ClearFocus()
+					</OnEnterPressed>
+					<OnTextChanged>
+						DL.ui.update = GetTime()
+					</OnTextChanged>
+				</Scripts>
+			</EditBox>
+			<Button name="$parent_MoreButton" inherits="UIPanelButtonTemplate" text="MoreButton">
+				<Size>
+					<AbsDimension x="90" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-10" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						ToggleUIFrame(DL_adv_frame)
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Frame name="$parent_list" enableMouse="true">
+				<Size>
+					<AbsDimension x="270" y="425"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="15" y="60"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\Tooltip-border" bgFile="Interface\SocialFrame\SocialFrame_Contextborder_bg">
+					<EdgeSize>
+						<AbsValue val="10"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="5"/>
+					</TileSize>
+				</Backdrop>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parent_Highlight" file="Interface\Login\Common\ServerlistButton-Highlight" hidden="true"/>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Button name="$parent_Button0"  inherits="DL_List_HeadButton_Template" />
+					<Button name="$parent_Button1" inherits="DL_ListButton_Template" />
+					<Button name="$parent_Button2" inherits="DL_ListButton_Template" />
+					<Button name="$parent_Button3" inherits="DL_ListButton_Template" />
+					<Button name="$parent_Button4" inherits="DL_ListButton_Template" />
+					<Button name="$parent_Button5" inherits="DL_ListButton_Template" />
+					<Button name="$parent_Button6" inherits="DL_ListButton_Template" />
+					<Button name="$parent_Button7" inherits="DL_ListButton_Template" />
+					<Button name="$parent_Button8" inherits="DL_ListButton_Template" />
+					<Button name="$parent_Button9" inherits="DL_ListButton_Template" />
+					<Button name="$parent_Button10" inherits="DL_ListButton_Template" />
+					<Button name="$parent_Button11" inherits="DL_ListButton_Template" />
+					<Button name="$parent_Button12" inherits="DL_ListButton_Template" />
+					<Button name="$parent_Button13" inherits="DL_ListButton_Template" />
+					<Button name="$parent_Button14" inherits="DL_ListButton_Template" />
+					<Button name="$parent_Button15" inherits="DL_ListButton_Template" />
+					<Button name="$parent_Button16" inherits="DL_ListButton_Template" />
+					<Button name="$parent_Button17" inherits="DL_ListButton_Template" />
+					<Button name="$parent_Button18" inherits="DL_ListButton_Template" />
+					<Button name="$parent_Button19" inherits="DL_ListButton_Template" />
+					<Button name="$parent_Button20" inherits="DL_ListButton_Template" />
+				</Frames>
+				<Scripts>
+					<OnLoad>
+						for n=0,20 do
+							local btn=_G[this:GetName().."_Button"..n]
+							btn:ClearAllAnchors()
+							btn:SetID(n)
+							btn:SetAnchor("TOPLEFT", "TOPLEFT", this:GetName(), 5, (n+1)*20-20)
+							btn:SetAnchor("BOTTOMRIGHT", "TOPRIGHT", this:GetName(), -5, (n+1)*20+0)
+						end
+					</OnLoad>
+					<OnShow>
+						DL.ui.FilterList()
+					</OnShow>
+				</Scripts>
+			</Frame>
+			<Slider name="$parent_ScrollBar" inherits="DL_ScrollbarTemplate">
+				<Size>
+					<AbsDimension x="10" y="380"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+						<Offset><AbsDimension x="290" y="85"/></Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this:SetValueStepMode("INT");
+					</OnLoad>
+					<OnValueChanged>
+						DL.ui.OnValueChanged(this)
+					</OnValueChanged>
+					<OnMouseWheel>
+						DL.ui.Scroll(DL_main_frame_ScrollBar,delta);
+					</OnMouseWheel>
+				</Scripts>
+			</Slider>
+		</Frames>
+		<Scripts>
+			<OnUpdate>
+				DL.ui.OnUpdate()
+			</OnUpdate>
+			<OnMouseDown>
+				this:StartMoving()
+			</OnMouseDown>
+			<OnMouseUp>
+				this:StopMovingOrSizing()
+			</OnMouseUp>
+		</Scripts>
+	</Frame>
+	<Frame name="DL_adv_frame" inherits="UICommonFrameTemplate" enableMouse="true" parent="DL_main_frame" hidden="true">
+		<Anchors>
+			<Anchor point="TOPLEFT" relativePoint="TOPRIGHT"/>
+		</Anchors>
+		<Size>
+			<AbsDimension x="300" y="500"/>
+		</Size>
+		<Frames>
+			<Frame name="$parent_search">
+				<Frames>
+					<Button name="$parent_CUR_INSTANCE" inherits="UIPanelButtonTemplate" text="">
+						<Size>
+							<AbsDimension x="140" y="25"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+								<Offset>
+									<AbsDimension x="10" y="50" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								DL.ui.CurrentInstanceBossButtonOnClick(true, nil)
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button name="$parent_CUR_Boss" inherits="UIPanelButtonTemplate" text="C_SEARCH">
+						<Size>
+							<AbsDimension x="140" y="25"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_CUR_INSTANCE">
+								<Offset>
+									<AbsDimension x="0" y="0" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								DL.ui.CurrentInstanceBossButtonOnClick(nil, true)
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button name="$parent_Instance" inherits="UIPanelButtonTemplate" text="Opposite Sex">
+						<Size>
+							<AbsDimension x="140" y="25"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_CUR_INSTANCE">
+								<Offset>
+									<AbsDimension x="0" y="10" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								DL.ui.SetListType(0)
+								DL.ui.SetChangerText()
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button name="$parent_Boss" inherits="UIPanelButtonTemplate" text="C_SEARCH">
+						<Size>
+							<AbsDimension x="140" y="25"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_Instance">
+								<Offset>
+									<AbsDimension x="0" y="0" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								DL.ui.SetListType(1)
+								DL.ui.SetChangerText()
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button name="$parent_Items" inherits="UIPanelButtonTemplate" text="Opposite Sex">
+						<Size>
+							<AbsDimension x="140" y="25"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_Instance">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								DL.ui.SetListType(2)
+								DL.ui.SetChangerText()
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button name="$parent_Search" inherits="UIPanelButtonTemplate" text="C_SEARCH">
+						<Size>
+							<AbsDimension x="140" y="25"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_Items">
+								<Offset>
+									<AbsDimension x="0" y="0" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								DL.ui.SetListType(3)
+								DL.ui.SetChangerText()
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button name="$parent_Treasure" inherits="UIPanelButtonTemplate" text="C_SEARCH">
+						<Size>
+							<AbsDimension x="140" y="25"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_Items">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								DL.ui.SetListType(4)
+								DL.ui.SetChangerText()
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Frame name="$parent_search">
+						<Backdrop edgeFile="Interface\Tooltips\Tooltip-border" bgFile="Interface\Tooltips\Tooltip-Background">
+							<BackgroundInsets>
+								<AbsInset top="4" left="4" bottom="4" right="4"/>
+							</BackgroundInsets>
+							<EdgeSize>
+								<AbsValue val="16"/>
+							</EdgeSize>
+							<TileSize>
+								<AbsValue val="16"/>
+							</TileSize>
+						</Backdrop>
+						<Size>
+							<AbsDimension x="280" y="190"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="165" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Frames>
+							<Frame name="$parent_Edit" inherits="DL_EditBox_with_LayerTemplate">
+								<Size>
+									<AbsDimension x="260" y="20" />
+								</Size>
+								<Anchors>
+									<Anchor point="TOPLEFT">
+										<Offset>
+											<AbsDimension x="10" y="10" />
+										</Offset>
+									</Anchor>
+								</Anchors>
+								<Scripts>
+									<OnLoad>
+										_G[this:GetName() .. "_Edit"]:SetSize(180,20)
+										_G[this:GetName() .. "_layer"]:SetSize(80,20)
+										this.func = function() DL.ui.StartSearchOnClick() end
+									</OnLoad>
+								</Scripts>
+							</Frame>
+							<CheckButton name="$parent_boss" inherits="DL_CheckLabelTemplate">
+								<Size>
+									<AbsDimension x="20" y="20" />
+								</Size>
+								<Anchors>
+									<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Edit">
+										<Offset>
+											<AbsDimension x="0" y="5" />
+										</Offset>
+									</Anchor>
+								</Anchors>
+								<Scripts>
+									<OnLoad>
+										this.func = function() DL.search.boss = this:IsChecked() end
+										_G[this:GetName() .. "_Label"]:SetSize(200,20)
+									</OnLoad>
+								</Scripts>
+							</CheckButton>
+							<CheckButton name="$parent_instance" inherits="DL_CheckLabelTemplate">
+								<Size>
+									<AbsDimension x="20" y="20" />
+								</Size>
+								<Anchors>
+									<Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_boss"/>
+								</Anchors>
+								<Scripts>
+									<OnLoad>
+										this.func = function() DL.search.instance = this:IsChecked() end
+										_G[this:GetName() .. "_Label"]:SetSize(200,20)
+									</OnLoad>
+								</Scripts>
+							</CheckButton>
+							<CheckButton name="$parent_item" inherits="DL_CheckLabelTemplate">
+								<Size>
+									<AbsDimension x="20" y="20" />
+								</Size>
+								<Anchors>
+									<Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_instance"/>
+								</Anchors>
+								<Scripts>
+									<OnLoad>
+										this.func = function() DL.search.item = this:IsChecked() end
+										_G[this:GetName() .. "_Label"]:SetSize(200,20)
+									</OnLoad>
+								</Scripts>
+							</CheckButton>
+							<CheckButton name="$parent_treasure" inherits="DL_CheckLabelTemplate">
+								<Size>
+									<AbsDimension x="20" y="20" />
+								</Size>
+								<Anchors>
+									<Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_item"/>
+								</Anchors>
+								<Scripts>
+									<OnLoad>
+										this.func = function() DL.search.treasure = this:IsChecked() end
+										_G[this:GetName() .. "_Label"]:SetSize(200,20)
+									</OnLoad>
+								</Scripts>
+							</CheckButton>
+							<CheckButton name="$parent_bossinstance" inherits="DL_CheckLabelTemplate">
+								<Size>
+									<AbsDimension x="20" y="20" />
+								</Size>
+								<Anchors>
+									<Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_treasure"/>
+								</Anchors>
+								<Scripts>
+									<OnLoad>
+										this.func = function() DL.search.bossinstance = this:IsChecked() end
+										_G[this:GetName() .. "_Label"]:SetSize(200,20)
+									</OnLoad>
+								</Scripts>
+							</CheckButton>
+							<CheckButton name="$parent_onlyinstance" inherits="DL_CheckLabelTemplate">
+								<Size>
+									<AbsDimension x="20" y="20" />
+								</Size>
+								<Anchors>
+									<Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_bossinstance"/>
+								</Anchors>
+								<Scripts>
+									<OnLoad>
+										this.func = function()
+											DL.search.onlyinstance = this:IsChecked()
+											DL.ui.listtype = 3
+											DL.ui.FilterList()
+										end
+										_G[this:GetName() .. "_Label"]:SetSize(200,20)
+									</OnLoad>
+								</Scripts>
+							</CheckButton>	
+							<Button name="$parent_SEARCH" inherits="UIPanelButtonTemplate" text="C_SEARCH">
+								<Size>
+									<AbsDimension x="140" y="20"/>
+								</Size>
+								<Anchors>
+									<Anchor point="BOTTOM" relativePoint="BOTTOM" relativeTo="$parent">
+										<Offset>
+											<AbsDimension x="0" y="-5" />
+										</Offset>
+									</Anchor>
+								</Anchors>
+								<Scripts>
+									<OnClick>
+										DL.ui.StartSearchOnClick()
+									</OnClick>
+								</Scripts>
+							</Button>
+						</Frames>
+					</Frame>
+
+					<Button name="$parent_OPPOSITE_SEX" inherits="UIPanelButtonTemplate" text="Opposite Sex">
+						<Size>
+							<AbsDimension x="140" y="25"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_search">
+								<Offset>
+									<AbsDimension x="0" y="10" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								if UnitSex("player") == 1 then
+									DL_PreviewFrameModel:SetDummyMale()
+								else
+									DL_PreviewFrameModel:SetDummyFemale()
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button name="$parent_SEX" inherits="UIPanelButtonTemplate" text="normal Sex">
+						<Size>
+							<AbsDimension x="140" y="25"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_OPPOSITE_SEX">
+								<Offset>
+									<AbsDimension x="0" y="0" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								if IsCtrlKeyDown() and UnitExists("target") then
+									DL_PreviewFrameModel:SetUnit( "target" , 1 );
+								else
+									DL_PreviewFrameModel:SetUnit( "player" , 1 );
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+
+					<Frame name="$parent_Colorhelmet" inherits="DL_ColorPickerButtons_Template" id="0" text="">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_OPPOSITE_SEX">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="$parent_Colortorso" inherits="DL_ColorPickerButtons_Template" id="3">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Colorhelmet">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="$parent_Colorbelt" inherits="DL_ColorPickerButtons_Template" id="6">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Colortorso">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="$parent_Colorleg" inherits="DL_ColorPickerButtons_Template" id="4">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Colorbelt">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+
+					<Frame name="$parent_Colorshoulder" inherits="DL_ColorPickerButtons_Template" id="7">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_SEX">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="$parent_Colorhand" inherits="DL_ColorPickerButtons_Template" id="1">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Colorshoulder">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="$parent_Colorfoot" inherits="DL_ColorPickerButtons_Template" id="2">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Colorhand">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="$parent_Colorback" inherits="DL_ColorPickerButtons_Template" id="5">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Colorfoot">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+				</Frames>
+			</Frame>
+			<Frame name="$parent_plus" hidden="true">
+				<Frames>
+					<Frame name="$parent_PLUS" inherits="DL_NumEditBox_with_LayerTemplate">
+						<Size>
+							<AbsDimension x="140" y="20" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="50" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								_G[this:GetName() .. "_Edit"]:SetSize(50,20)
+								_G[this:GetName() .. "_layer"]:SetSize(80,20)
+								this.next = _G[this:GetParent():GetName().."_TIER_Edit"]
+								this.func = function() DL.plus.CreateItem(DL.ui.ListSelect) end
+							</OnLoad>
+						</Scripts>
+					</Frame>
+					<Frame name="$parent_TIER" inherits="DL_NumEditBox_with_LayerTemplate">
+						<Size>
+							<AbsDimension x="140" y="20" />
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_PLUS">
+								<Offset>
+									<AbsDimension x="0" y="0" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								_G[this:GetName() .. "_Edit"]:SetSize(50,20)
+								_G[this:GetName() .. "_layer"]:SetSize(80,20)
+								this.next = _G[this:GetParent():GetName().."_DURA_Edit"]
+								this.func = function() DL.plus.CreateItem(DL.ui.ListSelect) end
+							</OnLoad>
+						</Scripts>
+					</Frame>
+					<Frame name="$parent_DURA" inherits="DL_NumEditBox_with_LayerTemplate">
+						<Size>
+							<AbsDimension x="140" y="20" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_PLUS">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								_G[this:GetName() .. "_Edit"]:SetSize(50,20)
+								_G[this:GetName() .. "_layer"]:SetSize(80,20)
+								this.next = _G[this:GetParent():GetName().."RARITY_Edit"]
+								this.func = function() DL.plus.CreateItem(DL.ui.ListSelect) end
+							</OnLoad>
+						</Scripts>
+					</Frame>
+					<Frame name="$parent_RARITY" inherits="DL_NumEditBox_with_LayerTemplate">
+						<Size>
+							<AbsDimension x="140" y="20" />
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_DURA">
+								<Offset>
+									<AbsDimension x="0" y="0" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								_G[this:GetName() .. "_Edit"]:SetSize(50,20)
+								_G[this:GetName() .. "_layer"]:SetSize(80,20)
+								this.next = _G[this:GetParent():GetName().."STAT1_Edit"]
+								this.func = function() DL.plus.CreateItem(DL.ui.ListSelect) end
+							</OnLoad>
+						</Scripts>
+					</Frame>
+					<Frame name="$parent_STAT1" inherits="DL_EditBox_with_LayerTemplate">
+						<Size>
+							<AbsDimension x="280" y="20" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_DURA">
+								<Offset>
+									<AbsDimension x="0" y="10" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								_G[this:GetName() .. "_Edit"]:SetSize(190,20)
+								_G[this:GetName() .. "_layer"]:SetSize(80,20)
+								this.next = _G[this:GetParent():GetName().."STAT2_Edit"]
+								this.func = function() DL.plus.CreateItem(DL.ui.ListSelect) end
+							</OnLoad>
+						</Scripts>
+					</Frame>
+					<Frame name="$parent_STAT2" inherits="DL_EditBox_with_LayerTemplate">
+						<Size>
+							<AbsDimension x="280" y="20" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_STAT1">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								_G[this:GetName() .. "_Edit"]:SetSize(190,20)
+								_G[this:GetName() .. "_layer"]:SetSize(80,20)
+								this.next = _G[this:GetParent():GetName().."STAT3_Edit"]
+								this.func = function() DL.plus.CreateItem(DL.ui.ListSelect) end
+							</OnLoad>
+						</Scripts>
+					</Frame>
+					<Frame name="$parent_STAT3" inherits="DL_EditBox_with_LayerTemplate">
+						<Size>
+							<AbsDimension x="280" y="20" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_STAT2">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								_G[this:GetName() .. "_Edit"]:SetSize(190,20)
+								_G[this:GetName() .. "_layer"]:SetSize(80,20)
+								this.next = _G[this:GetParent():GetName().."STAT4_Edit"]
+								this.func = function() DL.plus.CreateItem(DL.ui.ListSelect) end
+							</OnLoad>
+						</Scripts>
+					</Frame>
+					<Frame name="$parent_STAT4" inherits="DL_EditBox_with_LayerTemplate">
+						<Size>
+							<AbsDimension x="280" y="20" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_STAT3">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								_G[this:GetName() .. "_Edit"]:SetSize(190,20)
+								_G[this:GetName() .. "_layer"]:SetSize(80,20)
+								this.next = _G[this:GetParent():GetName().."STAT5_Edit"]
+								this.func = function() DL.plus.CreateItem(DL.ui.ListSelect) end
+							</OnLoad>
+						</Scripts>
+					</Frame>
+					<Frame name="$parent_STAT5" inherits="DL_EditBox_with_LayerTemplate">
+						<Size>
+							<AbsDimension x="280" y="20" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_STAT4">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								_G[this:GetName() .. "_Edit"]:SetSize(190,20)
+								_G[this:GetName() .. "_layer"]:SetSize(80,20)
+								this.next = _G[this:GetParent():GetName().."STAT6_Edit"]
+								this.func = function() DL.plus.CreateItem(DL.ui.ListSelect) end
+							</OnLoad>
+						</Scripts>
+					</Frame>
+					<Frame name="$parent_STAT6" inherits="DL_EditBox_with_LayerTemplate">
+						<Size>
+							<AbsDimension x="280" y="20" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_STAT5">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								_G[this:GetName() .. "_Edit"]:SetSize(190,20)
+								_G[this:GetName() .. "_layer"]:SetSize(80,20)
+								this.next = _G[this:GetParent():GetName().."RUNE1_Edit"]
+								this.func = function() DL.plus.CreateItem(DL.ui.ListSelect) end
+							</OnLoad>
+						</Scripts>
+					</Frame>
+
+					<Frame name="$parent_RUNE1" inherits="DL_EditBox_with_LayerTemplate">
+						<Size>
+							<AbsDimension x="280" y="20" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_STAT6">
+								<Offset>
+									<AbsDimension x="0" y="10" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								_G[this:GetName() .. "_Edit"]:SetSize(190,20)
+								_G[this:GetName() .. "_layer"]:SetSize(80,20)
+								this.next = _G[this:GetParent():GetName().."RUNE2_Edit"]
+								this.func = function() DL.plus.CreateItem(DL.ui.ListSelect) end
+							</OnLoad>
+						</Scripts>
+					</Frame>
+					<Frame name="$parent_RUNE2" inherits="DL_EditBox_with_LayerTemplate">
+						<Size>
+							<AbsDimension x="280" y="20" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_RUNE1">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								_G[this:GetName() .. "_Edit"]:SetSize(190,20)
+								_G[this:GetName() .. "_layer"]:SetSize(80,20)
+								this.next = _G[this:GetParent():GetName().."RUNE3_Edit"]
+								this.func = function() DL.plus.CreateItem(DL.ui.ListSelect) end
+							</OnLoad>
+						</Scripts>
+					</Frame>
+					<Frame name="$parent_RUNE3" inherits="DL_EditBox_with_LayerTemplate">
+						<Size>
+							<AbsDimension x="280" y="20" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_RUNE2">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								_G[this:GetName() .. "_Edit"]:SetSize(190,20)
+								_G[this:GetName() .. "_layer"]:SetSize(80,20)
+								this.next = _G[this:GetParent():GetName().."RUNE4_Edit"]
+								this.func = function() DL.plus.CreateItem(DL.ui.ListSelect) end
+							</OnLoad>
+						</Scripts>
+					</Frame>
+					<Frame name="$parent_RUNE4" inherits="DL_EditBox_with_LayerTemplate">
+						<Size>
+							<AbsDimension x="280" y="20" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_RUNE3">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								_G[this:GetName() .. "_Edit"]:SetSize(190,20)
+								_G[this:GetName() .. "_layer"]:SetSize(80,20)
+								this.next = _G[this:GetParent():GetName().."PLUS_Edit"]
+								this.func = function() DL.plus.CreateItem(DL.ui.ListSelect) end
+							</OnLoad>
+						</Scripts>
+					</Frame>
+
+					<CheckButton name="$parent_bind" inherits="DL_CheckLabelTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_RUNE4">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								DL_adv_frame_plus_eqbind:SetChecked(false)
+								DL_adv_frame_plus_locked:SetChecked(false)
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_eqbind" inherits="DL_CheckLabelTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_bind">
+								<Offset>
+									<AbsDimension x="0" y="0" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								DL_adv_frame_plus_bind:SetChecked(false)
+								DL_adv_frame_plus_locked:SetChecked(false)
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_locked" inherits="DL_CheckLabelTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_eqbind">
+								<Offset>
+									<AbsDimension x="0" y="0" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								DL_adv_frame_plus_eqbind:SetChecked(false)
+								DL_adv_frame_plus_bind:SetChecked(false)
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_itemprotect" inherits="DL_CheckLabelTemplate">
+						<Anchors>
+							<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_bind">
+								<Offset>
+									<AbsDimension x="115" y="0" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="$parent_pkprotect" inherits="DL_CheckLabelTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_itemprotect">
+								<Offset>
+									<AbsDimension x="0" y="0" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="$parent_suitskillextracted" inherits="DL_CheckLabelTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_pkprotect">
+								<Offset>
+									<AbsDimension x="0" y="0" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+
+					<Button name="$parent_GO" inherits="UIPanelButtonTemplate" text="GO!!!">
+						<Size>
+							<AbsDimension x="140" y="25"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_locked">
+								<Offset>
+									<AbsDimension x="50" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								DL.plus.CreateItem(DL.ui.ListSelect)
+							</OnClick>
+						</Scripts>
+					</Button>
+				</Frames>
+			</Frame>
+
+			<Frame name="$parent_tabHeader" inherits="DL_TabFrame_Template" frameLevel="1" frameStrata="HIGH">
+				<Size>
+					<AbsDimension x="540" y="342"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="30" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+		</Frames>
+	</Frame>
+	<GameTooltip name="DLTooltip" frameStrata="TOOLTIP" hidden="true" inherits="GameTooltipTemplate" parent="UIParent" enableMouse="true">
+		<Size>
+			<AbsDimension x="218" y="55"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset>
+					<AbsDimension x="30" y="0" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Button inherits="UIPanelCloseButtonTemplate">
+				<Size>
+					<AbsDimension x="15" y="15"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-5" y="5"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnMouseDown> this:StartMoving()	</OnMouseDown>
+			<OnMouseUp> this:StopMovingOrSizing()</OnMouseUp>
+		</Scripts>
+	</GameTooltip>
+	<Frame name="DL_PreviewFrame" inherits="DL_modelFrameTemplate" parent="UIParent" id="1"/>
+</Ui>

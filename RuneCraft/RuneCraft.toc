@@ -1,0 +1,15 @@
+## Title: RuneCraft
+## Author: Ganjaaa, odie2, psprofi
+
+Libs/Sol/LibStub.lua
+Libs/Sol/Sol.lua
+
+RuneCraft.xml
+-- X-Curse-Packaged-Version: 0.56-2-gf1a71b5
+-- X-Curse-Project-Name: RuneCraft
+-- X-Curse-Project-ID: runecraft
+-- X-Curse-Repository-ID: rom/runecraft/mainline
+-- X-Curse-Packaged-Version: v0.61-2-g151502d
+-- X-Curse-Project-Name: RuneCraft
+-- X-Curse-Project-ID: runecraft
+-- X-Curse-Repository-ID: rom/runecraft/mainline

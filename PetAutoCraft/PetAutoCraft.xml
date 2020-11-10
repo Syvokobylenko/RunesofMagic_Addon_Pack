@@ -1,0 +1,607 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/..\..\WorldXML\UI.xsd">
+	<Script file="PetAutoCraft.lua"/>
+	<Frame name="PetAutoCraft_OptionTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="98" y="16"/>
+		</Size>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="$parentLabel" inherits="GameFontNormal">
+					<Anchors>
+						<Anchor point="LEFT"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentButton" inherits="UIPanelButtonTemplate">
+				<Size>
+					<AbsDimension x="24" y="16"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentLabel" relativePoint="RIGHT"/>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						ToggleDropDownMenu(getglobal(this:GetParent():GetName().."Menu"))
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Frame name="$parentMenu" inherits="UIDropDownMenuTemplate">
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="$parentButton" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="0" y="-10"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+		</Frames>
+	</Frame>
+	<Frame name="PetAutoCraft_TextTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="98" y="16"/>
+		</Size>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="$parentLabel" inherits="GameFontNormal">
+					<Anchors>
+						<Anchor point="LEFT"/>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentValue" inherits="GameFontHighlight">
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentLabel" relativePoint="RIGHT"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+	<Button name="PetAutoCraft_ProductButtonTemplate" inherits="PetProductButoonTemplate" virtual="true">
+		<Scripts>
+			<OnEnter>
+				PetAutoCraft.ProductButton_OnEnter(this)
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+		</Scripts>
+	</Button>
+	<Frame name="PetAutoCraft_Frame" parent="UIParent" enableMouse="true" hidden="true">
+		<Size>
+			<AbsDimension x="314" y="137"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" relativePoint="TOPRIGHT">
+				<Offset>
+					<AbsDimension x="-450" y="100"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Backdrop bgFile="Interface\Tooltips\Tooltip-Background" edgeFile="Interface\Tooltips\Tooltip-border" tile="true">
+			<BackgroundInsets>
+				<AbsInset top="4" left="4" bottom="4" right="4"/>
+			</BackgroundInsets>
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+		</Backdrop>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString inherits="GameTitleFont" justifyH="CENTER" text="Pet Auto Craft">
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="5"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="PetAutoCraft_AuctionCloseButton" inherits="UIPanelCloseButtonTemplate">
+				<Size>
+					<AbsDimension x="15" y="15"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-6" y="6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Frame name="PetAutoCraft_SelectPet" inherits="PetAutoCraft_OptionTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="7"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						PetAutoCraft_SelectPetLabel:SetText("Selected Pet: ")
+						PetAutoCraft_SelectPetButton:SetWidth(24)
+						UIDropDownMenu_Initialize(PetAutoCraft_SelectPetMenu, PetAutoCraft.SelectPetMenu, "MENU")
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame name="PetAutoCraft_SelectTools" inherits="PetAutoCraft_OptionTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="PetAutoCraft_SelectPet" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						PetAutoCraft_SelectToolsLabel:SetText("Use Tools: ")
+						PetAutoCraft_SelectToolsButton:SetWidth(24)
+						UIDropDownMenu_Initialize(PetAutoCraft_SelectToolsMenu, PetAutoCraft.SelectToolsMenu, "MENU")
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame name="PetAutoCraft_BuyTools" inherits="PetAutoCraft_OptionTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="PetAutoCraft_SelectTools" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="5" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						PetAutoCraft_BuyToolsLabel:SetText("Buy Tools: ")
+						PetAutoCraft_BuyToolsButton:SetWidth(24)
+						UIDropDownMenu_Initialize(PetAutoCraft_BuyToolsMenu, PetAutoCraft.BuyToolsMenu, "MENU")
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame name="PetAutoCraft_SellMats" inherits="PetAutoCraft_OptionTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="PetAutoCraft_BuyTools" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="5" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						PetAutoCraft_SellMatsLabel:SetText("Sell Mats: ")
+						PetAutoCraft_SellMatsButton:SetWidth(24)
+						UIDropDownMenu_Initialize(PetAutoCraft_SellMatsMenu, PetAutoCraft.SellMatsMenu, "MENU")
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame name="PetAutoCraft_HarvestAt">
+				<Size>
+					<AbsDimension x="80" y="16"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="PetAutoCraft_SellMats" relativePoint="TOPLEFT"/>
+				</Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="PetAutoCraft_HarvestAtLabel" inherits="GameFontNormal">
+							<Anchors>
+								<Anchor point="LEFT"/>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Button name="PetAutoCraft_HarvestAtButton" inherits="UIPanelButtonTemplate">
+						<Size>
+							<AbsDimension x="30" y="16"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parentLabel" relativePoint="RIGHT"/>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								this.AskNumberFrameCallBack = function(button ,Number)
+									PetAutoCraft_HarvestAtButton:SetText(Number)
+									PetAutoCraftCSave.HarvestAt = Number
+								end
+								OpenAskNumberFrame(1, 999, this, "TOPRIGHT", "TOPRIGHT");
+							</OnClick>
+						</Scripts>
+					</Button>
+				</Frames>
+				<Scripts>
+					<OnLoad>
+						PetAutoCraft_HarvestAtLabel:SetText("Harvest: ")
+						PetAutoCraft_HarvestAtButton.tooltip = "Auto Harvest When Middle Product Is At Least This Much"
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame name="PetAutoCraft_HERBOptions" inherits="PetAutoCraft_OptionTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="PetAutoCraft_SelectTools" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="4"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						PetAutoCraft_HERBOptionsLabel:SetText(LIFESKILL_HERB..": ")
+						PetAutoCraft_HERBOptionsButton:SetWidth(24)
+						UIDropDownMenu_Initialize(PetAutoCraft_HERBOptionsMenu, PetAutoCraft.HerbOptionsMenu, "MENU")
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame name="PetAutoCraft_HERBLevel" inherits="PetAutoCraft_TextTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="PetAutoCraft_HERBOptions" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						PetAutoCraft_HERBLevelLabel:SetText("Level: ")
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame name="PetAutoCraft_HERBToLvl" inherits="PetAutoCraft_TextTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="PetAutoCraft_HERBLevel" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						PetAutoCraft_HERBToLvlLabel:SetText("To Lvl: ")
+						PetAutoCraft_HERBToLvlValue:SetText("Unknown")
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame name="PetAutoCraft_WOODOptions" inherits="PetAutoCraft_OptionTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="PetAutoCraft_HERBOptions" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="5" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						PetAutoCraft_WOODOptionsLabel:SetText(LIFESKILL_WOOD..": ")
+						PetAutoCraft_WOODOptionsButton:SetWidth(24)
+						UIDropDownMenu_Initialize(PetAutoCraft_WOODOptionsMenu, PetAutoCraft.WoodOptionsMenu, "MENU")
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame name="PetAutoCraft_WOODLevel" inherits="PetAutoCraft_TextTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="PetAutoCraft_WOODOptions" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						PetAutoCraft_WOODLevelLabel:SetText("Level: ")
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame name="PetAutoCraft_WOODToLvl" inherits="PetAutoCraft_TextTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="PetAutoCraft_WOODLevel" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						PetAutoCraft_WOODToLvlLabel:SetText("To Lvl: ")
+						PetAutoCraft_WOODToLvlValue:SetText("Unknown")
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame name="PetAutoCraft_MININGOptions" inherits="PetAutoCraft_OptionTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="PetAutoCraft_WOODOptions" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="5" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						PetAutoCraft_MININGOptionsLabel:SetText(LIFESKILL_MINE..": ")
+						PetAutoCraft_MININGOptionsButton:SetWidth(24)
+						UIDropDownMenu_Initialize(PetAutoCraft_MININGOptionsMenu, PetAutoCraft.MiningOptionsMenu, "MENU")
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame name="PetAutoCraft_MININGLevel" inherits="PetAutoCraft_TextTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="PetAutoCraft_MININGOptions" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						PetAutoCraft_MININGLevelLabel:SetText("Level: ")
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame name="PetAutoCraft_MININGToLvl" inherits="PetAutoCraft_TextTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="PetAutoCraft_MININGLevel" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						PetAutoCraft_MININGToLvlLabel:SetText("To Lvl: ")
+						PetAutoCraft_MININGToLvlValue:SetText("Unknown")
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Button name="PetAutoCraft_ToolButton" inherits="ItemButtonTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="PetAutoCraft_Frame" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="10" y="-10"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						PetAutoCraft.ToolButton_OnClick()
+					</OnClick>
+					<OnDragStart>
+						PetAutoCraft.ToolButton_OnClick()
+					</OnDragStart>
+					<OnReceiveDrag>
+						PetAutoCraft.ToolButton_OnClick()
+					</OnReceiveDrag>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_TOPRIGHT")
+						GameTooltip:SetPetEquipmentItem(PetAutoCraftCSave.Pet, "tools")
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+			</Button>
+			<Frame name="PetAutoCraft_Cast" inherits="PetAutoCraft_TextTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="PetAutoCraft_ToolButton" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="3" y="-8"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this:SetWidth(100)
+						PetAutoCraft_CastLabel:SetText("Casting: ")
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame name="PetAutoCraft_OutOfTool" inherits="PetAutoCraft_TextTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="PetAutoCraft_Cast" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this:SetWidth(140)
+						PetAutoCraft_OutOfToolLabel:SetText("Total: ")
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Button name="PetAutoCraft_StartButton" inherits="PetButtonTemplate">
+				<Size>
+					<AbsDimension x="40" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+							<AbsDimension x="10" y="-27"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this.tooltip = PET_CRAFT_START
+					</OnLoad>
+					<OnClick>
+						PetAutoCraftCSave.Running = true
+						PetAutoCraft.EquipTool()
+					</OnClick>
+				</Scripts>
+				<NormalTexture inherits="PetButtonTextureTemplate" file="Interface\PetFrame\Buttons\StartButton-Normal"/>
+				<PushedTexture inherits="PetButtonTextureTemplate" file="Interface\PetFrame\Buttons\StartButton-Depress"/>
+			</Button>
+			<Button name="PetAutoCraft_StopButton" inherits="PetButtonTemplate" hidden="true">
+				<Size>
+					<AbsDimension x="40" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER" relativeTo="PetAutoCraft_StartButton"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this.tooltip = PET_CRAFT_STOP
+					</OnLoad>
+					<OnClick>
+						PetAutoCraftCSave.Running = false
+						PetCraftingStop(PetAutoCraftCSave.Pet)
+					</OnClick>
+				</Scripts>
+				<NormalTexture inherits="PetButtonTextureTemplate" file="Interface\PetFrame\Buttons\StopButton-Normal"/>
+				<PushedTexture inherits="PetButtonTextureTemplate" file="Interface\PetFrame\Buttons\StopButton-Depress"/>
+			</Button>
+			<Button name="PetCraftHarvestButton" inherits="PetButtonTemplate">
+				<Size>
+					<AbsDimension x="40" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP" relativeTo="PetAutoCraft_StartButton" relativePoint="BOTTOM">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this.tooltip = PET_CRAFT_HARVEST
+					</OnLoad>
+					<OnClick>
+						PetAutoCraft.HarvestItems()
+					</OnClick>
+				</Scripts>
+				<NormalTexture inherits="PetButtonTextureTemplate" file="Interface\PetFrame\Buttons\HarvestButton-Normal"/>
+				<PushedTexture inherits="PetButtonTextureTemplate" file="Interface\PetFrame\Buttons\HarvestButton-Depress"/>
+			</Button>
+			<Button name="PetAutoCraft_ProductButton3" inherits="PetAutoCraft_ProductButtonTemplate" id="3">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="PetAutoCraft_Frame" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-10" y="-10"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="PetAutoCraft_ProductButton2" inherits="PetAutoCraft_ProductButtonTemplate" id="2">
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="PetAutoCraft_ProductButton3" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="PetAutoCraft_ProductButton1" inherits="PetAutoCraft_ProductButtonTemplate" id="1">
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="PetAutoCraft_ProductButton2" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnMouseDown>
+				if key == "RBUTTON" and IsShiftKeyDown() then
+					this:StartMoving()
+				end
+			</OnMouseDown>
+			<OnMouseUp>
+				if key == "RBUTTON" then
+					this:StopMovingOrSizing()
+					PetAutoCraftGSave.PosX, PetAutoCraftGSave.PosY = this:GetPos()
+				end
+			</OnMouseUp>
+		</Scripts>
+	</Frame>
+	<Frame name="PetAutoCraft_MiniMap" parent="PlayerFramePetButton">
+		<Size>
+			<AbsDimension x="26" y="26"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER"/>
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="PetAutoCraft_MiniMapFlash" file="Interface\Minimap\MinimapButton_Flash" alphaMode="ADD">
+					<Color r="1" g="0" b="0"/>
+				</Texture>
+			</Layer>
+		</Layers>
+	</Frame>
+	<Button name="PetAutoCraft_VendorMapLocation" parent="WorldMapViewFrame" hidden="true" enableMouse="true" frameLevel="10000" frameStrata="HIGH">
+		<Size>
+			<AbsDimension x="20" y="20"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER"/>
+		</Anchors>
+		<NormalTexture file="Interface\PetFrame\PetFrameShow_Normal"/>
+	</Button>
+	<Frame name="PetAutoCraft_AutoRefine" parent="CraftQueueFrameTitleFrame">
+		<Frames>
+			<Button name="PetAutoCraft_AutoRefineStartButton" inherits="PetButtonTemplate">
+				<Size>
+					<AbsDimension x="45" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="CraftQueueFrame">
+						<Offset>
+							<AbsDimension x="-50" y="6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this.tooltip = PET_CRAFT_START
+					</OnLoad>
+					<OnClick>
+						PetAutoCraft.AutoRefine_OnClick(0)
+						PetAutoCraft_AutoRefineStartButton:Hide()
+						PetAutoCraft_AutoRefineStopButton:Show()
+					</OnClick>
+				</Scripts>
+				<NormalTexture inherits="PetButtonTextureTemplate" file="Interface\PetFrame\Buttons\StartButton-Normal"/>
+				<PushedTexture inherits="PetButtonTextureTemplate" file="Interface\PetFrame\Buttons\StartButton-Depress"/>
+				<DisabledTexture inherits="PetButtonTextureTemplate" file="Interface\PetFrame\Buttons\StartButton-Disable"/>
+			</Button>
+			<Button name="PetAutoCraft_AutoRefineStopButton" inherits="PetButtonTemplate" hidden="true">
+				<Size>
+					<AbsDimension x="45" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER" relativeTo="PetAutoCraft_AutoRefineStartButton"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this.tooltip = PET_CRAFT_STOP
+					</OnLoad>
+					<OnClick>
+						PetAutoCraft.AutoRefine_OnClick(nil)
+						StopCreateCraftItem()
+						CraftQueueStopCreate(CraftQueueFrame)
+						PetAutoCraft_AutoRefineStopButton:Hide()
+						PetAutoCraft_AutoRefineStartButton:Show()
+					</OnClick>
+				</Scripts>
+				<NormalTexture inherits="PetButtonTextureTemplate" file="Interface\PetFrame\Buttons\StopButton-Normal"/>
+				<PushedTexture inherits="PetButtonTextureTemplate" file="Interface\PetFrame\Buttons\StopButton-Depress"/>
+				<DisabledTexture inherits="PetButtonTextureTemplate" file="Interface\PetFrame\Buttons\StopButton-Disable"/>
+			</Button>
+		</Frames>
+	</Frame>
+	<Button name="PetAutoCraft_StoreButton" parent="StoreFrame" inherits="PetButtonTemplate" hidden="true">
+		<Size>
+			<AbsDimension x="50" y="32"/>
+		</Size>
+		<Anchors>
+			<Anchor point="BOTTOMRIGHT">
+				<Offset>
+					<AbsDimension x="-66" y="-90"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnClick>
+				PetAutoCraft.BuyTools()
+			</OnClick>
+			<OnEnter>
+				GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT", 0, 0)
+				GameTooltip:SetText("Buy A Set Of Pet Crafting Tools")
+				GameTooltip:Show()
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+		</Scripts>
+		<NormalTexture inherits="PetButtonTextureTemplate" file="Interface\PetFrame\Buttons\HarvestButton-Normal"/>
+		<PushedTexture inherits="PetButtonTextureTemplate" file="Interface\PetFrame\Buttons\HarvestButton-Depress"/>
+		<HighlightTexture file="Interface\Buttons\QuickSlot-Highlight" alphaMode="ADD"/>
+	</Button>
+	<Frame name="PetAutoCraftEventFrame" parent="UIParent">
+		<Scripts>
+			<OnLoad>
+				PetAutoCraft.OnLoad(this)
+			</OnLoad>
+			<OnUpdate>
+				PetAutoCraft.OnUpdate(update, elapsedTime)
+			</OnUpdate>
+			<OnEvent>
+				PetAutoCraft.Events[event]()
+			</OnEvent>
+		</Scripts>
+	</Frame>
+</Ui>

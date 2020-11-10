@@ -1,0 +1,126 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+    <Script file="yGatherMini.lua"></Script>
+    <Frame name="yGatherIconTextEdit" hidden="true" parent="UIParent" enableMouse="true" frameStrata="TOOLTIP">
+        <Size><AbsDimension x="200" y="140"/></Size>
+        <Anchors>
+            <Anchor point="CENTER"/>
+        </Anchors>
+        <Backdrop edgeFile="Interface\Tooltips\Tooltip-border" bgFile="Interface\Tooltips\Tooltip-Background">
+            <BackgroundInsets>
+                <AbsInset top="4" left="4" bottom="4" right="4"/>
+            </BackgroundInsets>
+            <EdgeSize>
+                <AbsValue val="16"/>
+            </EdgeSize>
+            <TileSize>
+                <AbsValue val="16"/>
+            </TileSize>
+        </Backdrop>
+        <Frames>
+            <Frame name="$parentEBorder">
+                <Size><AbsDimension x="190" y="90"/></Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset><AbsDimension x="5" y="20"/></Offset>
+                    </Anchor>
+                </Anchors>
+                <Backdrop edgeFile="Interface\SocialFrame\SocialFrame_Contextborder_eg" bgFile="Interface\SocialFrame\SocialFrame_Contextborder_bg">
+                    <BackgroundInsets>
+                        <AbsInset top="16" left="16" bottom="16" right="16"/>
+                    </BackgroundInsets>
+                    <EdgeSize>
+                        <AbsValue val="64"/>
+                    </EdgeSize>
+                    <TileSize>
+                        <AbsValue val="64"/>
+                    </TileSize>
+                </Backdrop>
+            </Frame>
+            <EditBox name="$parentE" inherits="UIMultiEditBoxTemplate" hidden="false" autoFocus="true" multiLine="true">
+                <Size><AbsDimension x="165" y="80"/></Size>
+                <Anchors><Anchor point="TOPLEFT">
+                    <Offset><AbsDimension x="10" y="25"/></Offset>
+                </Anchor></Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parentT" inherits="GameTitleFont" justifyH="CENTER" text="Description">
+                            <Size><AbsDimension x="350" y="20"/></Size>
+                            <FontHeight><AbsValue val="16"/></FontHeight>
+                            <Anchors>
+                                <Anchor point="TOP" relativeTo="yGatherIconTextEdit">
+                                    <Offset><AbsDimension x="0" y="5"/></Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <HitRectInsets>
+                    <AbsInset left="4" right="4" top="4" bottom="4"/>
+                </HitRectInsets>
+                <FontString inherits="GameEditFont"/>
+            </EditBox>     
+            <Button name="$parentOK" inherits="UIPanelButtonTemplate" text="OK">
+                <Size><AbsDimension x="80" y="22"/></Size>
+                <Anchors><Anchor point="TOPLEFT">
+                    <Offset><AbsDimension x="10" y="110"/></Offset>
+                </Anchor></Anchors>
+                <Scripts>
+                   <OnClick>
+                        local yGZoneId, yGMatId, yGWorldMapX, yGWorldMapY = unpack(yGatherIconTextEdit.stackInfo);
+                        if (yGather.database.EntryExists(yGZoneId, yGMatId, yGWorldMapX * 1000, yGWorldMapY * 1000)) then
+                            if (yGatherIconTextEditE:GetText()~="") then
+                                yGather.database.SetEntryText(yGZoneId, yGMatId, yGWorldMapX * 1000, yGWorldMapY * 1000,
+                                        yGatherIconTextEditE:GetText());
+                            else
+                                yGather.database.SetEntryText(yGZoneId, yGMatId, yGWorldMapX * 1000, yGWorldMapY * 1000,
+                                        nil);
+                            end
+                        end
+                        HideUIPanel(yGatherIconTextEdit);
+                    </OnClick>
+                </Scripts>
+            </Button>
+            <Button name="$parentCancel" inherits="UIPanelButtonTemplate" text="Cancel">
+                <Size><AbsDimension x="80" y="22"/></Size>
+                <Anchors><Anchor point="TOPRIGHT">
+                    <Offset><AbsDimension x="-10" y="110"/></Offset>
+                </Anchor></Anchors>
+                <Scripts>
+                   <OnClick>
+                        HideUIPanel(yGatherIconTextEdit);
+                    </OnClick>
+                </Scripts>
+            </Button>
+        </Frames>
+        <Scripts>
+            <OnShow>
+                local yGZoneId, yGMatId, yGWorldMapX, yGWorldMapY, yGName = unpack(yGatherIconTextEdit.stackInfo);
+                if (yGName) then
+                    yGatherIconTextEditET:SetText(yGName)
+                else
+                    yGatherIconTextEditET:SetText("Default")
+                end
+                local entryText = yGather.database.GetEntryText(yGZoneId, yGMatId, yGWorldMapX * 1000,
+                        yGWorldMapY * 1000);
+                if (entryText ~= nil) then
+                    yGatherIconTextEditE:SetText(entryText);
+                else
+                    yGatherIconTextEditE:SetText("");
+                end
+            </OnShow>
+        </Scripts>
+    </Frame>
+    
+    <Frame name="yGatherIconMenu" parent="UIParent" inherits="UIDropDownMenuTemplate">
+        <Anchors>
+            <Anchor point="TOPRIGHT">
+                <Offset><AbsDimension x="20" y="-20"/></Offset>
+            </Anchor>
+        </Anchors>
+        <Scripts>
+            <OnLoad>
+                yGatherIconMenu_OnLoad(this);
+            </OnLoad>
+        </Scripts>
+    </Frame>
+</Ui>

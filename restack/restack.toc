@@ -1,0 +1,6 @@
+restack.lua
+restack.xml
+-- X-Curse-Packaged-Version: v1.0.1
+-- X-Curse-Project-Name: restack
+-- X-Curse-Project-ID: restack
+-- X-Curse-Repository-ID: rom/restack/mainline

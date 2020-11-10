@@ -1,0 +1,78 @@
+<!-- ä
+
+	Name: Advanced Questbook
+	By: Crypton
+
+-->
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Button name="AdvQuestBookMapDailiesIcon" hidden="true" enableMouse="true" virtual="true">
+		<Size>
+			<AbsDimension x="24" y="24" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" />
+		</Anchors>
+		<NormalTexture file="Interface\AddOns\AdvQuestBook\images\dflag.png" />
+		<PushedTexture file="Interface\AddOns\AdvQuestBook\images\dflag.png" />
+		<HighlightTexture file="Interface\AddOns\AdvQuestBook\images\fhl.png" alphaMode="NONE" />
+		<Scripts>
+			<OnClick>
+				AdvQuestBook_AutoMoveTo(this:GetName());
+			</OnClick>
+			<OnEnter>
+				local name, line = AdvQuestBook_GetDailyInfo(this.mid, this.idx);
+				GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+				GameTooltip:SetText("|cff72d2ff"..name.."|r\n\n");
+				GameTooltip:AddLine(line);
+				if (AdvQuestBook_Config["iconsettings"][7]["value"]) then
+					GameTooltip:AddLine("\nCoords: "..AQB_DecMagic(this.x, 2)..", "..AQB_DecMagic(this.y, 2));
+				end
+				AdvQuestBook_Checktooltip();
+				GameTooltip:Show();
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide();
+			</OnLeave>
+		</Scripts>
+	</Button>
+	<Frame name="AdvQuestBookMapDailiesIcons" parent="WorldMapViewFrame" hidden="false" enableMouse="true" frameLevel="10000" frameStrata="HIGH">
+		<Size>
+			<AbsDimension x="24" y="24" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" />
+		</Anchors>
+		<Frames>
+			<Button name="$parent1" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent2" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent3" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent4" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent5" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent6" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent7" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent8" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent9" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent10" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent11" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent12" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent13" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent14" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent15" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent16" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent17" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent18" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent19" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent20" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent21" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent22" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent23" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent24" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent25" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent26" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent27" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent28" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent29" inherits="AdvQuestBookMapDailiesIcon" />
+			<Button name="$parent30" inherits="AdvQuestBookMapDailiesIcon" />
+		</Frames>
+	</Frame>
+</Ui>

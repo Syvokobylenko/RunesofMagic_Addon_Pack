@@ -1,0 +1,44 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Frame name="XBarGuild" parent="UIParent" frameStrata="BACKGROUND" frameLevel="1">
+		<Size><AbsDimension x="128" y="32"/></Size>
+		<Anchors><Anchor point="LEFT" relativeTo="XBarFrame"><Offset>
+			<AbsDimension x="660" y="0"/></Offset></Anchor></Anchors>
+		<Scripts>
+			<OnEvent>XBar.Guild_OnEvent(this,event)</OnEvent>
+			<OnShow>XBar.Guild_OnEvent(this,"LOADED")</OnShow>
+			<OnHide>
+				this:UnregisterEvent("UPDATE_GUILD_MEMBER")
+				this:UnregisterEvent("GUILDHOUSEWAR_INFOS_UPDATE")
+			</OnHide>
+		</Scripts>
+	</Frame>
+	<Frame name="XBarGuild_BG" inherits="XButton_BGTemp" parent="XBarFrame">
+		<Anchors><Anchor point="LEFT" relativeTo="XBarGuild"><Offset>
+			<AbsDimension x="-28" y="0"/></Offset></Anchor></Anchors>
+	</Frame>
+	<Button name="XBarGuild_B" inherits="XButton_BTemp" parent="XBarGuild">
+		<Anchors><Anchor point="LEFT"/></Anchors>
+		<NormalTexture file="Interface/Icons/Skill_Mag_New20-5"/>
+		<PushedTexture file="Interface/Icons/Skill_Mag_New50-4"/>
+		<HighlightTexture file="Interface/Icons/Skill_Mag_New20-4" alphaMode="ADD"/>
+		<Scripts>
+			<OnClick>
+				if key=="LBUTTON" then
+					PlaySoundByPath("sound/interface/ui_generic_click.mp3")
+					XBar.Guild_OnClick()
+				elseif GuildPanel and GetNumGuildMembers()>0 then
+					XBar.ToggleUI(GuildPanelFrame)
+				else
+					XBar.ToggleUI(GuildFrame)
+				end
+			</OnClick>
+			<OnDragStart>XBar.MoveStart(XBarGuild)</OnDragStart>
+			<OnDragStop>XBar.MoveEnd(XBarGuild)</OnDragStop>
+			<OnEnter>XBar.Guild_OnEnter(this)</OnEnter>
+		</Scripts>
+	</Button>
+	<Frame name="XBarGuild_F" inherits="XButton_FTemp" parent="XBarGuild">
+		<Anchors><Anchor point="LEFT"><Offset>
+			<AbsDimension x="26" y="3"/></Offset></Anchor></Anchors>
+	</Frame>
+</Ui>

@@ -1,0 +1,36 @@
+------------------------------------------------------------------------
+r148 | cowboyenvy | 2011-06-30 13:30:25 +0000 (Thu, 30 Jun 2011) | 1 line
+Changed paths:
+   A /tags/StatRating v1.03.146 stable (from /trunk:147)
+
+Tagging as StatRating v1.03.146 stable
+------------------------------------------------------------------------
+r141 | cowboyenvy | 2011-06-30 10:51:35 +0000 (Thu, 30 Jun 2011) | 3 lines
+Changed paths:
+   M /trunk/StatsDB.lua
+
+My apologize I had some mis-information in regards to Dex no longer adding anything to pattk and therefore updated StatsDB.lua, I have reverted the changes.
+
+Also, i has having some trouble with TortoiseSVN those issues have been resolved and I am now able to use the SVN repository to version control, this should make everything run much more smoothly. 
+------------------------------------------------------------------------
+r140 | cowboyenvy | 2011-06-30 10:44:00 +0000 (Thu, 30 Jun 2011) | 2 lines
+Changed paths:
+   M /trunk/StatsDB.lua
+
+Changed StatsDB.lua to reflect that Dex no longer adds pattk and STR now adds 1
+
+------------------------------------------------------------------------
+r139 | cowboyenvy | 2011-06-30 10:40:46 +0000 (Thu, 30 Jun 2011) | 2 lines
+Changed paths:
+   M /trunk/StatRating.lua
+   M /trunk/StatsDB.lua
+
+Minor fix. Commented out the DPS section as it was added to chapter 4
+
+------------------------------------------------------------------------
+r138 | shadecut | 2010-04-15 09:33:05 +0000 (Thu, 15 Apr 2010) | 1 line
+Changed paths:
+   M /trunk/lang/SRC_PL.lua
+
+Fixed localization mistype which prevented addon from showing DPS value in the Physical Damage line of weapon tooltip in polish version.
+------------------------------------------------------------------------

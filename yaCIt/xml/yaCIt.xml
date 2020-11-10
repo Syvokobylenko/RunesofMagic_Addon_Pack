@@ -1,0 +1,16 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+
+	<GameTooltip name="yaCItTooltip" frameStrata="TOOLTIP" hidden="true" inherits="GameTooltipTemplate" parent="UIParent">
+	</GameTooltip>
+
+	<Frame name="yaCItFrame" parent="UIParent" enableMouse="false">
+		<Scripts>
+			<OnLoad>
+				yaCIt.OnLoad(this);
+			</OnLoad>
+			<OnEvent>
+				yaCIt.OnEvent(frame, event);
+			</OnEvent>
+		</Scripts>
+	</Frame>
+</Ui>

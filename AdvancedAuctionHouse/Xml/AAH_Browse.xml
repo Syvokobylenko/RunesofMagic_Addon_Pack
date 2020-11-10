@@ -1,0 +1,1571 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ ../../../worldxml/ui.xsd">
+	<Button name="AAH_BrowseHeaderTemplate" inherits="AAH_TemplateHeaderButton" virtual="true" enableMouse="true">
+		<Scripts>
+			<OnClick>AAH.Browse.Header_OnClick(this, key)</OnClick>
+		</Scripts>
+	</Button>
+
+	<Button name="AAH_BrowseTreeButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="116" y="22"/>
+		</Size>
+		<Layers>
+			<Layer>
+				<Texture name="$parentBackgound" file="Interface\Buttons\PanelButton-Normal">
+					<TexCoords left="0" right="0.671875" top="0" bottom="0.6875"/>
+				</Texture>
+				<Texture name="$parentLine" file="Interface\AuctionFrame\AuctionFrame-FilterLines">
+					<Size>
+						<AbsDimension x="16" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="6" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<NormalText name="$parentNormalText" inherits="GameFontNormal" justifyH="LEFT">
+			<Size>
+				<AbsDimension x="102" y="20"/>
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT">
+					<Offset>
+						<AbsDimension x="10" y="0"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+		</NormalText>
+		<HighlightText name="$parentHighlightText" inherits="GameFontHighlight" justifyH="LEFT">
+			<Size>
+				<AbsDimension x="102" y="20"/>
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT">
+					<Offset>
+						<AbsDimension x="10" y="0"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+		</HighlightText>
+		<HighlightTexture file="Interface\Buttons\PanelButton-highlight" alphaMode="ADD">
+			<TexCoords left="0" right="0.671875" top="0" bottom="0.6875"/>
+		</HighlightTexture>
+	</Button>
+	<Button name="AAH_BrowseCategoryButtonTemplate" inherits="AAH_BrowseTreeButtonTemplate" virtual="true">
+		<Scripts>
+			<OnClick>
+				AAH.Browse.CategoryButton_OnClick(this, key)
+			</OnClick>
+			<OnMouseWheel>
+				UIPanelScrollBar_OnMouseWheel(AAH_BrowseCategoryScrollBar, delta)
+			</OnMouseWheel>
+		</Scripts>
+	</Button>
+	<Button name="AAH_BrowseListItemTemplate" inherits="AAH_TemplateListItem" virtual="true">
+		<Size>
+			<AbsDimension x="636" y="40"/>
+		</Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentName" inherits="GameFontNormal" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="145" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="46" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentCustom1" inherits="GameFontNormal">
+					<Size>
+						<AbsDimension x="62" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentName" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="6" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentCustom2" inherits="GameFontNormal">
+					<Size>
+						<AbsDimension x="62" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentCustom1" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="6" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentLeftTime" inherits="GameFontHighlight">
+					<Size>
+						<AbsDimension x="90" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeTo="$parentCustom2" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="6" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentPPUBid" inherits="GameFontHighlight" justifyH="RIGHT">
+					<Size>
+						<AbsDimension x="70" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentLeftTime" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="6" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentPPUBuy" inherits="GameFontHighlight" justifyH="RIGHT">
+					<Size>
+						<AbsDimension x="70" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentCustom2" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="102" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentIcon" inherits="ItemButtonTemplate">
+				<Anchors>
+					<Anchor point="LEFT">
+						<Offset>
+							<AbsDimension x="1" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						AAH.Browse.List_SetSelected(this:GetParent().auctionid)
+						AAH.Browse.List_ItemIcon_OnClick(this,key)
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT")
+						GameTooltip:SetAuctionBrowseItem(this:GetParent().auctionid)
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+					<OnMouseWheel>
+						GameTooltip:Hide()						
+						UIPanelScrollBar_OnMouseWheel(AAH_BrowseListScrollBar, delta)	
+						GameTooltip:SetAuctionBrowseItem(this:GetParent().auctionid)	
+					</OnMouseWheel>					
+				</Scripts>
+			</Button>
+            <Button name="$parentSeller" enableMouse="true" text="test">
+                <Size>
+                    <AbsDimension x="90" y="16"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentCustom2" relativePoint="RIGHT">
+                        <Offset>
+                            <AbsDimension x="6" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnLoad>
+                        this:RegisterForClicks("LeftButton", "RightButton")
+                    </OnLoad>
+                    <OnClick>
+                        AAH.Tools.ClickPlayerName(this, key)
+                    </OnClick>
+                </Scripts>
+                <NormalText inherits="GameFontHighlight">
+                    <Size>
+                        <AbsDimension x="0" y="16"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="CENTER">
+                            <Offset>
+                                <AbsDimension x="-1" y="-1"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </NormalText>
+            </Button>
+		</Frames>
+		<Scripts>
+			<OnClick>
+				AAH.Browse.List_SetSelected(this.auctionid)
+			</OnClick>
+			<OnMouseWheel>
+				UIPanelScrollBar_OnMouseWheel(AAH_BrowseListScrollBar, delta)
+			</OnMouseWheel>
+		</Scripts>
+	</Button>
+	<Frame name="AAH_BrowseFrame" parent="AAH_AuctionFrame">
+		<Frames>
+			<Frame name="AAH_BrowseCategory" enableMouse="true">
+				<Size>
+					<AbsDimension x="142" y="340"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="18" y="102"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\AuctionFrame\AuctionFrame-Tooltip-Border" bgFile="Interface\AuctionFrame\AuctionFrame-Tooltip-Background">
+					<EdgeSize>
+						<AbsValue val="16"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+					<BackgroundInsets>
+						<AbsInset left="16" right="16" top="16" bottom="16"/>
+					</BackgroundInsets>
+				</Backdrop>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture file="Interface\AuctionFrame\AuctionSeparate-HorizontalLine">
+							<Size>
+								<AbsDimension x="1" y="4"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="7" y="24"/>
+									</Offset>
+								</Anchor>
+								<Anchor point="TOPRIGHT">
+									<Offset>
+										<AbsDimension x="-7" y="24"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0.25" right="0.75" top="0" bottom="1"/>
+						</Texture>
+					</Layer>
+					<Layer level="ARTWORK">
+						<FontString inherits="GameFontYellow" text="C_ITEM_SORT">
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="11"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Slider name="AAH_BrowseCategoryScrollBar" inherits="UIPanelScrollBarHaveBackdropTemplate">
+						<Anchors>
+							<Anchor point="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="-6" y="47"/>
+								</Offset>
+							</Anchor>
+							<Anchor point="BOTTOMRIGHT">
+								<Offset>
+									<AbsDimension x="-6" y="-26"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this:SetValueStepMode("INT")
+							</OnLoad>
+							<OnValueChanged>
+								UIPanelScrollBar_OnValueChanged(this, arg1)
+								AAH.Browse.Category_UpdateList()
+							</OnValueChanged>
+						</Scripts>
+					</Slider>
+					<Button name="AAH_BrowseCategoryButton1" inherits="AAH_BrowseCategoryButtonTemplate" id="1">
+						<Anchors>
+							<Anchor point="TOP">
+								<Offset>
+									<AbsDimension x="-7" y="27"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseCategoryButton2" inherits="AAH_BrowseCategoryButtonTemplate" id="2">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="AAH_BrowseCategoryButton1" relativePoint="BOTTOM"/>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseCategoryButton3" inherits="AAH_BrowseCategoryButtonTemplate" id="3">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="AAH_BrowseCategoryButton2" relativePoint="BOTTOM"/>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseCategoryButton4" inherits="AAH_BrowseCategoryButtonTemplate" id="4">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="AAH_BrowseCategoryButton3" relativePoint="BOTTOM"/>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseCategoryButton5" inherits="AAH_BrowseCategoryButtonTemplate" id="5">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="AAH_BrowseCategoryButton4" relativePoint="BOTTOM"/>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseCategoryButton6" inherits="AAH_BrowseCategoryButtonTemplate" id="6">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="AAH_BrowseCategoryButton5" relativePoint="BOTTOM"/>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseCategoryButton7" inherits="AAH_BrowseCategoryButtonTemplate" id="7">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="AAH_BrowseCategoryButton6" relativePoint="BOTTOM"/>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseCategoryButton8" inherits="AAH_BrowseCategoryButtonTemplate" id="8">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="AAH_BrowseCategoryButton7" relativePoint="BOTTOM"/>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseCategoryButton9" inherits="AAH_BrowseCategoryButtonTemplate" id="9">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="AAH_BrowseCategoryButton8" relativePoint="BOTTOM"/>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseCategoryButton10" inherits="AAH_BrowseCategoryButtonTemplate" id="10">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="AAH_BrowseCategoryButton9" relativePoint="BOTTOM"/>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseCategoryButton11" inherits="AAH_BrowseCategoryButtonTemplate" id="11">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="AAH_BrowseCategoryButton10" relativePoint="BOTTOM"/>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseCategoryButton12" inherits="AAH_BrowseCategoryButtonTemplate" id="12">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="AAH_BrowseCategoryButton11" relativePoint="BOTTOM"/>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseCategoryButton13" inherits="AAH_BrowseCategoryButtonTemplate" id="13">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="AAH_BrowseCategoryButton12" relativePoint="BOTTOM"/>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseCategoryButton14" inherits="AAH_BrowseCategoryButtonTemplate" id="14">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="AAH_BrowseCategoryButton13" relativePoint="BOTTOM"/>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseCategoryButton15" inherits="AAH_BrowseCategoryButtonTemplate" id="15">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="AAH_BrowseCategoryButton14" relativePoint="BOTTOM"/>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseCategoryButton16" inherits="AAH_BrowseCategoryButtonTemplate" id="16">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="AAH_BrowseCategoryButton15" relativePoint="BOTTOM"/>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseCategoryButton17" inherits="AAH_BrowseCategoryButtonTemplate" id="17">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="AAH_BrowseCategoryButton16" relativePoint="BOTTOM"/>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseCategoryButton18" inherits="AAH_BrowseCategoryButtonTemplate" id="18">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="AAH_BrowseCategoryButton17" relativePoint="BOTTOM"/>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseCategoryButton19" inherits="AAH_BrowseCategoryButtonTemplate" id="19">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="AAH_BrowseCategoryButton18" relativePoint="BOTTOM"/>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseCategoryButton20" inherits="AAH_BrowseCategoryButtonTemplate" id="20">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="AAH_BrowseCategoryButton19" relativePoint="BOTTOM"/>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseCategoryButton21" inherits="AAH_BrowseCategoryButtonTemplate" id="21">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="AAH_BrowseCategoryButton20" relativePoint="BOTTOM"/>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseCategoryButton22" inherits="AAH_BrowseCategoryButtonTemplate" id="22">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="AAH_BrowseCategoryButton21" relativePoint="BOTTOM"/>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseCategoryButton23" inherits="AAH_BrowseCategoryButtonTemplate" id="23">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="AAH_BrowseCategoryButton22" relativePoint="BOTTOM"/>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseCategoryButton24" inherits="AAH_BrowseCategoryButtonTemplate" id="24">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="AAH_BrowseCategoryButton23" relativePoint="BOTTOM"/>
+						</Anchors>
+					</Button>
+				</Frames>
+				<Scripts>
+					<OnMouseWheel>
+						UIPanelScrollBar_OnMouseWheel(AAH_BrowseCategoryScrollBar, delta)
+					</OnMouseWheel>
+				</Scripts>
+			</Frame>
+			<Frame name="AAH_BrowseSearch" enableMouse="true">
+				<Size>
+					<AbsDimension x="450" y="77"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="95" y="32"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\AuctionFrame\AuctionFrame-Tooltip-Border" bgFile="Interface\AuctionFrame\AuctionFrame-Tooltip-Background">
+					<EdgeSize>
+						<AbsValue val="16"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+					<BackgroundInsets>
+						<AbsInset left="16" right="16" top="16" bottom="16"/>
+					</BackgroundInsets>
+				</Backdrop>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture file="Interface\AuctionFrame\AuctionSeparate-HorizontalLine">
+							<Size>
+								<AbsDimension x="1" y="4"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="7" y="21"/>
+									</Offset>
+								</Anchor>
+								<Anchor point="TOPRIGHT">
+									<Offset>
+										<AbsDimension x="-7" y="21"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0.25" right="0.75" top="0" bottom="1"/>
+						</Texture>
+					</Layer>
+					<Layer level="ARTWORK">
+						<FontString name="AAH_BrowseSearchLabel" inherits="GameFontYellow" justifyH="CENTER" text="search parameters">
+							<Anchors>
+								<Anchor point="TOP" relativePoint="TOP">
+									<Offset>
+										<AbsDimension x="0" y="8"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<EditBox name="AAH_BrowseNameEditBox" inherits="UIPanelEditBoxTemplate" historyLines="0">
+						<Size>
+							<AbsDimension x="118" y="22"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="12" y="42"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString inherits="GameFontHighlight" text="C_KEYWORD">
+									<Anchors>
+										<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
+											<Offset>
+												<AbsDimension x="4" y="-2"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnTabPressed>
+								if IsShiftKeyDown() then
+									AAH_BrowseFilter3EditBox:SetFocus()
+								else
+									AAH_BrowseMinLvlEditBox:SetFocus()
+								end
+							</OnTabPressed>
+							<OnEnterPressed>
+								this:ClearFocus()
+								AAH.Browse.SearchButton_OnClick()
+							</OnEnterPressed>
+						</Scripts>
+					</EditBox>
+					<EditBox name="AAH_BrowseMinLvlEditBox" inherits="UIPanelEditBoxTemplate" letters="3" numeric="true" historyLines="0">
+						<Size>
+							<AbsDimension x="32" y="22"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="AAH_BrowseNameEditBox" relativePoint="RIGHT">
+								<Offset>
+									<AbsDimension x="5" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString inherits="GameFontHighlight" text="C_LEVEL">
+									<Anchors>
+										<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
+											<Offset>
+												<AbsDimension x="4" y="-2"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnTabPressed>
+								if IsShiftKeyDown() then
+									AAH_BrowseNameEditBox:SetFocus()
+								else
+									AAH_BrowseMaxLvlEditBox:SetFocus()
+								end
+							</OnTabPressed>
+							<OnEnterPressed>
+								this:ClearFocus()
+								AAH.Browse.SearchButton_OnClick()
+							</OnEnterPressed>
+						</Scripts>
+					</EditBox>
+					<EditBox name="AAH_BrowseMaxLvlEditBox" inherits="UIPanelEditBoxTemplate" letters="3" numeric="true" historyLines="0">
+						<Size>
+							<AbsDimension x="32" y="22"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="AAH_BrowseMinLvlEditBox" relativePoint="RIGHT">
+								<Offset>
+									<AbsDimension x="8" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString inherits="GameFontHighlight" text="-">
+									<Anchors>
+										<Anchor point="RIGHT" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="-3" y="0"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnTabPressed>
+								if IsShiftKeyDown() then
+									AAH_BrowseMinLvlEditBox:SetFocus()
+								else
+									AAH_BrowseFilterMinPriceEditBox:SetFocus()
+								end
+							</OnTabPressed>
+							<OnEnterPressed>
+								this:ClearFocus()
+								AAH.Browse.SearchButton_OnClick()
+							</OnEnterPressed>
+						</Scripts>
+					</EditBox>
+					<Frame name="AAH_BrowseRarityDropDown" inherits="UIDropDownMenuTemplate">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="AAH_BrowseMaxLvlEditBox" relativePoint="RIGHT">
+								<Offset>
+									<AbsDimension x="5" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString inherits="GameFontHighlight" text="UNUSUAL">
+									<Anchors>
+										<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
+											<Offset>
+												<AbsDimension x="6" y="-1"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+					</Frame>
+					<Frame name="AAH_BrowseRuneDropDown" inherits="UIDropDownMenuTemplate">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="AAH_BrowseRarityDropDown" relativePoint="RIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString inherits="GameFontHighlight" text="RUNEHOLE">
+									<Anchors>
+										<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
+											<Offset>
+												<AbsDimension x="6" y="-1"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+					</Frame>
+					<CheckButton name="AAH_BrowseUsableButton" inherits="UIPanelCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="AAH_BrowseRuneDropDown" relativePoint="RIGHT">
+								<Offset>
+									<AbsDimension x="2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString name="AAH_BrowseUsableButtonLabel" inherits="GameFontHighlight" text="usable" justifyH="LEFT">
+									<Anchors>
+										<Anchor point="BOTTOM" relativePoint="TOP">
+											<Offset>
+												<AbsDimension x="0" y="2"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+					</CheckButton>
+				</Frames>
+			</Frame>
+			<Frame name="AAH_BrowseFilter" enableMouse="true">
+				<Size>
+					<AbsDimension x="295" y="77"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="AAH_BrowseSearch" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-7" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\AuctionFrame\AuctionFrame-Tooltip-Border" bgFile="Interface\AuctionFrame\AuctionFrame-Tooltip-Background">
+					<EdgeSize>
+						<AbsValue val="16"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+					<BackgroundInsets>
+						<AbsInset left="16" right="16" top="16" bottom="16"/>
+					</BackgroundInsets>
+				</Backdrop>
+				<Frames>
+					<EditBox name="AAH_BrowseFilter1EditBox" inherits="UIPanelEditBoxTemplate" historyLines="0">
+						<Size>
+							<AbsDimension x="118" y="22"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="49" y="6"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString name="AAH_BrowseFilter1EditBoxLabel" inherits="GameFontYellow" text="filters">
+									<Anchors>
+										<Anchor point="RIGHT" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="-5" y="0"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnTabPressed>
+								if IsShiftKeyDown() then
+									AAH_BrowseFilterMaxPriceEditBox:SetFocus()
+								else
+									AAH_BrowseFilter2EditBox:SetFocus()
+								end
+							</OnTabPressed>
+							<OnEnterPressed>
+								this:ClearFocus()
+							</OnEnterPressed>
+							<OnTextChanged>
+								AAH.Browse.FilterChange()
+							</OnTextChanged>
+							<OnEnter>
+								AAH.Browse.Filter_TooltipDisplay(this, 1)
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</EditBox>
+					<EditBox name="AAH_BrowseFilter2EditBox" inherits="UIPanelEditBoxTemplate" historyLines="0">
+						<Size>
+							<AbsDimension x="118" y="22"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_BrowseFilter1EditBox" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString inherits="GameFontHighlight" text="">
+									<Anchors>
+										<Anchor point="RIGHT" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="0" y="-2"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnTabPressed>
+								if IsShiftKeyDown() then
+									AAH_BrowseFilter1EditBox:SetFocus()
+								else
+									AAH_BrowseFilter3EditBox:SetFocus()
+								end
+							</OnTabPressed>
+							<OnEnterPressed>
+								this:ClearFocus()
+							</OnEnterPressed>
+							<OnTextChanged>
+								AAH.Browse.FilterChange()
+							</OnTextChanged>
+							<OnEnter>
+								AAH.Browse.Filter_TooltipDisplay(this, 2)
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</EditBox>
+					<EditBox name="AAH_BrowseFilter3EditBox" inherits="UIPanelEditBoxTemplate" historyLines="0">
+						<Size>
+							<AbsDimension x="118" y="22"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_BrowseFilter2EditBox" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString inherits="GameFontHighlight" text="">
+									<Anchors>
+										<Anchor point="RIGHT" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="0" y="-2"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnTabPressed>
+								if IsShiftKeyDown() then
+									AAH_BrowseFilter2EditBox:SetFocus()
+								else
+									AAH_BrowseNameEditBox:SetFocus()
+								end
+							</OnTabPressed>
+							<OnEnterPressed>
+								this:ClearFocus()
+							</OnEnterPressed>
+							<OnTextChanged>
+								AAH.Browse.FilterChange()
+							</OnTextChanged>
+							<OnEnter>
+								AAH.Browse.Filter_TooltipDisplay(this, 3)
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</EditBox>
+					<CheckButton name="AAH_BrowseFilter2OrButton" inherits="UIPanelCheckButtonTemplate">
+						<Size>
+							<AbsDimension x="24" y="24"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPRIGHT" relativeTo="AAH_BrowseFilter2EditBox" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="-2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString name="AAH_BrowseFilter2OrButtonLabel" inherits="GameFontHighlight" text="Oder" justifyH="LEFT">
+									<Anchors>
+										<Anchor point="RIGHT" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="0" y="0"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								AAH.Browse.FilterChange()
+							</OnClick>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT", 4, 0)
+								GameTooltip:SetText(AAHLocale.Messages.BROWSE_FILTER_OR_TOOLTIP_HEADER, 1, 1, 1)
+								GameTooltip:AddLine(AAHLocale.Messages.BROWSE_FILTER_OR_TOOLTIP_TEXT, 0, 0.75, 0.95)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="AAH_BrowseFilter3OrButton" inherits="UIPanelCheckButtonTemplate">
+						<Size>
+							<AbsDimension x="24" y="24"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPRIGHT" relativeTo="AAH_BrowseFilter3EditBox" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="-2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString name="AAH_BrowseFilter3OrButtonLabel" inherits="GameFontHighlight" text="Oder" justifyH="LEFT">
+									<Anchors>
+										<Anchor point="RIGHT" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="0" y="0"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								AAH.Browse.FilterChange()
+							</OnClick>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT", 4, 0)
+								GameTooltip:SetText(AAHLocale.Messages.BROWSE_FILTER_OR_TOOLTIP_HEADER, 1, 1, 1)
+								GameTooltip:AddLine(AAHLocale.Messages.BROWSE_FILTER_OR_TOOLTIP_TEXT, 0, 0.75, 0.95)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="AAH_BrowseFilterPPUButton" inherits="UIPanelCheckButtonTemplate">
+						<Size>
+							<AbsDimension x="24" y="24"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="205" y="6"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString name="AAH_BrowseFilterPPUButtonLabel" inherits="GameFontHighlight" text="ppu" justifyH="LEFT">
+									<Anchors>
+										<Anchor point="RIGHT" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="0" y="0"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								AAH.Browse.FilterChange()
+							</OnClick>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT", 4, 0)
+								GameTooltip:SetText(AAHLocale.Messages.BROWSE_FILTER_PRICERANGE_PPU_TOOLTIP_HEADER, 1, 1, 1)
+								GameTooltip:AddLine(AAHLocale.Messages.BROWSE_FILTER_PRICERANGE_PPU_TOOLTIP_TEXT, 0, 0.75, 0.95)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="AAH_BrowseFilterBidButton" inherits="UIPanelCheckButtonTemplate">
+						<Size>
+							<AbsDimension x="24" y="24"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="255" y="6"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString name="AAH_BrowseFilterBidButtonLabel" inherits="GameFontHighlight" text="AUCTION_BID" justifyH="LEFT">
+									<Anchors>
+										<Anchor point="RIGHT" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="0" y="0"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								AAH.Browse.FilterChange()
+							</OnClick>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT", 4, 0)
+								GameTooltip:SetText(AAHLocale.Messages.BROWSE_FILTER_PRICERANGE_BID_TOOLTIP_HEADER, 1, 1, 1)
+								GameTooltip:AddLine(AAHLocale.Messages.BROWSE_FILTER_PRICERANGE_BID_TOOLTIP_TEXT, 0, 0.75, 0.95)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<EditBox name="AAH_BrowseFilterMinPriceEditBox" inherits="UIPanelEditBoxTemplate" letters="9" numeric="true" historyLines="0">
+						<Size>
+							<AbsDimension x="80" y="22"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_BrowseFilter2EditBox" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="35" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString name="AAH_BrowseFilterMinPriceEditBoxLabel" inherits="GameFontHighlight" text="min">
+									<Anchors>
+										<Anchor point="RIGHT" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="-4" y="-2"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnTabPressed>
+								if IsShiftKeyDown() then
+									AAH_BrowseMaxLvlEditBox:SetFocus()
+								else
+									AAH_BrowseFilterMaxPriceEditBox:SetFocus()
+								end
+							</OnTabPressed>
+							<OnEnterPressed>
+								this:ClearFocus()
+							</OnEnterPressed>
+							<OnTextChanged>
+								AAH.Browse.FilterChange()
+							</OnTextChanged>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT", 4, 0)
+								GameTooltip:SetText(AAHLocale.Messages.BROWSE_FILTER_PRICERANGE_MIN_TOOLTIP_HEADER, 1, 1, 1)
+								GameTooltip:AddLine(AAHLocale.Messages.BROWSE_FILTER_PRICERANGE_MIN_TOOLTIP_TEXT, 0, 0.75, 0.95)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</EditBox>
+					<EditBox name="AAH_BrowseFilterMaxPriceEditBox" inherits="UIPanelEditBoxTemplate" letters="9" numeric="true" historyLines="0">
+						<Size>
+							<AbsDimension x="80" y="22"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_BrowseFilterMinPriceEditBox" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+						<Layers>
+							<Layer>
+								<FontString name="AAH_BrowseFilterMaxPriceButtonLabel" inherits="GameFontHighlight" text="max">
+									<Anchors>
+										<Anchor point="RIGHT" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="-4" y="-2"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnTabPressed>
+								if IsShiftKeyDown() then
+									AAH_BrowseFilterMinPriceEditBox:SetFocus()
+								else
+									AAH_BrowseFilter1EditBox:SetFocus()
+								end
+							</OnTabPressed>
+							<OnEnterPressed>
+								this:ClearFocus()
+							</OnEnterPressed>
+							<OnTextChanged>
+								AAH.Browse.FilterChange()
+							</OnTextChanged>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT", 4, 0)
+								GameTooltip:SetText(AAHLocale.Messages.BROWSE_FILTER_PRICERANGE_MAX_TOOLTIP_HEADER, 1, 1, 1)
+								GameTooltip:AddLine(AAHLocale.Messages.BROWSE_FILTER_PRICERANGE_MAX_TOOLTIP_TEXT, 0, 0.75, 0.95)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</EditBox>
+				</Frames>
+			</Frame>
+			<Frame name="AAH_BrowseList" enableMouse="true">
+				<Size>
+					<AbsDimension x="666" y="340"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="156" y="102"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\AuctionFrame\AuctionFrame-Tooltip-Border" bgFile="Interface\AuctionFrame\AuctionFrame-Tooltip-Background">
+					<EdgeSize>
+						<AbsValue val="16"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+					<BackgroundInsets>
+						<AbsInset left="16" right="16" top="16" bottom="16"/>
+					</BackgroundInsets>
+				</Backdrop>
+				<Layers>
+					<Layer>
+						<FontString name="AAH_BrowseProgressLabel" inherits="GameFontHighlight" text="">
+							<Anchors>
+								<Anchor point="CENTER">
+									<Offset>
+										<AbsDimension x="0" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<FontHeight>
+								<AbsValue val="20"/>
+							</FontHeight>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Slider name="AAH_BrowseListScrollBar" inherits="UIPanelScrollBarHaveBackdropTemplate">
+						<Anchors>
+							<Anchor point="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="-6" y="46"/>
+								</Offset>
+							</Anchor>
+							<Anchor point="BOTTOMRIGHT">
+								<Offset>
+									<AbsDimension x="-6" y="-24"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this:SetValueStepMode("INT")
+							</OnLoad>
+							<OnValueChanged>
+								UIPanelScrollBar_OnValueChanged(this, arg1)
+								AAH.Browse.List_UpdateItems()
+							</OnValueChanged>
+						</Scripts>
+					</Slider>
+					<Button name="AAH_BrowseHeaderName" inherits="AAH_BrowseHeaderTemplate" text="C_ITEM_NAME" id="1">
+						<Anchors>
+							<Anchor point="TOP" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="112" y="6"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseHeaderCustom1" inherits="AAH_BrowseHeaderTemplate" text="C_LEVEL" id="2">
+						<Anchors>
+							<Anchor point="TOP" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="238" y="6"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>this:RegisterForClicks("LeftButton", "RightButton")</OnLoad>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT", 4, 0)
+								GameTooltip:SetText(AAHLocale.Messages.GENERAL_CUSTOM_HEADER_TOOLTIP_HEADER, 1, 1, 1)
+								GameTooltip:AddLine(AAHLocale.Messages.GENERAL_CUSTOM_HEADER_TOOLTIP_TEXT, 0, 0.75, 0.95)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</Button>
+					<Frame name="AAH_BrowseHeaderCustom1Menu" inherits="UIDropDownMenuTemplate">
+						<Anchors>
+							<Anchor point="RIGHT" relativeTo="AAH_BrowseHeaderCustom1" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="0" y="-10"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Button name="AAH_BrowseHeaderCustom2" inherits="AAH_BrowseHeaderTemplate" text="" id="3">
+						<Anchors>
+							<Anchor point="TOP" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="308" y="6"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>this:RegisterForClicks("LeftButton", "RightButton")</OnLoad>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT", 4, 0)
+								GameTooltip:SetText(AAHLocale.Messages.GENERAL_CUSTOM_HEADER_TOOLTIP_HEADER, 1, 1, 1)
+								GameTooltip:AddLine(AAHLocale.Messages.GENERAL_CUSTOM_HEADER_TOOLTIP_TEXT, 0, 0.75, 0.95)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</Button>
+					<Frame name="AAH_BrowseHeaderCustom2Menu" inherits="UIDropDownMenuTemplate">
+						<Anchors>
+							<Anchor point="RIGHT" relativeTo="AAH_BrowseHeaderCustom2" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="0" y="-10"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Button name="AAH_BrowseHeaderLeftTime" inherits="AAH_BrowseHeaderTemplate" text="TIMEFLAG_STATE" id="4">
+						<Anchors>
+							<Anchor point="TOP" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="367" y="6"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseHeaderSeller" inherits="AAH_BrowseHeaderTemplate" text="AUCTION_SELLER" id="5">
+						<Anchors>
+							<Anchor point="TOP" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="422" y="6"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseHeaderPPU" inherits="AAH_BrowseHeaderTemplate" text="" id="6">
+						<Anchors>
+							<Anchor point="TOP" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="484" y="6"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseHeaderPrice" inherits="AAH_BrowseHeaderTemplate" text="AUCTION_PRICE" id="7">
+						<Anchors>
+							<Anchor point="TOP" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="591" y="6"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseListItem1" inherits="AAH_BrowseListItemTemplate" id="1">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="29"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseListItem2" inherits="AAH_BrowseListItemTemplate" id="2">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_BrowseListItem1" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseListItem3" inherits="AAH_BrowseListItemTemplate" id="3">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_BrowseListItem2" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseListItem4" inherits="AAH_BrowseListItemTemplate" id="4">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_BrowseListItem3" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseListItem5" inherits="AAH_BrowseListItemTemplate" id="5">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_BrowseListItem4" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseListItem6" inherits="AAH_BrowseListItemTemplate" id="6">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_BrowseListItem5" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseListItem7" inherits="AAH_BrowseListItemTemplate" id="7">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_BrowseListItem6" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseListItem8" inherits="AAH_BrowseListItemTemplate" id="8">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_BrowseListItem7" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseListItem9" inherits="AAH_BrowseListItemTemplate" id="9">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_BrowseListItem8" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseListItem10" inherits="AAH_BrowseListItemTemplate" id="10">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_BrowseListItem9" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseListItem11" inherits="AAH_BrowseListItemTemplate" id="11">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_BrowseListItem10" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="AAH_BrowseListItem12" inherits="AAH_BrowseListItemTemplate" id="12">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="AAH_BrowseListItem11" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+				</Frames>
+				<Scripts>
+					<OnMouseWheel>
+						UIPanelScrollBar_OnMouseWheel(AAH_BrowseListScrollBar, delta)
+					</OnMouseWheel>
+				</Scripts>
+			</Frame>
+			<Button name="AAH_BrowseSearchButton" inherits="UIPanelButtonTemplate" text="C_SEARCH">
+				<Size>
+					<AbsDimension x="72" y="22"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="24" y="45"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						AAH.Browse.SearchButton_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="AAH_BrowseResetButton" inherits="UIPanelButtonTemplate" text="Reset">
+				<Size>
+					<AbsDimension x="72" y="22"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="24" y="75"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						AAH.Browse.ResetButton_OnClick()
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_LEFT", 4, 0)
+						GameTooltip:SetText(AAHLocale.Messages.BROWSE_CLEAR_BUTTON_TOOLTIP_HEADER, 1, 1, 1)
+						GameTooltip:AddLine(AAHLocale.Messages.BROWSE_CLEAR_BUTTON_TOOLTIP_TEXT, 0, 0.75, 0.95)
+						GameTooltip:Show()
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchExpandButton">
+				<Size>
+					<AbsDimension x="20" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-7" y="107"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>AAH.SavedSearch.ExpandButton_OnClick()</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\PageRightButton-Normal">
+					<TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/>
+				</NormalTexture>
+				<PushedTexture file="Interface\Buttons\PageRightButton-Depress">
+					<TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/>
+				</PushedTexture>
+				<DisabledTexture file="Interface\Buttons\PageRightButton-Disable">
+					<TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/>
+				</DisabledTexture>
+				<HighlightTexture file="Interface\Buttons\PanelLeftButton-Highlight" alphaMode="ADD"/>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchMinimizeButton" hidden="true">
+				<Size>
+					<AbsDimension x="20" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-7" y="107"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>AAH.SavedSearch.MinimizeButton_OnClick()</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\PageLeftButton-Normal">
+					<TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/>
+				</NormalTexture>
+				<PushedTexture file="Interface\Buttons\PageLeftButton-Depress">
+					<TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/>
+				</PushedTexture>
+				<DisabledTexture file="Interface\Buttons\PageLeftButton-Disable">
+					<TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/>
+				</DisabledTexture>
+				<HighlightTexture file="Interface\Buttons\PanelLeftButton-Highlight" alphaMode="ADD"/>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchPlusButton">
+				<Size>
+					<AbsDimension x="20" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-7" y="130"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>this:Disable()</OnLoad>
+					<OnClick>StaticPopup_Show("SAVEDSEARCH_CREATEITEM")</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\PlusButton_Normal">
+					<TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/>
+				</NormalTexture>
+				<PushedTexture file="Interface\Buttons\PlusButton_Depress">
+					<TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/>
+				</PushedTexture>
+				<DisabledTexture file="Interface\Buttons\PlusButton_Disable">
+					<TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/>
+				</DisabledTexture>
+				<HighlightTexture file="Interface\Buttons\PanelLeftButton-Highlight" alphaMode="ADD"/>
+			</Button>
+			<Button name="AAH_BrowseInfoLabel" text="">
+				<Size>
+					<AbsDimension x="350" y="22"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="18" y="-23"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnter>
+						if this:GetText() ~= "" then
+							GameTooltip:SetOwner(this, "ANCHOR_BOTTOM", 4, 0)
+							GameTooltip:SetText(AAHLocale.Messages.BROWSE_INFO_LABEL_TOOLTIP_HEADER, 1, 1, 1)
+							GameTooltip:AddLine(AAHLocale.Messages.BROWSE_INFO_LABEL_TOOLTIP_TEXT, 0, 0.75, 0.95)
+							GameTooltip:Show()
+						end
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+				<NormalText inherits="GameFontHighlight" justifyH="LEFT"/>
+			</Button>
+			<Button name="AAH_BrowseHistoryButton" inherits="UIPanelButtonTemplate" text="AUCTION_HISTORY_PRICE">
+				<Size>
+					<AbsDimension x="60" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-52" y="-20"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>AAH.Browse.HistoryButton_OnClick(this)</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="AAH_BrowseBidButton" inherits="UIPanelButtonTemplate" text="AUCTION_BID">
+				<Size>
+					<AbsDimension x="60" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="AAH_BrowseHistoryButton" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="-4" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if GetButtonDelayTime() == nil then
+							SetButtonDelayTime()
+							AAH.Browse.BidButton_OnClick(this)
+						end
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="AAH_BrowseBuyoutButton" inherits="UIPanelButtonTemplate" text="AUCTION_BUYOUT">
+				<Size>
+					<AbsDimension x="60" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="AAH_BrowseBidButton" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="-4" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if GetButtonDelayTime() == nil then
+							SetButtonDelayTime()
+							AAH.Browse.BuyoutButton_OnClick(this)
+						end
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Frame name="AAH_BrowseBidMoneyInput" inherits="AAH_MoneyTemplate">
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="AAH_BrowseBuyoutButton" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="-25" y="-1"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>AAH.Browse.Frame_OnLoad(this)</OnLoad>
+			<OnUpdate>AAH.Browse.Frame_OnUpdate(this, elapsedTime)</OnUpdate>
+		</Scripts>
+	</Frame>
+</Ui>

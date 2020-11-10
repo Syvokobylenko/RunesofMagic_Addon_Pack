@@ -1,0 +1,36 @@
+<Ui xmlns="http://www.runewaker.com/" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/
+UI.xsd">
+  <FontString name="PyStyleFontNormal" inherits="GameFontNormal" virtual="true">
+    <FontHeight>
+      <AbsValue val="12"/>
+    </FontHeight>
+    <Color r="0.9" g="0.9" b="0.9"/>
+  </FontString>
+  <FontString name="PyStyleFontTitle" inherits="PyStyleFontNormal" weight="BOLD" virtual="true">
+    <FontHeight>
+      <AbsValue val="14"/>
+    </FontHeight>
+  </FontString>
+
+  <FontString name="PyStyleFontDisabled" inherits="PyStyleFontNormal" virtual="true">
+    <Color r="0.75" g="0.75" b="0.75"/>
+  </FontString>
+  <FontString name="PyStyleFontHighlight" inherits="PyStyleFontNormal" virtual="true">
+    <Color r="1" g="1" b="1"/>
+  </FontString>
+  <FontString name="PyStyleFontNormalSmall" inherits="PyStyleFontNormal" virtual="true">
+    <FontHeight>
+      <AbsValue val="10"/>
+    </FontHeight>
+  </FontString>
+  <FontString name="PyStyleFontHighlightSmall" inherits="PyStyleFontNormalSmall" virtual="true">
+    <Color b="1" g="1" r="1"/>
+  </FontString>
+  <FontString name="PyStyleEditBoxFont" inherits="PyStyleFontNormal" virtual="true">
+    <FontHeight>
+      <AbsValue val="12"/>
+    </FontHeight>
+    <Color r="1" g="1" b="1"/>
+  </FontString>
+</Ui>

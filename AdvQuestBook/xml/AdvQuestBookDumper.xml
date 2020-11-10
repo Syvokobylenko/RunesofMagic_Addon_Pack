@@ -1,0 +1,22 @@
+<!-- ä
+
+	Name: Advanced Questbook
+	By: Crypton
+
+-->
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Frame name="AdvQuestBookCoreFrame">
+		<Scripts>
+			<OnLoad>
+				this:RegisterEvent("VARIABLES_LOADED");
+				this:RegisterEvent("SYSTEM_MESSAGE");
+				this:RegisterEvent("ADDNEW_QUESTBOOK");
+				this:RegisterEvent("QUEST_COMPLETE");
+				this:RegisterEvent("CHAT_MSG_SYSTEM");
+			</OnLoad>
+			<OnEvent>
+				AQB_DUMPEVENT(this, event);
+			</OnEvent>
+		</Scripts>
+	</Frame>
+</Ui>

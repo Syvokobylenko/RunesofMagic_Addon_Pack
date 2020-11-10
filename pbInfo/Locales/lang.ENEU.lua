@@ -1,0 +1,138 @@
+--[[
+pbInfo - Locales/lang.ENEU.lua
+	v0.49
+	by p.b. a.k.a. novayuna
+	released under the Creative Commons License By-Nc-Sa: http://creativecommons.org/licenses/by-nc-sa/3.0/
+]]
+pbInfo.QuestTracker.CompleteText = "%(Complete%)";
+pbInfo.QuestTracker.DailyQuestPatterns = {"still complete (%d+) Daily", "cannot complete Daily", "use Daily Quest Ticket"};
+pbInfo.ChatFrame.XPTP = {'^%d+ XP', '^%d+ TP'};
+pbInfo.ChatFrame.XPTPDebt = {'^Experience debt has been decreased by %d+', '^TP debt has been reduced by %d+'};
+pbInfo.ChatFrame.Progress = {'^(.+) learning progress: [%d.]+%%'};
+pbInfo.Locale = {
+	["Messages"] = {
+		["DESCRIPTION"]  		= "pbInfo shows a tooltip with several information about the mob, player or NPC you are hovering, a tooltip with information about gathering materials and it modifies the target blood bars to show a mob's real healthpoints.\n\nBy now, pbInfo includes a ThreatMeter, a QuestTracker and a ChatLog.",
+		["LOADED"]  		= "Add-on loaded",
+		["NVT"] 			= "No valid target selected!",
+		["TOGGLEtrue"] 		= " has been successfully |cff00FF00enabled|r.",
+		["TOGGLEfalse"]		= " has been successfully |cffFF0000disabled|r.",
+		["TOGGLEerror"]		= " does not exist in the configuration.",
+		["ONLOAD"]			= "Use the minimap button or /pbic to toggle options.",
+		["ATTENTIONENABLE"]	= "Attention: The add-on has been |cffFF0000disabled|r in the past. Use /pbic to enable it."
+	},
+	["Tooltip"] = {
+		["HP"] 			= "Health",
+		["LVL"] 		= "Level",
+		["PROGRESS"]	= "Progress",
+		["TITLE"]		= "Title",
+		["GUILD"]	 	= "Guild",
+		["DISTANCE"]	= "Distance",
+		["TARGET"] 		= "Target",
+		["MANATYPE1"] 	= "Mana",
+		["MANATYPE2"] 	= "Rage",
+		["MANATYPE3"] 	= "Focus",
+		["MANATYPE4"] 	= "Energy",
+		["MATINBAG"]	= "In the bags",
+		["MATONBANK"]	= "On the bank"
+	},
+	["ClockTooltip"] = {
+		["CNDTIME"] 	= "Time in Candara",
+		["ONLINE"] 		= "Online",
+		["TIMEFORMAT"] 	= "%I:%M %p" -- http://www.lua.org/pil/22.1.html
+	},
+	["QuestTracker"] = {
+		["DAILY"] 		= "Daily Quest",
+		["REWARD"] 		= "Reward",
+		["QUESTNPC"] 	= "Quest-NPC",
+		["XP"] 			= "XP",
+		["TP"] 			= "TP",
+		["GOLD"] 		= "Gold",
+		["DQITEMS"] 	= "Daily quest items",
+		["COMPLQUESTS"]	= "complete quests",
+		["INFOTOOLTIP"] = "Click the left mouse button to toggle the QuestTracker.\n\nHold shift and the right mouse button to move it."
+	},
+	["Config"] = {
+		["Title"] 									= "pbInfo settings",
+		["TabGeneral"] 								= "General",
+		["TabTooltip"] 								= "Tooltip",
+		["TabTargetFrame"] 							= "TargetFrame",
+		["TabBloodBars"] 							= "BloodBars",
+		["TabThreatMeter"] 							= "ThreatMeter",
+		["TabQuestTracker"] 						= "QuestTracker",
+		["TabChatLog"] 								= "ChatLog",
+		["TabChatFrame"] 							= "ChatFrame",
+		["TabCastingBar"] 							= "CastingBar",
+		["SettingEnable"] 							= "Enable pbInfo",
+		["SettingThousandsSeparatorFormat"]			= "ThousandsSeparator:",
+		["SettingTimeStampFormat"] 					= "TimeStamp format:",
+		["SettingExtraLanguage"] 					= "Language:",
+		["SettingModifyTooltip"] 					= "Show info about monsters and players",
+		["SettingModifyHealthbar"] 					= "Show real hp in target frame",
+		["SettingHealthbarShowPercentage"] 			= "Keep percentage values",
+		["SettingHealthColorFade"] 					= "Smooth healthpoints coloring",
+		["SettingShowMana"] 						= "Show mana, rage, energy and focus",
+		["SettingShowDistance"] 					= "Show distance",
+		["SettingTooltipShowRace"] 					= "Show race",
+		["SettingTooltipShowPlayerInfo"] 			= "Show a player's title (experimental)",
+		["SettingShowMouseoverTarget"] 				= "Show the target's target",
+		["SettingAllNPC"] 							= "Enable for all npc",
+		["SettingStickyTooltip"] 					= "Static Tooltip position",
+		["SettingStickyAllTooltips"] 				= "all Tooltips (spells, items, etc.)",
+		["SettingStickyTooltipButton"] 				= "Set position",
+		["SettingShowMaterialInfo"] 				= "Show info about gathering materials",
+		["SettingShowMatInfoItemCount"] 			= "Show item count",
+		["SettingShowMatInfoItemCountBank"] 		= "+ Bank items",
+		["SettingShowMatInfoItemCountIV"] 			= "+ InventoryViewer Support",
+		["SettingShowClockTooltip"] 				= "Show ClockTooltip on the daylight icon",
+		["SettingHealthBarColorFade"] 				= "Color health bar from green to red",
+		["SettingModifyBloodBars"] 					= "Show real hp in blood bars",
+		["SettingBloodBarsColorFade"] 				= "Color blood bar from green to red",
+		["SettingBloodBarsDelay"] 					= "Update delay in seconds:",
+		["SettingThreatMeter"] 						= "ThreatMeter",
+		["SettingThreatMeterShowTitle"] 			= "Show title",
+		["SettingThreatMeterLock"] 					= "Fix position",
+		["SettingThreatMeterPlayerOnTop"] 			= "Place player always on top",
+		["SettingThreatMeterWarnTargetTargetTarget"]= 'Warn me if "TargetTargetTarget = Me"',
+		["TooltipThreatMeterWarnTargetTargetTarget"]= "Shows a warning message if your target's target targets you.\nEx.: Tank -> Mob -> You",
+		["SettingThreatMeterHideOnNoTarget"] 		= "Hide if no target selected",
+		["SettingThreatMeterHideOnNoParty"] 		= "Hide if not in party",
+		["SettingThreatMeterRelativeToMaxThreat"] 	= "Show threats relative to max. threat",
+		["SettingThreatMeterShowRealThreat"] 		= "Show real threat instead of percentages",
+		["SettingThreatMeterDisplayLimit"] 			= "% minimum threat for display in list",
+		["SettingGameTooltipAlpha"] 				= "% Tooltip transparency",
+		["SettingThreatMeterAlpha"] 				= "% ThreatMeter transparency",
+		["SettingThreatMeterDelay"] 				= "Update delay in seconds:",
+		["SettingQuestTracker"] 					= "QuestTracker",
+		["SettingQuestTrackerShowTitle"] 			= "Show title",
+		["SettingQuestTrackerSortAsc"] 				= "Sort ascending",
+		["SettingQuestTrackerProgressColorFade"] 	= "Color progress smoothly",
+		["SettingQuestTrackerTooltip"] 				= "Show Tooltip",
+		["SettingQuestTrackerTooltipRight"] 		= "Show tooltip on the right",
+		["SettingQuestTrackerTooltipDescription"] 	= "Show quest summary",
+		["SettingQuestTrackerHighlightDailies"] 	= "Highlight daily quests",
+		["SettingQuestTrackerOpenQuestbook"] 		= "Open questbook on left click",
+		["SettingQuestTrackerShowDailiesCounter"] 	= "Show daily quest counter (experimental)",
+		["SettingQuestTrackerFontSizesTitle"] 		= "QuestTracker title font size:",
+		["SettingQuestTrackerFontSizesQuestTitle"] 	= "Quest name font size:",
+		["SettingQuestTrackerFontSizesQuestItems"] 	= "Quest items font size:",
+		["SettingQuestTrackerColorsDailyQuest"] 	= "Daily quest color",
+		["SettingChatLog"] 							= "ChatLog",
+		["SettingChatLogMaxLinesPerChat"] 			= "lines to save in history",
+		["SettingChatFrameFilterTitles"] 			= "Remove chat titles ([Zone], [Party], ...)",
+		["SettingChatFrameFilterXPTP"] 				= "Remove XP/TP messages",
+		["SettingChatFrameFilterXPTPDebt"] 			= "Remove debt messages",
+		["SettingChatFrameFilterProgress"] 			= "Remove progress messages", -- changed: remove all progress messages
+		["SettingChatFrameFilterProgressGather"]	= "Gathering messages only",   -- added: remove gathering progress messages only (mining, woodcutting, harbalism)
+		["SettingChatFrameShowPlayerInfo"] 			= "Show class & level info (experimental)",
+		["SettingTimeStamp"] 						= "Show TimeStamp in chat",
+		["SettingTimeStampNotInCombatLog"] 			= "Don't show in combat log",
+		["SettingAutoRepairAll"] 					= "Repair equip when opening store",
+		["SettingCastingBarShowCastTime"] 			= "Show cast time",
+		["SettingCastingBarButton"] 				= "Move CastingBar",
+		["TooltipBorderTitle"] 						= "GameTooltip position",
+		["TooltipBorderText"] 						= "Drag and drop",
+		["ResetButton"] 							= "! Reset pbInfo !",
+		["CloseButton"] 							= "Close",
+		["SaveButton"] 								= "Save"
+	}
+};

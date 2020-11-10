@@ -1,0 +1,463 @@
+<!--
+pbInfo - Xml/ThreatMeter.xml
+	v0.51-fix
+	by p.b. a.k.a. novayuna
+	released under the Creative Commons License By-Nc-Sa: http://creativecommons.org/licenses/by-nc-sa/3.0/
+-->
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="..\..\worldxml\ui.xsd">
+	<!-- ThreatMeter -->
+	<Frame name="pbInfoThreatMeter" hidden="false" parent="UIParent" frameStrata="BACKGROUND">
+		<Size>
+			<AbsDimension x="150" y="115"/>
+		</Size>
+		<Backdrop bgFile="Interface\Tooltips\Tooltip-Background" edgeFile="Interface\Tooltips\Tooltip-border" tile="true">
+			<BackgroundInsets>
+				<AbsInset top="4" left="4" bottom="4" right="4"/>
+			</BackgroundInsets>
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+		</Backdrop>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Button name="pbInfoThreatMeter_MovingDot">
+				<Size>
+					<AbsDimension x="16" y="16"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<NormalTexture file="Interface\WorldMap\WorldMap-TitlebarSwitch-Normal"/>
+				<!-- <PushedTexture file="Interface\WorldMap\WorldMap-TitlebarSwitch-Depress"/> -->
+				<Scripts>
+					<OnMouseDown>
+						if (pbInfoSettings["THREATMETERLOCK"] == false) then
+							pbInfoThreatMeter:StartMoving("TOPLEFT");
+						end;
+					</OnMouseDown>
+					<OnMouseUp>
+						pbInfoThreatMeter:StopMovingOrSizing();
+						pbInfoSettings["ThreatMeterPosition"] = {this:GetPos()};
+					</OnMouseUp>
+				</Scripts>
+			</Button>
+			<Frame name="pbInfoThreatMeter_Head">
+				<Size>
+					<AbsDimension x="150" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="pbInfoThreatMeter" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="pbInfoThreatMeter_Title" hidden="false" inherits="GameTitleFont" text="ThreatMeter">
+							<Size>
+								<AbsDimension x="150" y="20"/>
+							</Size>
+							<FontHeight>
+								<AbsValue val="15"/>
+							</FontHeight>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			<Frame name="pbInfoThreatMeter_Body">
+				<Layers>
+					<!-- Bar 1 -->
+					<Layer>
+						<Texture name="pbInfoThreatMeter_Bar1" file="interface\common\bar\round.tga">
+							<Color r="0" g="1" b="0" a="1"/>
+							<Size>
+								<AbsDimension x="0" y="10"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="pbInfoThreatMeter_Head" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="5" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0.2" right="0.9" top="0" bottom="0.75"/>
+						</Texture>
+						<FontString name="pbInfoThreatMeter_Name1" inherits="GameTitleFont" justifyH="LEFT" text="">
+							<Color r="1" g="1" b="1" a="1"/>
+							<Size>
+								<AbsDimension x="110" y="12"/>
+							</Size>
+							<FontHeight>
+								<AbsValue val="10"/>
+							</FontHeight>
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="pbInfoThreatMeter_Bar1" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="2" y="-1"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="pbInfoThreatMeter_Percentage1" inherits="GameTitleFont" justifyH="RIGHT" text="">
+							<Color r="1" g="1" b="1" a="1"/>
+							<Size>
+								<AbsDimension x="40" y="12"/>
+							</Size>
+							<FontHeight>
+								<AbsValue val="10"/>
+							</FontHeight>
+							<Anchors>
+								<Anchor point="TOPRIGHT" relativeTo="pbInfoThreatMeter_Head" relativePoint="BOTTOMRIGHT">
+									<Offset>
+										<AbsDimension x="-5" y="-1"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+					<!-- Bar 2 -->
+					<Layer>
+						<Texture name="pbInfoThreatMeter_Bar2" file="interface\common\bar\round.tga">
+							<Color r="0" g="1" b="0.15" a="1"/>
+							<Size>
+								<AbsDimension x="0" y="10"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="pbInfoThreatMeter_Head" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="5" y="15"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0.2" right="0.9" top="0" bottom="0.75"/>
+						</Texture>
+						<FontString name="pbInfoThreatMeter_Name2" inherits="GameTitleFont" justifyH="LEFT" text="">
+							<Color r="1" g="1" b="1" a="1"/>
+							<Size>
+								<AbsDimension x="110" y="12"/>
+							</Size>
+							<FontHeight>
+								<AbsValue val="10"/>
+							</FontHeight>
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="pbInfoThreatMeter_Bar2" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="2" y="-1"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="pbInfoThreatMeter_Percentage2" inherits="GameTitleFont" justifyH="RIGHT" text="">
+							<Color r="1" g="1" b="1" a="1"/>
+							<Size>
+								<AbsDimension x="40" y="12"/>
+							</Size>
+							<FontHeight>
+								<AbsValue val="10"/>
+							</FontHeight>
+							<Anchors>
+								<Anchor point="TOPRIGHT" relativeTo="pbInfoThreatMeter_Head" relativePoint="BOTTOMRIGHT">
+									<Offset>
+										<AbsDimension x="-5" y="14"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+					<!-- Bar 3 -->
+					<Layer>
+						<Texture name="pbInfoThreatMeter_Bar3" file="interface\common\bar\round.tga">
+							<Color r="0" g="1" b="0.15" a="1"/>
+							<Size>
+								<AbsDimension x="0" y="10"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="pbInfoThreatMeter_Head" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="5" y="30"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0.2" right="0.9" top="0" bottom="0.75"/>
+						</Texture>
+						<FontString name="pbInfoThreatMeter_Name3" inherits="GameTitleFont" justifyH="LEFT" text="">
+							<Color r="1" g="1" b="1" a="1"/>
+							<Size>
+								<AbsDimension x="110" y="12"/>
+							</Size>
+							<FontHeight>
+								<AbsValue val="10"/>
+							</FontHeight>
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="pbInfoThreatMeter_Bar3" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="2" y="-1"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="pbInfoThreatMeter_Percentage3" inherits="GameTitleFont" justifyH="RIGHT" text="">
+							<Color r="1" g="1" b="1" a="1"/>
+							<Size>
+								<AbsDimension x="40" y="12"/>
+							</Size>
+							<FontHeight>
+								<AbsValue val="10"/>
+							</FontHeight>
+							<Anchors>
+								<Anchor point="TOPRIGHT" relativeTo="pbInfoThreatMeter_Head" relativePoint="BOTTOMRIGHT">
+									<Offset>
+										<AbsDimension x="-5" y="29"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+					<!-- Bar 4 -->
+					<Layer>
+						<Texture name="pbInfoThreatMeter_Bar4" file="interface\common\bar\round.tga">
+							<Color r="0" g="1" b="0.15" a="1"/>
+							<Size>
+								<AbsDimension x="0" y="10"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="pbInfoThreatMeter_Head" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="5" y="45"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0.2" right="0.9" top="0" bottom="0.75"/>
+						</Texture>
+						<FontString name="pbInfoThreatMeter_Name4" inherits="GameTitleFont" justifyH="LEFT" text="">
+							<Color r="1" g="1" b="1" a="1"/>
+							<Size>
+								<AbsDimension x="110" y="12"/>
+							</Size>
+							<FontHeight>
+								<AbsValue val="10"/>
+							</FontHeight>
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="pbInfoThreatMeter_Bar4" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="2" y="-1"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="pbInfoThreatMeter_Percentage4" inherits="GameTitleFont" justifyH="RIGHT" text="">
+							<Color r="1" g="1" b="1" a="1"/>
+							<Size>
+								<AbsDimension x="40" y="12"/>
+							</Size>
+							<FontHeight>
+								<AbsValue val="10"/>
+							</FontHeight>
+							<Anchors>
+								<Anchor point="TOPRIGHT" relativeTo="pbInfoThreatMeter_Head" relativePoint="BOTTOMRIGHT">
+									<Offset>
+										<AbsDimension x="-5" y="44"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+					<!-- Bar 5 -->
+					<Layer>
+						<Texture name="pbInfoThreatMeter_Bar5" file="interface\common\bar\round.tga">
+							<Color r="0" g="1" b="0.15" a="1"/>
+							<Size>
+								<AbsDimension x="0" y="10"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="pbInfoThreatMeter_Head" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="5" y="60"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0.2" right="0.9" top="0" bottom="0.75"/>
+						</Texture>
+						<FontString name="pbInfoThreatMeter_Name5" inherits="GameTitleFont" justifyH="LEFT" text="">
+							<Color r="1" g="1" b="1" a="1"/>
+							<Size>
+								<AbsDimension x="110" y="12"/>
+							</Size>
+							<FontHeight>
+								<AbsValue val="10"/>
+							</FontHeight>
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="pbInfoThreatMeter_Bar5" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="2" y="-1"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="pbInfoThreatMeter_Percentage5" inherits="GameTitleFont" justifyH="RIGHT" text="">
+							<Color r="1" g="1" b="1" a="1"/>
+							<Size>
+								<AbsDimension x="40" y="12"/>
+							</Size>
+							<FontHeight>
+								<AbsValue val="10"/>
+							</FontHeight>
+							<Anchors>
+								<Anchor point="TOPRIGHT" relativeTo="pbInfoThreatMeter_Head" relativePoint="BOTTOMRIGHT">
+									<Offset>
+										<AbsDimension x="-5" y="59"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+					<!-- Bar 6 -->
+					<Layer>
+						<Texture name="pbInfoThreatMeter_Bar6" file="interface\common\bar\round.tga">
+							<Color r="0" g="1" b="0.15" a="1"/>
+							<Size>
+								<AbsDimension x="0" y="10"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="pbInfoThreatMeter_Head" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="5" y="75"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0.2" right="0.9" top="0" bottom="0.75"/>
+						</Texture>
+						<FontString name="pbInfoThreatMeter_Name6" inherits="GameTitleFont" justifyH="LEFT" text="">
+							<Color r="1" g="1" b="1" a="1"/>
+							<Size>
+								<AbsDimension x="110" y="12"/>
+							</Size>
+							<FontHeight>
+								<AbsValue val="10"/>
+							</FontHeight>
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="pbInfoThreatMeter_Bar6" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="2" y="-1"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="pbInfoThreatMeter_Percentage6" inherits="GameTitleFont" justifyH="RIGHT" text="">
+							<Color r="1" g="1" b="1" a="1"/>
+							<Size>
+								<AbsDimension x="40" y="12"/>
+							</Size>
+							<FontHeight>
+								<AbsValue val="10"/>
+							</FontHeight>
+							<Anchors>
+								<Anchor point="TOPRIGHT" relativeTo="pbInfoThreatMeter_Head" relativePoint="BOTTOMRIGHT">
+									<Offset>
+										<AbsDimension x="-5" y="74"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				if (type(pbInfo.ThreatMeter.Scripts.OnLoad) ~= "function") then this:Hide(); end;
+				this:RegisterEvent("UNIT_TARGET_CHANGED");
+				this:RegisterEvent("PARTY_MEMBER_CHANGED");
+--				this:RegisterEvent("TARGET_HATE_LIST_UPDATED"); -- does not fire if AGGROFRAME_ENABLE is false or if you are not in combat
+				this:RegisterEvent("VARIABLES_LOADED");
+			</OnLoad>
+			<OnEvent>
+				if (event == "VARIABLES_LOADED") then
+					pbInfo.ThreatMeter.Scripts.OnLoad();
+				elseif (pbInfoSettings["THREATMETER"]) then
+--[[				if (event == "TARGET_HATE_LIST_UPDATED" and UnitCanAttack("player", "target")) then
+						pbInfo.ThreatMeter.Update();
+					else]]if (event == "UNIT_TARGET_CHANGED" and pbInfoSettings["THREATMETERHIDEONNOTARGET"]) then
+						if (UnitExists("target")
+							and UnitCanAttack("player", "target")
+							and ((pbInfoSettings["THREATMETERHIDEONNOPARTY"] and GetNumPartyMembers() > 0) or not pbInfoSettings["THREATMETERHIDEONNOPARTY"])
+						) then
+							pbInfo.ThreatMeter.Timer = 0;
+							pbInfo.ThreatMeter.Show = true;
+							this:Show();
+						else
+							pbInfo.ThreatMeter.Show = false;
+							this:Hide();
+						end;
+					elseif (event == "PARTY_MEMBER_CHANGED"
+						and pbInfoSettings["THREATMETERHIDEONNOPARTY"]
+						and not pbInfoSettings["THREATMETERHIDEONNOTARGET"]
+					) then
+						if (GetNumPartyMembers() > 0) then
+							pbInfo.ThreatMeter.Show = true;
+							this:Show();
+						else
+							pbInfo.ThreatMeter.Show = false;
+							this:Hide();
+						end;
+					end;
+				end;
+			</OnEvent>
+			<OnUpdate> -- does not fire if hidden \o/
+				if (UnitCanAttack("player", "target")) then
+					pbInfo.ThreatMeter.Scripts.OnUpdate();
+				end;
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+	<Frame name="pbInfoThreatMeterAggroWarning" parent="UIParent" hidden="true">
+		<Size>
+			<AbsDimension x="500" y="50"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="UIParent" relativePoint="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="-200"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer>
+				<FontString name="pbInfoThreatMeterAggroWarning_Text" inherits="GameTitleFont" text="Attention! TargetTargetTarget = You!">
+					<Color r="1" g="0" b="0" a="1"/>
+					<Size>
+						<AbsDimension x="500" y="50"/>
+					</Size>
+					<FontHeight>
+						<AbsValue val="28"/>
+					</FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+	<Frame name="pbInfoThreatMeterAggroWarningTimer" parent="UIParent" hidden="true">
+		<Scripts>
+			<OnUpdate>
+				if (pbInfoSettings["THREATMETER"] and type(UnitName("target")) == "string" and UnitCanAttack("player", "targettarget") and UnitName("targettargettarget") == UnitName("target")) then
+					pbInfoThreatMeterAggroWarning:Show();
+				else
+					pbInfoThreatMeterAggroWarning:Hide();
+				end;
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+</Ui>

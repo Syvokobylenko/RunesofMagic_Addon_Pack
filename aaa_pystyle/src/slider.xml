@@ -1,0 +1,218 @@
+<Ui xmlns="http://www.runewaker.com/" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ UI.xsd">
+  <Button name="PyStyleScrollbarButtonTemplate" virtual="true">
+    <Size>
+      <AbsDimension x="16" y="16"/>
+    </Size>
+    <Scripts>
+      <OnLoad>
+        this.dir = 1
+      </OnLoad>
+      <OnMouseUp>
+        this.time = nil
+      </OnMouseUp>
+      <OnMouseDown>
+        this.wait = 1
+        this.step = 0
+        this.time = 1000
+      </OnMouseDown>
+      <OnEnable>
+        this.time = nil
+      </OnEnable>
+      <OnUpdate>
+        if this.time then
+          if this.time > this.wait then
+            local sb = this:GetParent()
+            local step = 1
+            if sb:GetValueStepMode()=="FLOAT" then
+              step = (sb:GetMaxValue()-sb:GetMinValue())/100
+            end
+            sb:SetValue(sb:GetValue() + step*this.dir)
+            this.time = 0
+            this.step = this.step + 1
+            if this.step == 1 then
+              this.wait = .5
+            elseif this.step == 3 then
+              this.wait = .2
+            elseif this.step == 5 then
+              this.wait = .08
+            elseif this.step == 10 then
+              this.wait = .01
+            end
+          else
+            this.time = this.time + elapsedTime
+          end
+        end
+      </OnUpdate>
+    </Scripts>
+  </Button>
+  <Slider name="PyStyleSliderScriptTemplate" enableMouse="true" virtual="true">
+    <Scripts>
+      <OnLoad>
+        PyStyle.slider.init(this)
+        this:SetValueStepMode("INT")
+      </OnLoad>
+      <OnMouseWheel>
+        this:scroll(delta)
+      </OnMouseWheel>
+      <OnValueChanged>
+        this:update()
+      </OnValueChanged>
+    </Scripts>
+  </Slider>
+  <Slider name="PyStyleScrollbarTemplate" inherits="PyStyleSliderScriptTemplate" virtual="true">
+    <Layers>
+      <Layer level="BACKGROUND">
+        <Texture name="$parentTop" file="Interface\Common\PanelScrollBar-Broder">
+          <Size>
+            <AbsDimension x="16" y="16"/>
+          </Size>
+          <Anchors>
+            <Anchor point="TOP">
+              <Offset>
+                <AbsDimension x="0" y="-20"/>
+              </Offset>
+            </Anchor>
+          </Anchors>
+          <TexCoords left="0" right="1" top="0" bottom="0.25"/>
+        </Texture>
+        <Texture name="$parentBottom" file="Interface\Common\PanelScrollBar-Broder">
+          <Size>
+            <AbsDimension x="16" y="16"/>
+          </Size>
+          <Anchors>
+            <Anchor point="BOTTOM">
+              <Offset>
+                <AbsDimension x="0" y="20"/>
+              </Offset>
+            </Anchor>
+          </Anchors>
+          <TexCoords left="0" right="1" top="0.75" bottom="1"/>
+        </Texture>
+        <Texture name="$parentMiddle" file="Interface\Common\PanelScrollBar-Broder">
+          <Size>
+            <AbsDimension x="16" y="1"/>
+          </Size>
+          <Anchors>
+            <Anchor point="TOP" relativeTo="$parentTop" relativePoint="BOTTOM"/>
+            <Anchor point="BOTTOM" relativeTo="$parentBottom" relativePoint="TOP"/>
+          </Anchors>
+          <TexCoords left="0" right="1" top="0.25" bottom="0.75"/>
+        </Texture>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Button name="$parentScrollUpButton" inherits="PyStyleScrollbarButtonTemplate">
+        <Anchors>
+          <Anchor point="BOTTOM" relativePoint="TOP" relativeTo="$parent"/>
+        </Anchors>
+        <NormalTexture file="Interface\Buttons\ScrollBar-UpButton-Normal"/>
+        <PushedTexture file="Interface\Buttons\ScrollBar-UpButton-Depress"/>
+        <DisabledTexture file="Interface\Buttons\ScrollBar-UpButton-Disable"/>
+        <HighlightTexture file="Interface\Buttons\ScrollBar-UpButton-Highlight" alphaMode="ADD"/>
+        <Scripts>
+          <OnLoad>
+            this.dir = -1
+          </OnLoad>
+        </Scripts>
+      </Button>
+      <Button name="$parentScrollDownButton" inherits="PyStyleScrollbarButtonTemplate">
+        <Anchors>
+          <Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent"/>
+        </Anchors>
+        <NormalTexture file="Interface\Buttons\ScrollBar-DownButton-Normal"/>
+        <PushedTexture file="Interface\Buttons\ScrollBar-DownButton-Depress"/>
+        <DisabledTexture file="Interface\Buttons\ScrollBar-DownButton-Disable"/>
+        <HighlightTexture file="Interface\Buttons\ScrollBar-UpButton-Highlight" alphaMode="ADD"/>
+      </Button>
+    </Frames>
+    <ThumbTexture file="Interface\Buttons\ScrollBar-Knob">
+      <Size>
+        <AbsDimension x="16" y="42"/>
+      </Size>
+      <TexCoords left="0" right="1" top="0" bottom="0.65625"/>
+    </ThumbTexture>
+  </Slider>
+
+  <Slider name="PyStyleSliderTemplate" inherits="PyStyleSliderScriptTemplate" orientation="HORIZONTAL" virtual="true">
+    <Size>
+      <AbsDimension x="120" y="16"/>
+    </Size>
+    <Layers>
+      <Layer level="BACKGROUND">
+        <Texture name="$parentLeft" file="Interface\BagFrame\BagFrame-Slider-Border">
+          <Size>
+            <AbsDimension x="16" y="16"/>
+          </Size>
+          <Anchors>
+            <Anchor point="LEFT"/>
+          </Anchors>
+          <TexCoords left="0" right="0.25" top="0" bottom="1"/>
+        </Texture>
+        <Texture name="$parentRight" file="Interface\BagFrame\BagFrame-Slider-Border">
+          <Size>
+            <AbsDimension x="16" y="16"/>
+          </Size>
+          <Anchors>
+            <Anchor point="RIGHT"/>
+          </Anchors>
+          <TexCoords left="0.75" right="1" top="0" bottom="1"/>
+        </Texture>
+        <Texture name="$parentMiddle" file="Interface\BagFrame\BagFrame-Slider-Border">
+          <Size>
+            <AbsDimension x="1" y="16"/>
+          </Size>
+          <Anchors>
+            <Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT"/>
+            <Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT"/>
+          </Anchors>
+          <TexCoords left="0.25" right="0.75" top="0" bottom="1"/>
+        </Texture>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Button name="$parentLeftButton" inherits="PyStyleScrollbarButtonTemplate">
+        <Size>
+          <AbsDimension x="16" y="16"/>
+        </Size>
+        <Scripts>
+          <OnLoad>
+            this.dir = -1
+          </OnLoad>
+        </Scripts>
+        <Anchors>
+          <Anchor point="RIGHT" relativePoint="LEFT">
+            <Offset>
+              <AbsDimension x="-2" y="0"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <NormalTexture file="Interface\Login\CharacterCreate\SliderLeft-Normal"/>
+        <PushedTexture file="Interface\Login\CharacterCreate\SliderLeft-Depress"/>
+        <DisabledTexture file="Interface\Login\CharacterCreate\SliderLeft-Disable"/>
+        <HighlightTexture file="Interface\Login\CharacterCreate\SliderLeft-Highlight" alphaMode="ADD"/>
+      </Button>
+      <Button name="$parentRightButton" inherits="PyStyleScrollbarButtonTemplate">
+        <Size>
+          <AbsDimension x="16" y="16"/>
+        </Size>
+        <Anchors>
+          <Anchor point="LEFT" relativePoint="RIGHT">
+            <Offset>
+              <AbsDimension x="2" y="0"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <NormalTexture file="Interface\Login\CharacterCreate\SliderRight-Normal"/>
+        <PushedTexture file="Interface\Login\CharacterCreate\SliderRight-Depress"/>
+        <DisabledTexture file="Interface\Login\CharacterCreate\SliderRight-Disable"/>
+        <HighlightTexture file="Interface\Login\CharacterCreate\SliderRight-Highlight" alphaMode="ADD"/>
+      </Button>
+    </Frames>
+    <ThumbTexture file="Interface\BagFrame\BagFrame-Slider-knob">
+      <Size>
+        <AbsDimension x="16" y="16"/>
+      </Size>
+    </ThumbTexture>
+  </Slider>
+</Ui>

@@ -1,0 +1,74 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<Frame parent="WorldMapFrame" hidden="false">
+    <Anchors>
+        <Anchor point="TOPLEFT"/>
+        <Anchor point="BOTTOMRIGHT"/>
+    </Anchors>
+    <Frames>
+        <Button name="yGather_WorldmapButton" inherits="UIPanelButtonTemplate" enableMouse="true" hidden="false">
+            <Size><AbsDimension x="100" y="22"/></Size>
+            <Anchors>
+                <Anchor point="TOPLEFT"><Offset><AbsDimension x="20" y="28"/></Offset></Anchor>
+            </Anchors>
+            <Scripts>
+                <OnShow>
+                    this:SetText(yGather.translate("worldmap/menu/buttonText"));
+                </OnShow>
+                <OnClick>
+                    ToggleDropDownMenu(yGather_WorldmapMenu);
+                </OnClick>
+                <OnEnter>
+                    local statistics = yGather.worldmap.statistics;
+                    if (IsCtrlKeyDown()) then
+                        GameTooltip:SetOwner(this, "ANCHOR_BOTTOM", 0, 5);
+                        GameTooltip:SetText("yGather " .. yGather.translate("statistics"), 1, 1, 1);
+                        if (statistics == nil) then
+                            GameTooltip:AddLine("no statistics available");
+                        else
+                            GameTooltip:AddLine("Total stacks: " .. yGather.database.GetZoneStackCount(WorldMapFrame.mapID)
+                                    .. "\nStacks shown: " .. statistics.stacksShown
+                                    .. "\nStacks filtered: " .. statistics.stacksFiltered
+                                    .. "\nIcons shown: " .. statistics.iconsShown, 1, 1, 1);
+                        end;
+                        GameTooltip:Show();
+                    end;
+                </OnEnter>
+                <OnLeave>
+                    GameTooltip:Hide();
+                </OnLeave>
+            </Scripts>
+        </Button>
+        <CheckButton name="yGather_WorldmapQuickSwitchButton" inherits="UIPanelCheckButtonTemplate">
+            <Size><AbsDimension x="28" y="28"/></Size>
+            <Anchors>
+                <Anchor point="TOPLEFT"><Offset><AbsDimension x="112" y="24"/></Offset></Anchor>
+            </Anchors>
+            <Scripts>
+                <OnShow>
+                    local updateFunction = function()
+                        this:SetChecked(yGather.settings.GetValue("worldmap/showResources"));
+                    end
+                    yGather.settings.AddListener(this, updateFunction);
+                    this:SetChecked(yGather.settings.GetValue("worldmap/showResources"));
+                </OnShow>
+                <OnHide>
+                    yGather.settings.RemoveListener(this);
+                </OnHide>
+                <OnClick>
+                    yGather.settings.SetValue("worldmap/showResources", this:IsChecked());
+                </OnClick>
+            </Scripts>
+        </CheckButton>
+        <Frame name="yGather_WorldmapMenu" inherits="UIDropDownMenuTemplate">
+            <Anchors>
+                <Anchor point="LEFT" relativePoint="LEFT" relativeTo="yGather_WorldmapButton"/>
+            </Anchors>
+            <Scripts>
+                <OnLoad>
+                    yGatherMenu_OnLoad(this);
+                </OnLoad>
+            </Scripts>
+        </Frame>
+    </Frames>
+</Frame>
+</Ui>

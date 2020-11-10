@@ -1,0 +1,344 @@
+<!--
+	Version: r41
+	Last modified: 2010-04-28T19:36:34Z
+	Last modified by: joselucas
+-->
+
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ UI.xsd">
+	<Frame name="SimpleDamageLogFrameTemplate" virtual="true" frameStrata="BACKGROUND">
+		<Size>
+			<AbsDimension x="80" y="14"/>
+		</Size>
+		<!--
+		<Backdrop edgeFile="Interface\Tooltips\Tooltip-Border" bgFile="Interface\Tooltips\Tooltip-Background">
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+		</Backdrop>
+		-->
+		<Frames>
+			<Frame name="$parentMove" inherits="UIPanelAnchorFrameTemplate" frameLevel="2" enableMouse="true">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="80" y="14"/>
+				</Size>
+				<Layers>
+					<Layer>
+						<FontString name="$parentLabel" inherits="GameTitleFont" justifyH="RIGHT">
+							<Size>
+								<AbsDimension x="80" y="14"/>
+							</Size>
+							<Anchors>
+								<Anchor point="BOTTOMRIGHT"/>
+							</Anchors>
+							<FontHeight>
+								<AbsValue val="14"/>
+							</FontHeight>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnShow>
+						UIPanelAnchorFrame_OnShow(this:GetParent());
+					</OnShow>
+					<OnMouseDown>
+						UIPanelAnchorFrame_OnMouseDown(this:GetParent(), key);
+					</OnMouseDown>
+					<OnMouseUp>
+						UIPanelAnchorFrame_OnMouseUp(this:GetParent(), key);
+					</OnMouseUp>
+				</Scripts>
+			</Frame>
+			<MessageFrame name="$parentMessages" displayDuration="7" maxLines="50">
+				<Size>
+					<AbsDimension x="300" y="180"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-15"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<FontString name="$parentText" inherits="GameFontNormal" justifyH="RIGHT" outline="THICK">
+					<FontHeight>
+						<AbsValue val="14"/>
+					</FontHeight>
+				</FontString>
+			</MessageFrame>
+		</Frames>
+		<Scripts>
+			<OnShow>
+				UIPanelAnchorFrame_OnShow(this);
+			</OnShow>
+		</Scripts>
+	</Frame>
+
+	<Frame name="SimpleDamageLogFrame" parent="UIParent" hidden="true">
+		<Scripts>
+			<OnLoad>SimpleDamageLog.OnLoad(this);</OnLoad>
+			<OnEvent>SimpleDamageLog.OnEvent(this, event, arg1);</OnEvent>
+		</Scripts>
+	</Frame>
+
+	<Frame name="SimpleDamageLogFrameDmgOut" parent="UIParent" inherits="SimpleDamageLogFrameTemplate">
+	</Frame>
+
+	<Frame name="SimpleDamageLogFrameDmgIn" parent="UIParent" inherits="SimpleDamageLogFrameTemplate">
+		<Scripts>
+			<OnLoad>
+				SimpleDamageLogFrameDmgInMessagesText:SetJustifyHType("LEFT");
+				SimpleDamageLogFrameDmgInMoveLabel:SetJustifyHType("LEFT");
+				SimpleDamageLogFrameDmgInMessages:ClearAllAnchors();
+				SimpleDamageLogFrameDmgInMessages:SetAnchor("BOTTOMLEFT", "BOTTOMLEFT", "SimpleDamageLogFrameDmgIn", 0, -15);
+			</OnLoad>
+		</Scripts>
+	</Frame>
+
+	<CheckButton name="SdlCheckboxTemplate" inherits="UIPanelCheckButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="22" y="22"/>
+		</Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parentText" inherits="GameTitleFont" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="400" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parent" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="14"/>
+					</FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>
+				PlaySoundByPath("sound\\interface\\ui_sysmenu_click.mp3");
+			</OnClick>
+		</Scripts>
+	</CheckButton>
+	<Button name="SdlButtonTemplate" inherits="UIPanelButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="80" y="30"/>
+		</Size>
+	</Button>
+	
+	<Frame name="SimpleDamageLogConfigFrame" inherits="UICommonFrameTemplate" hidden="true" parent="UIParent" frameLevel="1">
+		<Size>
+			<AbsDimension x="320" y="380"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer>
+				<FontString name="$parentTitleText" inherits="Font_FrameTitle">
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="7"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<CheckButton name="$parentEnable" inherits="SdlCheckboxTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="20" y="40"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						PlaySoundByPath("sound\\interface\\ui_sysmenu_click.mp3");
+						SimpleDamageLog.guiOnEnable(this:IsChecked());
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentLock" inherits="SdlCheckboxTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentEnable">
+						<Offset>
+							<AbsDimension x="20" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parentOutgoingDamage" inherits="SdlCheckboxTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentLock">
+						<Offset>
+							<AbsDimension x="0" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parentOutgoingHeals" inherits="SdlCheckboxTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentOutgoingDamage">
+						<Offset>
+							<AbsDimension x="0" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parentIncomingDamage" inherits="SdlCheckboxTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentOutgoingHeals">
+						<Offset>
+							<AbsDimension x="0" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						PlaySoundByPath("sound\\interface\\ui_sysmenu_click.mp3");
+						SimpleDamageLog.guiOnIncomingDamage(this);
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentShowDamageSource" inherits="SdlCheckboxTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentIncomingDamage">
+						<Offset>
+							<AbsDimension x="20" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parentIncomingHeals" inherits="SdlCheckboxTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentShowDamageSource">
+						<Offset>
+							<AbsDimension x="-20" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						PlaySoundByPath("sound\\interface\\ui_sysmenu_click.mp3");
+						SimpleDamageLog.guiOnIncomingHeals(this);
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentShowHealSource" inherits="SdlCheckboxTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentIncomingHeals">
+						<Offset>
+							<AbsDimension x="20" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<EditBox name="$parentHeight" inherits="UIPanelEditBoxTemplate" letters="2" numeric="true">
+				<Size>
+					<AbsDimension x="35" y="18"/>
+				</Size>
+				<Layers>
+					<Layer>
+						<FontString name="$parentText" inherits="GameTitleFont" justifyH="LEFT">
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="RIGHT"/>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentShowHealSource">
+						<Offset>
+							<AbsDimension x="-20" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</EditBox>
+			
+			<Button name="$parentApply" inherits="SdlButtonTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-20" y="-20"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						SimpleDamageLog.guiOnApplySettings();
+					</OnClick>
+					<OnLoad>
+						this:SetText(OBJ_APPLY);
+					</OnLoad>
+				</Scripts>
+			</Button>
+			<Button name="$parentCancel" inherits="SdlButtonTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMLEFT" relativeTo="$parentApply">
+						<Offset>
+							<AbsDimension x="-20" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this:SetText(C_CANCEL);
+					</OnLoad>
+					<OnClick>
+						if XBARVERSION and XBARVERSION>=1.51 then
+							XAddonMngr:Hide();
+						end
+						this:GetParent():Hide();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentOK" inherits="SdlButtonTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMLEFT" relativeTo="$parentCancel">
+						<Offset>
+							<AbsDimension x="-20" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this:SetText(OKAY);
+					</OnLoad>
+					<OnClick>
+						SimpleDamageLog.guiOnApplySettings();
+						if XBARVERSION and XBARVERSION>=1.51 then
+							XAddonMngr:Hide();
+						end
+						this:GetParent():Hide();
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnShow>
+				SimpleDamageLog.guiOnShow(this);
+			</OnShow>
+		</Scripts>
+	</Frame>
+</Ui>

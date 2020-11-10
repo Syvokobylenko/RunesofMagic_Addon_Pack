@@ -1,0 +1,411 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/..\..\WorldXML\UI.xsd">
+    <Frame name="GuildPanel_Base" parent="UIParent">
+        <Scripts>
+            <OnLoad>GuildPanel_OnLoad(this);</OnLoad>
+            <OnEvent>GuildPanel_OnEvent(this,event);</OnEvent>
+            <OnUpdate>GuildPanelResourceList_CheckUpdate(elapsedTime);
+					  GuildPanel.CheckPendingUpdates(elapsedTime);</OnUpdate>
+        </Scripts>
+    </Frame>
+    <Frame name="GuildPanelFrame" parent="UIParent" inherits="UICommonFrameTemplate" movable="true" enableMouse="true">
+        <Scripts>
+            <OnShow>GuildPanel_OnShow(this);</OnShow>
+        </Scripts>
+        <Size>
+            <AbsDimension x="700" y="570" />
+        </Size>
+        <Anchors>
+            <Anchor point="CENTER">
+                <Offset>
+                    <AbsDimension x="0" y="0" />
+                </Offset>
+            </Anchor>
+        </Anchors>
+        <Layers>
+            <!-- Begin Title -->
+            <Layer>
+                <FontString name="$parent_Title" inherits="Font_FrameTitle">
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="60" y="7" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <Frames>
+        	<Button name="$parent_ButtonToMembers" inherits="UIPanelButtonTemplate" text="xx">
+            	<Size>
+                    <AbsDimension x="90" y="27"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="-15" y="-5"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        GuildPanel_ResourceFrame:Hide();
+                        GuildPanel_MemberList:Show();
+                        GuildPanel_Dropdown:Show();
+                        GuildPanelConfig_ShowOffline:Show();
+                    </OnClick>
+                </Scripts>
+            </Button>
+        	<Button name="$parent_ButtonToContribs" inherits="UIPanelButtonTemplate" text="GUILDCONTRIBUTION_GUILDRESOURCE">
+                <Size>
+                    <AbsDimension x="90" y="27"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="$parent_ButtonToMembers">
+                        <Offset>
+                            <AbsDimension x="-2" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                    <!-- GuildResLogWnd:Show() -->
+                        GuildPanel_ResourceFrame:Show();
+                        GuildPanel_MemberList:Hide();
+                        GuildPanel_Dropdown:Hide();
+                        GuildPanelConfig_ShowOffline:Hide();
+
+                        GuildPanel_ResourceList:Show();
+                        GuildPanel_ContribFrame:Show();
+                        GuildPanel_GuildFunctionsFrame:Hide();
+                        GuildPanel_RessStatus:Show();
+                    </OnClick>
+                </Scripts>
+            </Button>
+            <Button name="$parent_ButtonToFunctions" inherits="UIPanelButtonTemplate" text="GUILDCONTRIBUTION_GUILDFUNCTION">
+            	<Size>
+                    <AbsDimension x="110" y="27"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="$parent_ButtonToContribs">
+                        <Offset>
+                            <AbsDimension x="-2" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        GuildPanel_ResourceFrame:Show();
+                        GuildPanel_MemberList:Hide();
+                        GuildPanel_Dropdown:Hide();
+                        GuildPanelConfig_ShowOffline:Hide();
+
+                        GuildPanel_ResourceList:Show();
+                        GuildPanel_ContribFrame:Hide();
+                        GuildPanel_GuildFunctionsFrame:Show();
+                        GuildPanel_RessStatus:Show();
+                    </OnClick>
+                </Scripts>
+            </Button>
+         
+	    <CheckButton name="GuildPanelConfig_ShowOffline" inherits="GuildPanelConfig_CheckButtonTemplate">
+		<Anchors>
+			<Anchor point="BOTTOMLEFT">
+				<Offset>
+					<AbsDimension x="10" y="-5"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+	    </CheckButton>	   
+
+
+            <Frame name="$parent_NoticeFrame" inherits="GuildPanel_BackDropTemplate" parent="GuildPanelFrame">
+                <Size>
+                    <AbsDimension x="360" y="120" />
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="12" y="30" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                   <Layer>
+                       <FontString name="GuildPanel_GuildNotice" inherits="GameFontNormal" justifyH="LEFT" justifyV="TOP">
+					       <Size>
+                               <AbsDimension x="350" y="110"/>
+                           </Size>
+                           <Anchors>
+                               <Anchor point="TOPLEFT">
+                                   <Offset>
+                                       <AbsDimension x="6" y="6" />
+                                   </Offset>
+                               </Anchor>
+                           </Anchors>
+                           <Color r="1" g="1" b="1" h="1" />
+                       </FontString>
+                   </Layer>
+               </Layers>
+               <Scripts>
+                   <OnClick>
+                       GuildBBSFrame:Show();
+                   </OnClick>
+               </Scripts>
+            </Frame>
+            <Frame name="$parent_OptionFrame" parent="GuildPanelFrame">
+                <Size>
+                    <AbsDimension x="320" y="120" />
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="370" y="30" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Frames>
+	                <Button name="GP_Button_Comments" inherits="UIPanelButtonTemplate" text="GUILD_GUESTBOOK_COMMAND">
+	                    <Size>
+	                        <AbsDimension x="100" y="27"/>
+	                    </Size>
+	                    <Anchors>
+	                        <Anchor point="TOPRIGHT">
+	                            <Offset>
+	                                <AbsDimension x="-2" y="0"/>
+	                            </Offset>
+	                        </Anchor>
+	                    </Anchors>
+	                    <Scripts>
+	                        <OnClick>
+	                            ToggleUIFrame(GuildBBSFrame);
+	                        </OnClick>
+	                    </Scripts>
+	                </Button>
+	                <Button name="GP_Button_War" inherits="UIPanelButtonTemplate" text="GUILDWAR">
+	                    <Size>
+	                        <AbsDimension x="90" y="27"/>
+	                    </Size>
+	                    <Anchors>
+	                        <Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="GP_Button_Comments">
+	                            <Offset>
+	                                <AbsDimension x="-2" y="0"/>
+	                            </Offset>
+	                        </Anchor>
+	                    </Anchors>
+	                    <Scripts>
+	                        <OnClick>
+	                            ToggleUIFrame(GuildWarFrame);
+	                        </OnClick>
+	                    </Scripts>
+	                </Button>
+					<Button name="GP_Button_ToGPConfig" inherits="UIPanelButtonTemplate" text="xx">
+						<Size>
+							<AbsDimension x="90" y="27"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="GP_Button_War">
+								<Offset>
+									<AbsDimension x="-2" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								ToggleUIFrame(GuildPanelConfigFrame);
+							</OnClick>
+						</Scripts>
+					</Button>  
+
+	
+
+            <!-- optional buttons -->
+            <Button name="GP_Button_Add" inherits="UIPanelButtonTemplate" text="GF_STR_GUILD_INVITE">
+               <Size>
+                   <AbsDimension x="90" y="27"/>
+               </Size>
+               <Anchors>
+                   <Anchor point="TOPRIGHT">
+                       <Offset>
+                           <AbsDimension x="-2" y="28"/>
+                       </Offset>
+                   </Anchor>
+               </Anchors>
+               <Scripts>
+                   <OnClick>
+                       GP_AddMember(this);
+                   </OnClick>
+               </Scripts>
+            </Button>
+            <Button name="GP_Button_Leader" inherits="UIPanelButtonTemplate" text="GUILD_LEADER_COMMAND">
+                <Size>
+                    <AbsDimension x="150" y="26"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="GP_Button_Add">
+                        <Offset>
+                            <AbsDimension x="-2" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        ToggleUIFrame(GuildLeaderFrame);
+                    </OnClick>
+                </Scripts>
+            </Button>                   
+	                
+             
+                    <Frame name="GP_Frame_Menu" inherits="UIDropDownMenuTemplate">
+                        <Scripts>
+                            <OnLoad>
+                                GP_MemberDropdown_OnLoad(this);
+                            </OnLoad>
+                        </Scripts>
+                    </Frame>
+                </Frames>
+            </Frame>
+            <Frame name="$parent_SelectedMember"  parent="GuildPanelFrame">
+                <Size>
+                    <AbsDimension x="310" y="70" />
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="380" y="80" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parent_Content" inherits="Font_FrameTitle">
+                            <Anchors>
+                                <Anchor point="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="8" />
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="$parent_Content2" inherits="Font_FrameTitle">
+                            <Anchors>
+                                <Anchor point="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="25" />
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Frames>
+                    <Frame name="GuildPanel_Dropdown" inherits="UIDropDownMenuTemplate">
+                         <Anchors>
+                             <Anchor point="BOTTOMRIGHT">
+                                 <Offset>
+                                     <AbsDimension x="0" y="0"/>
+                                 </Offset>
+                             </Anchor>
+                         </Anchors>
+                         <Scripts>
+                             <OnLoad>
+                                 GuildPanel_Dropdown_Onload(this);
+                             </OnLoad>
+                         </Scripts>
+                            <Layers>
+                                <Layer>
+                                    <FontString name="$parent_Title" inherits="GameFontHighlight">
+                                        <Anchors>
+                                            <Anchor point="RIGHT" relativePoint="LEFT">
+                                                <Offset>
+                                                    <AbsDimension x="-2" y="0"/>
+                                                </Offset>
+                                            </Anchor>
+                                        </Anchors>
+                                    </FontString>
+                                </Layer>
+                            </Layers>
+                    </Frame>
+                </Frames>
+            </Frame>
+            <!-- Begin member list -->
+            <Frame name="GuildPanel_MemberList" inherits="UIPanelBackdropFrame" enableMouse="true" parent="GuildPanelFrame" frameLevel="1000">
+                <Size>
+                    <AbsDimension x="676" y="370" />
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="12" y="153" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parentTitle" inherits="Font_FrameTitle">
+                            <Anchors>
+                                <Anchor point="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="7" />
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Frames>
+                    <Button name="$parent_Member_1" inherits="GuildPanel_MemberTemplate" id="1" />
+                    <Button name="$parent_Member_2" inherits="GuildPanel_MemberTemplate" id="2" />
+                    <Button name="$parent_Member_3" inherits="GuildPanel_MemberTemplate" id="3" />
+                    <Button name="$parent_Member_4" inherits="GuildPanel_MemberTemplate" id="4" />
+                    <Button name="$parent_Member_5" inherits="GuildPanel_MemberTemplate" id="5" />
+                    <Button name="$parent_Member_6" inherits="GuildPanel_MemberTemplate" id="6" />
+                    <Button name="$parent_Member_7" inherits="GuildPanel_MemberTemplate" id="7" />
+                    <Button name="$parent_Member_8" inherits="GuildPanel_MemberTemplate" id="8" />
+                    <Button name="$parent_Member_9" inherits="GuildPanel_MemberTemplate" id="9" />
+                    <Button name="$parent_Member_10" inherits="GuildPanel_MemberTemplate" id="10" />
+                    <Button name="$parent_Member_11" inherits="GuildPanel_MemberTemplate" id="11" />
+                    <Button name="$parent_Member_12" inherits="GuildPanel_MemberTemplate" id="12" />
+                    <Button name="$parent_Member_13" inherits="GuildPanel_MemberTemplate" id="13" />
+                    <Button name="$parent_Member_14" inherits="GuildPanel_MemberTemplate" id="14" />
+                    <Button name="$parent_Member_15" inherits="GuildPanel_MemberTemplate" id="15" />
+                    <Button name="$parent_Member_16" inherits="GuildPanel_MemberTemplate" id="16" />
+                    <Slider name="GuildPanel_MemberListSlider" inherits="UIPanelScrollBarTemplate" enableMouse="true">
+                        <Size>
+                            <AbsDimension x="12" y="204" />
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPRIGHT">
+                                <Offset>
+                                    <AbsDimension x="-1" y="45" />
+                                </Offset>
+                            </Anchor>
+                            <Anchor point="BOTTOMRIGHT">
+                                <Offset>
+                                    <AbsDimension x="-1" y="-19" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnValueChanged>
+                                GuildPanel_MemberList_OnValueChanged(this, arg1);
+                            </OnValueChanged>
+                            <OnMouseWheel>
+                                GuildPanel_MemberList_OnMouseWheel(GuildPanel_MemberListSlider, delta);
+                            </OnMouseWheel>
+                        </Scripts>
+                    </Slider>
+                </Frames>
+                <Scripts>
+                    <OnLoad>
+                        UIPanelBackdropFrame_SetTexture(this, "Interface/Common/PanelListFrame", 128 , 128);
+                    </OnLoad>
+                    <OnMouseWheel>
+                        GuildPanel_MemberList_OnMouseWheel(GuildPanel_MemberListSlider, delta);
+                    </OnMouseWheel>
+                </Scripts>
+            </Frame>
+            <!-- End member list -->
+         </Frames>
+    </Frame>
+</Ui>

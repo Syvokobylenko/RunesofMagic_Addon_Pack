@@ -1,0 +1,10 @@
+##	Guild Siege Quick Trade AddOn
+##	
+##	All right reserved.
+##
+##	by McGaerty 	(mcgaerty@ikarus-systems.net)
+##
+##
+
+GSQT.lua
+GSQT.xml

@@ -1,0 +1,19 @@
+## Title: Sol
+## Description: All-purpose library for RoM addon development
+## Notes: See http://theromwiki.com/index.php/Sol
+## Author: Alleris
+## X-Curse-Packaged-Version: v1.34
+## X-Curse-Project-Name: Sol
+## X-Curse-Project-ID: sol
+## X-Curse-Repository-ID: rom/sol/mainline
+
+LibStub.lua
+Sol.lua
+-- X-Curse-Packaged-Version: v3.2
+-- X-Curse-Project-Name: ComeOnIn
+-- X-Curse-Project-ID: comeonin
+-- X-Curse-Repository-ID: rom/comeonin/mainline
+-- X-Curse-Packaged-Version: v1.0
+-- X-Curse-Project-Name: CleanChat
+-- X-Curse-Project-ID: cleanchat
+-- X-Curse-Repository-ID: rom/cleanchat/mainline

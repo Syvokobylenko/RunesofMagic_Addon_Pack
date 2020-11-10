@@ -1,0 +1,11 @@
+## Title: TitleLink
+## Notes: Allows linking of titles from default UI
+## Author: Jaamosan
+## ---
+## X-Curse-Packaged-Version: v1.0.1
+## X-Curse-Project-Name: TitleLink
+## X-Curse-Project-ID: titlelink
+## X-Curse-Repository-ID: rom/titlelink/mainline
+
+TitleLink.lua
+TitleLink.xml

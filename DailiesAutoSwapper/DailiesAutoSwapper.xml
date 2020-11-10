@@ -1,0 +1,37 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+
+	<Script file="DailiesAutoSwapper.lua"/>
+
+	<Frame name="DailiesAutoSwapperFrame" hidden="false">
+		<Scripts>
+			<OnLoad>
+				DailiesAutoSwapper_OnLoad(this)
+			</OnLoad>
+			<OnEvent>
+				DailiesAutoSwapper_OnEvent(this, event)
+			</OnEvent>
+		</Scripts>
+	</Frame>
+	
+	<Button name="DAS_Toggle" inherits="MinimapButtonTemplate" parent="UIParent">
+	  <Size>
+		<AbsDimension y="24" x="24"/>
+	  </Size>
+	  <Anchors>
+		<Anchor point="CENTER" relativePoint="CENTER" relativeTo="MinimapViewFrame">
+		  <Offset>
+			<RelDimension x="-100" y="20"/>
+		  </Offset>
+		</Anchor>
+	  </Anchors>
+	  <Scripts>
+		<OnLoad>this:RegisterForClicks("LeftButton", "RightButton")</OnLoad>
+		<OnClick>DASMinimapButton_onClick(this, key)</OnClick>
+		<OnEnter>DASMinimapButton_OnEnter(this)</OnEnter>
+		<OnLeave>GameTooltip:Hide()</OnLeave>
+	  </Scripts>
+	  <NormalTexture file="Interface/AddOns/DailiesAutoSwapper/buttons/DASoff.tga"/>
+	  <PushedTexture file="Interface/AddOns/DailiesAutoSwapper/buttons/DASon.tga"/>
+	</Button>
+
+</Ui>

@@ -1,0 +1,39 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ ../../worldxml/ui.xsd">
+	<Frame name="QuestAnnouncerFrame" parent="UIParent" hidden="true">
+		<Scripts>
+			<OnLoad>QuestAnnouncer.OnLoad(this)</OnLoad>
+			<OnEvent>QuestAnnouncer.OnEvent(event)</OnEvent>
+		</Scripts>
+	</Frame>
+	<Button name="QuestAnnouncerMinimapButton" hidden="false" inherits="MinimapButtonTemplate" parent="UIParent">
+		<Size>
+			<AbsDimension y="24" x="24"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="MinimapViewFrame" relativePoint="CENTER">
+				<Offset>
+					<RelDimension x="-85" y="-2.5"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Frame name="QuestAnnouncer_Menu" inherits="UIDropDownMenuTemplate" hidden="true">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="QuestAnnouncerMinimapButton" relativePoint="TOP"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>UIDropDownMenu_Initialize(this, QuestAnnouncer.MenuOnShow, "MENU")</OnLoad>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<Scripts>
+            <OnLoad>this:RegisterForClicks("LeftButton","RightButton")</OnLoad>
+			<OnClick>QuestAnnouncer.ButtonOnClick(this, key)</OnClick>
+			<OnEnter>QuestAnnouncer.ButtonOnEnter(this)</OnEnter>
+			<OnLeave>QuestAnnouncer.ButtonOnLeave(this)</OnLeave>
+		</Scripts>
+		<NormalTexture file="interface/AddOns/QuestAnnouncer/img/icon"/>
+		<PushedTexture file="interface/AddOns/QuestAnnouncer/img/icon_off"/>
+		<HighlightTexture file="interface/minimap/minimapbutton_highlight" alphaMode="ADD"/>
+	</Button>
+</Ui>

@@ -1,0 +1,12 @@
+tag 4a658d39dcbb6fd89edc6f9d0a954be7f92877be 2.15
+Author:	Amurilon <jan-wendler@gmx.de>
+Date:	Sat Feb 24 13:14:22 2018 +0100
+
+Tagging as 2.15
+
+commit 80ff001d075988900722229fd1c86e0ecf0d8b10
+Author: Amurilon <jan-wendler@gmx.de>
+Date:   Sat Feb 24 13:13:45 2018 +0100
+
+    18 new icons
+

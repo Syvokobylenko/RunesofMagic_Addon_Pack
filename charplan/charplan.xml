@@ -1,0 +1,893 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ ../../worldxml/ui.xsd">
+	<!-- Equipment Buttons -->
+	<Button name="CPEquipItemButtonTemplate" inherits="ItemButtonTemplate" virtual="true">
+		<Scripts>
+			<OnClick>Charplan.EquipItem_OnClick(this, key)</OnClick>
+			<OnLoad>Charplan.EquipItem_OnLoad( this )</OnLoad>
+			<OnEnter>Charplan.EquipItem_OnEnter( this )</OnEnter>
+			<OnLeave>Charplan.EquipItem_OnLeave( this )</OnLeave>
+			<OnReceiveDrag>Charplan.EquipItem_OnReceiveDrag( this )</OnReceiveDrag>
+		</Scripts>
+	</Button>
+	<!-- Attribute Displays -->
+	<Frame name="CPAttributeFrameTemplate" enableMouse="true" virtual="true">
+		<Size>
+			<AbsDimension x="136" y="14"/>
+		</Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentLabel" inherits="GameFontLabel" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="96" y="14"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="2" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentValue" inherits="NumberFontNormal" justifyH="RIGHT">
+					<Anchors>
+						<Anchor point="RIGHT">
+							<Offset>
+								<AbsDimension x="-4" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentDifValue" inherits="NumberFontNormal" justifyH="RIGHT">
+					<Anchors>
+						<Anchor point="RIGHT">
+							<Offset>
+								<AbsDimension x="-40" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="1.0" g="0.3" b="0.3"/>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>Charplan.Attribute_OnLoad( this )</OnLoad>
+			<OnEnter>Charplan.Attribute_OnEnter(this)</OnEnter>
+			<OnLeave>GameTooltip:Hide()</OnLeave>
+		</Scripts>
+	</Frame>
+	<!-- Attribute Title display -->
+	<Frame name="CPAttributeTitleTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="136" y="14"/>
+		</Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentLabel" inherits="GameFontHighlight"/>
+			</Layer>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface\Common\PanelSeparate-HorizontalLine">
+					<Size><AbsDimension x="142" y="4"/></Size>
+					<Anchors>
+						<Anchor point="BOTTOM">
+							<Offset><AbsDimension x="0" y="0"/></Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>Charplan.AttributeTitle_OnLoad( this )</OnLoad>
+		</Scripts>
+	</Frame>
+	<!-- class diaplay button -->
+	<Button name="CPClassButtonTemplate" inherits="UIPanelButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="134" y="32"/>
+		</Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentLeftText" inherits="GameFontNormal" text="blub">
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="8" y="-1"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentRightText" inherits="GameFontNormal" text="99">
+					<Anchors>
+						<Anchor point="RIGHT">
+							<Offset>
+								<AbsDimension x="-10" y="-1"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Button>
+
+
+	<!-- Main Dialog -->
+	<Frame name="CPFrame" parent="UIParent" enableMouse="true" inherits="UICommonFrameTemplate">
+		<Size>
+			<AbsDimension x="636" y="433"/>
+		</Size>
+		<Anchors>
+			<Anchor point="LEFT">
+				<Offset>
+					<AbsDimension x="10" y="-20"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Frame name="CPAttributeFrame">
+				<Size>
+					<AbsDimension x="300" y="398"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="8" y="32"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture file="interface\auctionframe\auctionseparate-verticalline">
+							<Size>
+								<AbsDimension x="4" y="400"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="144" y="16"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</Texture>
+						<Texture file="Interface\Common\PanelSeparate-HorizontalLine">
+							<Size>
+								<AbsDimension x="290" y="4"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="2" y="13"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</Texture>
+						<Texture file="Interface\Common\PanelSeparate-HorizontalLine">
+							<Size>
+								<AbsDimension x="290" y="4"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="2" y="33"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</Texture>
+                        <FontString name="CPAttributePlayerTitle" inherits="NumberFontNormal" justifyH="CENTER">
+					    <Size>
+						    <AbsDimension x="280" y="12"/>
+					    </Size>
+					    <Anchors>
+						    <Anchor point="TOP"><Offset><AbsDimension x="5" y="0"/></Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+					</Layer>
+        		</Layers>
+				<Frames>
+					<Frame name="CPAttributeFrameValueHP" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="6" y="20"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValueMANA" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="150" y="20"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeTitleBASE" inherits="CPAttributeTitleTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="6" y="47"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValueSTR" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeTitleBASE" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValueDEX" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeFrameValueSTR" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValueSTA" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeFrameValueDEX" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValueINT" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeFrameValueSTA" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValueWIS" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeFrameValueINT" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeTitleMAGIC" inherits="CPAttributeTitleTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="150" y="47"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValueMDMG" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeTitleMAGIC" relativePoint="BOTTOMLEFT" >
+								<Offset><AbsDimension x="0" y="2"/></Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValueMATK" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeFrameValueMDMG" relativePoint="BOTTOMLEFT">
+								<Offset><AbsDimension x="0" y="2"/></Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValueMCRIT" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeFrameValueMATK" relativePoint="BOTTOMLEFT">
+								<Offset><AbsDimension x="0" y="2"/></Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValueMHEAL" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeFrameValueMCRIT" relativePoint="BOTTOMLEFT">
+								<Offset><AbsDimension x="0" y="2"/></Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValueMACC" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeFrameValueMHEAL" relativePoint="BOTTOMLEFT">
+								<Offset><AbsDimension x="0" y="2"/></Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeTitleMELEE" inherits="CPAttributeTitleTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="6" y="155"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValuePDMGMH" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeTitleMELEE" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValuePATK" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeFrameValuePDMGMH" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValuePCRITMH" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeFrameValuePATK" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValuePACC" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeFrameValuePCRITMH" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+
+					<Frame name="CPAttributeTitleMELEEOFFHAND" inherits="CPAttributeTitleTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="6" y="250"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValuePDMGOH" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeTitleMELEEOFFHAND" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValuePCRITOH" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeFrameValuePDMGOH" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValuePACCOH" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeFrameValuePCRITOH" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeTitleRANGE" inherits="CPAttributeTitleTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="150" y="155"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValuePDMGR" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeTitleRANGE" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValuePATKR" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeFrameValuePDMGR" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValuePCRITR" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeFrameValuePATKR" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValuePACCR" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeFrameValuePCRITR" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeTitlePHYSICALDEFENCE" inherits="CPAttributeTitleTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="150" y="250"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValuePDEF" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeTitlePHYSICALDEFENCE" relativePoint="BOTTOMLEFT" >
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValuePARRY" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeFrameValuePDEF" relativePoint="BOTTOMLEFT" >
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValueEVADE" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeFrameValuePARRY" relativePoint="BOTTOMLEFT" >
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeTitleMAGICDEFENCE" inherits="CPAttributeTitleTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="150" y="330"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValueMDEF" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeTitleMAGICDEFENCE" relativePoint="BOTTOMLEFT" >
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValueMRES" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeFrameValueMDEF" relativePoint="BOTTOMLEFT" >
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValuePCRITDMG" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="6" y="346"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="CPAttributeFrameValueMCRITDMG" inherits="CPAttributeFrameTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CPAttributeFrameValuePCRITDMG" relativePoint="BOTTOMLEFT" >
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<!--Frame name="CPAttributeTitleBASE2" inherits="CPAttributeTitleTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="150" y="6"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame!-->
+				</Frames>
+			</Frame>
+			<Frame name="CPEquipmentFrame" enableMouse="true">
+				<Size>
+					<AbsDimension x="290" y="390"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="328" y="32"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<Button name="CPFrameClassBtn" inherits="CPClassButtonTemplate">
+						<Size>
+							<AbsDimension x="132" y="24"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="8" y="5"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>Charplan.ChangeClass()</OnClick>
+						</Scripts>
+					</Button>
+					<Button name="CPFrameMenuBtn" inherits="UIPanelButtonTemplate" text="Menu">
+						<Size>
+							<AbsDimension x="132" y="24"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="150" y="5"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>ToggleDropDownMenu(CPFrameMenu)</OnClick>
+						</Scripts>
+					</Button>
+					<Frame name="CPFrameMenu" inherits="UIDropDownMenuTemplate">
+						<Size>
+							<AbsDimension x="132" y="26"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="150" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>Charplan.OnMenuLoad(this)</OnLoad>
+						</Scripts>
+					</Frame>
+                	<Frame name="$parentPeperdollFrame" frameStrata="BACKGROUND" frameLevel="1">
+						<Size>
+							<AbsDimension x="191" y="238"/>
+						</Size>
+						<Anchors>
+							<Anchor point="BOTTOM" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="138" y="310"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Backdrop edgeFile="Interface\CharacterFrame\Peperdoll-Backdrop-Border" bgFile="interface\CharacterFrame\Peperdoll-Backdrop-Background">
+							<EdgeSize>
+								<AbsValue val="64"/>
+							</EdgeSize>
+							<TileSize>
+								<AbsValue val="16"/>
+							</TileSize>
+						</Backdrop>
+					</Frame>
+					<Model name="$parentModel" inherits="CommonModelTemplate" frameStrata="BACKGROUND" frameLevel="2">
+						<Size>
+							<AbsDimension x="180" y="220"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentPeperdollFrame">
+								<Offset>
+									<AbsDimension x="4" y="4"/>
+								</Offset>
+							</Anchor>
+							<Anchor point="BOTTOMRIGHT" relativeTo="$parentPeperdollFrame">
+								<Offset>
+									<AbsDimension x="-2" y="-2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>Charplan.OnModelLoad(this)</OnLoad>
+						</Scripts>
+					</Model>
+					<Button name="$parentEquipRing0Slot" inherits="CPEquipItemButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="40" y="32"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parentEquipRing1Slot" inherits="CPEquipItemButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentEquipRing0Slot" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="4" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parentEquipEarring0Slot" inherits="CPEquipItemButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentEquipRing1Slot" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="4" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parentEquipEarring1Slot" inherits="CPEquipItemButtonTemplate" >
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentEquipEarring0Slot" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="4" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parentEquipNecklaceSlot" inherits="CPEquipItemButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentEquipEarring1Slot" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="4" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parentEquipHeadSlot" inherits="CPEquipItemButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="2" y="76"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parentEquipChestSlot" inherits="CPEquipItemButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentEquipHeadSlot" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parentEquipWaistSlot" inherits="CPEquipItemButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentEquipChestSlot" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parentEquipLegsSlot" inherits="CPEquipItemButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentEquipWaistSlot" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parentEquipMainHandSlot" inherits="CPEquipItemButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentEquipLegsSlot" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parentEquipRangedSlot" inherits="CPEquipItemButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentEquipMainHandSlot" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parentEquipShoulderSlot" inherits="CPEquipItemButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="-16" y="76"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parentEquipHandsSlot" inherits="CPEquipItemButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentEquipShoulderSlot" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parentEquipFeetSlot" inherits="CPEquipItemButtonTemplate" >
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentEquipHandsSlot" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parentEquipBackSlot" inherits="CPEquipItemButtonTemplate" >
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentEquipFeetSlot" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parentEquipSecondaryHandSlot" inherits="CPEquipItemButtonTemplate" >
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentEquipBackSlot" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parentEquipAdornmentSlot" inherits="CPEquipItemButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentEquipSecondaryHandSlot" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Frame name="$parentIntroductionFrame" frameStrata="BACKGROUND" frameLevel="-2">
+						<Size>
+							<AbsDimension x="278" y="79"/>
+						</Size>
+						<Anchors>
+							<Anchor point="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Backdrop edgeFile="Interface\Tooltips\Tooltip-border" bgFile="Interface\Tooltips\Tooltip-background">
+							<BackgroundInsets>
+								<AbsInset top="6" left="6" bottom="6" right="6"/>
+							</BackgroundInsets>
+							<EdgeSize>
+								<AbsValue val="16"/>
+							</EdgeSize>
+							<TileSize>
+								<AbsValue val="16"/>
+							</TileSize>
+						</Backdrop>
+						<Layers>
+							<Layer>
+								<FontString name="$parentText" inherits="GameFontNormal" justifyH="LEFT" justifyV="TOP">
+									<Size>
+										<AbsDimension x="262" y="65"/>
+									</Size>
+									<Anchors>
+										<Anchor point="TOPLEFT">
+											<Offset>
+												<AbsDimension x="8" y="8"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Frames>
+							<Button name="CPFramePetEggButton">
+								<Size>
+									<AbsDimension x="24" y="24"/>
+								</Size>
+								<Anchors>
+									<Anchor point="BOTTOMLEFT"><Offset><AbsDimension y="-5" x="8"></AbsDimension></Offset></Anchor>
+								</Anchors>
+								<Scripts>
+									<OnClick>ToggleDropDownMenu(CPFrameEggMenu)</OnClick>
+									<OnEnter>Charplan.PetButton_OnEnter(this)</OnEnter>
+									<OnLeave>GameTooltip:Hide()</OnLeave>
+								</Scripts>
+								<NormalTexture name="$parentIcon" file="Interface\PetFrame\PetEggButton-Empty"/>
+								<DisabledTexture file="Interface\PetFrame\PetEggButton-Default"/>
+								<HighlightTexture file="Interface\PetFrame\PetEggButton-Highlight" alphaMode="ADD"/>
+							</Button>
+							<Frame name="CPFrameEggMenu" inherits="UIDropDownMenuTemplate">
+								<Size>
+									<AbsDimension x="132" y="26"/>
+								</Size>
+								<Anchors>
+									<Anchor point="TOPLEFT">
+										<Offset>
+											<AbsDimension x="0" y="0"/>
+										</Offset>
+									</Anchor>
+								</Anchors>
+								<Scripts>
+									<OnLoad>Charplan.OnEggMenuLoad(this)</OnLoad>
+								</Scripts>
+							</Frame>
+						</Frames>
+					</Frame>
+				</Frames>
+			</Frame>
+			<Frame name="CPEquipButtonMenu" inherits="UIDropDownMenuTemplate">
+				<Scripts>
+					<OnLoad>UIDropDownMenu_Initialize(this, Charplan.EquipItem_ShowMenu, "MENU")</OnLoad>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>Charplan.OnLoad(this)</OnLoad>
+			<OnEvent>Charplan.OnEvent(this,event)</OnEvent>
+			<OnShow>Charplan.OnShow(this)</OnShow>
+			<OnHide>Charplan.OnHide()</OnHide>
+		</Scripts>
+	</Frame>
+
+	<!-- Addon Manager Button -->
+	<Button name="CharplanMiniButton" hidden="true" inherits="UIPanelButtonTemplate" parent="AddonManagerMiniFrame">
+		<Size>
+			<AbsDimension y="24" x="24"/>
+		</Size>
+		<Scripts>
+			<OnClick>AddonManager.MiniButton_OnClick(this)</OnClick>
+			<OnEnter>AddonManager.MiniButton_OnEnter(this)</OnEnter>
+			<OnLeave>AddonManager.MiniButton_OnLeave(this)</OnLeave>
+		</Scripts>
+		<NormalTexture file="interface/AddOns/charplan/icon"/>
+		<PushedTexture file="interface/AddOns/charplan/icon"/>
+		<HighlightTexture file="Interface\Buttons\PanelSmallButtonHighlight" alphaMode="ADD"/>
+	</Button>
+	<!-- Minimap Button -->
+    <Button name="CharplanMinimapButton" hidden="false" inherits="MinimapButtonTemplate" parent="UIParent" >
+		<Size>
+			<AbsDimension y="24" x="24"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="MinimapViewFrame" relativePoint="CENTER">
+				<Offset>
+					<RelDimension x="-85" y="-2.5"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnClick>ToggleUIFrame(CPFrame)</OnClick>
+            <OnLoad>if AddonManager then this:Hide() end</OnLoad>
+		</Scripts>
+		<NormalTexture file="interface/AddOns/charplan/minimap_icon"/>
+		<PushedTexture file="interface/AddOns/charplan/minimap_icon"/>
+		<HighlightTexture file="interface/minimap/minimapbutton_highlight" alphaMode="ADD"/>
+	</Button>
+</Ui>

@@ -1,0 +1,279 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ ../../worldxml/ui.xsd">
+	<Frame name="CPPimpDropDown" inherits="UIDropDownMenuTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="40" y="25"/>
+		</Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parentLabel" inherits="GameFontHighlight" justifyH="RIGHT">
+					<Size>
+						<AbsDimension x="79" y="16"></AbsDimension>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="-80" y="1"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>Charplan.Pimp.OnCtrlLoad(this)</OnLoad>
+		</Scripts>
+	</Frame>
+	<Frame name="CPStatSelectionTemplate" virtual="true">
+		<Size><AbsDimension x="160" y="26"></AbsDimension></Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parentLabel" inherits="GameFontHighlight"  justifyH="RIGHT">
+					<Size><AbsDimension x="43" y="16"></AbsDimension></Size>
+					<Anchors><Anchor point="LEFT"/></Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<EditBox name="$parentName" inherits="UIPanelEditBoxTemplate">
+				<Size><AbsDimension x="100" y="22"></AbsDimension></Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentLabel" relativePoint="RIGHT">
+                        <Offset><AbsDimension x="1" y="0"/></Offset>
+                    </Anchor>
+				</Anchors>
+				<Scripts>
+                    <OnTabPressed>Charplan.Pimp.StatName_Tab(this)</OnTabPressed>
+					<OnEditFocusLost>Charplan.Pimp.StatName_Finished(this)</OnEditFocusLost>
+				</Scripts>
+				<FontString inherits="GameFontNormalSmall" />
+				<TextInsets><AbsInset top="6" right="3" left="4" bottom="0"></AbsInset></TextInsets>
+			</EditBox>
+			<Frame name="$parentTier" inherits="UIDropDownMenuTemplate">
+				<Size><AbsDimension x="40" y="20"></AbsDimension></Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentName" relativePoint="RIGHT"></Anchor>
+				</Anchors>
+			</Frame>
+			<Button name="$parentSearch" inherits="UIPanelButtonTemplate" text="....">
+				<Size><AbsDimension x="25" y="24"></AbsDimension></Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTier" relativePoint="RIGHT"></Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>Charplan.Pimp.OnStatSelSearch(this:GetParent())</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>Charplan.Pimp.OnStatCtrlLoad(this)</OnLoad>
+		</Scripts>
+	</Frame>
+
+	<Frame name="CPPimpMe" parent="CPFrame" inherits="UICommonFrameTemplate">
+		<Size>
+			<AbsDimension x="660" y="550"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" relativePoint="TOP" >
+				<Offset>
+					<AbsDimension x="0" y="-60"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<GameTooltip name="$parentToolTip" inherits="GameTooltipTemplate" frameStrata="DIALOG" frameLevel="0">
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset>
+						<AbsDimension x="9" y="30" />
+					</Offset></Anchor>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMLEFT">
+						<Offset><AbsDimension x="400" y="-9" ></AbsDimension></Offset>
+					</Anchor>
+				</Anchors>
+			</GameTooltip>
+			<Frame name="CPPimpMeAttr">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset><AbsDimension x="415" y="36" /></Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset><AbsDimension x="-10" y="-10" /></Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture file="Interface\Common\PanelSeparate-HorizontalLine">
+							<Size>
+								<AbsDimension x="160" y="4"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="2" y="98"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</Texture>
+						<Texture file="Interface\Common\PanelSeparate-HorizontalLine">
+							<Size>
+								<AbsDimension x="160" y="4"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="2" y="268"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</Texture>
+						<FontString name="$parentDuraLabel" justifyH="RIGHT" inherits="GameFontHighlight">
+							<Size><AbsDimension x="80" y="24"></AbsDimension></Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset><AbsDimension x="20" y="70"/></Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Button name="CPPimpMeItem" inherits="ItemButtonTemplate">
+							<Anchors><Anchor point="TOPLEFT" /></Anchors>
+							<Scripts>
+								<OnClick>Charplan.Pimp.OnItemClicked()</OnClick>
+							</Scripts>
+					</Button>
+					<Frame name="$parentPlus" inherits="CPPimpDropDown">
+						<Anchors>
+							<Anchor point="TOPLEFT"><Offset><AbsDimension x="100" y="8"/></Offset></Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="$parentTier" inherits="CPPimpDropDown">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentPlus" relativePoint="BOTTOMLEFT">
+								<Offset><AbsDimension x="0" y="6"/></Offset></Anchor>
+						</Anchors>
+					</Frame>
+					<EditBox name="$parentDura" inherits="UIPanelEditBoxTemplate" numeric="true" letters="3">
+						<Size>
+							<AbsDimension x="40" y="32"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentTier" relativePoint="BOTTOMLEFT"><Offset><AbsDimension x="5" y="3"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTabPressed>Charplan.Pimp.OnDura_TabClick(this)</OnTabPressed>
+							<OnTextChanged>Charplan.Pimp.OnDura_Changed(this)</OnTextChanged>
+						</Scripts>
+						<TextInsets><AbsInset top="8" right="4" left="4" bottom="0"></AbsInset></TextInsets>
+					</EditBox>
+					<EditBox name="$parentMaxDura" inherits="UIPanelEditBoxTemplate" numeric="true" letters="3">
+						<Size>
+							<AbsDimension x="40" y="32"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentDura" relativePoint="TOPRIGHT"><Offset><AbsDimension x="5" y="0"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTabPressed>Charplan.Pimp.OnMaxDura_TabClick(this)</OnTabPressed>
+							<OnTextChanged>Charplan.Pimp.OnMaxDura_Changed(this)</OnTextChanged>
+						</Scripts>
+						<TextInsets><AbsInset top="8" right="4" left="4" bottom="0"></AbsInset></TextInsets>
+					</EditBox>
+					<Frame name="$parentStat1" inherits="CPStatSelectionTemplate" id="1">
+						<Anchors>
+							<Anchor point="TOPLEFT"><Offset><AbsDimension x="0" y="107"/></Offset></Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="$parentStat2" inherits="CPStatSelectionTemplate" id="2">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parentStat1" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Frame>
+					<Frame name="$parentStat3" inherits="CPStatSelectionTemplate" id="3">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parentStat2" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Frame>
+					<Frame name="$parentStat4" inherits="CPStatSelectionTemplate" id="4">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parentStat3" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Frame>
+					<Frame name="$parentStat5" inherits="CPStatSelectionTemplate" id="5">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parentStat4" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Frame>
+					<Frame name="$parentStat6" inherits="CPStatSelectionTemplate" id="6">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parentStat5" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Frame>
+					<Frame name="$parentRune1" inherits="CPStatSelectionTemplate" id="7">
+						<Anchors>
+							<Anchor point="TOPLEFT"><Offset><AbsDimension x="0" y="280"/></Offset></Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="$parentRune2" inherits="CPStatSelectionTemplate" id="8">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parentRune1" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Frame>
+					<Frame name="$parentRune3" inherits="CPStatSelectionTemplate" id="9">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parentRune2" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Frame>
+					<Frame name="$parentRune4" inherits="CPStatSelectionTemplate" id="10">
+						<Anchors><Anchor point="TOPLEFT" relativeTo="$parentRune3" relativePoint="BOTTOMLEFT" /></Anchors>
+					</Frame>
+					<Button name="$parentBtnOK" inherits="UIPanelButtonTemplate" text="OK">
+						<Size><AbsDimension x="70" y="24"></AbsDimension></Size>
+						<Anchors>
+							<Anchor point="BOTTOM"><Offset><AbsDimension x="-45" y="-10"></AbsDimension></Offset></Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>Charplan.Pimp.OnOK(this)</OnClick>
+						</Scripts>
+					</Button>
+					<Button name="$parentBtnCancel" inherits="UIPanelButtonTemplate" text="CANCEL">
+						<Size><AbsDimension x="70" y="24"></AbsDimension></Size>
+						<Anchors>
+							<Anchor point="BOTTOM"><Offset><AbsDimension x="55" y="-10"></AbsDimension></Offset></Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>Charplan.Pimp.OnCancel(this)</OnClick>
+						</Scripts>
+					</Button>
+					<Button name="$parentClearBtn" inherits="UIPanelButtonTemplate">
+						<Size><AbsDimension x="60" y="24"></AbsDimension></Size>
+						<Anchors>
+							<Anchor point="BOTTOM"><Offset><AbsDimension x="70" y="-90"></AbsDimension></Offset></Anchor>
+						</Anchors>
+						<Scripts>
+							<OnDoubleClick>Charplan.Pimp.OnClear()
+										GameTooltip:Hide()</OnDoubleClick>
+							<OnClick>GameTooltip:SetOwner(this, "ANCHOR_TOPLEFT", -5, 0)
+										GameTooltip:SetText(Charplan.L.PIMP_CLEAR_TIP)
+										GameTooltip:Show()
+							</OnClick>
+							<OnLeave>GameTooltip:Hide()</OnLeave>
+						</Scripts>
+					</Button>					
+					<Button name="$parentCopyMenuBtn" inherits="UIPanelButtonTemplate">
+						<Size><AbsDimension x="120" y="24"></AbsDimension></Size>
+						<Anchors>
+							<Anchor point="BOTTOM"><Offset><AbsDimension x="0" y="-55"></AbsDimension></Offset></Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>ToggleDropDownMenu(CPPimpMeAttrCopyMenu)</OnClick>
+						</Scripts>
+					</Button>
+					<Frame name="$parentCopyMenu" inherits="UIDropDownMenuTemplate">
+						<Anchors><Anchor point="TOP" relativeTo="$parentCopyMenuBtn">
+							<Offset><AbsDimension y="-4" x="-20"></AbsDimension></Offset></Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>UIDropDownMenu_Initialize(this, Charplan.Pimp.ShowCopyMenu, "MENU")</OnLoad>
+						</Scripts>
+					</Frame>
+				</Frames>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>Charplan.Pimp.OnLoad(this)</OnLoad>
+			<OnShow>Charplan.Pimp.OnShow(this)</OnShow>
+			<OnHide>Charplan.Pimp.OnHide(this)</OnHide>
+		</Scripts>
+	</Frame>
+
+</Ui>

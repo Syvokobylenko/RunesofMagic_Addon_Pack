@@ -1,0 +1,24 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<!-- Made by Zhur -->
+	<Script file="StatLinks.lua"/>
+	<Frame name="StatLinksFrame" hidden="true">
+		<Size>
+			<AbsDimension x="1" y="1"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" >
+				<Offset>
+					<AbsDimension x="0" y="0" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnLoad>
+				StatLinks:OnLoad(this);
+			</OnLoad>
+			<OnEvent>
+				StatLinks:OnEvent(event);
+			</OnEvent>
+		</Scripts>
+	</Frame>
+</Ui>

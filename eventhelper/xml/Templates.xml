@@ -1,0 +1,744 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/..\..\WorldXML\UI.xsd">
+	<Script file="xml/templates.lua"/>
+
+	<Button name="EventHelper_ListHeadButton_Template" virtual="true">
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentLeft" file="Interface\SocialFrame\Column">
+					<Size>
+						<AbsDimension x="8" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+					</Anchors>
+					<TexCoords left="0" right="0.5" top="0" bottom="1"/>
+				</Texture>
+				<Texture name="$parentRight" file="Interface\SocialFrame\Column">
+					<Size>
+						<AbsDimension x="8" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT"/>
+					</Anchors>
+					<TexCoords left="0.5" right="1" top="0" bottom="1"/>
+				</Texture>
+				<Texture name="$parentMiddle" file="Interface\SocialFrame\Column">
+					<Size>
+						<AbsDimension x="1" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT"/>
+						<Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT"/>	
+					</Anchors>
+					<TexCoords left="0.5" right="0.5" top="0" bottom="1"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForClicks("LeftButton", "RightButton")
+			</OnLoad>
+			<OnEnter>
+				if this.OnEnterFn then
+					this.OnEnterFn(this,this:GetID(),this.args)
+				else
+					if string.len(this:GetText()) > 33 then
+						GameTooltip:Show();
+						GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT", 0, 0);
+						GameTooltip:SetText(this:GetText())
+					end
+				end
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+			<OnClick>
+				if this.OnClickFn then
+					this.OnClickFn(this,this:GetID(),key,this.args)
+				end
+			</OnClick>
+		</Scripts>
+		<NormalText inherits="GameFontLabelYellow" justifyH="CENTER">
+			<Anchors>
+				<Anchor point="TOPLEFT" relativePoint="LEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="4" y="0"/></Offset>
+				</Anchor>
+				<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-4" y="-8"/></Offset>
+				</Anchor>					
+			</Anchors>
+		</NormalText>
+		<HighlightText inherits="GameFontLabel" justifyH="CENTER">
+			<Anchors>
+				<Anchor point="TOPLEFT" relativePoint="LEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="4" y="0"/></Offset>
+				</Anchor>
+				<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-4" y="-8"/></Offset>
+				</Anchor>					
+			</Anchors>
+		</HighlightText>	
+	</Button>
+	
+	<Button name="EventHelper_ListButton_Template" virtual="true" enableMouse="true">
+		<Frames>
+			<CheckButton name="$parent_check" hidden="true" enabled="true" inherits="UIPanelCheckButtonTemplate">
+				<Size>
+					<AbsDimension y="24" x="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+						<Offset><AbsDimension x="10" y="0"/></Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if this:GetParent():GetParent().OnClickFn then
+							this:GetParent():GetParent().OnClickFn(this:GetParent():GetID(),"check", this:IsChecked())
+						end
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+		</Frames>
+		<Layers>
+			<Layer>
+				<Texture name="$parent_active" hidden="true">
+					<Size><AbsDimension x="15" y="15"/></Size>
+					<Anchors>
+						<Anchor point="RIGHT" relativeTo="$parent" relativePoint="RIGHT">
+							<Offset><AbsDimension x="-10" y="0"/></Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="$parent_txt" justifyH="LEFT" inherits="Font_Normal">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="LEFT" relativeTo="$parent">
+							<Offset><AbsDimension x="40" y="-10"/></Offset>
+						</Anchor>
+						<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent">
+							<Offset><AbsDimension x="-40" y="0"/></Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight><AbsValue val="12"/></FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+		<HighlightTexture file="Interface\AuctionFrame\AuctionFrameItem-Highlight" alphaMode="ADD">
+			<Anchors>
+				<Anchor point="TOPLEFT"/>
+				<Anchor point="BOTTOMRIGHT"/>
+			</Anchors>
+		</HighlightTexture>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForClicks("LeftButton", "RightButton")
+			</OnLoad>
+			<OnClick>
+				if this:GetParent().OnClickFn then
+					this:GetParent().OnClickFn(this:GetID(),"click",this,key)
+				end
+			</OnClick>
+			<OnEnter>
+				if this:GetParent().OnEnterFn then
+					this:GetParent().OnEnterFn(this, this:GetID())
+				end
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+			<OnMouseWheel>
+				if this:GetParent().OnScrollFn and this:GetParent().Scrollbar then
+					this:GetParent().OnScrollFn(this:GetParent().Scrollbar, delta)
+				end
+			</OnMouseWheel>
+		</Scripts>
+	</Button>
+	<Slider name="EventHelper_ScrollbarTemplate" virtual="true">
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentTop" file="Interface\Common\PanelScrollBar-Broder">
+					<Size><AbsDimension x="16" y="16"/></Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset><AbsDimension x="0" y="-20"/></Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0" right="1" top="0" bottom="0.25"/>
+				</Texture>
+				<Texture name="$parentBottom" file="Interface\Common\PanelScrollBar-Broder">
+					<Size><AbsDimension x="16" y="16"/></Size>
+					<Anchors>
+						<Anchor point="BOTTOM">
+							<Offset><AbsDimension x="0" y="20"/></Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0" right="1" top="0.75" bottom="1"/>
+				</Texture>
+				<Texture name="$parentMiddle" file="Interface\Common\PanelScrollBar-Broder">
+					<Size><AbsDimension x="16" y="1"/></Size>
+					<Anchors>
+						<Anchor point="TOP" relativeTo="$parentTop" relativePoint="BOTTOM"/>
+						<Anchor point="BOTTOM" relativeTo="$parentBottom" relativePoint="TOP"/>
+					</Anchors>
+					<TexCoords left="0" right="1" top="0.25" bottom="0.75"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentScrollUpButton" inherits="UIPanelScrollUpButtonTemplate">
+				<Anchors><Anchor point="BOTTOM" relativePoint="TOP" relativeTo="$parent"/></Anchors>
+			</Button>
+			<Button name="$parentScrollDownButton" inherits="UIPanelScrollDownButtonTemplate">
+				<Anchors><Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent"/></Anchors>
+			</Button>
+		</Frames>
+		<ThumbTexture file="Interface\Buttons\ScrollBar-Knob">
+			<Size><AbsDimension x="16" y="42"/></Size>
+			<TexCoords left="0" right="1" top="0" bottom="0.65625"/>
+		</ThumbTexture>
+		<Scripts>
+			<OnLoad>
+				this:SetValueStepMode("INT")
+			</OnLoad>
+			<OnValueChanged>
+				if this.OnValueChangedFn then
+					this.OnValueChangedFn(this, delta)
+				end
+			</OnValueChanged>
+			<OnMouseWheel>
+				if this.OnScrollFn then
+					this.OnScrollFn(this, delta)
+				end
+			</OnMouseWheel>
+		</Scripts>
+	</Slider>
+	<Button name="EventHelper_Tab_Template" inherits="UIPanelTopTabTemplate" frameStrata="HIGH" virtual="true">
+		<Scripts>
+			<OnClick>
+				EventHelper_Tab_Template_OnClick(this,this.override)
+			</OnClick>
+			<OnEnter>
+				EventHelper_Tab_Template_OnEnter(this)
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+			<OnLoad>
+				PanelTemplates_TabResize(this, 30)
+			</OnLoad>
+		</Scripts>
+		<Layers>
+			<Layer>
+				<FontString name="$parent_text" inherits="GameTitleFont" >
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="0" y="8"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Button>
+	<Frame name="EventHelper_TabFrame_Template" virtual="true">
+		<Frames>
+			<Button name="$parentTab1" inherits="EventHelper_Tab_Template" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab2" inherits="EventHelper_Tab_Template" id="2">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab1" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab3" inherits="EventHelper_Tab_Template" id="3">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab2" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab4" inherits="EventHelper_Tab_Template" id="4">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab3" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab5" inherits="EventHelper_Tab_Template" id="5">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab4" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab6" inherits="EventHelper_Tab_Template" id="6">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab5" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab7" inherits="EventHelper_Tab_Template" id="7">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab6" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab8" inherits="EventHelper_Tab_Template" id="8">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab7" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab9" inherits="EventHelper_Tab_Template" id="9">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab8" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab10" inherits="EventHelper_Tab_Template" id="10">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab9" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnShow>
+				EventHelper_Tab_Template_OnShow(this)
+			</OnShow>
+		</Scripts>
+	</Frame>
+	<CheckButton name="EventHelper_CheckLabelTemplate" inherits="UIPanelCheckButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension y="24" x="24"/>
+		</Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parent_Label" inherits="GameFontHighlight" justifyH="LEFT" >
+					<Size>
+						<AbsDimension y="20" x="100"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>
+				if this.func then
+					this.func(this)
+				end
+			</OnClick>
+			<OnEnter>
+				if this.tooltip then
+					GameTooltip:Show()
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT", 0, 0)
+					GameTooltip:SetText(this.tooltip)
+				end
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+		</Scripts>
+	</CheckButton>
+
+	<EditBox name="EventHelper_IDEditBox_Template" inherits="UIPanelEditBoxTemplate" historyLines="0" numeric="true" virtual="true" letters="6">
+		<Size>
+			<AbsDimension x="80" y="18"/>
+		</Size>
+		<Scripts>
+			<OnEnterPressed>
+				this:ClearFocus()
+				if this.func then
+					this.func(this)
+				end
+			</OnEnterPressed>
+			<OnTabPressed>
+				if this.next then
+					this.next:SetFocus()
+				end
+			</OnTabPressed>
+			<OnEnter>
+				if this.tooltip then
+					local tooltip=this.tooltip
+					GameTooltip:Show()
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT", 0, 0)
+					if tooltip[1] then
+						GameTooltip:SetText(tooltip[1])
+					else
+						GameTooltip:SetText("")
+					end
+					if type(tooltip[2]) =="table" then
+						for i=1, #tooltip[2] do
+							GameTooltip:AddLine(tooltip[2][i])
+						end
+					elseif type(tooltip[2]) =="string" then
+						GameTooltip:AddLine(tooltip[2])
+					end
+				end
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+		</Scripts>
+	</EditBox>
+	<EditBox name="EventHelper_EditBox_Template" inherits="UIPanelEditBoxTemplate" historyLines="0" virtual="true">
+		<Size>
+			<AbsDimension x="224" y="18"/>
+		</Size>
+		<Scripts>
+			<OnEnterPressed>
+				this:ClearFocus()
+				if this.func then
+					this.func(this)
+				end
+			</OnEnterPressed>
+			<OnTabPressed>
+				if this.next then
+					this.next:SetFocus()
+				end
+			</OnTabPressed>
+			<OnEnter>
+				if this.tooltip then
+					local tooltip=this.tooltip
+					GameTooltip:Show()
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT", 0, 0)
+					if tooltip[1] then
+						GameTooltip:SetText(tooltip[1])
+					else
+						GameTooltip:SetText("")
+					end
+					if type(tooltip[2]) =="table" then
+						for i=1, #tooltip[2] do
+							GameTooltip:AddLine(tooltip[2][i])
+						end
+					elseif type(tooltip[2]) =="string" then
+						GameTooltip:AddLine(tooltip[2])
+					end
+				end
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+		</Scripts>
+	</EditBox>
+	<EditBox name="EventHelper_NumEditBox_Template" inherits="UIPanelEditBoxTemplate" historyLines="0" virtual="true" numeric="true">
+		<Size>
+			<AbsDimension x="224" y="18"/>
+		</Size>
+		<Scripts>
+			<OnEnterPressed>
+				this:ClearFocus()
+				if this.func then
+					this.func(this)
+				end
+			</OnEnterPressed>
+			<OnTabPressed>
+				if this.next then
+					this.next:SetFocus()
+				end
+			</OnTabPressed>
+			<OnEnter>
+				if this.tooltip then
+					local tooltip=this.tooltip
+					GameTooltip:Show()
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT", 0, 0)
+					if tooltip[1] then
+						GameTooltip:SetText(tooltip[1])
+					else
+						GameTooltip:SetText("")
+					end
+					if type(tooltip[2]) =="table" then
+						for i=1, #tooltip[2] do
+							GameTooltip:AddLine(tooltip[2][i])
+						end
+					elseif type(tooltip[2]) =="string" then
+						GameTooltip:AddLine(tooltip[2])
+					end
+				end
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+		</Scripts>
+	</EditBox>
+
+	<Frame name="EventHelper_EditBox_with_LayerTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="270" y="20" />
+		</Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parent_layer" text="Original Name" inherits="GameFontNormal" justifyH="RIGHT">
+					<Size>
+						<AbsDimension x="100" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="LEFT"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<EditBox name="$parent_Edit" inherits="EventHelper_EditBox_Template">
+				<Size>
+					<AbsDimension x="160" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativePoint="RIGHT"/>
+				</Anchors>
+				<Scripts>
+					<OnEnterPressed>
+						this:ClearFocus()
+						if this:GetParent().func then
+							this:GetParent().func(this:GetParent())
+						end
+					</OnEnterPressed>
+					<OnTabPressed>
+						if this:GetParent().next then
+							this:GetParent().next:SetFocus()
+						end
+					</OnTabPressed>
+					<OnEnter>
+						if this:GetParent().tooltip then
+							local tooltip=this:GetParent().tooltip
+							GameTooltip:Show()
+							GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT", 0, 0)
+							if tooltip[1] then
+								GameTooltip:SetText(tooltip[1])
+							else
+								GameTooltip:SetText("")
+							end
+							if type(tooltip[2]) =="table" then
+								for i=1, #tooltip[2] do
+									GameTooltip:AddLine(tooltip[2][i])
+								end
+							elseif type(tooltip[2]) =="string" then
+								GameTooltip:AddLine(tooltip[2])
+							end
+						end
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+			</EditBox>
+		</Frames>
+	</Frame>
+	<Frame name="EventHelper_NumEditBox_with_LayerTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="270" y="20" />
+		</Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parent_layer" text="Original Name" inherits="GameFontNormal" justifyH="RIGHT">
+					<Size>
+						<AbsDimension x="100" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="LEFT"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<EditBox name="$parent_Edit" inherits="EventHelper_NumEditBox_Template">
+				<Size>
+					<AbsDimension x="160" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativePoint="RIGHT"/>
+				</Anchors>
+				<Scripts>
+					<OnEnterPressed>
+						this:ClearFocus()
+						if this:GetParent().func then
+							this:GetParent().func(this:GetParent())
+						end
+					</OnEnterPressed>
+					<OnTabPressed>
+						if this:GetParent().next then
+							this:GetParent().next:SetFocus()
+						end
+					</OnTabPressed>
+					<OnEnter>
+						if this:GetParent().tooltip then
+							local tooltip=this:GetParent().tooltip
+							GameTooltip:Show()
+							GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT", 0, 0)
+							if tooltip[1] then
+								GameTooltip:SetText(tooltip[1])
+							else
+								GameTooltip:SetText("")
+							end
+							if type(tooltip[2]) =="table" then
+								for i=1, #tooltip[2] do
+									GameTooltip:AddLine(tooltip[2][i])
+								end
+							elseif type(tooltip[2]) =="string" then
+								GameTooltip:AddLine(tooltip[2])
+							end
+						end
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+			</EditBox>
+		</Frames>
+	</Frame>
+
+	<Button name="EventHelper_Tab_Template" inherits="UIPanelTopTabTemplate" frameStrata="HIGH" virtual="true">
+		<Scripts>
+			<OnClick>
+				EventHelper_Tab_Template_OnClick(this,this.override)
+			</OnClick>
+			<OnEnter>
+				EventHelper_Tab_Template_OnEnter(this)
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+			<OnLoad>
+				PanelTemplates_TabResize(this, 30);
+			</OnLoad>
+		</Scripts>
+		<Layers>
+			<Layer>
+				<FontString name="$parent_text" inherits="GameTitleFont" >
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="0" y="8"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Button>
+	<Frame name="EventHelper_TabFrame_Template" virtual="true">
+		<Frames>
+			<Button name="$parentTab1" inherits="DL_Tab_Template" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab2" inherits="DL_Tab_Template" id="2">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab1" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab3" inherits="DL_Tab_Template" id="3">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab2" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab4" inherits="DL_Tab_Template" id="4">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab3" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab5" inherits="DL_Tab_Template" id="5">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab4" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab6" inherits="DL_Tab_Template" id="6">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab5" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab7" inherits="DL_Tab_Template" id="7">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab6" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab8" inherits="DL_Tab_Template" id="8">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab7" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab9" inherits="DL_Tab_Template" id="9">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab8" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab10" inherits="DL_Tab_Template" id="10">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab9" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnShow>
+				EventHelper_Tab_Template_OnShow(this)
+			</OnShow>
+		</Scripts>
+	</Frame>
+</Ui>

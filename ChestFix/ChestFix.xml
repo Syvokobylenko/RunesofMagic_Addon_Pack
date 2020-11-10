@@ -1,0 +1,12 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+    <Frame name="ChestFix_Frame">
+        <Scripts>
+			<OnLoad>
+				ChestFix.OnLoad(this)
+			</OnLoad>
+            <OnEvent>
+                ChestFix.Events[event](arg1)
+            </OnEvent>
+        </Scripts>
+    </Frame>
+</Ui>

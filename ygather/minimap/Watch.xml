@@ -1,0 +1,131 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+    
+    <Button name="yGather_MinimapWatchButtonTemplate" inherits="ListItemButtonTemplate" hidden="false" virtual="true">
+        <Size>
+            <AbsDimension x="280" y="18"/>
+        </Size>
+        <Layers>
+            <Layer level="OVERLAY">
+                <FontString name="$parent_Name" inherits="GameFontHighlight" text="" justifyH="LEFT" justifyV="MIDDLE">
+                    <Size>
+                        <AbsDimension x="166" y="16"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="LEFT">
+                            <Offset>
+                                <AbsDimension x="0" y="0"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+                <FontString name="$parent_X" inherits="GameFontHighlight" text="" justifyH="RIGHT" justifyV="MIDDLE">
+                    <Size>
+                        <AbsDimension x="50" y="16"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="LEFT" relativeTo="$parent_Name" relativePoint="RIGHT">
+                            <Offset>
+                                <AbsDimension x="2" y="0"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+                <FontString name="$parent_Y" inherits="GameFontHighlight" text="" justifyH="RIGHT" justifyV="MIDDLE">
+                    <Size>
+                        <AbsDimension x="50" y="16"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="LEFT" relativeTo="$parent_X" relativePoint="RIGHT">
+                            <Offset>
+                                <AbsDimension x="2" y="0"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+    </Button>
+
+    
+	<Frame name="yGather_MinimapWatchFrame" parent="UIParent" inherits="UICommonFrameTemplate" hidden="true">
+        <Size>
+			<AbsDimension x="300" y="260"/>
+		</Size>
+        <Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER"/>
+		</Anchors>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString inherits="GameTitleFont" text="yGather Minimap Watch">
+					<Anchors><Anchor point="TOP"><Offset><AbsDimension x="-24" y="7"/></Offset></Anchor></Anchors>
+                </FontString>
+			</Layer>
+		</Layers>
+        <Frames>
+            <Frame  name="yGather_MinimapWatchContentFrame">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="TOPLEFT"/>
+                    <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT"/>
+                </Anchors>
+                <Frames>
+                    <Button name="$parent_1" inherits="yGather_MinimapWatchButtonTemplate" id="1"/>
+                    <Button name="$parent_2" inherits="yGather_MinimapWatchButtonTemplate" id="2"/>
+                    <Button name="$parent_3" inherits="yGather_MinimapWatchButtonTemplate" id="3"/>
+                    <Button name="$parent_4" inherits="yGather_MinimapWatchButtonTemplate" id="4"/>
+                    <Button name="$parent_5" inherits="yGather_MinimapWatchButtonTemplate" id="5"/>
+                    <Button name="$parent_6" inherits="yGather_MinimapWatchButtonTemplate" id="6"/>
+                    <Button name="$parent_7" inherits="yGather_MinimapWatchButtonTemplate" id="7"/>
+                    <Button name="$parent_8" inherits="yGather_MinimapWatchButtonTemplate" id="8"/>
+                    <Button name="$parent_9" inherits="yGather_MinimapWatchButtonTemplate" id="9"/>
+                    <Button name="$parent_10" inherits="yGather_MinimapWatchButtonTemplate" id="10"/>
+                </Frames>
+				<Scripts>
+					<OnLoad>
+						local x,y;
+						x = 10;
+						y = 32;
+						for i=1, 10,1 do
+							local obj = getglobal( "yGather_MinimapWatchContentFrame_" .. i );
+							obj:ClearAllAnchors();
+							obj:SetAnchor( "TOPLEFT", "TOPLEFT", "$parent", x, 21*(i-1)+y );
+						end
+					</OnLoad>
+                </Scripts>
+            </Frame>
+        </Frames>
+        <Scripts>
+            <OnShow>
+                local callback = function(frame, locationData)
+                    local i = 0;
+                    for _, spot in pairs(locationData.spots) do
+                        i = i + 1;
+                        getglobal("yGather_MinimapWatchContentFrame_" .. i .. "_Name"):SetText(GetMinimapIconText(spot.icon:GetID()));
+                        getglobal("yGather_MinimapWatchContentFrame_" .. i .. "_X"):SetText(spot.x / 10);
+                        getglobal("yGather_MinimapWatchContentFrame_" .. i .. "_Y"):SetText(spot.y / 10);
+                        if (i == 10) then
+                            return;
+                        end;
+                    end;
+                    for _, spot in pairs(locationData.missingSpots) do
+                        i = i + 1;
+                        getglobal("yGather_MinimapWatchContentFrame_" .. i .. "_Name"):SetText(matId);
+                        getglobal("yGather_MinimapWatchContentFrame_" .. i .. "_X"):SetText(spot.x / 10);
+                        getglobal("yGather_MinimapWatchContentFrame_" .. i .. "_Y"):SetText(spot.y / 10);
+                        if (i == 10) then
+                            return;
+                        end;
+                    end;
+                    for j = i + 1, 10 do
+                        getglobal("yGather_MinimapWatchContentFrame_" .. j .. "_Name"):SetText("");
+                        getglobal("yGather_MinimapWatchContentFrame_" .. j .. "_X"):SetText("");
+                        getglobal("yGather_MinimapWatchContentFrame_" .. j .. "_Y"):SetText("");
+                    end;
+                end;
+                yGather.minimap.watch.AddListener(this, callback);
+            </OnShow>
+            <OnHide>
+                yGather.minimap.watch.RemoveListener(this);
+            </OnHide>
+        </Scripts>
+	</Frame>
+</Ui>

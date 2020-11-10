@@ -1,0 +1,119 @@
+﻿changelog:
+	-ToDo:
+
+	- @project-version@
+		- hotfix for 3.1.2792
+	- 3.1.2792
+		- Added Ice Blade Plateau
+		- DB update 7.0.2.2792
+
+	- 3.1.2781
+		- DB update 7.0.0.2781
+
+	- r71
+		- DB update 6.5.5.2769
+		- Changes:
+			- Added Treasure Lists
+			- Added treasure to search
+			
+	- 3.1.2767
+		- DB update 6.5.4.2767
+		- Changes:
+			- You can now change order of Instancelist between level and name
+			- update: veiled crypt of kashaylan
+			- update: bone peak
+			- update: Madro Troll Nest
+			- update: Raven Heart
+			- added: Ritual Canyon (level 100)
+			- Added Worldboss Sismond
+		
+	- 3.1.2749
+		- Changes:
+			- You can move the Frame now, if you click somewhere on the background frame
+			- DB update 6.4.0.2749
+			
+	- version 3.1.2742
+		- DB Update 6.3.0.2742
+		- Changes:
+			- Changed name of worldmap button: now DL-Options
+			- If there is yGather used, the worldmap option button will be moved
+			- Added ItemList
+			- Removed memento count Text in Bosslist; It's still there as tooltip -> less lag if you Change to this list
+			- All Items will be found with search no
+			- Added lua to sort Instance table
+		- Fixes:
+			- fixed error in Teleportpoint parsing
+			- fixed minor error in plus frame (skilllevel 0)
+			- Changed normal/easy Tatarwiak (Kashaylan instance)
+
+	- version 3.1.2736
+		- Changes:
+			- added Skull Rock, + Madroke (level 95/97 instance) ty to Ulukilulu for the data
+			- added Teleport Book Pois to Varanas Map
+			- tp pois now visible even without wowmap
+			- added Button to enable/disable WoWMap/DL stuff
+			- added Anselve, Perodia, Myrmex Queen
+			- db update to 6.2.2.2736
+		- Fixes:
+			- if you ctrl click a boss, the text on head button will not change
+			- fixed unknown map name -> now it's "unk"
+			- fixed error in plus frame
+			- fixed Error in Memswarning calculation
+		
+	- version 3.0.2733
+		- Changes:
+			- added Teleport info to tooltip (worldmap)
+			- added Red circle to Mapbuttons if there is a teleport point next to them
+			- added Show current zone/Target Button
+			- there's now a tooltip if headertext is too long
+			- Added Kashaylan (level 92 instance)
+		- Fixes:
+			- fixed Search -> now you can open romwelten db by CTRL + Alt
+			- fixed treasure script (DL.helper.GetLootRecursive())
+			- level 20/40/60/80/100 plus fix, now it creates the correct tier
+
+	- version 3.0.2733 beta
+		- Complete rewriting of the Code
+		- New Interface
+			- Same Design as ItemPreview2
+			- Left Click -> Forward
+			- Right Click -> Back
+			- Click on Headline -> Back	
+		- Features
+			- Search
+				- Tooltips with more information
+				- Alt+Click: Show Mappos if possible
+				- CTRL+ALT+Click -> romwelten db if possible
+				- Shift + Click -> Into Chat if possible
+				- CTRL + Click -> Preview if possible
+			- Instancelist
+				- Tooltips with more information
+				- Alt+Click: Show Mappos
+			- Bosslist of all NPCs (NEW)
+				- Tooltips with more information
+				- Alt+Click: Show Mappos
+				- CTRL+ALT+Click -> romwelten db
+				- CTRL + Click -> Preview
+				- Shift + Click -> Into Chat
+			- ItemList
+				- Droprate (NEW)
+				- Drop num (NEW)
+				- CTRL+ALT+Click -> romwelten db
+				- CTRL + Click -> Preview
+				- Shift + Click -> Into Chat
+			- Statlist (NEW)
+				- Droprate (NEW)
+				
+			- Full plus possibility
+			- Filter for current frame
+			- Worldmap
+				- ALT + Click -> Show BossList/ItemList
+				- CTRL+ALT+Click -> romwelten db (only bosses)
+				- Right-Click
+					- Dropdown
+						- Teleport
+						- Show In Dungeon Loot
+						- Show in romwelten db
+						- Preview if possible
+			- Mementowarning if you enter an instance
+			- RoM-Welten Export script for Articles

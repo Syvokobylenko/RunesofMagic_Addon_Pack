@@ -1,0 +1,53 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Frame name="XBarMail" parent="UIParent" frameStrata="BACKGROUND" frameLevel="1">
+		<Size><AbsDimension x="128" y="32"/></Size>
+		<Anchors><Anchor point="LEFT" relativeTo="XBarFrame"><Offset>
+			<AbsDimension x="750" y="0"/></Offset></Anchor></Anchors>
+		<Scripts>
+			<OnEvent>XBar.Mail_OnEvent(this,event)</OnEvent>
+			<OnShow>XBar.Mail_OnEvent(this,"LOADED")</OnShow>
+			<OnHide>
+				this:UnregisterEvent("MAIL_SHOW")
+				this:UnregisterEvent("CHAT_MSG_SYSTEM")
+			</OnHide>
+		</Scripts>
+	</Frame>
+	<Frame name="XBarMail_BG" inherits="XButton_BGTemp" parent="XBarFrame">
+		<Anchors><Anchor point="LEFT" relativeTo="XBarMail"><Offset>
+			<AbsDimension x="-28" y="0"/></Offset></Anchor></Anchors>
+	</Frame>
+	<Button name="XBarMail_B" inherits="XButton_BTemp" parent="XBarMail">
+		<Anchors><Anchor point="LEFT"/></Anchors>
+		<Scripts>
+			<OnClick>
+				if key=="LBUTTON" then
+					XBar.Mail_OnClick()
+				else
+					XBar.ToggleUI(PartnerFrame)
+				end
+			</OnClick>
+			<OnDragStart>XBar.MoveStart(XBarMail)</OnDragStart>
+			<OnDragStop>XBar.MoveEnd(XBarMail)</OnDragStop>
+			<OnEnter>XBar.Mail_OnEnter(this)</OnEnter>
+		</Scripts>
+		<NormalTexture file="Interface/Icons/Quest_Letter02"/>
+		<PushedTexture file="Interface/Icons/Quest_Letter07"/>
+		<HighlightTexture file="Interface/Icons/Quest_Letter08" alphaMode="ADD"/>
+	</Button>
+	<Frame name="XBarMail_F" inherits="XButton_FTemp" parent="XBarMail">
+		<Anchors><Anchor point="LEFT"><Offset>
+			<AbsDimension x="26" y="3"/></Offset></Anchor></Anchors>
+	</Frame>
+	<Frame name="XBarMail_New" parent="XBarMail" hidden="true">
+		<Anchors><Anchor point="CENTER" relativeTo="XBarMail_B"/></Anchors>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture file="Interface\Buttons\QuickSlot-QualityBorder01" alphaMode="ADD">
+					<Size><AbsDimension x="50" y="50"/></Size>
+					<Anchors><Anchor point="CENTER"/></Anchors>
+					<Color r="0" g="1" b="0"/>
+				</Texture>
+			</Layer>
+		</Layers>
+	</Frame>
+</Ui>

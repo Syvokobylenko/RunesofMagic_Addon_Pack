@@ -1,0 +1,6 @@
+libs\ZZLibrary.xml
+FixforGuildbank.lua
+-- X-Curse-Packaged-Version: 1.2
+-- X-Curse-Project-Name: Fix for GuildBank
+-- X-Curse-Project-ID: guildbankfix
+-- X-Curse-Repository-ID: rom/guildbankfix/mainline

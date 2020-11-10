@@ -1,0 +1,70 @@
+<!-- ä
+
+	Name: Advanced Questbook
+	By: Crypton
+
+-->
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Button name="AdvQuestBookMapItemIcon" hidden="true" enableMouse="true" virtual="true">
+		<Size>
+			<AbsDimension x="6" y="6" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" />
+		</Anchors>
+		<NormalTexture file="Interface\AddOns\AdvQuestBook\images\item.png" />
+		<PushedTexture file="Interface\AddOns\AdvQuestBook\images\item.png" />
+		<HighlightTexture file="Interface\AddOns\AdvQuestBook\images\chl.png" alphaMode="NONE" />
+		<Scripts>
+			<OnClick>
+				AdvQuestBook_AutoMoveTo(this:GetName());
+			</OnClick>
+			<OnEnter>
+				AdvQuestBookIcon_OnDirection(this:GetName(), "inf", "in");
+			</OnEnter>
+			<OnLeave>
+				AdvQuestBookIcon_OnDirection(this, nil, nil);
+			</OnLeave>
+		</Scripts>
+	</Button>
+	<Frame name="AdvQuestBookMapItemIcons" parent="WorldMapViewFrame" hidden="false" enableMouse="true" frameLevel="10000" frameStrata="HIGH">
+		<Size>
+			<AbsDimension x="6" y="6" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" />
+		</Anchors>
+		<Frames>
+			<Button name="$parent1" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent2" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent3" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent4" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent5" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent6" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent7" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent8" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent9" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent10" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent11" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent12" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent13" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent14" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent15" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent16" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent17" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent18" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent19" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent20" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent21" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent22" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent23" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent24" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent25" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent26" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent27" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent28" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent29" inherits="AdvQuestBookMapItemIcon" />
+			<Button name="$parent30" inherits="AdvQuestBookMapItemIcon" />
+		</Frames>
+	</Frame>
+</Ui>

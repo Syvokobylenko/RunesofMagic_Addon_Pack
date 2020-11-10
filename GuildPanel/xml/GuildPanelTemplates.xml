@@ -1,0 +1,226 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/..\..\WorldXML\UI.xsd">
+    <Frame name="GuildPanel_BackDropTemplate" enableMouse="true" virtual="true">
+        <Backdrop edgeFile="Interface\Tooltips\Tooltip-Border" bgFile="Interface\Tooltips\Tooltip-Background">
+            <BackgroundInsets>
+                <AbsInset top="4" left="4" bottom="4" right="4"/>
+            </BackgroundInsets>
+            <EdgeSize>
+                <AbsValue val="16"/>
+            </EdgeSize>
+            <TileSize>
+                <AbsValue val="16"/>
+            </TileSize>
+        </Backdrop>
+    </Frame>
+    <Frame name="GuildPanel_BackDropTemplate1" enableMouse="true" virtual="true">
+        <Backdrop edgeFile="Interface\Tooltips\Tooltip-Border" bgFile="Interface\Tooltips\Tooltip-Background">
+            <EdgeSize>
+                <AbsValue val="16"/>
+            </EdgeSize>
+            <TileSize>
+                <AbsValue val="16"/>
+            </TileSize>
+        </Backdrop>
+    </Frame>
+    <Frame name="GuildPanel_BackDropTemplate2" virtual="true">
+        <Backdrop edgeFile="Interface\CharacterFrame\Peperdoll-Backdrop-Border" bgFile="interface\CharacterFrame\Peperdoll-Backdrop-Background">
+            <EdgeSize>
+                <AbsValue val="54"/>
+            </EdgeSize>
+            <TileSize>
+                <AbsValue val="16"/>
+            </TileSize>
+        </Backdrop>
+    </Frame>
+
+
+    <Button name="GuildPanel_ResourceTemplate" inherits="ListItemButtonTemplate" hidden="true" virtual="true">
+    	<Size>
+        	<AbsDimension x="365" y="15" />
+        </Size>
+        <Layers>
+            <Layer level="ARTWORK">
+                <FontString name="$parent_Name" inherits="GameFontNormal" justifyH="LEFT" text="rn1">
+                    <Size>
+                        <AbsDimension x="105" y="16"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="LEFT">
+                            <Offset>
+                                <AbsDimension x="15" y="0"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                    <Color r="1" g="1" b="1" a="1" />
+                </FontString>
+                <FontString name="$parent_Resource" inherits="GameFontNormal" justifyH="LEFT" text="rn2">
+                    <Size>
+                        <AbsDimension x="155" y="16"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="LEFT">
+                            <Offset>
+                                <AbsDimension x="120" y="0"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                	<Color r="1" g="1" b="1" a="1" />
+                </FontString>
+                <FontString name="$parent_Date" inherits="GameFontNormal" justifyH="LEFT" text="rn3">
+                    <Size>
+                        <AbsDimension x="110" y="16"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="LEFT">
+                            <Offset>
+                                <AbsDimension x="260" y="0"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                    <Color r="1" g="1" b="1" a="1" />
+                </FontString>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnLoad>
+                this:RegisterForClicks("LeftButton", "RightButton");
+            </OnLoad>
+            <OnClick>
+                GuildPanel_ResourceList_OnClick(this,key);
+            </OnClick>
+            <OnMouseWheel>
+                GuildPanel_ResourceList_OnMouseWheel(GuildPanel_ResourceListSlider, delta);
+            </OnMouseWheel>
+        </Scripts>
+    </Button>
+
+
+
+    <Button name="GuildPanel_MemberTemplate" inherits="ListItemButtonTemplate" hidden="true" virtual="true">
+        <Size>
+            <AbsDimension x="650" y="18" />
+        </Size>
+        <Layers>
+            <Layer level="ARTWORK">
+                <FontString name="$parent_Name" inherits="GameFontLabel" justifyH="LEFT">
+                    <Size>
+                        <AbsDimension x="120" y="16"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="LEFT">
+                            <Offset>
+                                <AbsDimension x="4" y="0"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+                <FontString name="$parent_Levels" inherits="GameFontLabel" justifyH="LEFT">
+                    <Size>
+                        <AbsDimension x="60" y="16"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="LEFT">
+                            <Offset>
+                                <AbsDimension x="120" y="0"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+                <FontString name="$parent_Classes" inherits="GameFontLabel" justifyH="LEFT">
+                    <Size>
+                        <AbsDimension x="145" y="16"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="LEFT">
+                            <Offset>
+                                <AbsDimension x="180" y="0"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+                <FontString name="$parent_Status" inherits="GameFontLabel" justifyH="LEFT">
+                    <Size>
+                        <AbsDimension x="150" y="16"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="LEFT">
+                            <Offset>
+                                <AbsDimension x="330" y="0"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+                <FontString name="$parent_RankNote" inherits="GameFontLabel" justifyH="LEFT">
+                    <Size>
+                        <AbsDimension x="160" y="16"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="LEFT">
+                            <Offset>
+                                <AbsDimension x="485" y="0"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnLoad>
+                this:RegisterForClicks("LeftButton", "RightButton");
+            </OnLoad>
+            <OnClick>
+                GuildPanel_MemberList_OnClick(this,key);
+            </OnClick>
+            <OnMouseWheel>
+                GuildPanel_MemberList_OnMouseWheel(GuildPanel_MemberListSlider, delta);
+            </OnMouseWheel>
+        </Scripts>
+    </Button>
+    
+     <CheckButton name="GuildPanelConfig_CheckButtonTemplate" inherits="UIPanelCheckButtonTemplate" virtual="true">
+        <Layers>
+            <Layer>
+                <FontString name="$parent_Text" inherits="GameTitleFont" justifyH="LEFT">
+                    <Size>
+                        <AbsDimension x="400" y="20"/>
+                    </Size>
+                    <FontHeight>
+                        <AbsValue val="14"/>
+                    </FontHeight>
+                    <Anchors>
+                        <Anchor point="LEFT" relativeTo="$parent" relativePoint="RIGHT">
+                            <Offset>
+                                <AbsDimension x="0" y="0"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnClick>GuildPanelConfig.ButtonClick(this);</OnClick>
+        </Scripts>
+    </CheckButton>    
+    
+     <CheckButton name="GuildPanel_MemberListCheckButtonTemplate" inherits="UIPanelCheckButtonTemplate" virtual="true">
+        <Layers>
+            <Layer>
+                <FontString name="$parent_Text" inherits="GameTitleFont" justifyH="LEFT">
+                    <Size>
+                        <AbsDimension x="400" y="20"/>
+                    </Size>
+                    <FontHeight>
+                        <AbsValue val="14"/>
+                    </FontHeight>
+                    <Anchors>
+                        <Anchor point="LEFT" relativeTo="$parent" relativePoint="RIGHT">
+                            <Offset>
+                                <AbsDimension x="0" y="0"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+    </CheckButton>        
+</Ui>

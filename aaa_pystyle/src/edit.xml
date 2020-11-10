@@ -1,0 +1,78 @@
+<Ui xmlns="http://www.runewaker.com/" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/
+../WorldXml/UI.xsd">
+  <EditBox name="PyStyleEditBoxTemplate" enableMouse="true" virtual="true">
+    <Size>
+      <AbsDimension x="150" y="20"/>
+    </Size>
+    <Layers>
+      <Layer>
+        <FontString name="$parent_placeholder" inherits="PyStyleFontHighlightSmall" justifyH="LEFT" text="">
+          <Anchors>
+            <Anchor point="LEFT" relativePoint="LEFT">
+              <Offset>
+                <AbsDimension x="5" y="0"/>
+              </Offset>
+            </Anchor>
+          </Anchors>
+        </FontString>
+      </Layer>
+      <Layer level="BACKGROUND">
+        <Texture name="$parentLeft" file="Interface\Common\PanelEditBoxBorder">
+          <Size>
+            <AbsDimension x="8" y="20"/>
+          </Size>
+          <Anchors>
+            <Anchor point="LEFT"/>
+          </Anchors>
+          <TexCoords left="0" right="0.25" top="0" bottom="0.625"/>
+        </Texture>
+        <Texture name="$parentRight" file="Interface\Common\PanelEditBoxBorder">
+          <Size>
+            <AbsDimension x="8" y="20"/>
+          </Size>
+          <Anchors>
+            <Anchor point="RIGHT"/>
+          </Anchors>
+          <TexCoords left="0.75" right="1" top="0" bottom="0.625"/>
+        </Texture>
+        <Texture name="$parentMiddle" file="Interface\Common\PanelEditBoxBorder">
+          <Size>
+            <AbsDimension x="1" y="20"/>
+          </Size>
+          <Anchors>
+            <Anchor point="TOPLEFT" relativeTo="$parentLeft" relativePoint="TOPRIGHT"/>
+            <Anchor point="BOTTOMRIGHT" relativeTo="$parentRight" relativePoint="BOTTOMLEFT"/>
+          </Anchors>
+          <TexCoords left="0.25" right="0.75" top="0" bottom="0.625"/>
+        </Texture>
+      </Layer>
+    </Layers>
+    <Scripts>
+      <OnLoad>
+              PyStyle.edit.onLoad(this)
+      </OnLoad>
+      <OnTextChanged>
+                local ph = _G[this:GetName().."_placeholder"]
+                if #this:GetText() == 0 then
+                ph:Show()
+                else
+                ph:Hide()
+                end
+      </OnTextChanged>
+      <OnEscapePressed>
+				this:ClearFocus();
+      </OnEscapePressed>
+      <OnEditFocusLost>
+				this:HighlightText(0, 0);
+      </OnEditFocusLost>
+      <OnEditFocusGained>
+				this:HighlightText();
+      </OnEditFocusGained>
+    </Scripts>
+    <FontString inherits="PyStyleEditBoxFont"/>
+    <TextInsets>
+      <AbsInset left="4" right="4" top="2" bottom="2"/>
+    </TextInsets>
+  </EditBox>
+</Ui>

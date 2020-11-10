@@ -1,0 +1,76 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+    
+<Frame name="yGather_MinimapIconHighlightTemplate" enableMouse="false" virtual="true">
+	<Layers>
+		<Layer level="OVERLAY">
+			<Texture name="$parent_Texture" file="Interface/Addons/yGather/resources/minimap_highlight.tga"
+                    alphaMode="ADD" animationSpeed="8">
+				<Anchors>
+                    <Anchor point="TOPLEFT"/>
+                    <Anchor point="BOTTOMRIGHT"/>
+                </Anchors>
+				<TexCoords top="0" left="0" bottom="0.5" right="0.5"/>
+				<TexCoords top="0" left="0" bottom="0.5" right="0.5"/>
+				<TexCoords top="0" left="0" bottom="0.5" right="0.5"/>
+				<TexCoords top="0" left="0" bottom="0.5" right="0.5"/>
+				<TexCoords top="0" left="0" bottom="0.5" right="0.5"/>
+				<TexCoords top="0" left="0.5" bottom="0.5" right="1" />
+				<TexCoords top="0" left="0.5" bottom="0.5" right="1" />
+				<TexCoords top="0" left="0.5" bottom="0.5" right="1" />
+				<TexCoords top="0.5" left="0" bottom="1" right="0.5"/>
+				<TexCoords top="0.5" left="0" bottom="1" right="0.5"/>
+				<TexCoords top="0.5" left="0.5" bottom="1" right="1" />
+				<TexCoords top="0.5" left="0" bottom="1" right="0.5"/>
+				<TexCoords top="0.5" left="0" bottom="1" right="0.5"/>
+				<TexCoords top="0" left="0.5" bottom="0.5" right="1" />
+				<TexCoords top="0" left="0.5" bottom="0.5" right="1" />
+				<TexCoords top="0" left="0.5" bottom="0.5" right="1" />
+				<!--Color r="0.6" g="1" b="0.6"/-->
+			</Texture>
+		</Layer>
+	</Layers>
+    <Scripts>
+        <OnShow>
+            yGather.minimapHighlight.OnShow(this);
+        </OnShow>
+        <OnLoad>
+            yGather.minimapHighlight.OnLoad(this);
+        </OnLoad>
+        <OnUpdate>
+            yGather.minimapHighlight.OnUpdate(this, elapsedTime);
+        </OnUpdate>
+    </Scripts>
+</Frame>
+
+<Frame name="yGather_MinimapHighlight1" parent="MinimapFrame_Icon1" inherits="yGather_MinimapIconHighlightTemplate" id="1"/>
+<Frame name="yGather_MinimapHighlight2" parent="MinimapFrame_Icon2" inherits="yGather_MinimapIconHighlightTemplate" id="2"/>
+<Frame name="yGather_MinimapHighlight3" parent="MinimapFrame_Icon3" inherits="yGather_MinimapIconHighlightTemplate" id="3"/>
+<Frame name="yGather_MinimapHighlight4" parent="MinimapFrame_Icon4" inherits="yGather_MinimapIconHighlightTemplate" id="4"/>
+<Frame name="yGather_MinimapHighlight5" parent="MinimapFrame_Icon5" inherits="yGather_MinimapIconHighlightTemplate" id="5"/>
+<Frame name="yGather_MinimapHighlight6" parent="MinimapFrame_Icon6" inherits="yGather_MinimapIconHighlightTemplate" id="6"/>
+<Frame name="yGather_MinimapHighlight7" parent="MinimapFrame_Icon7" inherits="yGather_MinimapIconHighlightTemplate" id="7"/>
+<Frame name="yGather_MinimapHighlight8" parent="MinimapFrame_Icon8" inherits="yGather_MinimapIconHighlightTemplate" id="8"/>
+<Frame name="yGather_MinimapHighlight9" parent="MinimapFrame_Icon9" inherits="yGather_MinimapIconHighlightTemplate" id="9"/>
+<Frame name="yGather_MinimapHighlight10" parent="MinimapFrame_Icon10" inherits="yGather_MinimapIconHighlightTemplate" id="10"/>
+<Frame name="yGather_MinimapHighlight11" parent="MinimapFrame_Icon11" inherits="yGather_MinimapIconHighlightTemplate" id="11"/>
+<Frame name="yGather_MinimapHighlight12" parent="MinimapFrame_Icon12" inherits="yGather_MinimapIconHighlightTemplate" id="12"/>
+<Frame name="yGather_MinimapHighlight13" parent="MinimapFrame_Icon13" inherits="yGather_MinimapIconHighlightTemplate" id="13"/>
+<Frame name="yGather_MinimapHighlight14" parent="MinimapFrame_Icon14" inherits="yGather_MinimapIconHighlightTemplate" id="14"/>
+<Frame name="yGather_MinimapHighlight15" parent="MinimapFrame_Icon15" inherits="yGather_MinimapIconHighlightTemplate" id="15"/>
+<Frame name="yGather_MinimapHighlight16" parent="MinimapFrame_Icon16" inherits="yGather_MinimapIconHighlightTemplate" id="16"/>
+<Frame name="yGather_MinimapHighlight17" parent="MinimapFrame_Icon17" inherits="yGather_MinimapIconHighlightTemplate" id="17"/>
+<Frame name="yGather_MinimapHighlight18" parent="MinimapFrame_Icon18" inherits="yGather_MinimapIconHighlightTemplate" id="18"/>
+<Frame name="yGather_MinimapHighlight19" parent="MinimapFrame_Icon19" inherits="yGather_MinimapIconHighlightTemplate" id="19"/>
+<Frame name="yGather_MinimapHighlight20" parent="MinimapFrame_Icon20" inherits="yGather_MinimapIconHighlightTemplate" id="20"/>
+<Frame name="yGather_MinimapHighlight21" parent="MinimapFrame_Icon21" inherits="yGather_MinimapIconHighlightTemplate" id="21"/>
+<Frame name="yGather_MinimapHighlight22" parent="MinimapFrame_Icon22" inherits="yGather_MinimapIconHighlightTemplate" id="22"/>
+<Frame name="yGather_MinimapHighlight23" parent="MinimapFrame_Icon23" inherits="yGather_MinimapIconHighlightTemplate" id="23"/>
+<Frame name="yGather_MinimapHighlight24" parent="MinimapFrame_Icon24" inherits="yGather_MinimapIconHighlightTemplate" id="24"/>
+<Frame name="yGather_MinimapHighlight25" parent="MinimapFrame_Icon25" inherits="yGather_MinimapIconHighlightTemplate" id="25"/>
+<Frame name="yGather_MinimapHighlight26" parent="MinimapFrame_Icon26" inherits="yGather_MinimapIconHighlightTemplate" id="26"/>
+<Frame name="yGather_MinimapHighlight27" parent="MinimapFrame_Icon27" inherits="yGather_MinimapIconHighlightTemplate" id="27"/>
+<Frame name="yGather_MinimapHighlight28" parent="MinimapFrame_Icon28" inherits="yGather_MinimapIconHighlightTemplate" id="28"/>
+<Frame name="yGather_MinimapHighlight29" parent="MinimapFrame_Icon29" inherits="yGather_MinimapIconHighlightTemplate" id="29"/>
+<Frame name="yGather_MinimapHighlight30" parent="MinimapFrame_Icon30" inherits="yGather_MinimapIconHighlightTemplate" id="30"/>
+
+</Ui>

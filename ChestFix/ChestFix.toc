@@ -1,0 +1,7 @@
+## Title: ChestFix
+## Version: 3.1.0
+## Notes: Implements splitting and automatic stacking in chests. Also makes item movements in foreign chests avaible.
+## Author: Achandos (Akastos)
+
+ChestFix.lua
+ChestFix.xml

@@ -1,0 +1,439 @@
+<!-- ä
+
+	Name: Advanced Questbook
+	By: Crypton
+
+-->
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Button name="AdvQuestBookMapNoteBtnTemp1" inherits="UIPanelButtonTemplate" hidden="true" virtual="true">
+		<Size>
+			<AbsDimension x="74" y="20" />
+		</Size>
+	</Button>
+	<Button name="AdvQuestBookMapNoteColTemp" inherits="UIPanelButtonTemplate" hidden="true" virtual="true">
+		<Size>
+			<AbsDimension x="12" y="12" />
+		</Size>
+		<NormalTexture file="Interface\AddOns\AdvQuestBook\images\bdot.png" />
+		<PushedTexture file="Interface\AddOns\AdvQuestBook\images\bdot.png" />
+		<HighlightTexture file="Interface\AddOns\AdvQuestBook\images\chl.png" alphaMode="NONE" />
+		<Scripts>
+			<OnClick>
+				AdvQuestBook_SetSelNoteColor(this);
+			</OnClick>
+		</Scripts>
+	</Button>
+	<EditBox name="AdvQuestBookMapNoteEBTemp1" hidden="true" virtual="true">
+		<Size>
+			<AbsDimension x="200" y="32" />
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentLeft" file="Interface\Common\PanelEditBoxBorder">
+					<Size>
+						<AbsDimension x="8" y="32" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="0" y="1" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0" right="0.25" top="0" bottom="1.0" />
+				</Texture>
+				<Texture name="$parentRight" file="Interface\Common\PanelEditBoxBorder">
+					<Size>
+						<AbsDimension x="8" y="32" />
+					</Size>
+					<Anchors>
+						<Anchor point="RIGHT">
+							<Offset>
+								<AbsDimension x="12" y="1" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.75" right="1.0" top="0" bottom="1.0" />
+				</Texture>
+				<Texture file="Interface\Common\PanelEditBoxBorder">
+					<Size>
+						<AbsDimension x="16" y="32" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="0" y="0" />
+							</Offset>
+						</Anchor>
+						<Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT">
+							<Offset>
+								<AbsDimension x="0" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.25" right="0.75" top="0" bottom="1.0"/>
+				</Texture>
+				<FontString name="$parentName" inherits="GameFontHighlight" justifyH="RIGHT" justifyV="MIDDLE">
+					<Size>
+						<AbsDimension x="100" y="32" />
+					</Size>
+					<Anchors>
+						<Anchor point="RIGHT" relativePoint="LEFT">
+							<Offset>
+								<AbsDimension x="-15" y="-5" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<TextInsets>
+			<AbsInset top="4" left="2" bottom="0" right="2" />
+		</TextInsets>
+		<FontString inherits="GameEditFont" />
+	</EditBox>
+	<EditBox name="AdvQuestBookMapNoteEBTemp2" inherits="UIMultiEditBoxTemplate" hidden="true" virtual="true" letters="255">
+		<Size>
+			<AbsDimension x="230" y="150" />
+		</Size>
+		<Backdrop edgeFile="Interface\Tooltips\Tooltip-border" bgFile="Interface\Tooltips\Tooltip-Background">
+			<BackgroundInsets>
+				<AbsInset top="4" left="4" bottom="4" right="4" />
+			</BackgroundInsets>
+			<EdgeSize>
+				<AbsValue val="16" />
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="16" />
+			</TileSize>
+		</Backdrop>
+		<TextInsets>
+			<AbsInset left="15" right="15" top="5" bottom="5" />
+		</TextInsets>
+		<FontString inherits="GameFontNormal" justifyH="LEFT">
+			<FontHeight>
+				<AbsValue val="12" />
+			</FontHeight>
+		</FontString>
+	</EditBox>
+	<Button name="AdvQuestBookMapNoteIconTemp" hidden="true" virtual="true">
+		<Size>
+			<AbsDimension x="12" y="12" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" />
+		</Anchors>
+		<NormalTexture file="Interface\AddOns\AdvQuestBook\images\bdot.png" />
+		<PushedTexture file="Interface\AddOns\AdvQuestBook\images\bdot.png" />
+		<HighlightTexture file="Interface\AddOns\AdvQuestBook\images\chl.png" alphaMode="NONE" />
+		<Scripts>
+			<OnLoad>
+				this:RegisterForClicks("LeftButton", "RightButton");
+			</OnLoad>
+			<OnEnter>
+				AdvQuestBookIcon_OnDirection(this:GetName(), "note", "in");
+			</OnEnter>
+			<OnLeave>
+				AdvQuestBookIcon_OnDirection(this, nil, nil)
+			</OnLeave>
+			<OnClick>
+				if (key == "LBUTTON" and IsCtrlKeyDown()) then
+					AdvQuestBook_DeleteCustomNote(this);
+				elseif (key == "LBUTTON" and IsShiftKeyDown()) then
+					AdvQuestBook_EditCustomNote(this);
+				else
+					AdvQuestBook_AutoMoveTo(this:GetName());
+				end
+			</OnClick>
+			<OnMouseDown>
+				if (key == "RBUTTON" and IsShiftKeyDown()) then
+					this:StartMoving("CENTER");
+				end
+			</OnMouseDown>
+			<OnMouseUp>
+				if (key == "RBUTTON" and IsShiftKeyDown()) then
+					this:StopMovingOrSizing();
+					local x, y = GetCursorPos();
+					AdvQuestBook_SaveCustomNoteLocation(this, x, y);
+				end
+			</OnMouseUp>
+		</Scripts>
+	</Button>
+	<Frame name="AdvQuestBookMapNoteIcon" parent="WorldMapViewFrame" hidden="false" enableMouse="true" frameLevel="10000" frameStrata="HIGH">
+		<Size>
+			<AbsDimension x="12" y="12" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" />
+		</Anchors>
+		<Frames>
+			<Button name="$parent1" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent2" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent3" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent4" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent5" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent6" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent7" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent8" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent9" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent10" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent11" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent12" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent13" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent14" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent15" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent16" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent17" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent18" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent19" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent20" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent21" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent22" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent23" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent24" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent25" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent26" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent27" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent28" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent29" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent30" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent31" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent32" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent33" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent34" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent35" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent36" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent37" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent38" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent39" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent40" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent41" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent42" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent43" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent44" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent45" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent46" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent47" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent48" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent49" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent50" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent51" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent52" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent53" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent54" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent55" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent56" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent57" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent58" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent59" inherits="AdvQuestBookMapNoteIconTemp" />
+			<Button name="$parent60" inherits="AdvQuestBookMapNoteIconTemp" />
+		</Frames>
+	</Frame>
+	<Frame name="AdvQuestBookNewNoteFrame" inherits="UICommonFrameTemplate" parent="UIParent" frameLevel="10002" enableMouse="true" hidden="true" frameStrata="HIGH">
+		<Size>
+			<AbsDimension x="250" y="250" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="12" y="33" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer>
+				<FontString name="$parentTitle" inherits="Font_FrameTitle" text="">
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="7" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<EditBox name="$parentTEB" inherits="AdvQuestBookMapNoteEBTemp1" hidden="false">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="20" y="30" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEscapePressed>
+						this:ClearFocus();
+					</OnEscapePressed>
+				</Scripts>
+			</EditBox>
+			<EditBox name="$parentNEB" inherits="AdvQuestBookMapNoteEBTemp2" hidden="false">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="50" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEscapePressed>
+						this:ClearFocus();
+					</OnEscapePressed>
+				</Scripts>
+			</EditBox>
+			<Button name="$parentColBtn1" inherits="AdvQuestBookMapNoteColTemp" hidden="false">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="20" y="-35" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentColBtn2" inherits="AdvQuestBookMapNoteColTemp" hidden="false">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="AdvQuestBookNewNoteFrameColBtn1">
+						<Offset>
+							<AbsDimension x="20" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentColBtn3" inherits="AdvQuestBookMapNoteColTemp" hidden="false">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="AdvQuestBookNewNoteFrameColBtn2">
+						<Offset>
+							<AbsDimension x="20" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentColBtn4" inherits="AdvQuestBookMapNoteColTemp" hidden="false">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AdvQuestBookNewNoteFrameColBtn1">
+						<Offset>
+							<AbsDimension x="0" y="20" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentColBtn5" inherits="AdvQuestBookMapNoteColTemp" hidden="false">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="AdvQuestBookNewNoteFrameColBtn4">
+						<Offset>
+							<AbsDimension x="20" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentColBtn6" inherits="AdvQuestBookMapNoteColTemp" hidden="false">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="AdvQuestBookNewNoteFrameColBtn5">
+						<Offset>
+							<AbsDimension x="20" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentSaveBtn1" inherits="AdvQuestBookMapNoteBtnTemp1" text="AQB_XML_NOTE9" hidden="true">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-20" y="-15" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						AdvQuestBook_SaveNewNote();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentSaveBtn2" inherits="AdvQuestBookMapNoteBtnTemp1" text="AQB_XML_NOTE9" hidden="true">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-20" y="-15" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						AdvQuestBook_SaveCustomNote();
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnHide>
+				AdvQuestBookNewNoteFrameSaveBtn1:Hide();
+				AdvQuestBookNewNoteFrameSaveBtn2:Hide();
+			</OnHide>
+		</Scripts>
+	</Frame>
+	<Frame name="AdvQuestBookAddNoteBtnFrame" parent="WorldMapFrame" frameStrata="HIGH">
+		<Layers>
+			<Layer>
+				<FontString name="$parentTitle" inherits="Font_FrameTitle" text="AQB_XML_NOTE8">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="50" y="6" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentColAddBtn" inherits="UIPanelButtonTemplate" hidden="false">
+				<Size>
+					<AbsDimension x="12" y="12" />
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="AdvQuestBookAddNoteBtnFrameTitle">
+						<Offset>
+							<AbsDimension x="6" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<NormalTexture file="Interface\AddOns\AdvQuestBook\images\ydot.png" />
+				<PushedTexture file="Interface\AddOns\AdvQuestBook\images\ydot.png" />
+				<HighlightTexture file="Interface\AddOns\AdvQuestBook\images\chl.png" alphaMode="NONE" />
+				<Scripts>
+					<OnMouseDown>
+						this:StartMoving("CENTER");
+					</OnMouseDown>
+					<OnMouseUp>
+						this:StopMovingOrSizing();
+						local x, y = GetCursorPos();
+						this:ClearAllAnchors();
+						this:SetPos(10, 0);
+						this:SetAnchor("CENTER", "RIGHT", "AdvQuestBookAddNoteBtnFrameTitle", 10, 0);
+						AdvQuestBook_NewNoteOnMouseUp(x, y);
+					</OnMouseUp>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "TOPLEFT" and "ANCHOR_LEFT", -6, 0 or "TOPRIGHT" and "ANCHOR_RIGHT", 0, 6);
+						GameTooltip:SetText("|cffFFFF00"..AQB_XML_NOTE1.."|r\n\n"..AQB_XML_NOTE2.."\n"..AQB_XML_NOTE3.."\n"..AQB_XML_NOTE4);
+						AdvQuestBook_Checktooltip();
+						GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				local i;
+				for i = 1, 6 do
+					local btn = getglobal("AdvQuestBookNewNoteFrameColBtn"..i);
+					btn:GetNormalTexture():SetFile(AQB_NoteColorsImg[i]);
+					btn:GetPushedTexture():SetFile(AQB_NoteColorsImg[i]);
+				end
+			</OnLoad>
+		</Scripts>
+	</Frame>
+</Ui>

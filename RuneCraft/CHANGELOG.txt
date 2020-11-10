@@ -1,0 +1,97 @@
+=== 0.62 ===
+	-locales:
+		- Spanish translation updated, thanks to Sathariel (Ridire),
+
+=== 0.61 ===
+	-locales:
+		- Russian translation (thanks to Turbid121),
+
+=== 0.60 ===
+	- new database of runes:
+		- language-based,
+		- clean,
+		- added patch 6.2 runes,
+		- added some alternative makes,
+		- corrected ranks of runes based on http://runesofmagic.gamepedia.com/Rune_Transmutation (1-6 and unranked),
+		- getting runes by id, no name (fix for Runes of Magic translators mistakes - the same rune names),
+	- locales:
+		- Italian translation (thanks to Retcha88),
+		- cleaner locale files,
+		- automatically locale system,
+		- auto-downloading locales from CurseForge,
+	- frame:
+		- hiding unused fields: in scroll list and needed runes,
+		- hiding scrollbar arrows when no elements overflow,
+		- returning to scrollbar top when tab changed,
+		- header text for TCTree from locale,
+		- cleaner buttons,
+		- cleaner center alignment of texts,
+	- code:
+		- updated old getglobal() to _G[],
+		- cleaner code of if statements for display active rune - changed to simple elseif and for loop,
+		- removed unnecessary Scripts from Grade frames (already contained in template),
+
+=== 0.57-2 ===
+	- Bugfix for TW runes database
+		Thanks to e65130
+	- BuildList:
+		- changed size of BuildList
+		- added 20 lines to BuildList
+		- now runes with alternative recipe are showing in BuildList
+		- now runes, which need 3 runes to create, are showing in BuildList
+		- now runes, which need 4 runes to create, are showing correct in BuildList (but rune 3 and 4 probably still are not showing)
+		- added header to BuildList (for now only in English)
+		- corrected buttons to toggle BuildList: now after close BuildList or Main frame, is visible correct button
+	- improved code
+
+=== 0.57 ===
+	- Addon translations added
+         FR from Adinar (UI)
+	- added new runes Tyrant, Assassin, Sage to database
+	- added info alternative recipe to runes possible to create with other technique (and add to their name "alt.")
+	- changed default texts (e.g. if addon crashed)
+	- set "TreeFrame" default to "off"
+	- added buttons to show/hide "TreeFrame"
+	- added mini buttons to AddonManager (on its bar)
+	- updated some translations
+
+== future version ==
+	- added new runes Tyrant, Assassin, Sage to database  	
+		TODO: add translations for CN?, FR, JP?, KR?, RU, TW
+		TODO: translate the (alt.) part
+	- added info alternative recipe
+		TODO: Translate new UI setting in TW, RU, PL, KR, ES
+
+
+=== 0.56 ===
+	- Addon translations added
+		TW from e65130 (UI)
+
+
+=== 0.55 ===
+	- bugfix: Buildlist is filled only when you click on the big picture of the rune.
+	- update some translations
+	- Addon database translations added
+		CN from killerpommes (Database, UI is missing),
+		FR from killerpommes (Database, UI is missing),
+		JP from killerpommes (Database, UI is missing),
+		KR from killerpommes (Database), zeramise (Part UI) and a Online Translator (Part UI),
+		TW from killerpommes (Database, UI is missing),
+
+
+=== 0.50 ===
+
+	From this Version, this addon is based on a Mod from psprofi aka Killerpommes
+	
+    - Current list of all runes and their combinations (Chapter 4 are in the category "Rank 9 Runes")
+    - Display field with information on some runes.
+    - When left-clicking on the Grade of the rune, this is posted in text boxes and chat.
+    - The build list is filled only with the old runes when you click on the big picture of the rune.
+    - Many Bugfixes
+	- Addon translations
+		DE from killerpommes (UI, Database), 
+		EN from Rycerzodie (UI, Database), 
+		PL from Rycerzodie (UI, Database), 
+		RU from tasquer (part UI), Rycerzodie (Database) and a Online Translator (part UI),
+		ES from N1h1l3m (UI) and Rycerzodie (Database)
+		

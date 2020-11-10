@@ -1,0 +1,11 @@
+## Title: CardInfo
+## Author: Corgrind and Zeno
+
+lua/yaCIt.lua
+data/yaCItData.lua
+xml/yaCIt.xml
+xml/yaCItConfig.xml
+lua/yaCardBook.lua
+xml/yaCardBook.xml
+dropdown.lua
+dropdown.xml

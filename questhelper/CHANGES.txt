@@ -1,0 +1,26 @@
+tag a3468257d572cd03c485fc23f8cf3b7e98488e3b v7.4.5
+Author:	McBen <viertelvor12@gmx.net>
+Date:	Sun Mar 29 16:20:57 2020 +0200
+
+v7.4.5
+
+commit d7445a909141841bbd738b0c5fe9c75dc9223f98
+Author: McBen <viertelvor12@gmx.net>
+Date:   Sun Mar 29 16:20:27 2020 +0200
+
+    quest positions update by Omnibrain
+
+commit ef7cd227699e294870a81950714a2c3f4ee0d768
+Author: McBen <viertelvor12@gmx.net>
+Date:   Sun Mar 29 16:20:06 2020 +0200
+
+    Skip quest-goals if RoM doesn't provide any text
+    
+    another workaround for another RoM bug
+
+commit 58f70d72de2900494c98926445714574081fee22
+Author: McBen <viertelvor12@gmx.net>
+Date:   Sun Mar 29 15:28:15 2020 +0200
+
+    CheckQuest workaround (RoM bug)
+

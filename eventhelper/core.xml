@@ -1,0 +1,45 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ UI.xsd">
+	<Frame name="EventHelper_Scripts" hidden="false">
+		<Scripts>
+			<OnLoad>ev.fn.OnLoad(this);</OnLoad>
+			<OnEvent>ev.fn.OnEvent(this, event, arg1, arg2);</OnEvent>
+			<OnUpdate>ev.fn.OnUpdate();</OnUpdate>
+		</Scripts>
+	</Frame>
+	<Frame name="EventHelper_Main" inherits="EventHelper_MainFrame_Template"/>
+	<Frame name="EventHelper_Adv" inherits="EventHelper_AdvFrame_Template" parent="EventHelper_Main"/>
+	<Button name="EventHelper_Minimap" inherits="EventHelper_Minimap_Template" parent="UIParent"/>
+	<Frame name="EventHelper_Msg">
+		<Size>
+			<AbsDimension x="640" y="80"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="-120"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Frame name="$parent_Move" hidden="true" enableMouse="true">
+				<Backdrop bgFile="Interface\AddOns\eventhelper\img\background" tile="true" tilealpha="0.5">
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+				</Backdrop>
+				<Scripts>
+					<OnMouseDown>
+						this:GetParent():StartMoving();
+					</OnMouseDown>
+					<OnMouseUp>
+						this:GetParent():StopMovingOrSizing();
+						ev.fn.SetMessageBoxPos(this:GetParent():GetPos())
+					</OnMouseUp>
+				</Scripts>
+			</Frame>
+			<MessageFrame name="$parentFrame" frameStrata="HIGH" frameLevel="3" displayDuration="4" fadeDuration="2" maxLines="5">
+				<FontString inherits="SystemMsgFont" justifyH="CENTER"/>
+			</MessageFrame>
+		</Frames>
+	</Frame>
+</Ui>

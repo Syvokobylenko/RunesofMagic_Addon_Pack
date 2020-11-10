@@ -1,0 +1,872 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ ../../worldxml/ui.xsd">
+
+	<Frame name="CPClassTemplate" virtual="true">
+		<Size><AbsDimension x="250" y="30"></AbsDimension></Size>
+		<Frames>
+			<Frame name="$parentClassDropDown" inherits="UIDropDownMenuTemplate">
+				<Size><AbsDimension x="140" y="25"/></Size>
+				<Anchors><Anchor point="LEFT" /></Anchors>
+				<Scripts>
+					<OnLoad>UIDropDownMenu_SetWidth(this, 110)
+								UIDropDownMenu_Initialize(this, Charplan.Classes.OnClassDropDownShow)
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<EditBox name="$parentLevelEdit"  inherits="UIPanelEditBoxTemplate" numeric="true" letters="3">
+				<Size><AbsDimension x="50" y="24"></AbsDimension></Size>
+				<Anchors>
+					<Anchor point="LEFT"><Offset><AbsDimension x="152"  y="0"></AbsDimension></Offset></Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnterPressed>Charplan.Classes.OnLevelChanged(this)</OnEnterPressed>
+					<OnTabPressed>Charplan.Classes.OnLevelChanged(this)</OnTabPressed>
+					<OnEditFocusLost>Charplan.Classes.OnLevelChanged(this)</OnEditFocusLost>
+				</Scripts>
+				<TextInsets><AbsInset top="4" right="3" left="10" bottom="0"></AbsInset></TextInsets>
+			</EditBox>
+		</Frames>
+	</Frame>
+
+	<Button name="CPClassTabTemplate" inherits="UIPanelTopTabTemplate" virtual="true">
+		<Scripts>
+			<OnClick>Charplan.Classes.OnTabClicked(this, this:GetID())</OnClick>
+			<OnShow>PanelTemplates_TabResize(this, 12)</OnShow>
+		</Scripts>
+	</Button>
+
+	<Frame name="CPSkillButton" virtual="true" enableMouse="true">
+		<Size><AbsDimension x="127" y="53"/></Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parentIcon" file="Interface\SkillBook\SkillBook_PowerLV_Icon">
+					<Size>
+						<AbsDimension y="16" x="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension y="38" x="1"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="$parentPowerLV" inherits="Font_ItemButton_SmallNumber" text="100" justifyV="MIDDLE" justifyH="CENTER">
+					<Size>
+						<AbsDimension y="19" x="24"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parentIcon"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="$parent_SkillInfo" inherits="Common_NameFrame_Short">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="37" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parent_Name" inherits="Font_ItemButton_Desc" justifyH="LEFT" text="TEMP">
+							<Size>
+								<AbsDimension x="88" y="14"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="4" y="3"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="$parent_LV" inherits="Font_ItemButton_Number" justifyH="RIGHT" text="TEMP">
+							<Size>
+								<AbsDimension x="88" y="14"/>
+							</Size>
+							<Anchors>
+								<Anchor point="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="-4" y="-3"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			<StatusBar name="$parentPointStatusBar" minValue="0" maxValue="1" defaultValue="0.5" virtual="true">
+				<Size>
+					<AbsDimension x="90" y="14"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="38" y="39"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parentBorder" file="Interface\SkillBook\SkillBook_Point_Border">
+							<Size>
+								<AbsDimension x="92" y="16"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="-1" y="-1"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords top="0" left="0" bottom="1" right="0.703125"/>
+						</Texture>
+					</Layer>
+					<Layer level="OVERLAY">
+						<FontString name="$parentNext" inherits="Font_ItemButton_SmallDesc" text="SKILLBOOK_NEXT" justifyV="MIDDLE" justifyH="LEFT">
+							<Size>
+								<AbsDimension x="30" y="14"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension y="0" x="2"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<Shadow>
+								<Color b="0" r="0" g="0"/>
+								<Offset>
+									<AbsDimension y="1" x="1"/>
+								</Offset>
+							</Shadow>
+						</FontString>
+						<FontString name="$parentNextValue" inherits="Font_ItemButton_SmallNumber" text="100000" justifyV="MIDDLE" justifyH="RIGHT">
+							<Size>
+								<AbsDimension y="14" x="60"/>
+							</Size>
+							<Anchors>
+								<Anchor point="RIGHT" relativePoint="RIGHT">
+									<Offset>
+										<AbsDimension y="0" x="-2"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<Shadow>
+								<Color b="0" r="0" g="0"/>
+								<Offset>
+									<AbsDimension y="1" x="1"/>
+								</Offset>
+							</Shadow>
+						</FontString>
+						<FontString name="$parentStatusText" inherits="Font_ItemButton_SmallNumber" text="MAX" justifyV="MIDDLE" justifyH="CENTER" hidden="true">
+							<Size>
+								<AbsDimension y="10" x="88"/>
+							</Size>
+							<Shadow>
+								<Color b="0" r="0" g="0"/>
+								<Offset>
+									<AbsDimension y="1" x="1"/>
+								</Offset>
+							</Shadow>
+						</FontString>
+					</Layer>
+				</Layers>
+				<BarTexture file="Interface\Common\Bar\StatusBar"/>
+				<BarColor r="0.6" g="0.78" b="1.0"/>
+			</StatusBar>
+			<Frame name="$parentSelect">
+				<Layers>
+					<Layer level="OVERLAY">
+						<Texture name="$parentSelect" file="Interface\SkillBook\SkillBook_SpellFrame_Highlight" alphaMode="ADD" hidden="true">
+							<Size>
+								<AbsDimension y="63" x="137"/>
+							</Size>
+							<Anchors>
+								<Anchor point="CENTER">
+									<Offset>
+										<AbsDimension y="0" x="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords top="0" left="0" bottom="0.984375" right="0.53515625"/>
+						</Texture>
+						<Texture name="$parentHighlight" file="Interface\SkillBook\SkillBook_SpellFrame_Highlight" alphaMode="ADD" hidden="true">
+							<Size>
+								<AbsDimension y="63" x="137"/>
+							</Size>
+							<Anchors>
+								<Anchor point="CENTER">
+									<Offset>
+										<AbsDimension y="0" x="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords top="0" left="0" bottom="0.984375" right="0.53515625"/>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Frame>
+			<Button name="$parentItemButton" inherits="ItemButtonTemplate" frameLevel="2" enableMouse="false">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>Charplan.Classes.OnClickButton(this:GetParent(), this:GetParent():GetID(), key)</OnClick>
+					<OnEnter>Charplan.Classes.OnEnterButton(this:GetParent(), this:GetParent():GetID())</OnEnter>
+					<OnLeave>GameTooltip:Hide()</OnLeave>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>this:RegisterForClicks("LeftButton", "RightButton")</OnLoad>
+			<OnEnter>Charplan.Classes.OnEnterButton(this, this:GetID())</OnEnter>
+			<OnLeave>
+				getglobal( this:GetName() .. "SelectHighlight" ):Hide()
+				GameTooltip:Hide()
+			</OnLeave>
+			<OnClick>Charplan.Classes.OnClickButton(this, this:GetID(), key)</OnClick>
+		</Scripts>
+	</Frame>
+
+	<Frame name="CPClassDialog" parent="CPFrame" inherits="UICommonFrameTemplate" frameStrata="DIALOG" hidden="true">
+		<Size>
+			<AbsDimension x="489" y="545"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer>
+				<FontString name="$parentClassLabel" inherits="GameFontHighlight">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="110" y="30"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentLevelLabel" inherits="GameFontHighlight">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="255" y="30"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentClassMainLabel" inherits="GameFontHighlight">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="10" y="50"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentClassSubLabel" inherits="GameFontHighlight">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="10" y="81"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+
+		<Frames>
+			<Frame name="$parentClassMain" inherits="CPClassTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset><AbsDimension x="100" y="43"></AbsDimension></Offset></Anchor>
+				</Anchors>
+			</Frame>
+			<Frame name="$parentClassSub" inherits="CPClassTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset><AbsDimension x="100" y="73"></AbsDimension></Offset></Anchor>
+				</Anchors>
+			</Frame>
+
+			<CheckButton name="$parentHideNotAvailable" inherits="CPSearchCheckbox">
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="280" y="110"></AbsDimension></Offset></Anchor></Anchors>
+				<Scripts>
+					<OnClick>Charplan.Classes.OnSkillChanged()</OnClick>
+				</Scripts>
+			</CheckButton>
+
+			<CheckButton name="$parentHideNotSkillable" inherits="CPSearchCheckbox">
+				<Anchors><Anchor point="TOPLEFT" relativeTo="$parentHideNotAvailable" relativePoint="BOTTOMLEFT">
+					<Offset><AbsDimension x="0" y="5"></AbsDimension></Offset></Anchor></Anchors>
+				<Scripts>
+					<OnClick>Charplan.Classes.OnSkillChanged()</OnClick>
+				</Scripts>
+			</CheckButton>
+
+			<EditBox name="$parentSkillPoints"  inherits="UIPanelEditBoxTemplate" numeric="true" letters="10">
+				<Size><AbsDimension x="100" y="24"></AbsDimension></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset><AbsDimension x="150"  y="110"></AbsDimension></Offset></Anchor>
+				</Anchors>
+				<TextInsets><AbsInset top="4" right="3" left="10" bottom="0"></AbsInset></TextInsets>
+			</EditBox>
+
+			<Frame name="$parentSkills">
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="156"></AbsDimension></Offset></Anchor>
+					<Anchor point="BOTTOMRIGHT"><Offset><AbsDimension x="-10" y="-13"></AbsDimension></Offset></Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\Tooltip-border" bgFile="Interface\Tooltips\Tooltip-background">
+					<BackgroundInsets>
+						<AbsInset top="6" left="6" bottom="6" right="6"/>
+					</BackgroundInsets>
+					<EdgeSize>
+						<AbsValue val="16"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+				</Backdrop>
+
+				<Frames>
+					<Button name="$parentTab1" inherits="CPClassTabTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="16" y="-23"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parentTab2" inherits="CPClassTabTemplate">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parentTab1" relativePoint="RIGHT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parentTab3" inherits="CPClassTabTemplate">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parentTab2" relativePoint="RIGHT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parentTab4" inherits="CPClassTabTemplate">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parentTab3" relativePoint="RIGHT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parentTab5" inherits="CPClassTabTemplate">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parentTab4" relativePoint="RIGHT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+
+					<Frame name="$parentSkillButton_1" inherits="CPSkillButton" id="1">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="20" y="20"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="$parentSkillButton_2" inherits="CPSkillButton" id="2">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentSkillButton_1" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="10"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="$parentSkillButton_3" inherits="CPSkillButton" id="3">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentSkillButton_2" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="10"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="$parentSkillButton_4" inherits="CPSkillButton" id="4">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentSkillButton_3" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="10"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="$parentSkillButton_5" inherits="CPSkillButton" id="5">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentSkillButton_4" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="10"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="$parentSkillButton_6" inherits="CPSkillButton" id="6">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentSkillButton_1" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="25" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="$parentSkillButton_7" inherits="CPSkillButton" id="7">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentSkillButton_2" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="25" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="$parentSkillButton_8" inherits="CPSkillButton" id="8">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentSkillButton_3" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="25" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="$parentSkillButton_9" inherits="CPSkillButton" id="9">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentSkillButton_4" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="25" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="$parentSkillButton_10" inherits="CPSkillButton" id="10">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentSkillButton_5" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="25" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="$parentSkillButton_11" inherits="CPSkillButton" id="11">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentSkillButton_6" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="25" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="$parentSkillButton_12" inherits="CPSkillButton" id="12">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentSkillButton_7" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="25" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="$parentSkillButton_13" inherits="CPSkillButton" id="13">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentSkillButton_8" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="25" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="$parentSkillButton_14" inherits="CPSkillButton" id="14">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentSkillButton_9" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="25" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="$parentSkillButton_15" inherits="CPSkillButton" id="15">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentSkillButton_10" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="25" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+
+			<Frame name="$parentPageBar">
+				<Size>
+					<AbsDimension x="325" y="29"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+							<AbsDimension x="0" y="-10"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<Texture name="$parentLeftBar" file="Interface\Buttons\PanelFloatBar">
+							<Size>
+								<AbsDimension x="17" y="29"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT"/>
+							</Anchors>
+							<TexCoords left="0" right="0.2656" top="0" bottom="0.9062"/>
+						</Texture>
+						<Texture name="$parentRightBar" file="Interface\Buttons\PanelFloatBar">
+							<Size>
+								<AbsDimension x="17" y="29"/>
+							</Size>
+							<Anchors>
+								<Anchor point="RIGHT"/>
+							</Anchors>
+							<TexCoords left="0.5156" right="0.7656" top="0" bottom="0.9062"/>
+						</Texture>
+						<Texture file="Interface\Buttons\PanelFloatBar">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parentLeftBar"/>
+								<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMLEFT" relativeTo="$parentRightBar"/>
+							</Anchors>
+							<TexCoords left="0.25" right="0.5" top="0" bottom="0.9062"/>
+						</Texture>
+						<FontString name="$parentPage" inherits="Font_ItemButton_Desc" justifyH="CENTER" justifyV="MIDDLE">
+							<Anchors>
+								<Anchor point="CENTER"/>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Button name="$parentLeftPage" inherits="SkillBookLeftPageButton" text="C_LAST_PAGE">
+						<Anchors>
+							<Anchor point="LEFT">
+								<Offset>
+									<AbsDimension x="10" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>Charplan.Classes.NextPage(-1)</OnClick>
+						</Scripts>
+					</Button>
+					<Button name="$parentRightPage" inherits="SkillBookRightPageButton" text="C_NEXT_PAGE">
+						<Anchors>
+							<Anchor point="RIGHT">
+								<Offset>
+									<AbsDimension x="-10" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>Charplan.Classes.NextPage(1)</OnClick>
+						</Scripts>
+					</Button>
+				</Frames>
+			</Frame>
+				</Frames>
+			</Frame>
+
+		</Frames>
+		<Scripts>
+			<OnShow>Charplan.Classes.OnShow( this )</OnShow>
+			<OnHide>Charplan.Classes.OnHide()</OnHide>
+		</Scripts>
+	</Frame>
+
+	<Frame name="CPSkillLevelUpFrame" frameStrata="HIGH" parent="CPClassDialog" enableKeyboard="true" hidden="true">
+		<Size>
+			<AbsDimension x="250" y="170"/>
+		</Size>
+		<Backdrop bgFile="Interface\tooltips\tooltip-background" edgeFile="Interface\DialogFrame\DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="8" right="9" top="9" bottom="8"/>
+			</BackgroundInsets>
+			<TileSize><AbsValue val="32"/></TileSize>
+			<EdgeSize><AbsValue val="32"/></EdgeSize>
+		</Backdrop>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="$parentValueText" inherits="GameFontHighlight" justifyH="CENTER" justifyV="MIDDLE">
+					<Size>
+						<AbsDimension x="50" y="22"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="50" y="37"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentSkillName" inherits="GameFontHighlight" justifyH="LEFT" justifyV="MIDDLE">
+					<Size>
+						<AbsDimension x="150" y="22"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="20" y="15"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="14"/>
+					</FontHeight>
+					<Color r="1.0" g="0.96" b="0.4"/>
+				</FontString>
+				<FontString name="$parentRank" inherits="GameFontHighlight" justifyH="RIGHT" justifyV="MIDDLE">
+					<Size>
+						<AbsDimension x="100" y="22"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="-20" y="15"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="14"/>
+					</FontHeight>
+					<Color r="0.99" g="0.8" b="0.23"/>
+				</FontString>
+				<FontString name="$parentCost" inherits="GameFontHighlight" justifyH="RIGHT" justifyV="MIDDLE">
+					<Size>
+						<AbsDimension x="100" y="22"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="-20" y="59"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="14"/>
+					</FontHeight>
+				</FontString>
+			</Layer>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface\DialogFrame\DialogBox-Input-Border">
+					<Size>
+						<AbsDimension x="8" y="24"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="20" y="37"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0" right="0.25" top="0" bottom="1.0"/>
+				</Texture>
+				<Texture file="Interface\DialogFrame\DialogBox-Input-Border">
+					<Size>
+						<AbsDimension x="8" y="24"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="80" y="37"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.75" right="1.0" top="0" bottom="1.0"/>
+				</Texture>
+				<Texture file="Interface\DialogFrame\DialogBox-Input-Border">
+					<Size>
+						<AbsDimension x="50" y="22"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="50" y="37"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.25" right="0.75" top="0" bottom="1.0"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentLeftButton" inherits="UIPanelLeftPageButtonTemplate">
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="$parentValueText" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="-16" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>Charplan.Classes.RaiseSkill_Modify(-1)</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentRightButton" inherits="UIPanelRightPageButtonTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentValueText" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="16" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>Charplan.Classes.RaiseSkill_Modify(1)</OnClick>
+				</Scripts>
+			</Button>
+			<Slider name="$parentLevelBar" orientation="HORIZONTAL">
+				<Size>
+					<AbsDimension x="200" y="15"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset><AbsDimension y="100" x="0"></AbsDimension></Offset></Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<Texture name="$parentNormalLeft" file="Interface\ChatFrame\ChatEditBox-Border">
+							<Size>
+								<AbsDimension x="16" y="15"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT"/>
+							</Anchors>
+							<TexCoords left="0" right="0.25" top="0" bottom="0.6875"/>
+						</Texture>
+						<Texture name="$parentNormalRight" file="Interface\ChatFrame\ChatEditBox-Border">
+							<Size>
+								<AbsDimension x="16" y="15"/>
+							</Size>
+							<Anchors>
+								<Anchor point="RIGHT"/>
+							</Anchors>
+							<TexCoords left="0.75" right="1" top="0" bottom="0.6875"/>
+						</Texture>
+						<Texture name="$parentNormalMiddle" file="Interface\ChatFrame\ChatEditBox-Border">
+							<Size>
+								<AbsDimension x="1" y="15"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parentNormalLeft"/>
+								<Anchor point="RIGHT" relativePoint="LEFT" relativeTo="$parentNormalRight"/>
+							</Anchors>
+							<TexCoords left="0.25" right="0.75" top="0" bottom="0.6875"/>
+						</Texture>
+					</Layer>
+					<Layer level="ARTWORK">
+						<FontString name="$parentSpend" inherits="GameFontHighlight">
+							<Anchors>
+								<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="0" y="-5"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="$parentRest" inherits="GameFontHighlight">
+							<Anchors>
+								<Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT">
+									<Offset>
+										<AbsDimension x="0" y="-5"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="$parentLow" inherits="GameFontHighlight" text="OPTUI_COM_LOW">
+							<Anchors>
+								<Anchor point="LEFT">
+									<Offset>
+										<AbsDimension x="5" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="$parentHigh" inherits="GameFontHighlight" text="OPTUI_COM_HIGH">
+							<Anchors>
+								<Anchor point="RIGHT">
+									<Offset>
+										<AbsDimension x="-5" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnValueChanged>Charplan.Classes.RaiseSkill_OnSlider(this, arg1)</OnValueChanged>
+					<OnMouseWheel>Charplan.Classes.RaiseSkill_Modify(delta*0.1)</OnMouseWheel>
+				</Scripts>
+				<ThumbTexture name="$parentThumb" file="Interface\ChatFrame\ChatFrame-ScrollBar-Knob">
+					<Size>
+						<AbsDimension x="16" y="16"/>
+					</Size>
+				</ThumbTexture>
+			</Slider>
+			<Button name="$parentOkayButton" inherits="UIPanelButtonTemplate" text="C_SURE">
+				<Size>
+					<AbsDimension x="64" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+							<AbsDimension x="-45" y="-14"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>Charplan.Classes.RaiseSkill_Okay()</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentCancelButton" inherits="UIPanelButtonTemplate" text="C_CANCEL">
+				<Size>
+					<AbsDimension x="64" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+							<AbsDimension x="45" y="-14"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						CPSkillLevelUpFrame:Hide()
+						GameTooltip_SkillLevelUp:Hide()
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+	</Frame>
+
+</Ui>

@@ -1,0 +1,159 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ .. \ .. \WorldXML\UI.xsd">
+	<Script file="src/MainFrame.lua"/>
+	<Frame name="EventHelper_MainFrame_Template" virtual="true" inherits="UICommonFrameTemplate" enableMouse="true" hidden="true">
+		<Anchors>
+			<Anchor point="CENTER"/>
+		</Anchors>
+		<Size>
+			<AbsDimension x="320" y="500"/>
+		</Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parent_name" inherits="GameTitleFont" >
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="0" y="8"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent_info" inherits="GameFontNormal" >
+					<Anchors>
+						<Anchor point="BOTTOM" relativePoint="BOTTOM">
+							<Offset>
+								<AbsDimension x="0" y="-4"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<EditBox name="$parent_Search" inherits="UIPanelEditBoxTemplate" >
+				<Size>
+					<AbsDimension x="200" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="15" y="35" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnTextChanged>
+						if type(ev.ui.mainframe)=="table" then
+							ev.ui.mainframe.update = GetTime()
+						end
+					</OnTextChanged>
+				</Scripts>
+			</EditBox>
+			<Button name="$parent_MoreButton" inherits="UIPanelButtonTemplate" text="MoreButton">
+				<Size>
+					<AbsDimension x="90" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-10" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						ToggleUIFrame(EventHelper_Adv)
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Frame name="$parent_list" enableMouse="true">
+				<Size>
+					<AbsDimension x="270" y="425"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="15" y="60"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\Tooltip-border" bgFile="Interface\SocialFrame\SocialFrame_Contextborder_bg">
+					<EdgeSize>
+						<AbsValue val="10"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="5"/>
+					</TileSize>
+				</Backdrop>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parent_Highlight" file="Interface\Login\Common\ServerlistButton-Highlight" hidden="true"/>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Button name="$parent_Button0"  inherits="EventHelper_ListHeadButton_Template" id="0" />
+					<Button name="$parent_Button1" inherits="EventHelper_ListButton_Template" id="1" />
+					<Button name="$parent_Button2" inherits="EventHelper_ListButton_Template" id="2" />
+					<Button name="$parent_Button3" inherits="EventHelper_ListButton_Template" id="3" />
+					<Button name="$parent_Button4" inherits="EventHelper_ListButton_Template" id="4" />
+					<Button name="$parent_Button5" inherits="EventHelper_ListButton_Template" id="5" />
+					<Button name="$parent_Button6" inherits="EventHelper_ListButton_Template" id="6" />
+					<Button name="$parent_Button7" inherits="EventHelper_ListButton_Template" id="7" />
+					<Button name="$parent_Button8" inherits="EventHelper_ListButton_Template" id="8" />
+					<Button name="$parent_Button9" inherits="EventHelper_ListButton_Template" id="9" />
+					<Button name="$parent_Button10" inherits="EventHelper_ListButton_Template" id="10"/>
+					<Button name="$parent_Button11" inherits="EventHelper_ListButton_Template" id="11"/>
+					<Button name="$parent_Button12" inherits="EventHelper_ListButton_Template" id="12"/>
+					<Button name="$parent_Button13" inherits="EventHelper_ListButton_Template" id="13"/>
+					<Button name="$parent_Button14" inherits="EventHelper_ListButton_Template" id="14"/>
+					<Button name="$parent_Button15" inherits="EventHelper_ListButton_Template" id="15"/>
+					<Button name="$parent_Button16" inherits="EventHelper_ListButton_Template" id="16"/>
+					<Button name="$parent_Button17" inherits="EventHelper_ListButton_Template" id="17"/>
+					<Button name="$parent_Button18" inherits="EventHelper_ListButton_Template" id="18"/>
+					<Button name="$parent_Button19" inherits="EventHelper_ListButton_Template" id="19"/>
+					<Button name="$parent_Button20" inherits="EventHelper_ListButton_Template" id="20"/>
+				</Frames>
+				<Scripts>
+					<OnLoad>
+						for n = 0,20 do
+							_G[this:GetName().."_Button" .. n]:ClearAllAnchors()
+							_G[this:GetName().."_Button" .. n]:SetAnchor("TOPLEFT", "TOPLEFT", this:GetName(), 5, n*20)
+							_G[this:GetName().."_Button" .. n]:SetAnchor("BOTTOMRIGHT", "TOPRIGHT", this:GetName(), -5, n*20+20)
+						end
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Slider name="$parent_ScrollBar" inherits="EventHelper_ScrollbarTemplate">
+				<Size>
+					<AbsDimension x="10" y="375"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+						<Offset><AbsDimension x="290" y="85"/></Offset>
+					</Anchor>
+				</Anchors>
+			</Slider>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				UIPanelBackdropFrame_SetTexture( this, "Interface/Common/PanelCommonFrame", 256, 256 );
+				ev.ui.mainframe.OnLoad(this)
+			</OnLoad>
+			<OnEvent>
+				ev.ui.mainframe.OnEvent(this, event)
+			</OnEvent>
+			<OnShow>
+				ev.ui.mainframe.OnShow()
+			</OnShow>
+			<OnUpdate>
+				ev.ui.mainframe.OnUpdate()
+			</OnUpdate>
+			<OnMouseDown>
+				this:StartMoving()
+			</OnMouseDown>
+			<OnMouseUp>
+				this:StopMovingOrSizing()
+			</OnMouseUp>
+		</Scripts>
+	</Frame>
+</Ui>

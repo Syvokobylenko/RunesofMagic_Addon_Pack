@@ -1,0 +1,639 @@
+    <Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+
+
+    <FontString name="StreamlineLabelTemplate" inherits="GameTitleFont" justifyH="LEFT" virtual="true">
+        <FontHeight>
+            <AbsValue val="14" />
+        </FontHeight>
+        <Anchors>
+            <Anchor point="LEFT" relativePoint="RIGHT" />
+        </Anchors>
+    </FontString>
+    
+    <FontString name="StreamlineCategoryLabelTemplate" inherits="GameTitleFont" justifyH="LEFT" virtual="true">
+        <FontHeight>
+            <AbsValue val="15"/>
+        </FontHeight>
+        <Color r="0.2" g="0.5" b="0.8" />
+        <Anchors>
+            <Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+                <Offset>
+                    <AbsDimension x="5" y="0"/>
+                </Offset>
+            </Anchor>
+        </Anchors>
+    </FontString>
+    
+    <Frame name="StreamlineCategoryTemplate" virtual="true">
+        <Size>
+            <AbsDimension x="400" y="25" />
+        </Size>            
+        <Layers>
+            <Layer>
+                <FontString name="$parentLabel" inherits="StreamlineCategoryLabelTemplate" />
+            </Layer>
+        </Layers>
+    </Frame>
+
+    <Button name="StreamlineTabTemplate" inherits="UIPanelButtonTemplate" virtual="true" >
+        <Size>
+            <AbsDimension x="80" y="30"/>
+        </Size>
+        <Scripts>
+            <OnClick>
+                LibStub("Sol").config.ChangeTab(Streamline.Strings.AddonName, this)
+            </OnClick>
+        </Scripts>
+    </Button>
+    
+    <CheckButton name="StreamlineCheckLabelTemplate" inherits="UIPanelCheckButtonTemplate" virtual="true">
+        <Layers>
+            <Layer>
+                <FontString name="$parentLabel" inherits="StreamlineLabelTemplate" />
+            </Layer>
+        </Layers>
+    </CheckButton>
+    
+    <Frame name="StreamlinePageTemplate" virtual="true">
+        <Anchors>
+            <Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT"></Anchor>
+        </Anchors>
+
+        <Frames>
+            <Frame name="$parentCategory" inherits="StreamlineCategoryTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="15" y="15"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Frame>
+        </Frames>
+    </Frame>
+    
+    
+    
+    <!-- Patches of the following was copied from the HudBars addon. Thanks go to Anahel -->
+    <Frame name="StreamlineConfigFrame" parent="UIParent" enableMouse="true" hidden="true">
+        <Size>
+            <AbsDimension x="475" y="242"/>
+        </Size>
+        <Anchors>
+            <Anchor point="CENTER"/>
+        </Anchors>
+        <Backdrop edgeFile="Interface\Tooltips\Tooltip-border" bgFile="Interface\Tooltips\Tooltip-Background">
+            <BackgroundInsets>
+                <AbsInset top="4" left="4" bottom="4" right="4"/>
+            </BackgroundInsets>
+            <EdgeSize>
+                <AbsValue val="16"/>
+            </EdgeSize>
+            <TileSize>
+                <AbsValue val="16"/>
+            </TileSize>
+        </Backdrop>
+
+        <Frames>
+            <!-- Tabs -->
+            <Frame name="$parentTabsFrame">
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="2"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Frames>
+                
+                    <Button name="$parentGeneralTab" inherits="StreamlineTabTemplate">
+                        <Anchors>
+                            <Anchor point="TOPRIGHT" />
+                        </Anchors>
+                    </Button>
+                    
+                    <Button name="$parentMailTab" inherits="StreamlineTabTemplate">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="$parentGeneralTab" relativePoint="BOTTOMLEFT"/>
+                        </Anchors>
+                    </Button>
+                    
+                    <Button name="$parentStoresTab" inherits="StreamlineTabTemplate">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="$parentMailTab" relativePoint="BOTTOMLEFT"/>
+                        </Anchors>
+                    </Button>
+                    
+                    <Button name="$parentQuestsTab" inherits="StreamlineTabTemplate">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="$parentStoresTab" relativePoint="BOTTOMLEFT"/>
+                        </Anchors>
+                    </Button>
+                    
+                    <Button name="$parentSkillsTab" inherits="StreamlineTabTemplate">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="$parentQuestsTab" relativePoint="BOTTOMLEFT"/>
+                        </Anchors>
+                    </Button>
+                    
+                    <Button name="$parentHouseTab" inherits="StreamlineTabTemplate">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="$parentSkillsTab" relativePoint="BOTTOMLEFT"/>
+                        </Anchors>
+                    </Button>
+                    
+                    <Button name="$parentPaidItemsTab" inherits="StreamlineTabTemplate">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="$parentHouseTab" relativePoint="BOTTOMLEFT"/>
+                        </Anchors>
+                    </Button>
+                    
+                    <Button name="$parentBagsTab" inherits="StreamlineTabTemplate">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="$parentPaidItemsTab" relativePoint="BOTTOMLEFT"/>
+                        </Anchors>
+                    </Button>
+
+                </Frames>
+            </Frame>
+            <!-- End Tabs Frame -->
+            
+            <Button name="$parentCloseButton" inherits="UIPanelButtonTemplate">
+                <Size>
+                    <AbsDimension x="80" y="30"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="0" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        HideUIPanel(StreamlineConfigFrame)
+                    </OnClick>
+                </Scripts>
+            </Button>
+            
+            <Button name="$parentSaveButton" inherits="UIPanelButtonTemplate">
+                <Size>
+                    <AbsDimension x="80" y="30"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="RIGHT" relativeTo="$parentCloseButton" relativePoint="LEFT" />
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        Streamline.Save()
+                    </OnClick>
+                </Scripts>
+            </Button>
+            
+            <!-- Pages -->
+            <Frame name="$parentPagesFrame">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT" />
+                </Anchors>
+                <Frames>
+                    <Frame name="$parentMailPage" inherits="StreamlinePageTemplate" hidden="true">
+                        <Frames>
+                            <CheckButton name="StreamlineConfig_ToggleTakeMail" inherits="StreamlineCheckLabelTemplate">
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="$parentCategory" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="15"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+                            
+                            <CheckButton name="StreamlineConfig_ToggleDeleteMail" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="StreamlineConfig_ToggleTakeMail" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="25"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+
+                            <CheckButton name="StreamlineConfig_ToggleOpenMail" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="StreamlineConfig_ToggleDeleteMail" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="25"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+                        </Frames>
+                    </Frame>
+                    <!-- End Mail Category -->
+                    
+                    
+                    <Frame name="$parentStoresPage" inherits="StreamlinePageTemplate" hidden="true">
+                        <Frames>
+                            <CheckButton name="StreamlineConfig_ToggleOpenStores" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="$parentCategory" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="15"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+
+                            <CheckButton name="StreamlineConfig_ToggleRepair" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="StreamlineConfig_ToggleOpenStores" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="25"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+                            
+                            <CheckButton name="StreamlineConfig_ToggleDontCloseRecipeWindow" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="StreamlineConfig_ToggleRepair" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="25"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+                        </Frames>
+                    </Frame>
+                    <!-- End Stores Category -->
+                    
+                    <Frame name="$parentQuestsPage" inherits="StreamlinePageTemplate" hidden="true">
+                        <Frames>
+                            <CheckButton name="StreamlineConfig_ToggleAcceptQuests" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="$parentCategory" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="15"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+
+                            <CheckButton name="StreamlineConfig_ToggleDontAcceptDailies" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="StreamlineConfig_ToggleAcceptQuests" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="25" y="25"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+                            
+                            <CheckButton name="StreamlineConfig_ToggleCompleteQuests" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="StreamlineConfig_ToggleDontAcceptDailies" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="-25" y="25"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+
+                            <CheckButton name="StreamlineConfig_ToggleReDisplayQuestDialog" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="StreamlineConfig_ToggleCompleteQuests" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="25"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+                            
+                            <CheckButton name="StreamlineConfig_ToggleAddMinQuestListButton" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="StreamlineConfig_ToggleReDisplayQuestDialog" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="25"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+                            
+                            <CheckButton name="StreamlineConfig_ToggleDontResetQuestBook" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="StreamlineConfig_ToggleAddMinQuestListButton" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="25"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+                        </Frames>
+                    </Frame>
+                    <!-- End Quests Category -->
+                    
+                    
+                    <Frame name="$parentSkillsPage" inherits="StreamlinePageTemplate" hidden="true">
+                        <Frames>
+                            <CheckButton name="StreamlineConfig_ToggleShowMaxSkillButton" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="$parentCategory" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="15"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+                            
+                            <CheckButton name="StreamlineConfig_ToggleShowCorrectCraftDialog" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="StreamlineConfig_ToggleShowMaxSkillButton" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="25"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+                            
+                            <CheckButton name="StreamlineConfig_ToggleShowCraftLevelInDialog" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="StreamlineConfig_ToggleShowCorrectCraftDialog" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="25"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+                            
+                            <CheckButton name="StreamlineConfig_ToggleHideHotkeys" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="StreamlineConfig_ToggleShowCraftLevelInDialog" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="25"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+                        </Frames>
+                    </Frame>
+                    <!-- End Skills Category -->
+                    
+                    
+                    <Frame name="$parentHousePage" inherits="StreamlinePageTemplate" hidden="true">
+                        <Frames>
+                            <CheckButton name="StreamlineConfig_ToggleChangeClass" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="$parentCategory" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="15"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+
+                            <CheckButton name="StreamlineConfig_ToggleLeaveHouseAfterChange" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="StreamlineConfig_ToggleChangeClass" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="25" y="25"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+                            
+                            <CheckButton name="StreamlineConfig_ToggleCloseBank" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="StreamlineConfig_ToggleLeaveHouseAfterChange" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="-25" y="25"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+                            
+                            <CheckButton name="StreamlineConfig_ToggleOpenBank" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="StreamlineConfig_ToggleCloseBank" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="25"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                                <Scripts>
+                                    <OnClick>
+                                        Streamline.CheckDropdownVisible("OpenBank")
+                                    </OnClick>
+                                </Scripts>
+                            </CheckButton>
+                            
+                            <Frame name="StreamlineConfig_DropdownOpenBankKey" inherits="UIDropDownMenuTemplate">
+                                <Anchors>
+                                    <Anchor point="LEFT" relativeTo="StreamlineConfig_ToggleOpenBank" relativePoint="RIGHT">
+                                        <Offset>
+                                            <AbsDimension x="290" y="0"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </Frame>
+                            
+                            <CheckButton name="StreamlineConfig_ToggleEnterHouse" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="StreamlineConfig_ToggleOpenBank" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="25"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                                <Scripts>
+                                    <OnClick>
+                                        Streamline.CheckDropdownVisible("EnterHouse")
+                                    </OnClick>
+                                </Scripts>
+                            </CheckButton>
+                            
+                            <Frame name="StreamlineConfig_DropdownEnterHouseKey" inherits="UIDropDownMenuTemplate">
+                                <Anchors>
+                                    <Anchor point="LEFT" relativeTo="StreamlineConfig_ToggleEnterHouse" relativePoint="RIGHT">
+                                        <Offset>
+                                            <AbsDimension x="290" y="0"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </Frame>
+                            
+                            <CheckButton name="StreamlineConfig_ToggleChangeClassAtMaid" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="StreamlineConfig_ToggleEnterHouse" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="25"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                                <Scripts>
+                                    <OnClick>
+                                        Streamline.CheckDropdownVisible("ChangeClassAtMaid")
+                                    </OnClick>
+                                </Scripts>
+                            </CheckButton>
+                            
+                            <Frame name="StreamlineConfig_DropdownChangeClassAtMaidKey" inherits="UIDropDownMenuTemplate">
+                                <Anchors>
+                                    <Anchor point="LEFT" relativeTo="StreamlineConfig_ToggleChangeClassAtMaid" relativePoint="RIGHT">
+                                        <Offset>
+                                            <AbsDimension x="290" y="0"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </Frame>
+                        </Frames>
+                    </Frame>
+                    <!-- End House Category -->
+                            
+
+                    <Frame name="$parentPaidItemsPage" inherits="StreamlinePageTemplate" hidden="true">
+                        <Frames>
+                            <CheckButton name="StreamlineConfig_ToggleAcceptTeleport" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="$parentCategory" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="15"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+                            
+                            <CheckButton name="StreamlineConfig_ToggleAccept15MinHorse" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="StreamlineConfig_ToggleAcceptTeleport" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="25"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+                            
+                            <CheckButton name="StreamlineConfig_ToggleAccept2HourHorse" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="StreamlineConfig_ToggleAccept15MinHorse" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="25"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+                        </Frames>
+                    </Frame>
+                    <!-- End Paid Items Category -->
+                    
+                    
+                    <Frame name="$parentGeneralPage" inherits="StreamlinePageTemplate" hidden="true">
+                        <Frames>
+                            <CheckButton name="StreamlineConfig_ToggleStopMovingOnClick" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="$parentCategory" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="15"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+                            
+                            <CheckButton name="StreamlineConfig_ToggleAddExtraMinimapZooms" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="StreamlineConfig_ToggleStopMovingOnClick" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="25"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+                            
+                            <CheckButton name="StreamlineConfig_ToggleAllowMultipleOpenFrames" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="StreamlineConfig_ToggleAddExtraMinimapZooms" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="25"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+                            
+                            
+                            <Frame name="StreamlineConfig_DropdownLanguage" inherits="UIDropDownMenuTemplate">
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="StreamlineConfig_ToggleAllowMultipleOpenFrames" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="50"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </Frame>
+                        </Frames>
+                    </Frame>
+                    <!-- End General Category -->
+                    
+                    <Frame name="$parentBagsPage" inherits="StreamlinePageTemplate" hidden="true">
+                        <Frames>
+                            <CheckButton name="StreamlineConfig_ToggleClickSendAttachment" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="$parentCategory" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="15"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>                            
+                            
+                            <CheckButton name="StreamlineConfig_ToggleSwitchBagsOnClick" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="StreamlineConfig_ToggleClickSendAttachment" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="25"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+                            
+                            <CheckButton name="StreamlineConfig_ToggleContributeToGuild" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="StreamlineConfig_ToggleSwitchBagsOnClick" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="25"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+                            
+                            <CheckButton name="StreamlineConfig_ToggleAuctionOnClick" inherits="StreamlineCheckLabelTemplate" >
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="StreamlineConfig_ToggleContributeToGuild" relativePoint="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="25"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </CheckButton>
+                        </Frames>
+                    </Frame>
+                    <!-- End Bags Category -->
+                    
+                </Frames>
+            </Frame>
+            <!-- End Pages Frame -->
+
+        </Frames>
+
+        <Scripts>
+            <OnShow>
+                Streamline.LoadConfig()
+            </OnShow>
+            <OnMouseDown>
+                this:StartMoving("CENTER")
+            </OnMouseDown>
+            <OnMouseUp>
+                this:StopMovingOrSizing()
+            </OnMouseUp>
+        </Scripts>
+    </Frame>
+    <!-- End Streamline Config Frame -->
+</Ui>

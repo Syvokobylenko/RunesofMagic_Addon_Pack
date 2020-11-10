@@ -1,0 +1,6 @@
+## Title: Dailies Auto Swapper
+## Version: 1.5
+## Notes: Automatically swaps classes when talking to housemaid and turned on (default is off)
+## Author: ZTrek
+
+DailiesAutoSwapper.xml

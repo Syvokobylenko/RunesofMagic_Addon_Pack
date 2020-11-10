@@ -1,0 +1,30 @@
+== Description ==
+
+CleanChat is a tool to simplify customizing the chat and to get rid of annoying messages.
+
+=== Messages filtering ===
+Messages filtering module allows to use predefined text grouped with categories and define own phrases to filter.
+
+==== Predefined filters ====
+Predefined filters are great way to get rid of most system and say messages, like Festival Events, Event Instances and anything you may find annoying.
+
+Second advantage is that when text is changed (for example, you use Polish language client and RoM's translator corrected a typo) you don't have to do anything! Predefined filters are obtained in live time from your game client!
+
+Predefined filters database is still completing. If you found a set of annoying messages, please comment on project or [[https://rom.curseforge.com/home/private-messages/|write a PM]]. Thanks a lot!
+
+==== Custom filters ====
+You have possibility to add custom filtering rules, like "You have opened auction interface" or gold sellers with certain keyword.
+How? You can replace any part of phrase with * (asterisk) symbol. Like "You have * interface", "* auction interface" or "* opened *". It can't be easier!
+
+For every custom filtering rule you have to choose one of available channels, like Yell, Say, System or currently joined Custom Channel.
+
+
+
+
+
+== Changelog ==
+
+=== Version 1.0 ===
+This is the initial release of the addon.
+It should works as excepted.
+Predefined Filters database is not completed yet.

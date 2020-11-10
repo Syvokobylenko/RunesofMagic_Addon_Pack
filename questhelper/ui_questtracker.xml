@@ -1,0 +1,110 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ ../../worldxml/ui.xsd">
+	<!-- QuestTracker -->
+	<Frame name="QH_QuestTracker" hidden="false" parent="UIParent" frameStrata="BACKGROUND">
+		<Size>
+			<AbsDimension x="175" y="200"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Button name="QH_QuestTracker_HeadMini" inherits="UIPanelAnchorFrameTemplate" frameLevel="2" hidden="true">
+				<Size>
+					<AbsDimension x="16" y="16"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-8" y="-9"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnter>QH.Tracker.ShowHeadToolTip(this)</OnEnter>
+					<OnLeave>GameTooltip:Hide()</OnLeave>
+					<OnClick>QH.Tracker.OnHeaderClick(this)</OnClick>
+					<OnMouseDown>QH.Tracker.OnHeaderMouseDown(this,key)</OnMouseDown>
+					<OnMouseUp>QH.Tracker.OnHeaderMouseUp(this,key)</OnMouseUp>
+				</Scripts>
+				<NormalTexture file="Interface\WorldMap\WorldMap-TitlebarSwitch-Normal"/>
+				<PushedTexture file="Interface\WorldMap\WorldMap-TitlebarSwitch-Depress"/>
+			</Button>
+			<Frame name="QH_QuestTracker_Head" enableMouse="true">
+				<Size>
+					<AbsDimension x="100" y="15"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-5" y="-16"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="QH_QuestTracker_Title" inherits="GameTitleFont" text="" justifyH="LEFT">
+							<Size>
+								<AbsDimension x="80" y="0"/>
+							</Size>
+							<FontHeight>
+								<AbsValue val="14"/>
+							</FontHeight>
+						</FontString>
+						<FontString name="QH_QuestTracker_Count" inherits="GameTitleFont" justifyH="LEFT" text="" hidden="false">
+							<Size>
+								<AbsDimension x="110" y="16"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="QH_QuestTracker_Title">
+									<Offset>
+										<AbsDimension x="0" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<FontHeight>
+								<AbsValue val="14"/>
+							</FontHeight>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnEnter>QH.Tracker.ShowHeadToolTip(this)</OnEnter>
+					<OnLeave>GameTooltip:Hide()</OnLeave>
+					<OnClick>QH.Tracker.OnHeaderClick(this)</OnClick>
+					<OnMouseDown>QH.Tracker.OnHeaderMouseDown(this,key)</OnMouseDown>
+					<OnMouseUp>QH.Tracker.OnHeaderMouseUp(this,key)</OnMouseUp>
+				</Scripts>
+			</Frame>
+			<Frame name="QH_QuestTracker_Body">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<Frame name="QH_QuestTrackerPopup" inherits="UIDropDownMenuTemplate" hidden="true">
+						<Anchors>
+							<Anchor point="TOP"/>
+						</Anchors>
+					</Frame>
+				</Frames>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnShow>UIPanelAnchorFrame_OnShow( this )</OnShow>
+			<OnUpdate>QH.Tracker.OnUpdate(elapsedTime)</OnUpdate>
+		</Scripts>
+	</Frame>
+	<Frame name="QH_QuestTracker_Updater" hidden="false" parent="UIParent">
+		<Size><AbsDimension x="0" y="0"/></Size>
+		<Scripts>
+			<OnUpdate>QH.Tracker.OnUpdateRefresh(elapsedTime)</OnUpdate>
+		</Scripts>
+	</Frame>
+</Ui>

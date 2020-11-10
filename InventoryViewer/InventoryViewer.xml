@@ -1,0 +1,1489 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Script file="InventoryViewer.lua"/>
+
+<!-- TEMPLATES -->
+
+	<!-- (TEMPLATE) Item Button -->
+	<Button name="IVItemButtonTemplate" virtual="true" inherits="ItemButtonTemplate">
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parentInvalid" file="Interface\Buttons\QuickSlot-Red" hidden="true"/>
+			</Layer>
+			<Layer level="ARTWORK">
+ 				<Texture name="$parentQualityBorder" file="Interface/AddOns/InventoryViewer/Textures/IV_QualityBorder.tga" alphaMode="BLEND" hidden="true">
+					<Size>
+						<AbsDimension x="43" y="43"/>
+					</Size>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForClicks("LeftButton");
+			</OnLoad>
+			<OnClick>
+				IVItemButton_OnClick(this, key);
+			</OnClick>
+			<OnEnter>
+				IVItemButton_OnEnter(this);
+			</OnEnter>
+			<OnLeave>
+				IVItemButton_OnLeave(this);
+			</OnLeave>
+			<OnReceiveDrag>
+				IVFrameCharTab_AbortDrag(this);
+			</OnReceiveDrag>
+			<OnMouseUp>
+				IVFrameCharTab_AbortDrag(this);
+			</OnMouseUp>
+		</Scripts>
+	</Button>
+	
+	<!-- (TEMPLATE) Config Tab Button -->
+	<Button name="IVConfigTabTemplate" inherits="UIPanelTopTabTemplate" virtual="true">
+		<Layers>
+			<Layer level="HIGHLIGHT">
+				<Texture name="$parentTexture">
+					<Size>
+						<AbsDimension x="16" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>
+				IVConfigFrameConfigTab_OnClick( this, button );
+			</OnClick>
+			<OnLoad>
+				IVConfigFrameConfigTab_OnLoad( this );
+			</OnLoad>
+		</Scripts>
+	</Button>
+	
+	<!-- (TEMPLATE) Character Tab Button -->
+	<Button name="IVFrameCharTabTemplate" inherits="UIPanelTopTabTemplate" hidden="true" virtual="true">
+		<Layers>
+			<Layer level="HIGHLIGHT">
+				<Texture name="$parentTexture">
+					<Size>
+						<AbsDimension x="16" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>
+				IVFrameCharTab_OnClick( this, key );
+			</OnClick>
+			<OnLoad>
+				IVFrameCharTab_OnLoad( this );
+			</OnLoad>
+			<OnDragStart>
+				IVFrameCharTab_OnDragStart(this);
+			</OnDragStart>
+			<OnReceiveDrag>
+				IVFrameCharTab_OnReceiveDrag(this);
+			</OnReceiveDrag>
+			<OnEnter>
+				IVFrameCharTab_OnEnter(this);
+			</OnEnter>
+			<OnLeave>
+				IVFrameCharTab_OnLeave(this);
+			</OnLeave>
+		</Scripts>
+	</Button>
+	
+	<!-- (TEMPLATE) Bank Tab Button -->
+	<Button name="IV_BankFrameTabTemplate" inherits="UIPanelTopTabTemplate" virtual="true">
+		<Layers>
+			<Layer level="HIGHLIGHT">
+				<Texture name="$parentTexture">
+					<Size>
+						<AbsDimension x="16" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>
+				IV_BankFrameTab_OnClick( this );
+			</OnClick>
+			<OnLoad>
+				getglobal( this:GetName() .. "Texture" ):SetFile( "interface/BagFrame/RomeNumber" .. this:GetID() );
+				PanelTemplates_TabResize( this, 16 )
+			</OnLoad>
+		</Scripts>
+	</Button>
+	
+	<!-- (TEMPLATE) Backpack Tab Button -->
+	<Button name="IV_BackpackFrameTabTemplate" inherits="UIPanelTopTabTemplate" virtual="true">
+		<Layers>
+			<Layer level="HIGHLIGHT">
+				<Texture name="$parentTexture">
+					<Size>
+						<AbsDimension x="32" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>
+				IV_BackpackFrameTab_OnClick( this );
+			</OnClick>
+			<OnLoad>
+				IV_BackpackFrameTab_OnLoad( this );
+			</OnLoad>
+		</Scripts>
+	</Button>
+	
+	<!-- (TEMPLATE) Equipment_1/Equipment_2 Tab/Furniture Buttons -->
+	<Button name="IV_FurnitureAndEquipmentFrameTabTemplate" inherits="UIPanelTopTabTemplate" virtual="true">
+		<Layers>
+			<Layer level="HIGHLIGHT">
+				<Texture name="$parentTexture">
+					<Size>
+						<AbsDimension x="16" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>
+				IV_FurnitureAndEquipmentFrameTab_OnClick( this );
+			</OnClick>
+			<OnLoad>
+				IV_FurnitureAndEquipmentFrameTab_OnLoad( this );
+			</OnLoad>
+		</Scripts>
+	</Button>
+	
+<!-- Other -->
+	
+	<!-- Character Tab Dropdown -->
+	<Frame name="IV_CharTabDropDown" inherits="UIDropDownMenuTemplate" parent="UIParent" hidden="true">
+		<Scripts>
+			<OnLoad>
+				IV_CharTabDropDown_OnLoad(this);
+			</OnLoad>
+		</Scripts>
+	</Frame>	
+	
+	<!-- Minimap Button -->
+	<Button name="IV_MinimapButton" hidden="false" inherits="MinimapButtonTemplate" parent="UIParent">
+		<Size>
+			<AbsDimension y="24" x="24"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" relativeTo="MinimapViewFrame">
+				<Offset>
+					<RelDimension x="79.94238" y="-3.03579"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnClick>
+				IV_MinimapButton_OnClick(this);
+			</OnClick>
+			<OnEnter>
+				IV_MinimapButton_OnEnter(this);
+			</OnEnter>
+			<OnLeave>
+				IV_MinimapButton_OnLeave(this);
+			</OnLeave>
+		</Scripts>
+	    <NormalTexture file="Interface/AddOns/InventoryViewer/Textures/IV_normal.tga"/>
+	    <PushedTexture file="Interface/AddOns/InventoryViewer/Textures/IV_pushed.tga"/>
+		<HighlightTexture file="Interface/AddOns/InventoryViewer/Textures/IV_highlight.tga" alphaMode="ADD" />
+	</Button>
+	
+	<!-- Addon Manager Button -->
+	<Button name="IV_AOMButton" hidden="true" inherits="UIPanelButtonTemplate" parent="AddonManagerMiniFrame">
+		<Size>
+			<AbsDimension y="24" x="24"/>
+		</Size>
+		<Scripts>
+			<OnClick>
+				AddonManager.MiniButton_OnClick(this);
+			</OnClick>
+			<OnEnter>
+				AddonManager.MiniButton_OnEnter(this);
+			</OnEnter>
+			<OnLeave>
+				AddonManager.MiniButton_OnLeave(this);
+			</OnLeave>
+		</Scripts>
+	    <NormalTexture file="Interface/AddOns/InventoryViewer/Textures/IV_normal.tga"/>
+	    <PushedTexture file="Interface/AddOns/InventoryViewer/Textures/IV_pushed.tga"/>
+		<HighlightTexture file="Interface/AddOns/InventoryViewer/Textures/IV_highlight.tga" alphaMode="ADD" />
+	</Button>
+
+	<!-- Collect Equipped items timer Button -->
+	<Button name="IV_EquippedButton" inherits="ItemButtonTemplate" text="Save Equipped Items to IV" parent="EquipmentFrame">
+		<Size>
+			<AbsDimension x="25" y="25"/>
+		</Size>
+		<Anchors>
+			<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="EquipNecklaceSlot">
+				<Offset>
+					<AbsDimension x="10" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface/AddOns/InventoryViewer/Textures/IV_EquipCatch.tga">
+					<Size>
+						<AbsDimension x="32" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parentText" inherits="GameTitleFont" text="">
+					<Size>
+						<AbsDimension x="150" y="25"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<HighlightTexture file="Interface/AddOns/InventoryViewer/Textures/IV_highlight.tga" alphaMode="ADD">
+			<Size>
+				<AbsDimension x="32" y="32"/>
+			</Size>
+			<Anchors>
+				<Anchor point="CENTER"/>
+			</Anchors>
+		</HighlightTexture>
+		<Scripts>
+			<OnClick>
+				IV_EquippedItemTimerButton_OnClick(this, key);
+			</OnClick>
+			<OnUpdate>
+				IV_EquippedItemTimerButton_OnUpdate(this, elapsedTime);
+			</OnUpdate>
+			<OnEnter>
+				IV_EquippedItemTimerButton_OnEnter(this);
+			</OnEnter>
+			<OnLeave>
+				IV_EquippedItemTimerButton_OnLeave(this);
+			</OnLeave>
+			<OnLoad>
+				this:RegisterForClicks("LeftButton", "RightButton");
+			</OnLoad>
+				
+			
+		</Scripts>
+	</Button>
+
+<!-- FRAME SETS -->
+	
+	<!-- IVConfigFrame Set -->
+	<Frame name="IVConfigFrame" parent="UIParent" inherits="UICommonFrameTemplate" hidden="true" enableMouse="true">
+		<Size>
+			<AbsDimension x="375" y="475"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+			</Anchor>
+		</Anchors>
+
+		<Frames>
+                           
+			<!-- IVConfig Backdrop Frame -->
+			<Frame name="IVConfigFrameBackdropFrame" inherits="UIPanelBackdropFrame">
+				<Size>
+					<AbsDimension x="350" y="400"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="60"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						UIPanelBackdropFrame_SetTexture( this, "Interface/AddOns/InventoryViewer/Textures/IV_Backdrop", 100 , 100 );
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			
+			<!-- IVConfig Tabs -->
+			<Button name="$parentTab1" inherits="IVConfigTabTemplate" text="GENERAL" id="1">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="IVConfigFrameBackdropFrame" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="4" y="9"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentTab2" text="testing" inherits="IVConfigTabTemplate" id="2">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentTab1" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+		
+			<!-- IVConfig Close Button -->
+			<Button name="IVConfigCloseButton" inherits="UIPanelButtonTemplate" text="CLOSE">
+				<Size>
+					<AbsDimension x="60" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOM" relativePoint="BOTTOM" relativeTo="IVConfigFrame">
+						<Offset>
+							<AbsDimension x="0" y="-30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						IVConfigFrame:Hide();
+					</OnClick>
+				</Scripts>
+			</Button>
+		
+            <Frame name="IVConfigFrameTab1Frame">
+				<Size>
+					<AbsDimension x="350" y="400"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="60"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+                <Frames>
+        			<!-- IVConfig_Tooltips Checkbutton -->
+        			<CheckButton name="IVConfig_ToolTips" inherits="UIPanelCheckButtonTemplate">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="IVConfigFrameBackdropFrame">
+                                <Offset>
+                                    <AbsDimension x="15" y="20"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Layers>
+        					<Layer>
+        						<FontString name="$parent_Text" text="OPTIONTEXT_ENHANCED_TOOLTIPS" inherits="GameFontHighlight" justifyH="LEFT">
+        							<Size>
+        								<AbsDimension x="130" y="0"/>
+        							</Size>
+        							<Anchors>
+        								<Anchor point="LEFT" relativePoint="RIGHT">
+        									<Offset>
+        										<AbsDimension x="0" y="0"/>
+        									</Offset>
+        								</Anchor>
+        							</Anchors>
+        						</FontString>
+        					</Layer>
+        				</Layers>
+        				<Scripts>
+        					<OnClick>
+        						IV_ToggleTooltips();
+        					</OnClick>
+        				</Scripts>
+        			</CheckButton>
+                    
+        			<!-- IVConfig_MiniMapCheck Checkbutton -->
+        			<CheckButton name="IVConfig_MiniMapCheck" inherits="UIPanelCheckButtonTemplate">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="IVConfig_ToolTips">
+                                <Offset>
+                                    <AbsDimension x="0" y="35"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Layers>
+        					<Layer>
+        						<FontString name="$parent_Text" text="OPTIONTEXT_SHOW_MINIMAP_ICON" inherits="GameFontHighlight" justifyH="LEFT">
+        							<Size>
+        								<AbsDimension x="130" y="0"/>
+        							</Size>
+        							<Anchors>
+        								<Anchor point="LEFT" relativePoint="RIGHT">
+        									<Offset>
+        										<AbsDimension x="0" y="0"/>
+        									</Offset>
+        								</Anchor>
+        							</Anchors>
+        						</FontString>
+        					</Layer>
+        				</Layers>
+        				<Scripts>
+        					<OnClick>
+        						IV_ToggleMinimapIcon();
+        					</OnClick>
+        				</Scripts>
+        			</CheckButton>
+
+        			<!-- IVConfig_ItemColor Checkbutton -->
+        			<CheckButton name="IVConfig_ItemColor" inherits="UIPanelCheckButtonTemplate">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="IVConfig_MiniMapCheck">
+                                <Offset>
+                                    <AbsDimension x="0" y="35"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Layers>
+        					<Layer>
+        						<FontString name="$parent_Text" text="OPTIONTEXT_ITEM_BORDER_COLOR" inherits="GameFontHighlight" justifyH="LEFT">
+        							<Size>
+        								<AbsDimension x="130" y="0"/>
+        							</Size>
+        							<Anchors>
+        								<Anchor point="LEFT" relativePoint="RIGHT">
+        									<Offset>
+        										<AbsDimension x="0" y="0"/>
+        									</Offset>
+        								</Anchor>
+        							</Anchors>
+        						</FontString>
+        					</Layer>
+        				</Layers>
+        				<Scripts>
+        					<OnClick>
+        						IV_ToggleIconBorders();
+        					</OnClick>
+        				</Scripts>
+        			</CheckButton>
+        			
+        			<!-- IVConfig_ItemColorWhite Checkbutton -->
+        			<CheckButton name="IVConfig_ItemColorWhite" inherits="UIPanelCheckButtonTemplate">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="IVConfig_ItemColor">
+                                <Offset>
+                                    <AbsDimension x="15" y="4"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Layers>
+        					<Layer>
+        						<FontString name="$parent_Text" text="OPTIONTEXT_ITEM_BORDER_COLOR_WHITE" inherits="GameFontHighlight" justifyH="LEFT">
+        							<Size>
+        								<AbsDimension x="160" y="0"/>
+        							</Size>
+        							<Anchors>
+        								<Anchor point="LEFT" relativePoint="RIGHT">
+        									<Offset>
+        										<AbsDimension x="0" y="0"/>
+        									</Offset>
+        								</Anchor>
+        							</Anchors>
+        						</FontString>
+        					</Layer>
+        				</Layers>
+        				<Scripts>
+        					<OnClick>
+        						IV_ToggleIconBordersWhite();
+        					</OnClick>
+        				</Scripts>
+        			</CheckButton>
+                </Frames>
+            </Frame>
+            
+            <Frame name="IVConfigFrameTab2Frame">
+				<Size>
+					<AbsDimension x="350" y="400"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="60"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+                <Frames>
+        			<!-- IVConfig_Tooltips Checkbutton -->
+        			<CheckButton name="IVConfig_Test" inherits="UIPanelCheckButtonTemplate">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="IVConfigFrameBackdropFrame">
+                                <Offset>
+                                    <AbsDimension x="15" y="20"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Layers>
+        					<Layer>
+        						<FontString name="$parent_Text" text="test..." inherits="GameFontHighlight" justifyH="LEFT">
+        							<Size>
+        								<AbsDimension x="130" y="0"/>
+        							</Size>
+        							<Anchors>
+        								<Anchor point="LEFT" relativePoint="RIGHT">
+        									<Offset>
+        										<AbsDimension x="0" y="0"/>
+        									</Offset>
+        								</Anchor>
+        							</Anchors>
+        						</FontString>
+        					</Layer>
+        				</Layers>
+        				<Scripts>
+        					<OnClick>
+
+        					</OnClick>
+        				</Scripts>
+        			</CheckButton>
+                </Frames>
+            </Frame>
+        </Frames>
+    </Frame>
+	
+	
+	<!-- IVFrame Set -->
+	<Frame name="IVFrame" parent="UIParent" inherits="UICommonFrameTemplate" hidden="true" enableMouse="true">
+		<Layer level="BACKGROUND">
+		</Layer>
+		<Size>
+			<AbsDimension x="743" y="575"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+					
+		<Frames>
+		
+			<!-- Config Button -->
+			<Button name="IV_ConfigButton" inherits="UIPanelButtonTemplate" text="FOCUSFRAME_OPTION">
+				<Size>
+					<AbsDimension x="60" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="IVFrame">
+						<Offset>
+							<AbsDimension x="-10" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						IV_ToggleOptionsPanel();
+					</OnClick>
+				</Scripts>
+			</Button>
+		
+		
+			<!-- IVFrame Backdrop -->
+			<Frame name="IVFrameBackdropFrame" inherits="UIPanelBackdropFrame">
+				<Size>
+					<AbsDimension x="727" y="483"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="80"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						UIPanelBackdropFrame_SetTexture( this, "Interface/AddOns/InventoryViewer/Textures/IV_Backdrop", 100 , 100 );
+					</OnLoad>
+				</Scripts>
+				<Layers>
+					<Layer>
+						<FontString name="IVFrameAccountSelectText" inherits="GameTitleFont" justifyH="TOP" justifyV="TOP" text="LOGIN_ACCOUNT_NAME">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="IVFrameBackdropFrame">
+									<Offset>
+										<AbsDimension x="0" y="-48"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+
+			<!-- IVMoneyFrame Backdrop which is a Fake Button to get Monies tooltip on mouse-hover-->
+			<Button name="IVMoneyFrameBackdropFrame">
+				<Size>
+					<AbsDimension x="212" y="78"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="IVFrame">
+						<Offset>
+							<AbsDimension x="27" y="-23"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+
+					<!-- Character Gold -->
+					<Layer>
+						<FontString name="IV_CharGold" inherits="GameFontHighlight" justifyH="TOP" justifyV="TOP" text="">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="IVMoneyFrameBackdropFrame">
+									<Offset>
+										<AbsDimension x="20" y="10"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+					<Layer>
+						<Texture name="IV_CharGoldTexture" file="Interface\AddOns\InventoryViewer\Textures\IV_CharGold" alphaMode="BLEND">
+							<Size>
+								<AbsDimension x="16" y="16"/>
+							</Size>					
+							<Anchors>
+								<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="IVMoneyFrameBackdropFrame">
+									<Offset>
+										<AbsDimension x="0" y="7"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</Texture>
+					</Layer>
+					
+					
+					<!-- Account Total Gold -->
+					<Layer>
+						<FontString name="IV_AccountGold" inherits="GameFontHighlight" justifyH="TOP" justifyV="TOP" text="9,999,999,999">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="IVMoneyFrameBackdropFrame">
+									<Offset>
+										<AbsDimension x="20" y="32"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+					<Layer>
+						<Texture name="IV_AccGoldTexture" file="Interface\AddOns\InventoryViewer\Textures\IV_AccGold" alphaMode="BLEND">
+							<Size>
+								<AbsDimension x="16" y="16"/>
+							</Size>					
+							<Anchors>
+								<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="IVMoneyFrameBackdropFrame">
+									<Offset>
+										<AbsDimension x="0" y="29"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</Texture>
+					</Layer>
+					
+					<!-- Server Total Gold -->
+					<Layer>
+						<FontString name="IV_ServerGold" inherits="GameFontHighlight" justifyH="TOP" justifyV="TOP" text="9,999,999,999">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="IVMoneyFrameBackdropFrame">
+									<Offset>
+										<AbsDimension x="20" y="56"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+					<Layer>
+						<Texture name="IV_AccGoldTexture" file="Interface\AddOns\InventoryViewer\Textures\IV_ServGold" alphaMode="BLEND">
+							<Size>
+								<AbsDimension x="16" y="16"/>
+							</Size>					
+							<Anchors>
+								<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="IVMoneyFrameBackdropFrame">
+									<Offset>
+										<AbsDimension x="0" y="53"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</Texture>
+					</Layer>
+
+					<!-- Transmutor Charges -->
+					<Layer>					
+						<FontString name="IV_CharCharges" inherits="GameFontHighlight" justifyH="TOP" justifyV="TOP" text="Cch/Ach/Sch">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="IVMoneyFrameBackdropFrame">
+									<Offset>
+										<AbsDimension x="127" y="10"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+					<Layer>
+						<Texture name="IV_TransChargeTexture" file="Interface\AddOns\InventoryViewer\Textures\IV_TransCharge" alphaMode="BLEND">
+							<Size>
+								<AbsDimension x="16" y="16"/>
+							</Size>					
+							<Anchors>
+								<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="IVMoneyFrameBackdropFrame">
+									<Offset>
+										<AbsDimension x="107" y="7"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</Texture>
+					</Layer>
+                    
+					<!-- Phirius Tokens -->
+					<Layer>					
+						<FontString name="IV_CharPhirius" inherits="GameFontHighlight" justifyH="TOP" justifyV="TOP" text="Cpt/Apt/Spt">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="IVMoneyFrameBackdropFrame">
+									<Offset>
+										<AbsDimension x="127" y="78"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+					<Layer>
+						<Texture name="IV_PhiriusTexture" file="Interface\MoneyFrame\MoneyIcons" alphaMode="BLEND">
+							<Size>
+								<AbsDimension x="16" y="16"/>
+							</Size>					
+							<Anchors>
+								<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="IVMoneyFrameBackdropFrame">
+									<Offset>
+										<AbsDimension x="107" y="75"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+                            <TexCoords left="0.09375" right="0.125" top="0" bottom="1" ></TexCoords>
+						</Texture>
+					</Layer>
+					
+
+					<!-- Diamond Amount -->
+					<Layer>					
+						<FontString name="IV_CharDiamonds" inherits="GameFontHighlight" justifyH="TOP" justifyV="TOP" text="Ad/Sd">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="IVMoneyFrameBackdropFrame">
+									<Offset>
+										<AbsDimension x="127" y="32"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+					<Layer>
+						<Texture name="IV_DiamondsTexture" file="Interface\MoneyFrame\MoneyIcons" alphaMode="BLEND">
+							<Size>
+								<AbsDimension x="16" y="16"/>
+							</Size>					
+							<Anchors>
+								<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="IVMoneyFrameBackdropFrame">
+									<Offset>
+										<AbsDimension x="107" y="30"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0.03125" right="0.0625" top="0" bottom="1"/>
+						</Texture>
+					</Layer>
+				
+					<!-- Ruby Amount -->
+					<Layer>					
+						<FontString name="IV_CharRuby" inherits="GameFontHighlight" justifyH="TOP" justifyV="TOP" text="Ar/Sr">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="IVMoneyFrameBackdropFrame">
+									<Offset>
+										<AbsDimension x="127" y="56"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+					<Layer>
+						<Texture name="IV_RubyTexture" file="Interface\MoneyFrame\MoneyIcons" alphaMode="BLEND">
+							<Size>
+								<AbsDimension x="16" y="16"/>
+							</Size>					
+							<Anchors>
+								<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="IVMoneyFrameBackdropFrame">
+									<Offset>
+										<AbsDimension x="107" y="53"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0.0625" right="0.09375" top="0" bottom="1"/>
+						</Texture>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnEnter>
+						IVFrame_MoniesTooltip(this);
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+			</Button>
+
+			<!-- Account Left Arrow button -->
+			<Button name="IVFrame_AccountLeftArrow" inherits="UIPanelLeftPageButtonTemplate" text="">
+				<Size>
+					<AbsDimension x="20" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="IVFrameAccountSelectText">
+						<Offset>
+							<AbsDimension x="8" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						IVFrame_AccountLeftArrow_OnClick(this);
+					</OnClick>
+				</Scripts>
+			</Button>
+			
+			<!-- Account Right Arrow button -->
+			<Button name="IVFrame_AccountRightArrow" inherits="UIPanelRightPageButtonTemplate">
+				<Size>
+					<AbsDimension x="20" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="IVFrame_AccountLeftArrow">
+						<Offset>
+							<AbsDimension x="180" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						IVFrame_AccountRightArrow_OnClick(this);
+					</OnClick>
+				</Scripts>
+			</Button>
+			
+			<!-- Character Tabs -->
+			<Button name="IVFrameCharTab1" inherits="IVFrameCharTabTemplate" text="Character1" id="1">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="IVFrameBackdropFrame" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="2" y="9"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="IVFrameCharTab2" inherits="IVFrameCharTabTemplate" text="Character2" id="2">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentCharTab1" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="IVFrameCharTab3" inherits="IVFrameCharTabTemplate" text="Character3" id="3">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentCharTab2" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="IVFrameCharTab4" inherits="IVFrameCharTabTemplate" text="Character4" id="4">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentCharTab3" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="IVFrameCharTab5" inherits="IVFrameCharTabTemplate" text="Character5" id="5">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentCharTab4" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="IVFrameCharTab6" inherits="IVFrameCharTabTemplate" text="Character6" id="6">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentCharTab5" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="IVFrameCharTab7" inherits="IVFrameCharTabTemplate" text="Character7" id="7">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentCharTab6" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="IVFrameCharTab8" inherits="IVFrameCharTabTemplate" text="Character8" id="8">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentCharTab7" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="IVFrameCharTab9" inherits="IVFrameCharTabTemplate" text="Character9" id="9">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentCharTab8" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="IVFrameCharTabDrag" inherits="IVFrameCharTabTemplate" text="Drag" frameLevel="9" frameStrata="LOW" id="9">
+			</Button>
+		
+			<!-- Bank Backdrop -->
+			<Frame name="IVFrameBankBackdropFrame" inherits="UIPanelBackdropFrame">
+				<Size>
+					<AbsDimension x="212" y="332"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="IVFrameBackdropFrame" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="15" y="60"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						UIPanelBackdropFrame_SetTexture( this, "Interface/Common/PanelCommonBorder", 40 , 40 );
+					</OnLoad>
+				</Scripts>
+				<Layers>
+					<Layer>
+						<FontString name="IVFrameBackdropBank" inherits="GameTitleFont" justifyH="CENTER" justifyV="TOP" text="BANK">
+						<!-- LUA file will determine location of this text -->
+							<Size>
+								<AbsDimension x="140" y="0"/>
+							</Size>
+							<Anchors>
+								<Anchor point="BOTTOM" relativeTo="$parent" relativePoint="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-27"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			
+			<!-- Bank Tabs -->
+			<Button name="IVFrameBankTab1" inherits="IV_BankFrameTabTemplate" text="" id="1">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="IVFrameBankBackdropFrame" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="2" y="8"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="IVFrameBankTab2" inherits="IV_BankFrameTabTemplate" text="" id="2">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentBankTab1" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="IVFrameBankTab3" inherits="IV_BankFrameTabTemplate" text="" id="3">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentBankTab2" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="IVFrameBankTab4" inherits="IV_BankFrameTabTemplate" text="" id="4">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentBankTab3" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="IVFrameBankTab5" inherits="IV_BankFrameTabTemplate" text="" id="5">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentBankTab4" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			
+			<!-- Bank Slots -->
+			<Button name="IVItemButton1" inherits="IVItemButtonTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="IVFrameBankBackdropFrame" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="8" y="8"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="IVItemButton2" inherits="IVItemButtonTemplate" id="2"/>
+			<Button name="IVItemButton3" inherits="IVItemButtonTemplate" id="3"/>
+			<Button name="IVItemButton4" inherits="IVItemButtonTemplate" id="4"/>
+			<Button name="IVItemButton5" inherits="IVItemButtonTemplate" id="5"/>
+			<Button name="IVItemButton6" inherits="IVItemButtonTemplate" id="6"/>
+			<Button name="IVItemButton7" inherits="IVItemButtonTemplate" id="7"/>
+			<Button name="IVItemButton8" inherits="IVItemButtonTemplate" id="8"/>
+			<Button name="IVItemButton9" inherits="IVItemButtonTemplate" id="9"/>
+			<Button name="IVItemButton10" inherits="IVItemButtonTemplate" id="10"/>
+			<Button name="IVItemButton11" inherits="IVItemButtonTemplate" id="11"/>
+			<Button name="IVItemButton12" inherits="IVItemButtonTemplate" id="12"/>
+			<Button name="IVItemButton13" inherits="IVItemButtonTemplate" id="13"/>
+			<Button name="IVItemButton14" inherits="IVItemButtonTemplate" id="14"/>
+			<Button name="IVItemButton15" inherits="IVItemButtonTemplate" id="15"/>
+			<Button name="IVItemButton16" inherits="IVItemButtonTemplate" id="16"/>
+			<Button name="IVItemButton17" inherits="IVItemButtonTemplate" id="17"/>
+			<Button name="IVItemButton18" inherits="IVItemButtonTemplate" id="18"/>
+			<Button name="IVItemButton19" inherits="IVItemButtonTemplate" id="19"/>
+			<Button name="IVItemButton20" inherits="IVItemButtonTemplate" id="20"/>
+			<Button name="IVItemButton21" inherits="IVItemButtonTemplate" id="21"/>
+			<Button name="IVItemButton22" inherits="IVItemButtonTemplate" id="22"/>
+			<Button name="IVItemButton23" inherits="IVItemButtonTemplate" id="23"/>
+			<Button name="IVItemButton24" inherits="IVItemButtonTemplate" id="24"/>
+			<Button name="IVItemButton25" inherits="IVItemButtonTemplate" id="25"/>
+			<Button name="IVItemButton26" inherits="IVItemButtonTemplate" id="26"/>
+			<Button name="IVItemButton27" inherits="IVItemButtonTemplate" id="27"/>
+			<Button name="IVItemButton28" inherits="IVItemButtonTemplate" id="28"/>
+			<Button name="IVItemButton29" inherits="IVItemButtonTemplate" id="29"/>
+			<Button name="IVItemButton30" inherits="IVItemButtonTemplate" id="30"/>
+			<Button name="IVItemButton31" inherits="IVItemButtonTemplate" id="31"/>
+			<Button name="IVItemButton32" inherits="IVItemButtonTemplate" id="32"/>
+			<Button name="IVItemButton33" inherits="IVItemButtonTemplate" id="33"/>
+			<Button name="IVItemButton34" inherits="IVItemButtonTemplate" id="34"/>
+			<Button name="IVItemButton35" inherits="IVItemButtonTemplate" id="35"/>
+			<Button name="IVItemButton36" inherits="IVItemButtonTemplate" id="36"/>
+			<Button name="IVItemButton37" inherits="IVItemButtonTemplate" id="37"/>
+			<Button name="IVItemButton38" inherits="IVItemButtonTemplate" id="38"/>
+			<Button name="IVItemButton39" inherits="IVItemButtonTemplate" id="39"/>
+			<Button name="IVItemButton40" inherits="IVItemButtonTemplate" id="40"/>
+		
+			<!-- Backpack Backdrop -->
+			<Frame name="IVFrameBackpackBackdropFrame" inherits="UIPanelBackdropFrame">
+				<Size>
+					<AbsDimension x="252" y="412"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="IVFrameBankBackdropFrame" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="10" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						UIPanelBackdropFrame_SetTexture( this, "Interface/Common/PanelCommonBorder", 40 , 40 );
+					</OnLoad>
+				</Scripts>
+				<Layers>
+					<Layer>
+						<FontString name="IVFrameBackdropBackpack" inherits="GameTitleFont" justifyH="CENTER" justifyV="TOP" text="GCF_TEXT_BAG">
+							<Size>
+								<AbsDimension x="240" y="0"/>
+							</Size>
+							<Anchors>
+								<Anchor point="BOTTOM" relativeTo="$parent" relativePoint="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-27"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+
+			<!-- Backpack Tabs -->
+			<Button name="IVFrameBackpackTab1" inherits="IV_BackpackFrameTabTemplate" text="" id="1">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="IVFrameBackpackBackdropFrame" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="2" y="8"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="IVFrameBackpackTab2" inherits="IV_BackpackFrameTabTemplate" text="" id="2">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentBackpackTab1" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="IVFrameBackpackTab3" inherits="IV_BackpackFrameTabTemplate" text="" id="3">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentBackpackTab2" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="IVFrameBackpackTab4" inherits="IV_BackpackFrameTabTemplate" text="IV_ACCOUNT_SHOP" id="4">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentBackpackTab3" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+
+			<!-- Backpack Slots -->
+			<Button name="IVItemButton41" inherits="IVItemButtonTemplate" id="41">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="IVFrameBackpackBackdropFrame" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="8" y="8"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="IVItemButton42" inherits="IVItemButtonTemplate" id="42"/>
+			<Button name="IVItemButton43" inherits="IVItemButtonTemplate" id="43"/>
+			<Button name="IVItemButton44" inherits="IVItemButtonTemplate" id="44"/>
+			<Button name="IVItemButton45" inherits="IVItemButtonTemplate" id="45"/>
+			<Button name="IVItemButton46" inherits="IVItemButtonTemplate" id="46"/>
+			<Button name="IVItemButton47" inherits="IVItemButtonTemplate" id="47"/>
+			<Button name="IVItemButton48" inherits="IVItemButtonTemplate" id="48"/>
+			<Button name="IVItemButton49" inherits="IVItemButtonTemplate" id="49"/>
+			<Button name="IVItemButton50" inherits="IVItemButtonTemplate" id="50"/>
+			<Button name="IVItemButton51" inherits="IVItemButtonTemplate" id="51"/>
+			<Button name="IVItemButton52" inherits="IVItemButtonTemplate" id="52"/>
+			<Button name="IVItemButton53" inherits="IVItemButtonTemplate" id="53"/>
+			<Button name="IVItemButton54" inherits="IVItemButtonTemplate" id="54"/>
+			<Button name="IVItemButton55" inherits="IVItemButtonTemplate" id="55"/>
+			<Button name="IVItemButton56" inherits="IVItemButtonTemplate" id="56"/>
+			<Button name="IVItemButton57" inherits="IVItemButtonTemplate" id="57"/>
+			<Button name="IVItemButton58" inherits="IVItemButtonTemplate" id="58"/>
+			<Button name="IVItemButton59" inherits="IVItemButtonTemplate" id="59"/>
+			<Button name="IVItemButton60" inherits="IVItemButtonTemplate" id="60"/>
+			<Button name="IVItemButton61" inherits="IVItemButtonTemplate" id="61"/>
+			<Button name="IVItemButton62" inherits="IVItemButtonTemplate" id="62"/>
+			<Button name="IVItemButton63" inherits="IVItemButtonTemplate" id="63"/>
+			<Button name="IVItemButton64" inherits="IVItemButtonTemplate" id="64"/>
+			<Button name="IVItemButton65" inherits="IVItemButtonTemplate" id="65"/>
+			<Button name="IVItemButton66" inherits="IVItemButtonTemplate" id="66"/>
+			<Button name="IVItemButton67" inherits="IVItemButtonTemplate" id="67"/>
+			<Button name="IVItemButton68" inherits="IVItemButtonTemplate" id="68"/>
+			<Button name="IVItemButton69" inherits="IVItemButtonTemplate" id="69"/>
+			<Button name="IVItemButton70" inherits="IVItemButtonTemplate" id="70"/>
+			<Button name="IVItemButton71" inherits="IVItemButtonTemplate" id="71"/>
+			<Button name="IVItemButton72" inherits="IVItemButtonTemplate" id="72"/>
+			<Button name="IVItemButton73" inherits="IVItemButtonTemplate" id="73"/>
+			<Button name="IVItemButton74" inherits="IVItemButtonTemplate" id="74"/>
+			<Button name="IVItemButton75" inherits="IVItemButtonTemplate" id="75"/>
+			<Button name="IVItemButton76" inherits="IVItemButtonTemplate" id="76"/>
+			<Button name="IVItemButton77" inherits="IVItemButtonTemplate" id="77"/>
+			<Button name="IVItemButton78" inherits="IVItemButtonTemplate" id="78"/>
+			<Button name="IVItemButton79" inherits="IVItemButtonTemplate" id="79"/>
+			<Button name="IVItemButton80" inherits="IVItemButtonTemplate" id="80"/>
+			<Button name="IVItemButton81" inherits="IVItemButtonTemplate" id="81"/>
+			<Button name="IVItemButton82" inherits="IVItemButtonTemplate" id="82"/>
+			<Button name="IVItemButton83" inherits="IVItemButtonTemplate" id="83"/>
+			<Button name="IVItemButton84" inherits="IVItemButtonTemplate" id="84"/>
+			<Button name="IVItemButton85" inherits="IVItemButtonTemplate" id="85"/>
+			<Button name="IVItemButton86" inherits="IVItemButtonTemplate" id="86"/>
+			<Button name="IVItemButton87" inherits="IVItemButtonTemplate" id="87"/>
+			<Button name="IVItemButton88" inherits="IVItemButtonTemplate" id="88"/>
+			<Button name="IVItemButton89" inherits="IVItemButtonTemplate" id="89"/>
+			<Button name="IVItemButton90" inherits="IVItemButtonTemplate" id="90"/>
+			<Button name="IVItemButton91" inherits="IVItemButtonTemplate" id="91"/>
+			<Button name="IVItemButton92" inherits="IVItemButtonTemplate" id="92"/>
+			<Button name="IVItemButton93" inherits="IVItemButtonTemplate" id="93"/>
+			<Button name="IVItemButton94" inherits="IVItemButtonTemplate" id="94"/>
+			<Button name="IVItemButton95" inherits="IVItemButtonTemplate" id="95"/>
+			<Button name="IVItemButton96" inherits="IVItemButtonTemplate" id="96"/>
+			<Button name="IVItemButton97" inherits="IVItemButtonTemplate" id="97"/>
+			<Button name="IVItemButton98" inherits="IVItemButtonTemplate" id="98"/>
+			<Button name="IVItemButton99" inherits="IVItemButtonTemplate" id="99"/>
+			<Button name="IVItemButton100" inherits="IVItemButtonTemplate" id="100"/>
+
+			<!-- Furniture/Equipped Items Backdrop -->
+			<Frame name="IVFrameHouseFurnitureBackdropFrame" inherits="UIPanelBackdropFrame">
+				<Size>
+					<AbsDimension x="212" y="212"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="IVFrameBackpackBackdropFrame" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="10" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						UIPanelBackdropFrame_SetTexture( this, "Interface/Common/PanelCommonBorder", 40 , 40 );
+					</OnLoad>
+				</Scripts>
+				<Layers>
+					<Layer>
+						<FontString name="IVFrameBackdropHouseFurniture" inherits="GameTitleFont" justifyH="CENTER" justifyV="TOP" text="UI_HOUSEFRAME_PLACEFURNISH">
+							<Size>
+								<AbsDimension x="300" y="0"/>
+							</Size>
+							<Anchors>
+								<Anchor point="BOTTOM" relativeTo="$parent" relativePoint="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-27"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+
+			<!-- Furniture / Equipped items Tabs -->
+			<Button name="IVFrameFurnitureAndEquipmentTab1" inherits="IV_FurnitureAndEquipmentFrameTabTemplate" text="" id="1">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="IVFrameHouseFurnitureBackdropFrame" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="2" y="8"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="IVFrameFurnitureAndEquipmentTab2" inherits="IV_FurnitureAndEquipmentFrameTabTemplate" text="" id="2">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentFurnitureAndEquipmentTab1" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="IVFrameFurnitureAndEquipmentTab3" inherits="IV_FurnitureAndEquipmentFrameTabTemplate" text="UI_HOUSEFRAME_PLACEFURNISH" id="3">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentFurnitureAndEquipmentTab2" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+
+			<!-- Furniture / Equipped items Slots -->
+			<Button name="IVItemButton101" inherits="IVItemButtonTemplate" id="101">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="IVFrameHouseFurnitureBackdropFrame" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="8" y="8"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="IVItemButton102" inherits="IVItemButtonTemplate" id="102"/>
+			<Button name="IVItemButton103" inherits="IVItemButtonTemplate" id="103"/>
+			<Button name="IVItemButton104" inherits="IVItemButtonTemplate" id="104"/>
+			<Button name="IVItemButton105" inherits="IVItemButtonTemplate" id="105"/>
+			<Button name="IVItemButton106" inherits="IVItemButtonTemplate" id="106"/>
+			<Button name="IVItemButton107" inherits="IVItemButtonTemplate" id="107"/>
+			<Button name="IVItemButton108" inherits="IVItemButtonTemplate" id="108"/>
+			<Button name="IVItemButton109" inherits="IVItemButtonTemplate" id="109"/>
+			<Button name="IVItemButton110" inherits="IVItemButtonTemplate" id="110"/>
+			<Button name="IVItemButton111" inherits="IVItemButtonTemplate" id="111"/>
+			<Button name="IVItemButton112" inherits="IVItemButtonTemplate" id="112"/>
+			<Button name="IVItemButton113" inherits="IVItemButtonTemplate" id="113"/>
+			<Button name="IVItemButton114" inherits="IVItemButtonTemplate" id="114"/>
+			<Button name="IVItemButton115" inherits="IVItemButtonTemplate" id="115"/>
+			<Button name="IVItemButton116" inherits="IVItemButtonTemplate" id="116"/>
+			<Button name="IVItemButton117" inherits="IVItemButtonTemplate" id="117"/>
+			<Button name="IVItemButton118" inherits="IVItemButtonTemplate" id="118"/>
+			<Button name="IVItemButton119" inherits="IVItemButtonTemplate" id="119"/>
+			<Button name="IVItemButton120" inherits="IVItemButtonTemplate" id="120"/>
+			<Button name="IVItemButton121" inherits="IVItemButtonTemplate" id="121"/>
+			<Button name="IVItemButton122" inherits="IVItemButtonTemplate" id="122"/>
+			<Button name="IVItemButton123" inherits="IVItemButtonTemplate" id="123"/>
+			<Button name="IVItemButton124" inherits="IVItemButtonTemplate" id="124"/>
+			<Button name="IVItemButton125" inherits="IVItemButtonTemplate" id="125"/>
+
+
+			<!-- House Furniture Left Arrow button -->
+			<Button name="IVFrame_HouseFurnitureLeftArrow" inherits="UIPanelLeftPageButtonTemplate" frameLevel="1" text="">
+				<Size>
+					<AbsDimension x="20" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="LEFT" relativeTo="IVFrameFurnitureAndEquipmentTab3">
+						<Offset>
+							<AbsDimension x="6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						IVFrame_HouseFurnitureLeftArrow_OnClick(this);
+					</OnClick>
+				</Scripts>
+			</Button>
+			
+			<!-- House Furniture Right Arrow button -->
+			<Button name="IVFrame_HouseFurnitureRightArrow" inherits="UIPanelRightPageButtonTemplate" frameLevel="1" text="">
+				<Size>
+					<AbsDimension x="20" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativePoint="RIGHT" relativeTo="IVFrameFurnitureAndEquipmentTab3">
+						<Offset>
+							<AbsDimension x="-6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						IVFrame_HouseFurnitureRightArrow_OnClick(this);
+					</OnClick>
+				</Scripts>
+			</Button>
+
+			<!-- Arcane Transmutor Backdrop -->
+			<Frame name="IVFrameBackdropArcaneTransmutor" inherits="UIPanelBackdropFrame">
+				<Size>
+					<AbsDimension x="212" y="92"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="IVFrameHouseFurnitureBackdropFrame" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="-2" y="28"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						UIPanelBackdropFrame_SetTexture( this, "Interface/Common/PanelCommonBorder", 40 , 40 );
+					</OnLoad>
+				</Scripts>
+				<Layers>
+					<Layer>
+						<FontString name="$parentText" inherits="GameTitleFont" justifyH="CENTER" justifyV="TOP" text="MAGICBOX_TITLE">
+							<Size>
+								<AbsDimension x="140" y="0"/>
+							</Size>
+							<Anchors>
+								<Anchor point="BOTTOM" relativeTo="$parent" relativePoint="TOP">
+									<Offset>
+										<AbsDimension x="0" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			
+			<!-- Arcane Transmutor Slots -->
+			<Button name="IVItemButton126" inherits="IVItemButtonTemplate" id="126">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="IVItemButton77" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="260" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="IVItemButton127" inherits="IVItemButtonTemplate" id="127"/>
+			<Button name="IVItemButton128" inherits="IVItemButtonTemplate" id="128"/>
+			<Button name="IVItemButton129" inherits="IVItemButtonTemplate" id="129"/>
+			<Button name="IVItemButton130" inherits="IVItemButtonTemplate" id="130"/>
+			<Button name="IVItemButton131" inherits="IVItemButtonTemplate" id="131"/>
+			<Button name="IVItemButton132" inherits="IVItemButtonTemplate" id="132"/>
+			<Button name="IVItemButton133" inherits="IVItemButtonTemplate" id="133"/>
+			<Button name="IVItemButton134" inherits="IVItemButtonTemplate" id="134"/>
+			<Button name="IVItemButton135" inherits="IVItemButtonTemplate" id="135"/>
+
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				IVFrame_OnLoad(this);
+			</OnLoad>
+			<OnShow>
+				IVFrame_OnShow(this);
+			</OnShow>
+			<OnHide>
+				IVFrame_OnHide(this);
+			</OnHide>
+			<OnEvent>
+				IVFrame_OnEvent(this, event, arg1, arg2, arg3, arg4, arg5, arg6);
+			</OnEvent>
+			<OnReceiveDrag>
+				IVFrameCharTab_AbortDrag(this);
+			</OnReceiveDrag>
+			<OnMouseUp>
+				IVFrameCharTab_AbortDrag(this);
+			</OnMouseUp>
+		</Scripts>
+	</Frame>
+</Ui>

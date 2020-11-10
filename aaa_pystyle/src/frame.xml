@@ -1,0 +1,88 @@
+<Ui xmlns="http://www.runewaker.com/" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/
+../WorldXml/UI.xsd">
+  <Frame name="PyStyleFrameTemplate" enableMouse="true" frameStrata="MEDIUM" virtual="true">
+    <Backdrop edgeFile="interface/addons/aaa_pystyle/res/frame-border" bgFile="Interface\SocialFrame\SocialFrame_Contextborder_bg">
+      <EdgeSize>
+        <AbsValue val="5"/>
+      </EdgeSize>
+      <TileSize>
+        <AbsValue val="5"/>
+      </TileSize>
+    </Backdrop>
+    <Size>
+      <AbsDimension x="400" y="100"/>
+    </Size>
+    <Frames>
+      <Frame name="$parentHeader" enableMouse="true">
+        <Backdrop edgeFile="interface/addons/aaa_pystyle/res/frame-border" bgFile="Interface\SocialFrame\SocialFrame_Contextborder_bg">
+          <EdgeSize>
+            <AbsValue val="5"/>
+          </EdgeSize>
+          <TileSize>
+            <AbsValue val="5"/>
+          </TileSize>
+        </Backdrop>
+        <Anchors>
+          <Anchor point="TOPLEFT"  relativePoint="TOPLEFT">
+            <Offset>
+              <AbsDimension x="0" y="-30"/>
+            </Offset>
+          </Anchor>
+          <Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT"/>
+        </Anchors>
+        <Layers>
+          <Layer>
+            <FontString name="$parentText" inherits="GameFontNormal" justifyH="CENTER" text="TEMPLATE">
+              <Color r="1" g="1" b="1" />
+              <Anchors>
+                <Anchor point="TOP">
+                  <Offset>
+                    <AbsDimension x="0" y="10"/>
+                  </Offset>
+                </Anchor>
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>
+        <Frames>
+          <Button name="$parentClose" inherits="PyStyleCloseButtonTemplate">
+              <Anchors>
+                <Anchor point="RIGHT">
+                  <Offset>
+                    <AbsDimension x="-3" y="0"/>
+                  </Offset>
+                </Anchor>
+              </Anchors>
+              <Scripts>
+                <OnClick>
+                  this:GetParent():GetParent():Hide()
+                </OnClick>
+              </Scripts>
+          </Button>
+        </Frames>
+        <Scripts>
+          <OnLoad>
+            this:RegisterForDrag("LeftButton")
+            this:SetBackdropTileAlpha(.8)
+            this:GetParent():SetBackdropTileAlpha(.5)
+          </OnLoad>
+          <OnDragStart>
+            if this.minimized then
+              this:StartMoving()
+            else
+              this:GetParent():StartMoving()
+            end
+          </OnDragStart>
+          <OnDragStop>
+            if this.minimized then
+              this:StopMovingOrSizing()
+            else
+              this:GetParent():StopMovingOrSizing()
+            end
+          </OnDragStop>
+        </Scripts>
+      </Frame>
+    </Frames>
+  </Frame>
+</Ui>

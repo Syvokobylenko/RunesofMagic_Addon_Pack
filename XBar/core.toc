@@ -1,0 +1,61 @@
+## Title: XBar III
+## Edit and new Developer: matif, Bussdee 05/2010
+## Official Support Website: www.BussDee.cjb.net
+
+## MAIN
+XBar.lua
+Xml/XBar.templates.xml
+Xml/XBar.background.xml
+Xml/XBar.xml
+
+## BUTTONS
+Btn/XBtn.ammo.lua
+Btn/XBtn.bag.lua
+Btn/XBtn.clock.lua
+Btn/XBtn.class.lua
+Btn/XBtn.craft.lua
+Btn/XBtn.dps.lua
+Btn/XBtn.exp.lua
+Btn/XBtn.friend.lua
+Btn/XBtn.guild.lua
+Btn/XBtn.mail.lua
+Btn/XBtn.money.lua
+Btn/XBtn.ping.lua
+Btn/XBtn.ammo.xml
+Btn/XBtn.bag.xml
+Btn/XBtn.clock.xml
+Btn/XBtn.class.xml
+Btn/XBtn.craft.xml
+Btn/XBtn.dps.xml
+Btn/XBtn.exp.xml
+Btn/XBtn.friend.xml
+Btn/XBtn.guild.xml
+Btn/XBtn.mail.xml
+Btn/XBtn.money.xml
+Btn/XBtn.ping.xml
+Btn/XBtn.eqdmg.xml
+
+Bonus/SimpleDamageLog.lua
+Bonus/SimpleDamageLog.xml
+Bonus/NewCasting.lua
+Bonus/XMinimap.lua
+Bonus/XMinimap.xml
+Bonus/vcThreatMeter.lua
+Bonus/vcThreatMeter.xml
+Bonus/RaidSave.lua
+Bonus/WebLinks.lua
+Bonus/WebLinks.xml
+Bonus/ItemPreviewResizer.xml
+
+################### OLD Version ####################
+## 04-2009
+## Notes: Replacement/Enhancement for MainMenuFrame
+## Author: nigr(A)ngelus
+## released under the Creative Commons License By-Nc-Sa: http://creativecommons.org/licenses/by-nc-sa/3.0/
+## Many thanks to the following people for their ideas, help and/or code:
+## aveng3r - kBar
+## Havorn - HaMoveableMinimap
+## Slayblaze - for his XBar skin
+## ArcticXWolf - adPanelGuild plugin
+## Caelin - KISDM (Keep It Simple Damage Meter)
+####################################################

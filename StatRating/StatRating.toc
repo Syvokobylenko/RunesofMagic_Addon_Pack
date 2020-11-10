@@ -1,0 +1,26 @@
+## Interface: 1812
+## Title: StatRating
+## Notes: Item stat breakdown, analysis and comparison
+## Author: nachtgold shadecut snoopycurse
+## Special thanks to: jolting32, Tschuss, rhyparo, cooper1988, puschk1n, gastro19, elrac, drOOgz, Qwox
+## X-eMail: sn81 [at] free [dot] fr
+## SavedVariables: SRC_VARS
+## OptionalDeps: 
+## X-Category: Interface Enhancements
+## X-Encoding: UTF-8
+## X-Curse-Packaged-Version: v1.02
+## X-Curse-Project-Name: StatRating
+## X-Curse-Project-ID: statrating
+## X-Curse-Repository-ID: rom/statrating/mainline
+## X-Curse-Packaged-Version: StatRating v1.03.146 stable
+## X-Curse-Project-Name: StatRating
+## X-Curse-Project-ID: statrating
+## X-Curse-Repository-ID: rom/statrating/mainline
+
+lib/lib.SRClass.lua
+keywords.lua
+StatRatingConfig.lua
+StatRatingConfig.xml
+lib/lib.Hook.lua
+StatRating.lua
+StatRating.xml

@@ -1,0 +1,97 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+
+
+	<Frame name="StreamlineFrame" parent="UIParent">
+		<Scripts>
+			<OnLoad>
+				Streamline.OnLoad(this)
+			</OnLoad>
+			<OnEvent>
+				Streamline.OnEvent(this, event, arg1)
+			</OnEvent>
+            <OnUpdate> 
+                Streamline_OnUpdate(this, elapsedTime)
+            </OnUpdate>
+		</Scripts>
+	</Frame>
+    
+    <!-- Adds a Max button to the skill upgrade frame -->
+    <Frame name="StreamlineMaxSkillFrame" parent="SkillLevelUpFrame" hidden="true">
+		<Frames>
+			<Button name="$parentMaxButton" inherits="UIPanelButtonTemplate" text=">>">
+				<Size>
+					<AbsDimension x="22" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT">
+						<Offset>
+							<AbsDimension x="-15" y="-11"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						SkillLevelUpFrameMax_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+	</Frame>
+    
+    <!-- Adds a Minimize button to the quest book frame -->
+    <Button name="StreamlineMinimizeQuestListButton" text=">" inherits="UIPanelButtonTemplate" parent="UI_QuestBook_QuestDetailBackdrop">
+        <Size>
+            <AbsDimension x="22" y="22"/>
+        </Size>
+        <Anchors>
+            <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT">
+                <Offset>
+                    <AbsDimension x="0" y="0"/>
+                </Offset>
+            </Anchor>
+        </Anchors>
+        <Scripts>
+            <OnClick>
+                Streamline.ToggleQuestList()
+            </OnClick>
+        </Scripts>
+    </Button>
+    
+    <Frame name="StreamlineCraftSkillFrame" parent="UI_CraftFrame" frameLevel="2">
+		<Size>
+			<AbsDimension x="100" y="30"></AbsDimension>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
+				<Offset>
+					<AbsDimension x="-25" y="10"/>
+				</Offset>
+			</Anchor>			
+		</Anchors>
+		<Layers>
+			<Layer>
+				<FontString name="StreamlineCraftSkillLabel" inherits="Font_FrameTitle" justifyH="RIGHT" justifyV="MIDDLE" />
+    		</Layer>
+		</Layers>
+	</Frame>
+    
+    <Button name="StreamlineMiniButton" hidden="true" inherits="UIPanelButtonTemplate" parent="AddonManagerMiniFrame">
+		<Size>
+			<AbsDimension y="24" x="24"/>
+		</Size>
+		<Scripts>
+			<OnClick>
+                AddonManager.MiniButton_OnClick(this)
+			</OnClick>
+			<OnEnter>
+                AddonManager.MiniButton_OnEnter(this)
+			</OnEnter>
+			<OnLeave>
+				AddonManager.MiniButton_OnLeave(this)
+			</OnLeave>
+		</Scripts>
+	    <NormalTexture file="Interface\AddOns\Streamline\Textures\streamlineIcon.tga"/>
+	    <PushedTexture file="Interface\AddOns\Streamline\Textures\streamlineIconInv.tga"/>
+		<HighlightTexture file="Interface\Buttons\PanelSmallButtonHighlight" alphaMode="ADD" />
+	</Button>
+</Ui>

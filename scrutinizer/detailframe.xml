@@ -1,0 +1,311 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="..\..\worldxml\ui.xsd">
+	
+-	<Frame name="scrutinizer_DetailFrame" inherits="scrutinizer_Backdrop_Template" frameStrata="HIGH" parent="UIParent" hidden="true">
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="-150"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Size>
+			<AbsDimension x="350" y="185"/>
+		</Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parent_Text" inherits="GameTitleFont" justifyH="LEFT">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="15" y="2"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Size>
+						<AbsDimension x="550" y="12"/>
+					</Size>
+					<FontHeight>
+						<AbsValue val="12"/>
+					</FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parent_MoveButton">
+				<NormalTexture file="Interface\WorldMap\WorldMap-TitlebarSwitch-Normal"/>
+				<PushedTexture file="Interface\WorldMap\WorldMap-TitlebarSwitch-Depress"/>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="14" y="14"/>
+				</Size>
+				<Scripts>
+					<OnMouseDown>
+						this:GetParent():StartMoving("TOPLEFT")
+					</OnMouseDown>
+					<OnMouseUp>
+						this:GetParent():StopMovingOrSizing()
+					</OnMouseUp>
+				</Scripts>
+			</Button>
+			<Button name="$parent_CloseButton" inherits="UIPanelCloseButtonTemplate">
+				<Size>
+					<AbsDimension x="14" y="14"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						this:GetParent():Hide()
+						scrutinizer:DetailFrameOnHide()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Frame name="$parent_Skills1" inherits="scrutinizer_Skills_Template" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="15" y="20"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+			<Frame name="$parent_Skills2" inherits="scrutinizer_Skills_Template" id="2">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Skills1"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parent_Skills3" inherits="scrutinizer_Skills_Template" id="3">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Skills2"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parent_Skills4" inherits="scrutinizer_Skills_Template" id="4">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Skills3"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parent_Skills5" inherits="scrutinizer_Skills_Template" id="5">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Skills4"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parent_Skills6" inherits="scrutinizer_Skills_Template" id="6">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Skills5"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parent_Skills7" inherits="scrutinizer_Skills_Template" id="7">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Skills6"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parent_Skills8" inherits="scrutinizer_Skills_Template" id="8">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Skills7"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parent_Skills9" inherits="scrutinizer_Skills_Template" id="9">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Skills8"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parent_Skills10" inherits="scrutinizer_Skills_Template" id="10">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Skills9"/>
+				</Anchors>
+			</Frame>
+			<Slider name="$parent_Slider" orientation="VERTICAL">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="2" y="20"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="10" y="160"/>
+				</Size>
+				<ThumbTexture file="Interface\BagFrame\BagFrame-Slider-Knob">
+					<Size>
+						<AbsDimension x="16" y="16"/>
+					</Size>
+				</ThumbTexture>
+				<Scripts>
+					<OnLoad>
+						scrutinizer:InitSkillsSlider(this)
+					</OnLoad>
+					<OnValueChanged>
+						scrutinizer:SkillsOnValueChanged(this)
+					</OnValueChanged>
+				</Scripts>
+			</Slider>
+			<Frame name="$parent_Types" inherits="scrutinizer_Backdrop_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="350" y="100"/>
+				</Size>
+				<Frames>
+					<Frame name="$parent_Type1" inherits="scrutinizer_Types_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="15" y="5"/>
+								</Offset>
+							</Anchor>
+						</Anchors>						
+					</Frame>
+					<Frame name="$parent_Type2" inherits="scrutinizer_Types_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Type1"/>
+						</Anchors>						
+					</Frame>
+					<Frame name="$parent_Type3" inherits="scrutinizer_Types_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Type2"/>
+						</Anchors>						
+					</Frame>
+					<Frame name="$parent_Type4" inherits="scrutinizer_Types_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Type3"/>
+						</Anchors>						
+					</Frame>
+					<Frame name="$parent_Type5" inherits="scrutinizer_Types_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Type4"/>
+						</Anchors>						
+					</Frame>
+					<Frame name="$parent_Type6" inherits="scrutinizer_Types_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Type5"/>
+						</Anchors>						
+					</Frame>
+					<Slider name="$parent_Slider" orientation="VERTICAL">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="2" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Size>
+							<AbsDimension x="10" y="95"/>
+						</Size>
+						<ThumbTexture file="Interface\BagFrame\BagFrame-Slider-Knob">
+							<Size>
+								<AbsDimension x="16" y="16"/>
+							</Size>
+						</ThumbTexture>
+						<Scripts>
+							<OnLoad>
+								scrutinizer:InitTypesSlider(this)
+							</OnLoad>
+							<OnValueChanged>
+								scrutinizer:TypesOnValueChanged(this)
+							</OnValueChanged>
+						</Scripts>
+					</Slider>				
+				</Frames>
+			</Frame>
+			<Frame name="$parent_Opponents" inherits="scrutinizer_Backdrop_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Types">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="350" y="100"/>
+				</Size>
+				<Frames>
+					<Frame name="$parent_Opponent1" inherits="scrutinizer_Opponents_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="15" y="5"/>
+								</Offset>
+							</Anchor>
+						</Anchors>						
+					</Frame>
+					<Frame name="$parent_Opponent2" inherits="scrutinizer_Opponents_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Opponent1"/>
+						</Anchors>						
+					</Frame>
+					<Frame name="$parent_Opponent3" inherits="scrutinizer_Opponents_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Opponent2"/>
+						</Anchors>						
+					</Frame>
+					<Frame name="$parent_Opponent4" inherits="scrutinizer_Opponents_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Opponent3"/>
+						</Anchors>						
+					</Frame>
+					<Frame name="$parent_Opponent5" inherits="scrutinizer_Opponents_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Opponent4"/>
+						</Anchors>						
+					</Frame>
+					<Frame name="$parent_Opponent6" inherits="scrutinizer_Opponents_Template">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Opponent5"/>
+						</Anchors>						
+					</Frame>
+					<Slider name="$parent_Slider" orientation="VERTICAL">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="2" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Size>
+							<AbsDimension x="10" y="95"/>
+						</Size>
+						<ThumbTexture file="Interface\BagFrame\BagFrame-Slider-Knob">
+							<Size>
+								<AbsDimension x="16" y="16"/>
+							</Size>
+						</ThumbTexture>
+						<Scripts>
+							<OnLoad>
+								scrutinizer:InitOpponentsSlider(this)
+							</OnLoad>
+							<OnValueChanged>
+								scrutinizer:OpponentsOnValueChanged(this)
+							</OnValueChanged>
+						</Scripts>
+					</Slider>				
+				</Frames>
+			</Frame>			
+		</Frames>
+		<Scripts>
+			<OnShow>
+				scrutinizer:DetailFrameOnShow()
+			</OnShow>
+			<OnEscapePressed>
+				this:Hide()
+				scrutinizer:DetailFrameOnHide()
+			</OnEscapePressed>
+		</Scripts>
+	</Frame>
+	
+</Ui>

@@ -1,0 +1,2125 @@
+<!-- last changes     by: Tinsus     at: 2016-05-14T14:21:37Z     project-version: v1.9beta1     hash: 83e16058a498c9525fabd3298f391d7bfe4b50c8 -->
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ ../../../worldxml/ui.xsd">
+	<!-- Config Frame -->
+	<Frame name="LootIt_Optionen" parent="UIParent" inherits="UICommonFrameTemplate" hidden="true">
+		<Size>
+			<AbsDimension x="400" y="645"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer>
+				<FontString name="$parent_Headline" inherits="QuestTitleFont" text="LootIt!">
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="5"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="16"/>
+					</FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parent_Close" inherits="UIPanelButtonTemplate" text="OK">
+				<Size>
+					<AbsDimension x="100" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP" relativePoint="BOTTOM">
+						<Offset>
+							<AbsDimension x="0" y="-40"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						this:GetParent():Hide()
+					</OnClick>
+					<OnLoad>
+						this:SetText(TEXT("OKAY"))
+					</OnLoad>
+				</Scripts>
+			</Button>
+			<!--	Brown buttons	-->
+			<Button name="$parent_MoveButton" inherits="UIPanelButtonTemplate" text="ERROR">
+				<Size>
+					<AbsDimension x="160" y="30"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="30" y="-270"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						this:GetParent():Hide()
+						LootIt_FrameMover:Show()
+					</OnClick>
+					<OnLoad>
+						this:SetText(LI.Trans("OPTIONS_HEADLINE_MOVEBUTTON"))
+					</OnLoad>
+				</Scripts>
+			</Button>
+			<Button name="$parent_Rollsettings" inherits="UIPanelButtonTemplate" text="ERROR">
+				<Size>
+					<AbsDimension x="160" y="30"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_MoveButton">
+						<Offset>
+							<AbsDimension x="20" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						this:GetParent():Hide()
+						LootIt_RollResult:Show()
+					</OnClick>
+					<OnLoad>
+						this:SetText(LI.Trans("OPTIONS_HEADLINE_ROLLBUTTON"))
+					</OnLoad>
+				</Scripts>
+			</Button>
+			<!--	Editbox			-->
+			<EditBox name="$parent_Profile">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="155" y="310"/>
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="365" y="335"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\Tooltip-border" tile="true">
+					<EdgeSize>
+						<AbsValue val="10"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="5"/>
+					</TileSize>
+				</Backdrop>
+				<Layers>
+					<Layer>
+						<FontString name="$parent_Title" justifyH="RIGHT" inherits="Font_Normal">
+							<Anchors>
+								<Anchor point="RIGHT" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="-2" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<FontHeight>
+								<AbsValue val="14"/>
+							</FontHeight>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnEscapePressed>
+						this:ClearFocus()
+					</OnEscapePressed>
+					<OnHide>
+						this:ClearFocus()
+					</OnHide>
+					<OnEnter>
+						LI.GameTooltip(this, "ANCHOR_BOTTOMRIGHT", 4, 0, "OPTION_HASHTAG_TOOLTIP")
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+					<OnUpdate>
+						local tag = getglobal(this:GetName().."_Text"):GetText()
+
+						if tag ~= nil and tag ~= "" then
+							LI_Data.Options.hashtag = tag
+						end
+					</OnUpdate>
+					<OnShow>
+						getglobal(this:GetName().."_Text"):SetText(tostring(LI_Data.Options.hashtag))
+						getglobal(this:GetName().."_Title"):SetText(LI.Trans("OPTION_HASHTAG_TITLE")..": !#")
+					</OnShow>
+				</Scripts>
+				<FontString name="$parent_Text" inherits="GameTooltipFont" justifyH="LEFT">
+					<FontHeight>
+						<AbsValue val="13"/>
+					</FontHeight>
+				</FontString>
+				<TextInsets>
+					<AbsInset left="8" right="4" top="7" bottom="0"/>
+				</TextInsets>
+			</EditBox>
+			<!--	Slider			-->
+			<Slider name="$parent_Slider1" inherits="LootIt_ScrollbarTemplate" id="1">
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+							<AbsDimension x="0" y="-190"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Slider>
+			<Slider name="$parent_Slider2" inherits="LootIt_ScrollbarTemplate" id="2">
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+							<AbsDimension x="0" y="-150"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Slider>
+			<Slider name="$parent_Slider3" inherits="LootIt_ScrollbarTemplate" id="3">
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+							<AbsDimension x="0" y="-110"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Slider>
+			<Slider name="$parent_Slider4" inherits="LootIt_ScrollbarTemplate" id="4">
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+							<AbsDimension x="0" y="-70"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Slider>
+			<Slider name="$parent_Slider5" inherits="LootIt_ScrollbarTemplate" id="5">
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+							<AbsDimension x="0" y="-230"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Slider>
+			<!--	CheckButtons	-->
+			<CheckButton name="$parent_CheckButton1" inherits="LootIt_CheckButton_Template" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="30" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_CheckButton3" inherits="LootIt_CheckButton_Template" id="3">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_CheckButton1">
+						<Offset>
+							<AbsDimension x="0" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_CheckButton5" inherits="LootIt_CheckButton_Template" id="5">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_CheckButton3">
+						<Offset>
+							<AbsDimension x="0" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_CheckButton7" inherits="LootIt_CheckButton_Template" id="7">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_CheckButton5">
+						<Offset>
+							<AbsDimension x="0" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_CheckButton9" inherits="LootIt_CheckButton_Template" id="9">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_CheckButton7">
+						<Offset>
+							<AbsDimension x="0" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_CheckButton11" inherits="LootIt_CheckButton_Template" id="11">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_CheckButton9">
+						<Offset>
+							<AbsDimension x="0" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_CheckButton13" inherits="LootIt_CheckButton_Template" id="13">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_CheckButton11">
+						<Offset>
+							<AbsDimension x="0" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_CheckButton15" inherits="LootIt_CheckButton_Template" id="15">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_CheckButton13">
+						<Offset>
+							<AbsDimension x="0" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_CheckButton17" inherits="LootIt_CheckButton_Template" id="17">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_CheckButton15">
+						<Offset>
+							<AbsDimension x="0" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_CheckButton19" inherits="LootIt_CheckButton_Template" id="19">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_CheckButton17">
+						<Offset>
+							<AbsDimension x="0" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_CheckButton21" inherits="LootIt_CheckButton_Template" id="21">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_CheckButton19">
+						<Offset>
+							<AbsDimension x="0" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_CheckButton2" inherits="LootIt_CheckButton_Template" id="2">
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="30" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_CheckButton4" inherits="LootIt_CheckButton_Template" id="4">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_CheckButton2">
+						<Offset>
+							<AbsDimension x="0" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_CheckButton6" inherits="LootIt_CheckButton_Template" id="6">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_CheckButton4">
+						<Offset>
+							<AbsDimension x="0" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_CheckButton8" inherits="LootIt_CheckButton_Template" id="8">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_CheckButton6">
+						<Offset>
+							<AbsDimension x="0" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_CheckButton10" inherits="LootIt_CheckButton_Template" id="10">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_CheckButton8">
+						<Offset>
+							<AbsDimension x="0" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_CheckButton12" inherits="LootIt_CheckButton_Template" id="12">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_CheckButton10">
+						<Offset>
+							<AbsDimension x="0" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_CheckButton14" inherits="LootIt_CheckButton_Template" id="14">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_CheckButton12">
+						<Offset>
+							<AbsDimension x="0" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_CheckButton16" inherits="LootIt_CheckButton_Template" id="16">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_CheckButton14">
+						<Offset>
+							<AbsDimension x="0" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_CheckButton18" inherits="LootIt_CheckButton_Template" id="18">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_CheckButton16">
+						<Offset>
+							<AbsDimension x="0" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_CheckButton20" inherits="LootIt_CheckButton_Template" id="20">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_CheckButton18">
+						<Offset>
+							<AbsDimension x="0" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_CheckButton22" inherits="LootIt_CheckButton_Template" id="22">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_CheckButton20">
+						<Offset>
+							<AbsDimension x="0" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+		</Frames>
+		<Scripts>
+			<OnShow>
+				getglobal(this:GetName().."_Headline"):SetText("LootIt! "..tostring(LI.version).." by Tinsus")
+				LI.OptionsOnShow(this)
+			</OnShow>
+		</Scripts>
+	</Frame>
+	<Frame name="LootIt_ItemFilter" parent="UIParent" inherits="UIPanelBackdropFrame" enableMouse="true" hidden="true" >
+		<Size>
+			<AbsDimension x="500" y="340"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="UIParent" relativePoint="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer>
+				<FontString name="$parent_Headline" inherits="QuestTitleFont" text="LootIt!">
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="5"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="16"/>
+					</FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+		<ResizeBounds>
+			<minResize>
+				<AbsDimension x="300" y="200"/>
+			</minResize>
+			<maxResize>
+				<AbsDimension x="800" y="800"/>
+			</maxResize>
+		</ResizeBounds>
+		<Frames>
+			<Button name="$parent_Close" inherits="UIPanelCloseButtonTemplate">
+				<Size>
+					<AbsDimension x="24" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-1" y="1"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parent_Help" inherits="UIPanelButtonTemplate">
+				<Size>
+					<AbsDimension x="40" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="$parent_Close" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="-3" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						GameTooltip:Hide()
+
+						ToggleUIFrame(LootIt_FilterHelp)
+
+						this:GetParent():Hide()
+					</OnClick>
+					<OnEnter>
+						LI.GameTooltip(this, "ANCHOR_BOTTOMRIGHT", 4, 0, "TOOLTIP_HELPBUTTON")
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="Interface\gamebarframe\gamebar-history-normal.tga"/>
+				<PushedTexture file="Interface\gamebarframe\gamebar-history-depress.tga"/>
+				<HighlightTexture file="Interface\gamebarframe\gamebar-moneyframe.tga" alphaMode="ADD"/>
+			</Button>
+			<Button name="$parent_ResizerButton">
+				<Size>
+					<AbsDimension x="24" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT"/>
+				</Anchors>
+				<Scripts>
+					<OnMouseDown>
+						LootIt_ItemFilter:StartSizing("BOTTOMRIGHT")
+					</OnMouseDown>
+					<OnMouseUp>
+						LootIt_ItemFilter:StopMovingOrSizing()
+						LI.PaintFilterFrame()
+					</OnMouseUp>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\LootIt\Textures\Corner"/>
+				<PushedTexture file="Interface\AddOns\LootIt\Textures\CornerDown"/>
+			</Button>
+			<Button name="$parent_Add" inherits="UIPlusButtonTemplate" enableMouse="true">
+				<Size>
+					<AbsDimension x="20" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="20" y="60"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this:RegisterForClicks("LeftButton", "RightButton")
+					</OnLoad>
+					<OnClick>
+						LI.AddButton(this)
+					</OnClick>
+					<OnEnter>
+						LI.GameTooltip(this, "ANCHOR_BOTTOMRIGHT", 4, 0, "ADD_BUTTON_TOOLTIP")
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+			</Button>
+			<Button name="$parent_Remove" inherits="UIMinusButtonTemplate">
+				<Size>
+					<AbsDimension x="20" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parent_Add" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this:RegisterForClicks("LeftButton", "RightButton")
+					</OnLoad>
+					<OnClick>
+						LI.DelButton(this)
+					</OnClick>
+					<OnEnter>
+						LI.GameTooltip(this, "ANCHOR_BOTTOMRIGHT", 4, 0, "DEL_BUTTON_TOOLTIP")
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+			</Button>
+			<Frame name="$parent_Rolling" inherits="UIDropDownMenuTemplate" enableMouse="true">
+				<Size>
+					<AbsDimension x="100" y="28"/>
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-20" y="60"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnter>
+						LI.GameTooltip(this, "ANCHOR_BOTTOMRIGHT", 4, 0, "ROLL_BUTTON_TOOLTIP")
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+					<OnLoad>
+						LI.LoadRollingDropDown(this)
+					</OnLoad>
+					<OnShow>
+						UIDropDownMenu_SetText(this, LI.Trans("ROLL"))
+					</OnShow>
+				</Scripts>
+			</Frame>
+			<Frame name="$parent_Looting" inherits="UIDropDownMenuTemplate" enableMouse="true">
+				<Size>
+					<AbsDimension x="100" y="28"/>
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="$parent_Rolling" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="-5" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnter>
+						LI.GameTooltip(this, "ANCHOR_BOTTOMRIGHT", 4, 0, "LOOT_BUTTON_TOOLTIP")
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+					<OnLoad>
+						LI.LoadLootingDropDown(this)
+					</OnLoad>
+					<OnShow>
+						UIDropDownMenu_SetText(this, LI.Trans("LOOT"))
+					</OnShow>
+				</Scripts>
+			</Frame>
+			<EditBox name="$parent_Itemname">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_Remove" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="5" y="-14"/>
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_Looting" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="-5" y="14"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\Tooltip-border" tile="true">
+					<EdgeSize>
+						<AbsValue val="10"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="5"/>
+					</TileSize>
+				</Backdrop>
+				<Layers>
+					<Layer>
+						<FontString name="$parent_Title" justifyH="LEFT" inherits="Font_Normal">
+							<Anchors>
+								<Anchor point="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="5" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<FontHeight>
+								<AbsValue val="12"/>
+							</FontHeight>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnEscapePressed>
+						this:ClearFocus()
+					</OnEscapePressed>
+					<OnEnterPressed>
+						LI.AddButton(getglobal(this:GetParent():GetName().."_Add"))
+					</OnEnterPressed>
+					<OnHide>
+						this:ClearFocus()
+					</OnHide>
+					<OnKeyUp>
+						LI.Search(this)
+					</OnKeyUp>
+					<OnEnter>
+						local name = LI.AddCursorItem()
+
+						if name then
+							this:SetText(name)
+							this:ClearFocus()
+
+							LI.Search(this)
+						else
+							LI.FilterExplain(this)
+						end
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+					<OnReceiveDrag>
+						local name = LI.AddCursorItem()
+
+						if name then
+							this:SetText(name)
+							this:ClearFocus()
+
+							LI.Search(this)
+						end
+					</OnReceiveDrag>
+					<OnClick>
+						local name = LI.AddCursorItem()
+
+						if name then
+							this:SetText(name)
+							this:ClearFocus()
+
+							LI.Search(this)
+						end
+					</OnClick>
+				</Scripts>
+				<FontString name="$parent_Text" inherits="GameTooltipFont" justifyH="LEFT">
+					<FontHeight>
+						<AbsValue val="13"/>
+					</FontHeight>
+				</FontString>
+				<TextInsets>
+					<AbsInset left="8" right="4" top="7" bottom="0"/>
+				</TextInsets>
+			</EditBox>
+			<Frame name="$parent_Filterlist" enableMouse="true">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="20" y="80"/>
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-40" y="-10"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\Tooltip-border" bgFile="Interface\SocialFrame\SocialFrame_Contextborder_bg">
+					<EdgeSize>
+						<AbsValue val="10"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="5"/>
+					</TileSize>
+				</Backdrop>
+				<Frames>
+					<Button name="$parent_Item1" inherits="LootIt_FilterButton" id="1"/>
+					<Button name="$parent_Item2" inherits="LootIt_FilterButton" id="2"/>
+					<Button name="$parent_Item3" inherits="LootIt_FilterButton" id="3"/>
+					<Button name="$parent_Item4" inherits="LootIt_FilterButton" id="4"/>
+					<Button name="$parent_Item5" inherits="LootIt_FilterButton" id="5"/>
+					<Button name="$parent_Item6" inherits="LootIt_FilterButton" id="6"/>
+					<Button name="$parent_Item7" inherits="LootIt_FilterButton" id="7"/>
+					<Button name="$parent_Item8" inherits="LootIt_FilterButton" id="8"/>
+					<Button name="$parent_Item9" inherits="LootIt_FilterButton" id="9"/>
+					<Button name="$parent_Item10" inherits="LootIt_FilterButton" id="10"/>
+					<Button name="$parent_Item11" inherits="LootIt_FilterButton" id="11"/>
+					<Button name="$parent_Item12" inherits="LootIt_FilterButton" id="12"/>
+					<Button name="$parent_Item13" inherits="LootIt_FilterButton" id="13"/>
+					<Button name="$parent_Item14" inherits="LootIt_FilterButton" id="14"/>
+					<Button name="$parent_Item15" inherits="LootIt_FilterButton" id="15"/>
+					<Button name="$parent_Item16" inherits="LootIt_FilterButton" id="16"/>
+					<Button name="$parent_Item17" inherits="LootIt_FilterButton" id="17"/>
+					<Button name="$parent_Item18" inherits="LootIt_FilterButton" id="18"/>
+					<Button name="$parent_Item19" inherits="LootIt_FilterButton" id="19"/>
+					<Button name="$parent_Item20" inherits="LootIt_FilterButton" id="20"/>
+					<Button name="$parent_Item21" inherits="LootIt_FilterButton" id="21"/>
+					<Button name="$parent_Item22" inherits="LootIt_FilterButton" id="22"/>
+					<Button name="$parent_Item23" inherits="LootIt_FilterButton" id="23"/>
+					<Button name="$parent_Item24" inherits="LootIt_FilterButton" id="24"/>
+					<Button name="$parent_Item25" inherits="LootIt_FilterButton" id="25"/>
+					<Button name="$parent_Item26" inherits="LootIt_FilterButton" id="26"/>
+					<Button name="$parent_Item27" inherits="LootIt_FilterButton" id="27"/>
+					<Button name="$parent_Item28" inherits="LootIt_FilterButton" id="28"/>
+					<Button name="$parent_Item29" inherits="LootIt_FilterButton" id="29"/>
+					<Button name="$parent_Item30" inherits="LootIt_FilterButton" id="30"/>
+					<Button name="$parent_Item31" inherits="LootIt_FilterButton" id="31"/>
+					<Button name="$parent_Item32" inherits="LootIt_FilterButton" id="32"/>
+					<Button name="$parent_Item33" inherits="LootIt_FilterButton" id="33"/>
+					<Button name="$parent_Item34" inherits="LootIt_FilterButton" id="34"/>
+				</Frames>
+				<Scripts>
+					<OnLoad>
+						for n = 1, 34 do
+							getglobal("LootIt_ItemFilter_Filterlist_Item"..n):ClearAllAnchors()
+							getglobal("LootIt_ItemFilter_Filterlist_Item"..n):SetAnchor("TOPLEFT", "TOPLEFT", LootIt_ItemFilter_Filterlist, 0, n * 20 - 10)
+							getglobal("LootIt_ItemFilter_Filterlist_Item"..n):SetAnchor("BOTTOMRIGHT", "TOPRIGHT", LootIt_ItemFilter_Filterlist, 0, n * 20 + 10)
+						end
+					</OnLoad>
+					<OnShow>
+						LI.PaintFilterFrame()
+					</OnShow>
+					<OnMouseWheel>
+						LI.ScrollBar(LootIt_ItemFilter_ScrollBar, delta * -1)
+					</OnMouseWheel>
+				</Scripts>
+			</Frame>
+			<Slider name="$parent_ScrollBar" inherits="LootIt_FilterScrollbarTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-35" y="100"/>
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-25" y="-30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnValueChanged>
+						LI.PaintFilterFrame()
+					</OnValueChanged>
+				</Scripts>
+			</Slider>
+		</Frames>
+		<Scripts>
+			<OnMouseDown>
+				LootIt_ItemFilter:StartMoving("CENTER")
+			</OnMouseDown>
+			<OnMouseUp>
+				LootIt_ItemFilter:StopMovingOrSizing()
+			</OnMouseUp>
+			<OnShow>
+				LI_FilterCache = nil
+				getglobal(this:GetName().."_Headline"):SetText("LootIt! "..tostring(LI.version))
+			</OnShow>
+		</Scripts>
+	</Frame>
+	<Frame name="LootIt_FrameMover" parent="UIParent" hidden="true" frameLevel="10">
+		<Frames>
+			<Frame name="$parent_6" inherits="LootIt_FrameMover_Template"/>
+			<Frame name="$parent_5" inherits="LootIt_FrameMover_Template"/>
+			<Frame name="$parent_4" inherits="LootIt_FrameMover_Template"/>
+			<Frame name="$parent_3" inherits="LootIt_FrameMover_Template"/>
+			<Frame name="$parent_2" inherits="LootIt_FrameMover_Template"/>
+			<Frame name="$parent_1" inherits="LootIt_FrameMover_Template" enableMouse="true">
+				<Scripts>
+					<OnMouseDown>
+						this:StartMoving("CENTER")
+					</OnMouseDown>
+					<OnMouseUp>
+						this:StopMovingOrSizing()
+					</OnMouseUp>
+				</Scripts>
+				<Frames>
+					<Button name="$parent_Ok" inherits="UIPanelButtonTemplate">
+						<Size>
+							<AbsDimension x="45" y="18"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="70" y="29"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								local _, _, _, d, e = this:GetParent():GetAnchor()
+
+								LI_Data.Options.RollFrameX = d
+								LI_Data.Options.RollFrameY = e
+								LI_Data.Options.RollFrameD = getglobal(this:GetParent():GetName().."_Slider"):GetValue()
+
+								LootIt_FrameMover:Hide()
+								LootIt_Optionen:Show()
+							</OnClick>
+							<OnShow>
+								this:SetText(TEXT("OKAY"))
+							</OnShow>
+						</Scripts>
+					</Button>
+					<Button name="$parent_Reset" inherits="UIPanelButtonTemplate">
+						<Size>
+							<AbsDimension x="45" y="18"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="120" y="29"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								getglobal(this:GetParent():GetName().."_Slider"):SetValue(LI_Data.Options.RollFrameD)
+								this:GetParent():ClearAllAnchors()
+								this:GetParent():SetAnchor("TOPLEFT", "TOPLEFT", UIParent, LI_Data.Options.RollFrameX, LI_Data.Options.RollFrameY)
+							</OnClick>
+							<OnShow>
+								this:SetText(TEXT("OBJ_RESET"))
+								this:GetParent():ClearAllAnchors()
+								this:GetParent():SetAnchor("TOPLEFT", "TOPLEFT", UIParent, LI_Data.Options.RollFrameX, LI_Data.Options.RollFrameY)
+							</OnShow>
+						</Scripts>
+					</Button>
+					<Slider name="$parent_Slider" inherits="LootIt_SliderTemplate">
+						<Size>
+							<AbsDimension x="95" y="15"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="70" y="11"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this:SetValueStepMode("INT")
+								this:SetMinMaxValues(-150, 150)
+								getglobal(this:GetName().."_Value"):ClearAllAnchors()
+								getglobal(this:GetName().."_Value"):SetAnchor("RIGHT", "LEFT", this, -3, 0)
+							</OnLoad>
+							<OnShow>
+								this:SetValue(LI_Data.Options.RollFrameD)
+								getglobal(this:GetName().."_Value"):SetText(this:GetValue())
+
+								LI.PlaceFrames(true)
+							</OnShow>
+							<OnValueChanged>
+								getglobal(this:GetName().."_Value"):SetText(this:GetValue())
+
+								LI.PlaceFrames(true)
+							</OnValueChanged>
+							<OnMouseWheel>
+								LI.ScrollBar(this, delta)
+							</OnMouseWheel>
+						</Scripts>
+						<ThumbTexture file="Interface\BagFrame\BagFrame-Slider-Knob">
+							<Size>
+								<AbsDimension x="16" y="16"/>
+							</Size>
+						</ThumbTexture>
+					</Slider>
+				</Frames>
+			</Frame>
+		</Frames>
+	</Frame>
+	<!-- Chat-Dropdown -->
+	<Frame name="LootIt_ChatDrop" parent="UIParent" inherits="LootIt_ChatDrop_Template" hidden="true" frameStrata="HIGH"/>
+	<!-- RollResult Selection -->
+	<Frame name="LootIt_RollResult" parent="UIParent" inherits="UICommonFrameTemplate" hidden="true">
+		<Size>
+			<AbsDimension x="245" y="300"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Headline" inherits="QuestTitleFont" text="LootIt!">
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="5"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="16"/>
+					</FontHeight>
+				</FontString>
+				<FontString name="$parent_Text0" inherits="GameFontHighlight" justifyH="RIGHT" hidden="true">
+					<Size>
+						<AbsDimension x="70" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="0" y="50"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent_Text1" inherits="GameFontHighlight" justifyH="RIGHT" hidden="true">
+					<Size>
+						<AbsDimension x="70" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="0" y="75"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent_Text2" inherits="GameFontHighlight" justifyH="RIGHT" hidden="true">
+					<Size>
+						<AbsDimension x="70" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="0" y="100"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent_Text3" inherits="GameFontHighlight" justifyH="RIGHT" hidden="true">
+					<Size>
+						<AbsDimension x="70" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="0" y="125"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent_Text4" inherits="GameFontHighlight" justifyH="RIGHT" hidden="true">
+					<Size>
+						<AbsDimension x="70" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="0" y="150"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent_Text5" inherits="GameFontHighlight" justifyH="RIGHT" hidden="true">
+					<Size>
+						<AbsDimension x="70" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="0" y="175"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent_Text6" inherits="GameFontHighlight" justifyH="RIGHT" hidden="true">
+					<Size>
+						<AbsDimension x="70" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="0" y="200"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent_Text7" inherits="GameFontHighlight" justifyH="RIGHT" hidden="true">
+					<Size>
+						<AbsDimension x="70" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="0" y="225"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent_Text8" inherits="GameFontHighlight" justifyH="RIGHT" hidden="true">
+					<Size>
+						<AbsDimension x="70" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="0" y="250"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent_Text9" inherits="GameFontHighlight" justifyH="RIGHT" hidden="true">
+					<Size>
+						<AbsDimension x="70" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="0" y="275"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<Texture name="$parent_Icon1" file="Interface/Addons/LootIt/Textures/roll-pass">
+					<Size>
+						<AbsDimension x="20" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="75" y="30"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="$parent_Icon2" file="Interface/Addons/LootIt/Textures/roll-greed">
+					<Size>
+						<AbsDimension x="20" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="100" y="30"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="$parent_Icon3" file="Interface/Addons/LootIt/Textures/roll-need">
+					<Size>
+						<AbsDimension x="20" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="125" y="30"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="$parent_Icon4" file="Interface/Addons/LootIt/Textures/loot-loot">
+					<Size>
+						<AbsDimension x="20" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="150" y="30"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="$parent_Icon5" file="Interface/craftframe/craftcreate_normal">
+					<Size>
+						<AbsDimension x="20" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="175" y="30"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="$parent_Icon6" file="Interface/craftframe/craftstopcreate_normal">
+					<Size>
+						<AbsDimension x="20" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="200" y="30"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<CheckButton name="$parent_Button01" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="75" y="50"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button02" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="100" y="50"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button03" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="125" y="50"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button04" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="150" y="50"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button05" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="175" y="50"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button06" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="200" y="50"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button11" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="75" y="75"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button12" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="100" y="75"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button13" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="125" y="75"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button14" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="150" y="75"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button15" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="175" y="75"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button16" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="200" y="75"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button21" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="75" y="100"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button22" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="100" y="100"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button23" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="125" y="100"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button24" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="150" y="100"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button25" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="175" y="100"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button26" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="200" y="100"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button31" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="75" y="125"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button32" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="100" y="125"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button33" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="125" y="125"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button34" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="150" y="125"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button35" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="175" y="125"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button36" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="200" y="125"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button41" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="75" y="150"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button42" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="100" y="150"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button43" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="125" y="150"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button44" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="150" y="150"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button45" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="175" y="150"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button46" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="200" y="150"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button51" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="75" y="175"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button52" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="100" y="175"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button53" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="125" y="175"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button54" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="150" y="175"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button55" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="175" y="175"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button56" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="200" y="175"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button61" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="75" y="200"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button62" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="100" y="200"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button63" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="125" y="200"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button64" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="150" y="200"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button65" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="175" y="200"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button66" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="200" y="200"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button71" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="75" y="225"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button72" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="100" y="225"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button73" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="125" y="225"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button74" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="150" y="225"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button75" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="175" y="225"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button76" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="200" y="225"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button81" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="75" y="250"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button82" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="100" y="250"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button83" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="125" y="250"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button84" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="150" y="250"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button85" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="175" y="250"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button86" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="200" y="250"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button91" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="75" y="275"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button92" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="100" y="275"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button93" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="125" y="275"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button94" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="150" y="275"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button95" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="175" y="275"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button96" inherits="LootIt_RollResultButton_Template">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="200" y="275"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+		</Frames>
+		<Scripts>
+			<OnShow>
+				for i = 0, LI.QualityCount do
+					getglobal(this:GetName().."_Text"..i):Show()
+					getglobal(this:GetName().."_Text"..i):SetText(LI.GetQualityString(i))
+
+					for j = 1, 6 do
+						getglobal(this:GetName().."_Button"..i..j):Show()
+					end
+				end
+
+				getglobal(this:GetName().."_Headline"):SetText(LI.Trans("RESULTWINDOW_HEADLINE"))
+
+				LootIt_RollResult:SetSize(245, (3 + LI.QualityCount) * 25)
+			</OnShow>
+			<OnHide>
+				LootIt_Optionen:Show()
+			</OnHide>
+		</Scripts>
+	</Frame>
+	<Frame name="LootIt_History" parent="UIParent" hidden="true">
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset>
+					<AbsDimension x="20" y="80"/>
+				</Offset>
+			</Anchor>
+			<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT">
+				<Offset>
+					<AbsDimension x="-40" y="-10"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Button name="$parent_Move" inherits="UIPanelAnchorFrameTemplate">
+				<Size>
+					<AbsDimension x="12" y="12"/>
+				</Size>
+				<NormalTexture file="Interface\AddOns\LootIt\Textures\Corner"/>
+				<PushedTexture file="Interface\AddOns\LootIt\Textures\CornerDown"/>
+			</Button>
+			<Button name="$parent_Item1" inherits="LootIt_ItemButton" id="1"/>
+			<Button name="$parent_Item2" inherits="LootIt_ItemButton" id="2"/>
+			<Button name="$parent_Item3" inherits="LootIt_ItemButton" id="3"/>
+			<Button name="$parent_Item4" inherits="LootIt_ItemButton" id="4"/>
+			<Button name="$parent_Item5" inherits="LootIt_ItemButton" id="5"/>
+			<Button name="$parent_Item6" inherits="LootIt_ItemButton" id="6"/>
+			<Button name="$parent_Item7" inherits="LootIt_ItemButton" id="7"/>
+			<Button name="$parent_Item8" inherits="LootIt_ItemButton" id="8"/>
+			<Button name="$parent_Item9" inherits="LootIt_ItemButton" id="9"/>
+			<Button name="$parent_Item10" inherits="LootIt_ItemButton" id="10"/>
+			<Button name="$parent_Item11" inherits="LootIt_ItemButton" id="11"/>
+			<Button name="$parent_Item12" inherits="LootIt_ItemButton" id="12"/>
+			<Button name="$parent_Item13" inherits="LootIt_ItemButton" id="13"/>
+			<Button name="$parent_Item14" inherits="LootIt_ItemButton" id="14"/>
+			<Button name="$parent_Item15" inherits="LootIt_ItemButton" id="15"/>
+			<Button name="$parent_Item16" inherits="LootIt_ItemButton" id="16"/>
+			<Button name="$parent_Item17" inherits="LootIt_ItemButton" id="17"/>
+			<Button name="$parent_Item18" inherits="LootIt_ItemButton" id="18"/>
+			<Button name="$parent_Item19" inherits="LootIt_ItemButton" id="19"/>
+			<Button name="$parent_Item20" inherits="LootIt_ItemButton" id="20"/>
+			<Button name="$parent_Item21" inherits="LootIt_ItemButton" id="21"/>
+			<Button name="$parent_Item22" inherits="LootIt_ItemButton" id="22"/>
+			<Button name="$parent_Item23" inherits="LootIt_ItemButton" id="23"/>
+			<Button name="$parent_Item24" inherits="LootIt_ItemButton" id="24"/>
+			<Button name="$parent_Item25" inherits="LootIt_ItemButton" id="25"/>
+			<Button name="$parent_Item26" inherits="LootIt_ItemButton" id="26"/>
+			<Button name="$parent_Item27" inherits="LootIt_ItemButton" id="27"/>
+			<Button name="$parent_Item28" inherits="LootIt_ItemButton" id="28"/>
+			<Button name="$parent_Item29" inherits="LootIt_ItemButton" id="29"/>
+			<Button name="$parent_Item30" inherits="LootIt_ItemButton" id="30"/>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				for n = 2, 30 do
+					getglobal("LootIt_History_Item"..n):ClearAllAnchors()
+					getglobal("LootIt_History_Item"..n):SetAnchor("BOTTOMLEFT", "TOPLEFT", getglobal("LootIt_History_Item"..(n - 1)), 0, 0)
+				end
+
+				LootIt_History_Item1:ClearAllAnchors()
+				LootIt_History_Item1:SetAnchor("BOTTOMRIGHT", "BOTTOMRIGHT", LootIt_History_Move, -6, -6)
+			</OnLoad>
+		</Scripts>
+	</Frame>
+	<!-- Own Tooltip -->
+	<GameTooltip name="LootIt_GameTooltip" inherits="GameTooltipTemplate" hidden="true">
+		<Scripts>
+			<OnShow>
+				this:Hide()
+
+				local _, _, frame = GameTooltip:GetAnchor()
+
+				if (frame and not string.find(string.lower(frame:GetName()), "bag")) or (LI_Data and LI_Data.Options and LI_Data.Options.noscantip) then
+					GameTooltip1:Hide()
+					GameTooltip2:Hide()
+				end
+			</OnShow>
+		</Scripts>
+	</GameTooltip>
+	<GameTooltip name="LootIt_GameTooltip2" inherits="GameTooltipTemplate" hidden="true">
+		<Scripts>
+			<OnShow>
+				LootIt_GameTooltip2:SetOwner(LootIt_FilterHelp, "ANCHOR_RIGHT", 4, 0)
+
+				GameTooltip1:Hide()
+				GameTooltip2:Hide()
+			</OnShow>
+		</Scripts>
+	</GameTooltip>
+	<Frame name="LootIt_FilterHelp" parent="UIParent" inherits="UIPanelBackdropFrame" enableMouse="true" hidden="true" >
+		<Size>
+			<AbsDimension x="360" y="260"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="UIParent" relativePoint="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer>
+				<FontString name="$parent_Headline" inherits="QuestTitleFont" text="LootIt!">
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="5"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="16"/>
+					</FontHeight>
+				</FontString>
+				<FontString name="$parent_Result" inherits="QuestTitleFont" text="">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="0" y="90"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="16"/>
+					</FontHeight>
+				</FontString>
+				<FontString name="$parent_Tipp1" inherits="QuestFont" text="">
+					<Size>
+						<AbsDimension x="300" y="50"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP" relativeTo="$parent_Result" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="0" y="25"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="12"/>
+					</FontHeight>
+				</FontString>
+				<FontString name="$parent_Tipp2" inherits="QuestFont" text="">
+					<Size>
+						<AbsDimension x="300" y="50"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP" relativeTo="$parent_Tipp1" relativePoint="BOTTOM">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="12"/>
+					</FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parent_Close" inherits="UIPanelCloseButtonTemplate">
+				<Size>
+					<AbsDimension x="24" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-1" y="1"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parent_Add" inherits="UIPlusButtonTemplate" enableMouse="true">
+				<Size>
+					<AbsDimension x="35" y="35"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOM" relativePoint="BOTTOM">
+						<Offset>
+							<AbsDimension x="0" y="-7"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						LootIt_ItemFilter_Itemname:SetText(LootIt_FilterHelp_Filtername_Text:GetText())
+
+						LootIt_FilterHelp:Hide()
+					</OnClick>
+					<OnEnter>
+						LI.GameTooltip(this, "ANCHOR_BOTTOMRIGHT", 4, 0, "TUTORIAL_ADD_BUTTON")
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+			</Button>
+			<EditBox name="$parent_Itemname">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="95" y="30"/>
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-15" y="55"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\Tooltip-border" tile="true">
+					<EdgeSize>
+						<AbsValue val="10"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="5"/>
+					</TileSize>
+				</Backdrop>
+				<Layers>
+					<Layer>
+						<FontString name="$parent_Title" justifyH="RIGHT" inherits="Font_Normal">
+							<Anchors>
+								<Anchor point="RIGHT" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="-2" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<FontHeight>
+								<AbsValue val="10"/>
+							</FontHeight>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnEscapePressed>
+						this:ClearFocus()
+					</OnEscapePressed>
+					<OnEditFocusGained>
+						this:ClearFocus()
+					</OnEditFocusGained>
+					<OnHide>
+						this:ClearFocus()
+					</OnHide>
+					<OnEnter>
+						local name = LI.AddCursorItem(false)
+
+						if name then
+							getglobal(this:GetName().."_Text"):SetText(name)
+						else
+							LI.GameTooltip(this, "ANCHOR_BOTTOMRIGHT", 4, 0, "EXAMPLE_LINK_HELP")
+						end
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+					<OnReceiveDrag>
+						local name = LI.AddCursorItem(false)
+
+						if name then
+							getglobal(this:GetName().."_Text"):SetText(name)
+						end
+
+						local link, filter = getglobal(this:GetParent():GetName().."_Itemname_Text"):GetText(), getglobal(this:GetParent():GetName().."_Filtername_Text"):GetText()
+
+						LootIt_FilterHelp_Result:SetText(LI.CheckTutorial(link, filter).."\n"..string.gsub(LI.LastResult, "  ", " "))
+						LootIt_FilterHelp_Tipp1:SetText(LI.TutorialTipp(filter, true))
+						LootIt_FilterHelp_Tipp2:SetText(LI.TutorialTipp(filter, false))
+					</OnReceiveDrag>
+					<OnClick>
+						local name = LI.AddCursorItem(false)
+
+						if name then
+							getglobal(this:GetName().."_Text"):SetText(name)
+						end
+					</OnClick>
+					<OnUpdate>
+						if not this.link or this.link ~= getglobal(this:GetName().."_Text"):GetText() then
+							this.link = getglobal(this:GetName().."_Text"):GetText()
+
+							for i = 1, 20 do
+								getglobal("LootIt_GameTooltip2TextLeft"..i):SetText("")
+								getglobal("LootIt_GameTooltip2TextRight"..i):SetText("")
+							end
+
+							LootIt_GameTooltip2:SetHyperLink(this.link)
+
+							if yaCIt then
+								yaCIt.ShowTooltipBySelf(LootIt_GameTooltip2)
+							end
+						end
+					</OnUpdate>
+				</Scripts>
+				<FontString name="$parent_Text" inherits="GameTooltipFont" justifyH="LEFT">
+					<FontHeight>
+						<AbsValue val="13"/>
+					</FontHeight>
+				</FontString>
+				<TextInsets>
+					<AbsInset left="8" right="4" top="7" bottom="0"/>
+				</TextInsets>
+			</EditBox>
+			<EditBox name="$parent_Filtername">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_Itemname" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="5"/>
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_Itemname" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="0" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\Tooltip-border" tile="true">
+					<EdgeSize>
+						<AbsValue val="10"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="5"/>
+					</TileSize>
+				</Backdrop>
+				<Layers>
+					<Layer>
+						<FontString name="$parent_Title" justifyH="RIGHT" inherits="Font_Normal">
+							<Anchors>
+								<Anchor point="RIGHT" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="-2" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<FontHeight>
+								<AbsValue val="10"/>
+							</FontHeight>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnEscapePressed>
+						this:ClearFocus()
+					</OnEscapePressed>
+					<OnHide>
+						this:ClearFocus()
+					</OnHide>
+					<OnEnter>
+						LI.GameTooltip(this, "ANCHOR_BOTTOMRIGHT", 4, 0, "EXAMPLE_FILTER_HELP")
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+					<OnKeyUp>
+						local link, filter = getglobal(this:GetParent():GetName().."_Itemname_Text"):GetText(), getglobal(this:GetParent():GetName().."_Filtername_Text"):GetText()
+
+						LootIt_FilterHelp_Result:SetText(LI.CheckTutorial(link, filter).."\n"..string.gsub(LI.LastResult, "  ", " "))
+						LootIt_FilterHelp_Tipp1:SetText(LI.TutorialTipp(filter, true))
+						LootIt_FilterHelp_Tipp2:SetText(LI.TutorialTipp(filter, false))
+					</OnKeyUp>
+				</Scripts>
+				<FontString name="$parent_Text" inherits="GameTooltipFont" justifyH="LEFT">
+					<FontHeight>
+						<AbsValue val="13"/>
+					</FontHeight>
+				</FontString>
+				<TextInsets>
+					<AbsInset left="8" right="4" top="7" bottom="0"/>
+				</TextInsets>
+			</EditBox>
+		</Frames>
+		<Scripts>
+			<OnShow>
+				getglobal(this:GetName().."_Headline"):SetText("LootIt! "..tostring(LI.version))
+				getglobal(this:GetName().."_Itemname_Title"):SetText(LI.Trans("HELP_ITEMLINK"))
+				getglobal(this:GetName().."_Filtername_Title"):SetText(LI.Trans("HELP_FILTER"))
+
+				if LootIt_FilterHelp_Itemname.link then
+					LootIt_GameTooltip2:SetHyperLink(LootIt_FilterHelp_Itemname.link)
+
+					if yaCIt then
+						yaCIt.ShowTooltipBySelf(LootIt_GameTooltip2)
+					end
+				end
+
+				LootIt_FilterHelp_Tipp1:SetText(LI.TutorialTipp("", true))
+				LootIt_FilterHelp_Tipp2:SetText(LI.TutorialTipp("", false))
+			</OnShow>
+			<OnHide>
+				LootIt_ItemFilter:Show()
+				LootIt_GameTooltip2:Hide()
+			</OnHide>
+			<OnMouseDown>
+				LootIt_GameTooltip2:Hide()
+
+				this:StartMoving("CENTER")
+			</OnMouseDown>
+			<OnMouseUp>
+				this:StopMovingOrSizing()
+
+				if LootIt_FilterHelp_Itemname.link then
+					LootIt_GameTooltip2:SetHyperLink(LootIt_FilterHelp_Itemname.link)
+
+					if yaCIt then
+						yaCIt.ShowTooltipBySelf(LootIt_GameTooltip2)
+					end
+				end
+			</OnMouseUp>
+		</Scripts>
+	</Frame>
+</Ui>

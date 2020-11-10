@@ -1,0 +1,64 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+    
+    <Frame name="yGather_Worldmap10ResourceIconsTemplate" virtual="true">
+        <Frames>
+            <Frame name="$parent0" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent1" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent2" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent3" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent4" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent5" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent6" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent7" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent8" inherits="yGather_ResourceIconTemplate"/>
+            <Frame name="$parent9" inherits="yGather_ResourceIconTemplate"/>
+        </Frames>
+    </Frame>
+    
+    <Frame name="yGather_WorldmapResource100ResourceIconsTemplate" virtual="true">
+        <Frames>
+            <Frame name="$parent0" inherits="yGather_Worldmap10ResourceIconsTemplate"/>
+            <Frame name="$parent1" inherits="yGather_Worldmap10ResourceIconsTemplate"/>
+            <Frame name="$parent2" inherits="yGather_Worldmap10ResourceIconsTemplate"/>
+            <Frame name="$parent3" inherits="yGather_Worldmap10ResourceIconsTemplate"/>
+            <Frame name="$parent4" inherits="yGather_Worldmap10ResourceIconsTemplate"/>
+            <Frame name="$parent5" inherits="yGather_Worldmap10ResourceIconsTemplate"/>
+            <Frame name="$parent6" inherits="yGather_Worldmap10ResourceIconsTemplate"/>
+            <Frame name="$parent7" inherits="yGather_Worldmap10ResourceIconsTemplate"/>
+            <Frame name="$parent8" inherits="yGather_Worldmap10ResourceIconsTemplate"/>
+            <Frame name="$parent9" inherits="yGather_Worldmap10ResourceIconsTemplate"/>
+        </Frames>
+    </Frame>
+    
+	<Frame name="yGather_WorldmapViewFrame" parent="WorldMapViewFrame">
+		<Anchors>
+			<Anchor point="TOPLEFT"/>
+			<Anchor point="BOTTOMRIGHT"/>
+		</Anchors>
+        <Frames>
+            <Frame name="yGather_WorldmapResourceIcon0" inherits="yGather_WorldmapResource100ResourceIconsTemplate"/>
+            <Frame name="yGather_WorldmapResourceIcon1" inherits="yGather_WorldmapResource100ResourceIconsTemplate"/>
+            <Frame name="yGather_WorldmapResourceIcon2" inherits="yGather_WorldmapResource100ResourceIconsTemplate"/>
+            <Frame name="yGather_WorldmapResourceIcon3" inherits="yGather_WorldmapResource100ResourceIconsTemplate"/>
+            <Frame name="yGather_WorldmapResourceIcon4" inherits="yGather_WorldmapResource100ResourceIconsTemplate"/>
+            <Frame name="yGather_WorldmapResourceIcon5" inherits="yGather_WorldmapResource100ResourceIconsTemplate"/>
+        </Frames>
+		<Scripts>
+            <OnLoad>
+                yGather.worldmap:InitializeIcons();
+            </OnLoad>
+			<OnShow>
+                local updateFunction = function()
+                    yGather.worldmap:UpdateIcons();
+                end
+				yGather.settings.AddListener(this, updateFunction);
+				yGather.database.AddListener(this, updateFunction);
+                yGather.worldmap:UpdateIcons();
+			</OnShow>
+			<OnHide>
+				yGather.settings.RemoveListener(this);
+				yGather.database.RemoveListener(this);
+			</OnHide>
+		</Scripts>
+	</Frame>
+</Ui>

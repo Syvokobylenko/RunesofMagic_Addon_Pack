@@ -1,0 +1,341 @@
+6/16/2012 - 1.59
+- [Fix] Quest Dumper not saving locations.
+* [ToDo] Finish Recoding AQB :)
+
+6/14/2012 - 1.58
+- [Fix] *Frame nil value errors / Broken Tips due to error.
+- [Fix] Quest Icon Setting not functioning as intended.
+* [ToDo] Currently lots - Recoding AQB - Stay Tuned!
+
+6/12/2012 - 1.57
+- [Search Database] v.5.0.0.2538
+- [Update] Quest Items and NPC Start/End Values
+- [Update] Zones String File
+- [Change] No longer considering project Beta - Now Release
+* [ToDo] Update Zone ID Data if needed + Much More :)
+
+6/10/2012 - 1.56 Beta
+- [AQB Database] v.2.544
+- [Change] Recode config check
+- [Enhancement] Added Map Icon Config.
+- [Change] Moved Icon Config Options to new Icon Config Panel.
+- [Enhancement] Config settings now dynamic (no more clicking Save/Close)
+- [Enhancement] Config toggle using Config buttons (Save/Close buttons removed)
+- [Fix] Moved Map Notes draggable icon to titlebar of World Map.
+- [Fix] AQB Config now opens above World Map for easy config access.
+- [Enhancement] Selecting options with World Map open dynamically re-maps icons.
+
+6/3/2012 - 1.48 Beta
+- [AQB Database] v.2.400 (Many Quests containing invalid data removed for now)
+- [Search Database] v.4.0.11.2531
+- [Update] Quest Item and NPC Start/End Values.
+- [Update] Snoop Transports
+- [Update] Zone Data
+* [ToDo] Double check all quests database for misc issues (missing/invalid id's etc..)
+* [ToDo] Still much to do ;)
+
+6/1/2012 - 1.391 Beta
+- No changes, working on my EN/US client. Please PM on curseforge any issues.
+
+9/6/2010 - 1.39 Beta
+- [AQB Database] v.2.563
+- [Localization] Brazilian support "Aventura Eterna" officially added - Thanks ackhart!
+- [Bug] Fixed an issue with item locations not being saved by quest dumper (broken in one of the recent patches)
+- [Fix] Fixed many of the issues regarding quest details getting id's parsed. (Some are still in need of review.)
+- [Feature] Quests in AQB can now be linked into chat. (Shift+Click Quest Name in List)
+- [UI Adjustment] Aligned text to the left in the list boxes.
+- [Feature] Added many Daily Quest locations/Icons (Still more to be added)
+- [Files] Made some slight changes to some of AQB file locations. Moved some from lib to lib/db
+* [ToDo] Will add option to config to show/hide daily icons.
+* [ToDo] Still much other stuff to do ;)
+
+8/21/2010 - 1.38 Beta
+- [AQB Database] v.2.162
+- [Bug] Fixed bug introduced in a previous RoM patch that caused Finish Flags to not show for quests.
+- [Enhancement] Added a few Snoop Transports for the new Continent.
+- [Feature] You can now add custom notes with icons to the map.
+- [Info] Custom Notes are saved "Per Character".
+* [ToDo] Add feature to share Custom Notes similar to Quest Share.
+* [ToDo] Fix missed parsed item strings etc..
+* [ToDo] Find/Add any missing Snoop Transports, etc...
+* [ToDo] Still much to do ;)
+
+8/15/2010 - 1.36 Beta
+- [AQB Database] v.2.155
+- [Search Database] v.3.0.3.2241
+- [Feature] Added a button which opens a new panel showing donators of AQB.
+- [Feature] Increased search results to 8k, any issues please inform me.
+- [Enhancement] Moved several language strings into the dynamic system.
+- [Localization] Was informed that English is fine for Philippines Servers. PH File added. Thnx phatmonkey!
+* [ToDo] Find/Add any missing Snoop Transports, etc...
+* [ToDo] Still much to do. I am a little behind, but that will change in the near future :)
+
+1/12/2010 - 1.35 Beta
+- [Localization] Chinese support added - Thanks rainycc
+- [Localization] Japanese language file updated - Thanks Yamabuki
+- No other changes
+
+1/10/2010 - 1.341 Beta
+- [Database Version] v.2.143
+- [Bug] Fixed missing item icon names.
+- No other changes, more will follow at a later date.
+
+10/22/2009 - 1.34 Beta
+- [Localization] Taiwan support added - Thanks antonyliaw
+
+10/21/2009 - 1.33 Beta
+- [Bug] Fixed error caused from checking old quest data on new install of AQB. (Hotfix)
+- [Localization] Korean support officially added - Thanks again Britz
+
+10/20/2009 - 1.32 Beta
+- [Enhancement] Dynamic pattern system is in place.
+- [Localization] Updated ES language file - Thanks Eklypse76
+- [Localization] Korean UI translation added, not enabled yet however - Thanks Britz
+- [Bug] Finished icons that were previously broken during pattern updates now working :)
+- [Enhancement] Trimmed down the dump data gathered on EN clients. (Less information dumped to SaveVars)
+* [ToDo] Korean server opens 10/21 - Need testing to make sure everything works properly.
+* [ToDo] Anyone playing on Chinese servers, please contact me for adding UI support to your client.
+
+10/18/2009 - 1.3 Beta
+- [Localization] Japanese support added - Thanks yamabuki for translation of the UI
+- [Localization] German language file updated - Thanks suchiman
+- [Enhancement] Dynamic created patterns should help with adding more languages.
+- [Bug] Fixed some names not being parsed correctly in quest descriptions.
+- [Bug] Fixed orange icons not disappearing with "Sticky Icons" option unchecked.
+- [Change] Adjusted item icons (orange icons) on World Map - slightly smaller.
+* [ToDo] Need translators for Korean, Chinese, and others. Please contact me :)
+
+10/17/2009 - v.1.2 Beta
+- [Database Version] v.2.093
+- [Major Update] No more need for text databases per language, AQB zip just went on a diet! :)
+- [Bug] Error when clicking Finish Flag - resolved
+- [Bug] Error when clicking Shared Flag - resolved
+- [Localization] French language file updated - Thanks upurii
+- [Bug] AQB reported settings updated every load even when the version has not changed - resolved
+- [Feature] You can now see if you have completed a quest or not when searching quests in AQB.
+
+10/14/2009 - v.1.02 Beta
+- [Bug] Fixed occasions when Quest Share would hide all whisper frames. (Thanks Mavoc for reporting the issue!)
+- [Enchancement] Better handling of Whispers when using Quest Share.
+- [Bug] Fixed AQB showing message for not finding AddonManager more than once per version update.
+- [Localization] Text for level 50 Elite Trainer was hard coded, now properly using the language files.
+* [ToDo] Working on various quest language fixes, may take some time to correct, but will get it done :)
+* No other changes.
+
+10/12/2009 - v.1.01 Beta
+- [Database Version] v.2.034
+- [Localization] Some language file updates/corrections.
+- [Update] Added Map icons for Snoop Teleport at Titans' Hill in Aotulia Volcano
+- [Bug] Fixed Minibook Toggle option (did not realize it was not working anymore)
+- [Fix] Fixed almost all the zones that were not being parsed correctly.
+- [UI] Adjusted French UI layout to properly fit UI Elements.
+- [Change] Reenabled Icon click to Move (some still may not work however)
+- [Search Database] v.2.1.1.1909
+- [Thanks] Thanks to Eklypse76, upurii, and Amiya for translations!
+
+10/6/2009 - v.1.0 Beta
+- [Database Version] v.2.009
+- [Major Update] Revamped the way the quest database is utilized.
+- [Change] All databases now use the same Database Version.
+- [Update] Most (if not all) quests are searchable in the database now (even those that have no coords yet).
+- [Change] Advanced Quest Dumper is only avail for English clients (coords and changes are centralized around the EN database)
+- [Enhancement] Icons should now redraw if the map scale is changed.
+- [Fix] UI has been adjusted to fit properly on other languages.
+* [ToDo] Some zone texts in descriptions are not being parsed by the game properly, need to figure it out..
+* [ToDo] Need French language file translated, any volunteers? :)
+
+9/20/2009 - v.0.96 Beta
+- [Feature] - Added Airship Icon locations to world map. (Toggle on/off with Option for Snoop)
+- [Change] - Moved Snoop and Map information to localized files.
+- [Update] EN quest database, version 1.994
+- [Update] DE quest database, version 1.942
+- [Update] FR quest database, version 0.856
+- [Update] ES quest database, version 0.442
+
+9/18/2009 - v.0.952 Beta
+- [Bug] Fixed DE language files error.
+- No other changes.
+
+9/17/2009 - v.0.951 Beta
+- [File Format] Accidentally saved the pattern strings as ANSI (should be UTF8) - Resolved (thanks AugustoJunk)
+- [Update] EN quest database, version 1.984
+- [Update] DE quest database, version 1.899
+- [Update] FR quest database, version 0.781
+- [Update] ES quest database, version 0.273
+
+9/16/2009 - v.0.95 Beta
+- [Bug] Error "unfinished string" when opening world map on DE clients. - Resolved.
+- [Enhancement] Quest Dumper Count now updates if config is open.
+- [Update] Added New Map Location ID's
+- [Update] Added missing Map ID's to map files.
+- [Update] Snoop Location for Elven Island added.
+- [Update] Snoop Location for Savage Lands added.
+- [Update] EN quest database, version 1.813
+- [Update] DE quest database, version 1.784
+- [Update] ES quest database, version 0.126
+- [No Update] No new quests found for FR.
+
+9/15/2009 - v.0.941 Beta
+- [Minor Fix] - Forgot to set share button back to hidden by default doh! - resolved.
+- Updated EN quest database, version 1.680
+- Updated DE quest database, version 1.673
+- Updated FR quest database, version 0.744
+- Updated ES quest database, version 0.117
+
+9/10/2009 - v.0.94 Beta
+- [Enhancement] Better error detection - detection frame loaded before rest of addon.
+- [Bug] Minimap button gets stuck to cursor. - resolved.
+- [Bug] Error when opening Map - (Unable to reproduce, but should be resolved via error detect).
+- [Language Support] Spanish Quest Dumper Support Added
+- [Change] Moved string patterns out of local files and into lib.
+- Updated EN quest database, version 1.673
+- Updated DE quest database, version 1.663
+- Updated FR quest database, version 0.722
+
+9/6/2009 - v.0.93 Beta
+- [Bug] GameTooltip Clipping - resolved - Special thanks to DFlame for reporting it and providing the fix!
+- [Enhancement] Option added to Config Panel, toggles showing a message when a quest is dumped
+- [Language Support] More German translation - Special thanks to Amiya
+- [Bug] Sometimes after leaving a party, share data still shows on map. - resolved.
+- Updated EN quest database, version 1.664
+- Updated DE quest database, version 1.525
+- Updated FR quest database, version 0.177
+
+8/26/2009 - v.0.92 Beta
+- Added Weeping Coast Snoop Location on World Map.
+- Minor adjustments to some UI XML code.
+- Updated EN quest database, version 1.547
+- Updated DE quest database, version 1.222
+- Updated FR quest database, version 0.032
+
+8/24/2009 - v.0.91 Beta
+- [Bug] AdvQuestBookShareFrames Onupdate 246 table expected got nil - resolved
+- [Language Support] French Quest Dumper Support Added
+- [Bug] AQB_DECVAL a string value in DE clients - resolved
+- [Bug] AQB_TTW nil value - resolved
+- Updated EN quest database, version 1.329
+- Updated DE quest database, version .938
+
+8/22/2009 - v.0.90 Beta
+- Renamed Share Updater XML
+- Added Shared Quest plotting on World Map along with new color icons.
+- Added option to config panel to show/hide shared quests on World Map
+- Shared Quest Data should now be less likely to show in whisper (not 100% sure of large parties yet!)
+- Added some notification of receiving or not receiving share data.
+- ReloadUI in config is now disabled when Advanced Quest Dumper is enabled.
+- Updated EN quest database, version 1.311
+- Updated DE quest database, version .844
+
+8/18/2009 - v.0.89 Beta
+- Just database updates this time around.
+- Updated EN quest database, version 1.239
+- Updated DE quest database, version .522
+
+8/14/2009 - v.0.89 Beta
+- Just database updates this time around.
+- Updated EN quest database, version 1.099
+- Updated DE quest database, version .415
+
+8/12/2009 - v.0.89 Beta
+- Added Elite Trainer locations to the World Map
+- Option added to toggle showing Elite Trainers.
+- Changed default config checking to fill in empty options.
+- Fixed index icon automoveto popping errors occassionally.
+- Added Readme to addon folder. DE Translation needed.
+- Added error check to close error window and log it to savevars (empties list when game is restarted)
+- Updated EN quest database, version 1.030
+- Updated DE quest database, version .304
+
+8/9/2009 - v.0.881 Beta
+- Updated EN quest database, version .969
+- Updated DE quest database, version .249
+- Fixed minor issues with Help button not being set back to Open.
+- Removed annoyance of settings being reset to default on new version number.
+
+8/8/2009 - v.0.88 Beta
+- Updated help section with accurate information regarding Quest Share.
+- Minor adjustment to Search Results and Details scrollbar buttons.
+- Cleaned Up/Removed some redundant leftover code.
+- DE translation to the AQB Panel - Special thanks to (Danke zu) Suchiman
+- Updated EN quest database, version .923
+- Updated DE quest database, version .118
+
+8/5/2009 - v.0.87 Beta
+- German (DE) Quest Dumper Support Added. (It will take some time to get quests into the database)
+- Snoop Teleporter locations added to map.
+- Option added to toggle showing Snoop Transport locations.
+- Snoop Transport icons show where they are able to link to.
+- Snoop icons colored blue if player meets recommended level, otherwise they are orange.
+- Automove fixed and added for Index, Item, Finished and Snoop Transport icons.
+- Added Purge Data button for Quest Dumper (Save/Close no longer deletes dump data)
+- Fixed language detection.
+- Fixed "Language Not Supported" message, not related to lang detection, related to misuse of "or" :P
+- Scrollbars for Searching and Quest Share are now fully functional.
+- Search limit raised to 100
+- Quest Share limit raised to the full 30 per player.
+- Updated to quest database, version .825
+
+8/2/2009 - v.0.85 Beta
+- Optimized icon plotting code.
+- Formatted icon xmls to proper templates.
+- Added mouseover for item icons with item name/coords.
+- Added new highlight to index/item icons.
+- Framstrata changed on icons making them visible above default game icons.
+- Index icon size slightly increased to allow mouseover when an item is on the same icon.
+- Enhanced icon edges making them more visible.
+- Mini icon can now be locked. Border is hidden when locked. (Right click to toggle)
+- Help section added in the AQB Config Panel.
+- Treasure Hunt 4 coords fixed. (thnx Daelic for pointing it out)
+- Fixed error message issue when opening the World Map while AQB Panel is open. 
+- Preserve Incomplete option added for Quest Dumper. (See help in config panel for details)
+- XP is now XP on Tooltips as is TP (they were reversed) Fixed. (Thanks Steffe2 for pointing it out)
+- Revamped database indexing system to further reduce memory overhead.
+- Added coordinate for entrance to Strange Substance instance entrance.
+- Experimental New Feature - Quest Share added. See ingame help section on config panel.
+- Updated to quest database, version .765
+
+7/27/2009 - v.0.8 Beta
+- Updated to quest database, version .707
+
+7/26/2009 - v.0.8 Beta
+- Fixed issue with some icons not showing up in the case of multiple items for a quest.
+- Fixed framelevel "bleed through" issue with details scroll frame and config frame.
+- Fixed details scrollframe "disappearing" scroll bug.
+- Reworked icon plotting on World Map.
+- Updated to quest database, version .652
+- Added config option to show/hide recommended level on tooltips.
+- Added config option to show/hide quest description on tooltips.
+- Added floating/movable/clickable book icon if AddonManager is not installed.
+- Added option to show/hide minibutton if AddonManager is not installed.
+
+7/25/2009 - v.0.7 Beta
+- Fixed major bug with icons showing in incorrect zones.
+- Fixed bug with Capture Wild Fungi icons not showing on map in Fungus Garden.
+- Fixed redrawing of icons on World Map switch.
+- Reduced overhead of data loaded into memory when opening World Map and AQB Lookup Panel.
+- Quest Dumper no longer dumps quests already in database.
+- Config panel shows how many new quests are dumped.
+
+7/23/2009 - v.0.5 Beta
+- Update to quest database, version .643
+- Added config panel along with some options
+- Advanced Quest Dumper added.
+
+7/22/2009 - v.0.41 Beta Preview
+- Added Tool-tips back to finished quest icons
+- Added Missing Quests: Treasure Hunt 1, 2 and 3.
+- Will use a sub number version system for quest database.
+- Update to quest database, version .623
+
+7/18/2009 - v.0.4 Beta Preview
+- Added mapping for quests on world map
+- Added more quests to the database.
+
+7/14/2009 - v.0.31 Alpha Test
+- Updated Preview Release
+- Minor fix to details page memory buffer.
+
+7/13/2009 - v.0.3 Alpha Test
+- Preview Release
+
+ä

@@ -1,0 +1,8 @@
+core.lua
+
+xml/Templates.xml
+xml/MinimapButton.xml
+xml/MainFrame.xml
+xml/AdvFrame.xml
+
+core.xml

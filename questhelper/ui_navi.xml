@@ -1,0 +1,50 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ ../../worldxml/ui.xsd">
+
+	<Frame name="QH_QuestNavi" parent="MinimapFrame" hidden="false" frameLevel="1" >
+		<Size>
+			<AbsDimension x="12" y="12"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" relativeTo="MinimapViewFrame"/>
+		</Anchors>
+		<Frames>
+			<Frame name="QH_QuestNavi_Pos" enableMouse="true">
+				<Size>
+					<AbsDimension x="12" y="12"/>
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER"/>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<Texture name="QH_QuestNavi_Texture" file="interface\addons\QuestHelper\textures\arrow">
+							<Size>
+								<AbsDimension x="12" y="12"/>
+							</Size>
+							<Anchors>
+								<Anchor point="CENTER"/>
+							</Anchors>
+							<TexCoords left="0" right="1" top="0" bottom="1"/>
+						</Texture>
+						<Texture name="QH_QuestNavi_Texture_overlay" file="interface\addons\QuestHelper\textures\arrow_overlay" hidden="true">
+							<Size>
+								<AbsDimension x="12" y="12"/>
+							</Size>
+							<Anchors>
+								<Anchor point="CENTER"/>
+							</Anchors>
+							<TexCoords left="0" right="1" top="0" bottom="1"/>
+						</Texture>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnEnter>QH.Navi.ShowToolTip(this)</OnEnter>
+					<OnLeave>QH.Navi.HideToolTip()</OnLeave>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnUpdate>QH.Navi.OnUpdate(elapsedTime)</OnUpdate>
+		</Scripts>
+	</Frame>
+</Ui>

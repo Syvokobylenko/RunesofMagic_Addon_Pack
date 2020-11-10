@@ -1,0 +1,342 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+
+<Frame name="yaCItConfigGroupTemplate" virtual="true">
+	<Backdrop edgeFile="Interface\Tooltips\Tooltip-border" bgFile="Interface\Tooltips\Tooltip-Background">
+		<EdgeSize><AbsValue val="12"/></EdgeSize>
+		<TileSize><AbsValue val="5"/></TileSize>
+	</Backdrop>
+	<Frames><Frame name="$parent_Header">
+		<Size><AbsDimension x="110" y="24"/></Size>
+		<Anchors>
+			<Anchor point="LEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+				<Offset><AbsDimension x="15" y="2"/></Offset>
+			</Anchor>
+		</Anchors>
+		<Backdrop edgeFile="Interface\Tooltips\Tooltip-border" bgFile="Interface\SocialFrame\SocialFrame_Contextborder_bg">
+			<EdgeSize><AbsValue val="10"/></EdgeSize>
+			<TileSize><AbsValue val="5"/></TileSize>
+		</Backdrop>
+		<Layers><Layer>
+			<FontString name="$parent_Text" justifyH="CENTER" justifyV="MIDDLE" inherits="Font_Normal">0
+				<Size><AbsDimension x="110" y="24"/></Size>
+				<FontHeight><AbsValue val="14"/></FontHeight>
+			</FontString>
+		</Layer></Layers>
+	</Frame></Frames>
+</Frame>
+
+<CheckButton name="yaCItCheckButtonTemplate" inherits="UIPanelCheckButtonTemplate" virtual="true">
+	<Layers><Layer>
+		<FontString name="$parent_Text" inherits="GameFontHighlight" justifyH="LEFT">
+			<Size><AbsDimension x="175" y="30"/></Size>
+			<Anchors><Anchor point="LEFT" relativeTo="$parent" relativePoint="RIGHT"/></Anchors>
+			<FontHeight><AbsValue val="12"/></FontHeight>
+		</FontString>
+	</Layer></Layers>
+	<Scripts>
+		<OnClick>
+			if (type(this.data) == "string") then
+				if this.group == "G" then
+					yaCIt_Persistent[this.data] = this:IsChecked();
+				elseif this.group == "C" then
+					yaCIt_Persistent[yaCIt.Realm][yaCIt.Player][this.data] = this:IsChecked();
+				end
+			end;
+		</OnClick>
+		<OnShow>
+			if (type(this.data) == "string") then
+				if this.group == "G" then
+					this:SetChecked(yaCIt_Persistent[this.data]);
+				elseif this.group == "C" then
+					this:SetChecked(yaCIt_Persistent[yaCIt.Realm][yaCIt.Player][this.data]);
+				end
+			end;
+		</OnShow>
+		<OnEnter>yaCIt.ShowTooltip(this);</OnEnter>
+		<OnLeave>GameTooltip:Hide();</OnLeave>
+	</Scripts>
+</CheckButton>
+
+<Button name="yaCItActionButtonTemplate" inherits="UIPanelButtonTemplate" virtual="true">
+	<Size><AbsDimension x="70" y="24"/></Size>
+	<Scripts>
+		<OnEnter>yaCIt.ShowTooltip(this);</OnEnter>
+		<OnLeave>GameTooltip:Hide();</OnLeave>
+	</Scripts>
+	<Layers><Layer>
+		<FontString name="$parent_Text" inherits="GameFontHighlight" justifyH="LEFT">
+			<Size><AbsDimension x="170" y="28"/></Size>
+			<Anchors><Anchor point="LEFT" relativeTo="$parent" relativePoint="RIGHT">
+				<Offset><AbsDimension x="2" y="-1" /></Offset>
+			</Anchor></Anchors>
+			<FontHeight><AbsValue val="12"/></FontHeight>
+		</FontString>
+	</Layer></Layers>
+</Button>
+
+<Frame name="yaCItConfigFrame" inherits="UIPanelBackdropFrame" toplevel="true" enableMouse="true" hidden="true" parent="UIParent">
+	<Size><AbsDimension x="535" y="300"/></Size>
+	<Anchors><Anchor point="CENTER"/></Anchors>
+
+	<Layers><Layer level="BACKGROUND">
+		<Texture name="$parent_Logo" file="Interface/Addons/yaCIt/data/yaCItLogo.tga">
+			<Size><AbsDimension x="48" y="48"/></Size>
+			<Anchors>
+				<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+					<Offset><AbsDimension x="261" y="242" /></Offset>
+			</Anchor></Anchors>
+		</Texture>
+		<FontString name="$parent_Title" justifyH="CENTER" justifyV="MIDDLE" inherits="Font_Normal">
+			<Size><AbsDimension x="510" y="26"/></Size>
+		</FontString>
+		<FontString name="$parent_ZoneInfo" inherits="Font_Normal" justifyH="LEFT">
+			<Size><AbsDimension y="14" x="195"/></Size>
+			<FontHeight><AbsValue val="12"/></FontHeight>
+			<Anchors>
+				<Anchor><Offset><AbsDimension x="35" y="273"/></Offset></Anchor>
+			</Anchors>
+		</FontString>
+		<FontString name="$parent_Version" inherits="Font_Normal" justifyH="LEFT" justifyV="BOTTOM">
+			<Size><AbsDimension y="26" x="200"/></Size>
+			<FontHeight><AbsValue val="12"/></FontHeight>
+			<Anchors>
+				<Anchor><Offset><AbsDimension x="315" y="252"/></Offset></Anchor>
+			</Anchors>
+		</FontString>
+	</Layer></Layers>
+
+	<Frames>
+		<Frame name="yaCItConfigTitleFrame" inherits="UIPanelTitleFrameTemplate">
+			<Size><AbsDimension x="510" y="26"/></Size>
+		</Frame>
+
+		<Button name="$parent_CloseButton" inherits="UIPanelCloseButtonTemplate">
+			<Size><AbsDimension x="24" y="24"/></Size>
+			<Anchors>
+				<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+					<Offset><AbsDimension x="-1" y="1" /></Offset>
+				</Anchor>
+			</Anchors>
+		</Button>
+
+		<Frame name="$parent_Global" inherits="yaCItConfigGroupTemplate">
+			<Size><AbsDimension x="220" y="115"/></Size>
+			<Anchors><Anchor><Offset><AbsDimension x="20" y="45"/></Offset></Anchor></Anchors>
+
+			<Frames>
+				<CheckButton name="$parent_ItemTT" inherits="yaCItCheckButtonTemplate">
+					<Anchors>
+						<Anchor><Offset><AbsDimension x="10" y="15"/></Offset></Anchor>
+					</Anchors>
+					<Scripts><OnLoad>this.group="G";this.data="ShowItemTT";</OnLoad></Scripts>
+				</CheckButton>
+				<CheckButton name="$parent_MobTT" inherits="yaCItCheckButtonTemplate">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent_ItemTT" relativePoint="TOPLEFT">
+							<Offset><AbsDimension x="0" y="30"/></Offset>
+					</Anchor></Anchors>
+					<Scripts><OnLoad>this.group="G";this.data="ShowMobTT";</OnLoad></Scripts>
+				</CheckButton>
+				<CheckButton name="$parent_HelpTT" inherits="yaCItCheckButtonTemplate">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent_MobTT" relativePoint="TOPLEFT">
+							<Offset><AbsDimension x="0" y="30"/></Offset>
+					</Anchor></Anchors>
+					<Scripts><OnLoad>this.group="G";this.data="HideHelpTT";</OnLoad></Scripts>
+				</CheckButton>
+			</Frames>
+		</Frame>
+
+		<Frame name="$parent_Char" inherits="yaCItConfigGroupTemplate">
+			<Size><AbsDimension x="220" y="85"/></Size>
+			<Anchors>
+				<Anchor point="TOPLEFT" relativeTo="$parent_Global" relativePoint="BOTTOMLEFT">
+					<Offset><AbsDimension x="0" y="20"/></Offset>
+			</Anchor></Anchors>
+			<Frames>
+				<CheckButton name="$parent_DontSave" inherits="yaCItCheckButtonTemplate">
+					<Anchors>
+						<Anchor><Offset><AbsDimension x="10" y="15"/></Offset></Anchor>
+					</Anchors>
+					<Scripts>
+						<OnLoad>this.group="C";this.data="DontSave";</OnLoad>
+						<OnClick>
+							yaCIt_Persistent[yaCIt.Realm][yaCIt.Player][this.data] = this:IsChecked();
+							if this:IsChecked() then 
+								yaCIt_Persistent[yaCIt.Realm][yaCIt.Player].Owned = nil;
+							else
+								yaCIt_Persistent[yaCIt.Realm][yaCIt.Player].Owned = yaCIt.Owned;
+							end;
+						</OnClick>
+					</Scripts>
+				</CheckButton>
+				<CheckButton name="$parent_NoSums" inherits="yaCItCheckButtonTemplate">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent_DontSave" relativePoint="TOPLEFT">
+							<Offset><AbsDimension x="0" y="30"/></Offset>
+					</Anchor></Anchors>
+					<Scripts><OnLoad>this.group="C";this.data="HideSums";</OnLoad></Scripts>
+				</CheckButton>
+			</Frames>
+		</Frame>
+
+		<Frame name="$parent_Tools" inherits="yaCItConfigGroupTemplate">
+			<Size><AbsDimension x="260" y="190"/></Size>
+			<Anchors>
+				<Anchor point="TOPLEFT" relativeTo="$parent_Global" relativePoint="TOPRIGHT">
+					<Offset><AbsDimension x="15" y="0"/></Offset>
+			</Anchor></Anchors>
+			<Frames>
+				<Button name="$parent_SaveZones" inherits="yaCItActionButtonTemplate">
+					<Size><AbsDimension x="70" y="24"/></Size>
+					<Anchors>
+						<Anchor><Offset><AbsDimension x="17" y="20"/></Offset></Anchor>
+					</Anchors>
+					<Scripts><OnClick>
+						yaCIt.SaveZoneList();
+						local cfg = yaCIt.Locales.config;
+						local text = cfg.tools.savezonestext .. yaCIt.Green:format(cfg.tools.done);
+						yaCItConfigFrame_Tools_SaveZones_Text:SetText(text);
+					</OnClick></Scripts>
+				</Button>
+				<Button name="$parent_SaveList" inherits="yaCItActionButtonTemplate">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent_SaveZones" relativePoint="TOPLEFT">
+							<Offset><AbsDimension x="0" y="30"/></Offset>
+					</Anchor></Anchors>
+					<Scripts><OnClick>
+						yaCIt.SaveCardList();
+						local cfg = yaCIt.Locales.config;
+						local text = cfg.tools.savelisttext .. yaCIt.Green:format(cfg.tools.done);
+						yaCItConfigFrame_Tools_SaveList_Text:SetText(text);
+					</OnClick></Scripts>
+				</Button>
+				<Button name="$parent_RenewNPCzones" inherits="yaCItActionButtonTemplate">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent_SaveList" relativePoint="TOPLEFT">
+							<Offset><AbsDimension x="0" y="30"/></Offset>
+					</Anchor></Anchors>
+					<Scripts><OnClick>
+						local cfg = yaCIt.Locales.config;
+
+						yaCIt_Persistent.NPCzones = nil;
+						ZoneLookup = {};
+						yaCIt.CreateZonesFromNPCsearch();
+						yaCIt.AddListZones();
+						yaCIt.ZoneSelectDDneedUpdate = true;
+
+						local text = cfg.tools.npczonestext .. yaCIt.Green:format(cfg.tools.done);
+						yaCItConfigFrame_Tools_RenewNPCzones_Text:SetText(text);
+					</OnClick></Scripts>
+				</Button>
+
+				<Button name="$parent_RemoveChar" inherits="yaCItActionButtonTemplate">
+					<Anchors>
+						<Anchor><Offset><AbsDimension x="17" y="155"/></Offset></Anchor>
+					</Anchors>
+					<Scripts><OnClick>
+						local cfg = yaCIt.Locales.config;
+						local charname = yaCItConfigFrame_Tools_DD_SelectCharText:GetText();
+						if charname == cfg.tools.selectchar then return; end
+
+						this:Disable();
+						if this:GetParent().Chars == 1 then 
+							UIDropDownMenuButton_Disable(yaCItConfigFrame_Tools_DD_SelectChar);
+						end;
+						yaCIt_Persistent[yaCIt.Realm][charname] = nil;
+						yaCItConfigFrame_Tools_DD_SelectCharText:SetText(cfg.tools.selectchar);
+						yaCItConfigFrame_Tools_RemoveChar_Text:SetText(yaCIt.Green:format(cfg.tools.done));
+					</OnClick></Scripts>
+				</Button>
+				<Frame name="$parent_DD_SelectChar" inherits="UIDropDownMenuTemplate" enableMouse="true">
+					<Size><AbsDimension x="120" y="26"/></Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+							<Offset><AbsDimension x="-14" y="153"/></Offset>
+						</Anchor>
+					</Anchors>
+					<Scripts>
+						<OnLoad>
+							UIDropDownMenu_SetWidth(this, 100);
+							UIDropDownMenu_Initialize(this, function () 
+								local menuitem = {};
+								this:GetParent().Chars = 0
+								if yaCIt_Persistent then
+									for CharName, Data in pairs(yaCIt_Persistent[yaCIt.Realm]) do
+										if yaCIt.Player ~= CharName and Data.Owned then
+											menuitem.text = CharName;
+											menuitem.func = function() 
+												getglobal(this:GetName() .. "Text"):SetText(CharName);
+												yaCItConfigFrame_Tools_RemoveChar:Enable();
+											end;
+											menuitem.notCheckable = 1;
+											UIDropDownMenu_AddButton(menuitem, 1);
+											this:GetParent().Chars = this:GetParent().Chars + 1;
+										end
+									end
+								end
+							end );
+						</OnLoad>
+					</Scripts>
+				</Frame>
+			</Frames>
+			<Layers><Layer>
+				<Texture file="Interface\Common\PanelSeparate-HorizontalLine">
+					<Size><AbsDimension x="260" y="3"/></Size>
+					<Anchors><Anchor point="TOPCENTER">
+						<Offset><AbsDimension x="0" y="111"/></Offset>
+					</Anchor></Anchors>
+				</Texture>
+				<FontString name="$parent_RemoveText" inherits="Font_Normal" justifyH="LEFT" justifyV="TOP">
+					<Size><AbsDimension y="30" x="228"/></Size>
+					<FontHeight><AbsValue val="12"/></FontHeight>
+					<Anchors>
+						<Anchor><Offset><AbsDimension x="17" y="124"/></Offset></Anchor>
+					</Anchors>
+				</FontString>
+			</Layer></Layers>
+		</Frame>
+	</Frames>
+	<Scripts>
+		<OnLoad>
+			UIPanelBackdropFrame_SetTexture(this, "Interface/Common/PanelCommonFrame", 256, 256);
+		
+			local cfg = yaCIt.Locales.config;
+			yaCItConfigFrame_Title:SetText(yaCIt.Logo .. cfg.title);
+			yaCItConfigFrame_Version:SetText(cfg.version:format(yaCIt.Version, yaCIt.author));
+
+			yaCItConfigFrame_Global_Header_Text:SetText(cfg.global.header);
+			yaCItConfigFrame_Global_ItemTT_Text:SetText(cfg.global.itemTT);
+			yaCItConfigFrame_Global_MobTT_Text:SetText(cfg.global.mobTT);
+			yaCItConfigFrame_Global_HelpTT_Text:SetText(cfg.global.helpTT);
+
+			yaCItConfigFrame_Char_Header_Text:SetText(cfg.char.header);
+			yaCItConfigFrame_Char_DontSave_Text:SetText(cfg.char.dontsave);
+			yaCItConfigFrame_Char_NoSums_Text:SetText(cfg.char.nosums);
+
+			yaCItConfigFrame_Tools_Header_Text:SetText(cfg.tools.header);
+			yaCItConfigFrame_Tools_SaveZones:SetText(cfg.tools.savezones);
+			yaCItConfigFrame_Tools_SaveZones_Text:SetText(cfg.tools.savezonestext);
+			yaCItConfigFrame_Tools_SaveList:SetText(cfg.tools.savelist);
+			yaCItConfigFrame_Tools_SaveList_Text:SetText(cfg.tools.savelisttext);
+			yaCItConfigFrame_Tools_RenewNPCzones:SetText(cfg.tools.npczones);
+			yaCItConfigFrame_Tools_RenewNPCzones_Text:SetText(cfg.tools.npczonestext);
+
+			yaCItConfigFrame_Tools_RemoveChar:SetText(cfg.tools.removechar);
+			yaCItConfigFrame_Tools_RemoveChar:Disable();
+			yaCItConfigFrame_Tools_RemoveText:SetText(cfg.tools.removechardesc);
+			yaCItConfigFrame_Tools_DD_SelectCharText:SetText(cfg.tools.selectchar);
+		</OnLoad>
+		<OnShow>
+			local zoneID = GetCurrentWorldMapID();
+			local zoneName = GetZoneLocalName(zoneID);
+			if not zoneName then zoneName = GetZoneName(); end
+			yaCItConfigFrame_ZoneInfo:SetText(yaCIt.Locales.config.zone .. zoneID .. " / " .. zoneName);
+
+			if yaCIt.NumCharacters == 1 then
+				UIDropDownMenuButton_Disable(yaCItConfigFrame_Tools_DD_SelectChar);
+			end
+		</OnShow>
+	</Scripts>
+</Frame>
+</Ui>

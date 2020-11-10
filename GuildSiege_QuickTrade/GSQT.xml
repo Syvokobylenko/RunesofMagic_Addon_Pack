@@ -1,0 +1,66 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="..\..\worldxml\ui.xsd">
+		
+	<Frame name="GSQT_Frame" parent="UIParent" frameStrata="LOW">
+		<Anchors><Anchor point="TOPLEFT"/></Anchors>
+		<Size><AbsDimension x="180" y="38"/></Size>
+		<Backdrop bgFile="Interface\Tooltips\Tooltip-Background" edgeFile="Interface\Tooltips\Tooltip-border" tile="true">
+			<BackgroundInsets><AbsInset top="4" left="4" bottom="4" right="4"/></BackgroundInsets> 
+			<EdgeSize><AbsValue val="16"/></EdgeSize>
+			<TileSize><AbsValue val="16"/></TileSize>
+		</Backdrop>	
+		
+		<Frames>
+			<Button name="$parent_MoveButton">
+				<NormalTexture file="Interface\WorldMap\WorldMap-TitlebarSwitch-Normal"/>
+				<PushedTexture file="Interface\WorldMap\WorldMap-TitlebarSwitch-Depress"/>
+				<Anchors><Anchor point="TOPLEFT"/></Anchors>
+				<Size><AbsDimension x="16" y="16"/></Size>
+				<Scripts>
+					<OnMouseDown>
+						this:GetParent():StartMoving("TOPLEFT");
+					</OnMouseDown>
+					<OnMouseUp>
+						this:GetParent():StopMovingOrSizing();
+						gsqtVARS.pos_x, gsqtVARS.pos_y = this:GetParent():GetPos();
+					</OnMouseUp>
+				</Scripts>
+			</Button>
+					
+			<CheckButton name="$parent_ActivateButton" text="Stop" inherits="UIPanelCheckButtonTemplate">
+				<Size><AbsDimension x="25" y="25"/></Size>    
+				<Anchors><Anchor point="LEFT"><Offset><AbsDimension x="65" y="0"/></Offset></Anchor></Anchors>
+				<Scripts><OnClick>gsqtVARS.active = this:IsChecked();</OnClick></Scripts>
+			</CheckButton>	
+			<Button name="$parent_ModeButton" text="++" inherits="UIPanelButtonTemplate">
+				<Size><AbsDimension x="70" y="25"/></Size>    
+				<Anchors><Anchor point="LEFT"><Offset><AbsDimension x="105" y="0"/></Offset></Anchor></Anchors>
+				<Scripts><OnClick>GSQT:ToggleMode(this);</OnClick></Scripts>
+			</Button>		
+		</Frames>
+	
+		<Layers>	
+			<Layer>
+				<FontString name="$parentActiveText" inherits="GameTooltipFont" text="Active:">
+					<Size><AbsDimension x="100" y="25"/></Size>    
+					<Anchors><Anchor point="LEFT"><Offset><AbsDimension x="10" y="0"/></Offset></Anchor></Anchors>			
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+	
+	<Frame name="GSQT_EventFrame" parent="UIParent">
+		<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="-10" y="-10"/></Offset></Anchor></Anchors>
+		<Size><AbsDimension x="1" y="1"/></Size>		
+		<Scripts>
+			<OnLoad>
+				GSQT:OnLoad(this);
+			</OnLoad>
+			<OnEvent>
+				GSQT:OnEvent(this, event, arg1, arg2, arg3, arg4);
+			</OnEvent>
+			<OnUpdate>
+				GSQT:OnUpdate(this, elapsedTime);
+			</OnUpdate>
+		</Scripts>
+	</Frame>	
+</Ui>

@@ -1,0 +1,255 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/ ../../../worldxml/ui.xsd">
+	<Button name="AAH_BrowseSavedSearchButtonTemplate" inherits="AAH_BrowseTreeButtonTemplate" virtual="true">
+		<Scripts>
+			<OnLoad>
+				this:RegisterForClicks("LeftButton", "RightButton")
+			</OnLoad>
+			<OnClick>AAH.SavedSearch.Button_OnClick(this, key)</OnClick>
+			<OnDragStart>AAH.SavedSearch.Button_OnDragStart(this)</OnDragStart>
+			<OnReceiveDrag>AAH.SavedSearch.Button_OnReceiveDrag(this)</OnReceiveDrag>
+			<OnMouseWheel>UIPanelScrollBar_OnMouseWheel(AAH_BrowseSavedSearchScrollBar, delta)</OnMouseWheel>
+		</Scripts>
+	</Button>
+
+	<Frame name="AAH_BrowseSavedSearch" enableMouse="true" hidden="true" parent="AAH_BrowseFrame">
+		<Size>
+			<AbsDimension x="144" y="481"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeTo="AAH_AuctionFrame" relativePoint="TOPRIGHT">
+				<Offset>
+					<AbsDimension x="-3" y="10"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Backdrop edgeFile="Interface\AuctionFrame\AuctionFrame-Tooltip-Border" bgFile="Interface\AuctionFrame\AuctionFrame-Tooltip-Background">
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="16" right="16" top="16" bottom="16"/>
+			</BackgroundInsets>
+		</Backdrop>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface\AuctionFrame\AuctionSeparate-HorizontalLine">
+					<Size>
+						<AbsDimension x="1" y="4"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="7" y="26"/>
+							</Offset>
+						</Anchor>
+						<Anchor point="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="-7" y="26"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.25" right="0.75" top="0" bottom="1"/>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="AAH_BrowseSavedSearchTitle" inherits="GameFontYellow" text="saved search">
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="10"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Slider name="AAH_BrowseSavedSearchScrollBar" inherits="UIPanelScrollBarHaveBackdropTemplate">
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-6" y="49"/>
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-6" y="-26"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this:SetValueStepMode("INT")
+					</OnLoad>
+					<OnValueChanged>
+						UIPanelScrollBar_OnValueChanged(this, arg1)
+						AAH.SavedSearch.UpdateList()
+					</OnValueChanged>
+				</Scripts>
+			</Slider>
+			<Button name="AAH_BrowseSavedSearchButton1" inherits="AAH_BrowseSavedSearchButtonTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="-7" y="32"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton2" inherits="AAH_BrowseSavedSearchButtonTemplate" id="2">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton1" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton3" inherits="AAH_BrowseSavedSearchButtonTemplate" id="3">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton2" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton4" inherits="AAH_BrowseSavedSearchButtonTemplate" id="4">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton3" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton5" inherits="AAH_BrowseSavedSearchButtonTemplate" id="5">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton4" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton6" inherits="AAH_BrowseSavedSearchButtonTemplate" id="6">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton5" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton7" inherits="AAH_BrowseSavedSearchButtonTemplate" id="7">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton6" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton8" inherits="AAH_BrowseSavedSearchButtonTemplate" id="8">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton7" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton9" inherits="AAH_BrowseSavedSearchButtonTemplate" id="9">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton8" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton10" inherits="AAH_BrowseSavedSearchButtonTemplate" id="10">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton9" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton11" inherits="AAH_BrowseSavedSearchButtonTemplate" id="11">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton10" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton12" inherits="AAH_BrowseSavedSearchButtonTemplate" id="12">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton11" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton13" inherits="AAH_BrowseSavedSearchButtonTemplate" id="13">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton12" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton14" inherits="AAH_BrowseSavedSearchButtonTemplate" id="14">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton13" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton15" inherits="AAH_BrowseSavedSearchButtonTemplate" id="15">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton14" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton16" inherits="AAH_BrowseSavedSearchButtonTemplate" id="16">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton15" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton17" inherits="AAH_BrowseSavedSearchButtonTemplate" id="17">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton16" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton18" inherits="AAH_BrowseSavedSearchButtonTemplate" id="18">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton17" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton19" inherits="AAH_BrowseSavedSearchButtonTemplate" id="19">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton18" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton20" inherits="AAH_BrowseSavedSearchButtonTemplate" id="20">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton19" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton21" inherits="AAH_BrowseSavedSearchButtonTemplate" id="21">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton20" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton22" inherits="AAH_BrowseSavedSearchButtonTemplate" id="22">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton21" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton23" inherits="AAH_BrowseSavedSearchButtonTemplate" id="23">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton22" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton24" inherits="AAH_BrowseSavedSearchButtonTemplate" id="24">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton23" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton25" inherits="AAH_BrowseSavedSearchButtonTemplate" id="25">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton24" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton26" inherits="AAH_BrowseSavedSearchButtonTemplate" id="26">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton25" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton27" inherits="AAH_BrowseSavedSearchButtonTemplate" id="27">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton26" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton28" inherits="AAH_BrowseSavedSearchButtonTemplate" id="28">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton27" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton29" inherits="AAH_BrowseSavedSearchButtonTemplate" id="29">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton28" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+			<Button name="AAH_BrowseSavedSearchButton30" inherits="AAH_BrowseSavedSearchButtonTemplate" id="30">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AAH_BrowseSavedSearchButton29" relativePoint="BOTTOM"/>
+				</Anchors>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>AAH.SavedSearch.OnLoad()</OnLoad>
+			<OnReceiveDrag>AAH.SavedSearch.Button_OnReceiveDrag(this)</OnReceiveDrag>
+			<OnMouseWheel>UIPanelScrollBar_OnMouseWheel(AAH_BrowseSavedSearchScrollBar, delta)</OnMouseWheel>
+		</Scripts>
+	</Frame>
+
+</Ui>

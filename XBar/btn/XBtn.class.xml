@@ -1,0 +1,54 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Frame name="XBarClass" parent="UIParent" frameStrata="BACKGROUND" frameLevel="1">
+		<Size><AbsDimension x="128" y="32"/></Size>
+		<Anchors><Anchor point="LEFT" relativeTo="XBarFrame"><Offset>
+			<AbsDimension x="135" y="0"/></Offset></Anchor></Anchors>
+		<Scripts>
+			<OnLoad>SaveVariables("XBtnChars")</OnLoad>
+			<OnEvent>XBar.Class_OnEvent(this,event)</OnEvent>
+			<OnShow>XBar.Class_OnEvent(this,"LOADED")</OnShow>
+			<OnHide>
+				this:UnregisterEvent("UNIT_LEVEL")
+				this:UnregisterEvent("EXCHANGECLASS_SUCCESS")
+				this:UnregisterEvent("CHAT_MSG_SYSTEM")
+				this:UnregisterEvent("PLAYER_GET_TITLE")
+				this:UnregisterEvent("PLAYER_TITLE_ID_CHANGED")
+				this:UnregisterEvent("CARDBOOKFRAME_UPDATED")
+				this:UnregisterEvent("PLAYER_HONOR_CHANGED")
+				this:UnregisterEvent("PLAYER_HONORPOINT_CHANGED")
+				this:UnregisterEvent("PLAYER_GOODEVIL_CHANGED")
+			</OnHide>
+		</Scripts>
+	</Frame>
+	<Frame name="XBarClass_BG" inherits="XButton_BGTemp" parent="XBarFrame">
+		<Anchors><Anchor point="LEFT" relativeTo="XBarClass"><Offset>
+			<AbsDimension x="-28" y="0"/></Offset></Anchor></Anchors>
+	</Frame>
+	<Button name="XBarClass_B" inherits="XButton_BTemp" parent="XBarClass">
+		<Anchors><Anchor point="LEFT"/></Anchors>
+		<NormalTexture file="Interface/Icons/Ft_Manikin01"/>
+		<PushedTexture file="Interface/Icons/Ft_Manikin02"/>
+		<HighlightTexture file="Interface/Icons/Ft_Manikin02" alphaMode="ADD"/>
+		<Scripts>
+			<OnLoad>this:RegisterForClicks("LeftButton","RightButton","MiddleButton") this:RegisterForDrag("RightButton")</OnLoad>
+			<OnClick>
+				if key=="LBUTTON" then
+					XBar.ToggleUI(CharacterFrame)
+				elseif key=="MBUTTON" then
+					XBar.ToggleUI(AchievementTitleFrame)
+				elseif IsCtrlKeyDown() then
+					SetTitleRequest(0)
+				else
+					XBar.ToggleUI(SkillSuitFrame)
+				end
+			</OnClick>
+			<OnDragStart>XBar.MoveStart(XBarClass)</OnDragStart>
+			<OnDragStop>XBar.MoveEnd(XBarClass)</OnDragStop>
+			<OnEnter>XBar.Class_OnEnter(this)</OnEnter>
+		</Scripts>
+	</Button>
+	<Frame name="XBarClass_F" inherits="XButton_FTemp" parent="XBarClass">
+		<Anchors><Anchor point="LEFT"><Offset>
+			<AbsDimension x="26" y="3"/></Offset></Anchor></Anchors>
+	</Frame>
+</Ui>

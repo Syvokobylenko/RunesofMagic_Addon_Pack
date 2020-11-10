@@ -1,0 +1,37 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+
+	<Script file="SettingsLoader.lua"/>
+
+	<Frame name="AutoAI_Frame" hidden="true">
+		<Scripts>
+		</Scripts>
+	</Frame>
+	<Button name="SettingsLoader_Button" hidden="false" inherits="MinimapButtonTemplate" parent="UIParent">
+		<Size>
+			<AbsDimension y="24" x="24"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="MinimapViewFrame" relativePoint="CENTER">
+				<Offset>
+					<RelDimension x="-85" y="-2.5"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Frame name="SettingsLoader_Menu" inherits="UIDropDownMenuTemplate" hidden="true">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="SettingsLoader_Button" relativePoint="TOP"/>
+				</Anchors>
+			</Frame>
+		</Frames>
+		<Scripts>
+            <OnLoad>this:RegisterForClicks("LeftButton","RightButton")</OnLoad>
+			<OnClick>SettingsLoader.ButtonOnClick(this, key)</OnClick>
+			<OnEnter>SettingsLoader.ButtonOnEnter(this)</OnEnter>
+			<OnLeave>SettingsLoader.ButtonOnLeave(this)</OnLeave>
+		</Scripts>
+		<NormalTexture file="interface/AddOns/zzz_settingsloader/img/icon_default"/>
+		<PushedTexture file="interface/AddOns/zzz_settingsloader/img/icon_light"/>
+		<HighlightTexture file="interface/minimap/minimapbutton_highlight" alphaMode="ADD"/>
+	</Button>
+</Ui>

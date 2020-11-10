@@ -1,0 +1,30 @@
+------------------------------------------------------------------------
+r4 | mavoc | 2011-11-29 07:06:02 +0000 (Tue, 29 Nov 2011) | 1 line
+Changed paths:
+   A /tags/v1.5.0 (from /trunk:3)
+
+added lvl 61 common mats
+------------------------------------------------------------------------
+r3 | mavoc | 2011-11-29 07:04:48 +0000 (Tue, 29 Nov 2011) | 1 line
+Changed paths:
+   M /trunk/Data.lua
+
+lvl 61 common mats
+------------------------------------------------------------------------
+r2 | mavoc | 2011-11-29 06:51:53 +0000 (Tue, 29 Nov 2011) | 1 line
+Changed paths:
+   A /trunk/Data.lua
+   A /trunk/PetAutoCraft.lua
+   A /trunk/PetAutoCraft.toc
+   A /trunk/PetAutoCraft.xml
+
+Init
+------------------------------------------------------------------------
+r1 | root | 2010-12-26 19:13:38 +0000 (Sun, 26 Dec 2010) | 1 line
+Changed paths:
+   A /branches
+   A /tags
+   A /trunk
+
+"pet-auto-craft/mainline: Initial Import"
+------------------------------------------------------------------------

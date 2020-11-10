@@ -1,0 +1,513 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<GameTooltip name="AAH_HistoryTooltip" frameStrata="TOOLTIP" hidden="true" inherits="GameTooltipTemplate" parent="UIParent"/>
+	<GameTooltip name="AAH_HistoryFilterTooltip" frameStrata="TOOLTIP" hidden="true" inherits="GameTooltipTemplate" parent="UIParent"/>
+	<Frame name="AAH_HistoryListItemTemplate" virtual="true" hidden="true">
+		<Size>
+			<AbsDimension x="520" y="36"/>
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface\Common\PanelSeparate-HorizontalLine">
+					<Size>
+						<AbsDimension x="578" y="4"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="-4"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parentName" inherits="GameFontHighlight" justifyH="LEFT" text="item name">
+					<Size>
+						<AbsDimension x="98" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="12" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentDateText" inherits="GameFontHighlight" justifyH="LEFT" text="05/10 09:18">
+					<Size>
+						<AbsDimension x="88" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentName" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentPPU" inherits="GameFontHighlight" justifyH="RIGHT" text="1234567">
+					<Size>
+						<AbsDimension x="80" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentDateText" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="168" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentIcon" inherits="ItemButtonTemplate">
+				<Anchors>
+					<Anchor point="LEFT">
+						<Offset>
+							<AbsDimension x="-30" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<Texture name="$parentRed" file="Interface\Buttons\Debuff_Border" alphaMode="ADD">
+							<Size>
+								<AbsDimension x="36" y="36"/>
+							</Size>
+							<Anchors>
+								<Anchor point="CENTER">
+								</Anchor>
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnEnter>
+						if this.index > 10 then
+							GameTooltip:SetOwner(this, "ANCHOR_TOPRIGHT")
+							GameTooltip:ClearLines()
+							local FoundLine = false
+							for s = 1,40 do
+								local LineLeft,LineRight = nil,nil
+								if AAH_SavedHistoryTable[AAH.History.curItem] and AAH_SavedHistoryTable[AAH.History.curItem].history 
+										and AAH_SavedHistoryTable[AAH.History.curItem].history[this.index] 
+										and AAH_SavedHistoryTable[AAH.History.curItem].history[this.index].lineleft 
+										and AAH_SavedHistoryTable[AAH.History.curItem].history[this.index].lineleft[s] then
+									LineLeft = AAH_SavedHistoryTable[AAH.History.curItem].history[this.index].lineleft[s]
+									if not FoundLine then FoundLine = true end
+								end
+								if AAH_SavedHistoryTable[AAH.History.curItem] and AAH_SavedHistoryTable[AAH.History.curItem].history 
+										and AAH_SavedHistoryTable[AAH.History.curItem].history[this.index] 
+										and AAH_SavedHistoryTable[AAH.History.curItem].history[this.index].lineright 
+										and AAH_SavedHistoryTable[AAH.History.curItem].history[this.index].lineright[s] then
+									LineRight = AAH_SavedHistoryTable[AAH.History.curItem].history[this.index].lineright[s]
+									if not FoundLine then FoundLine = true end
+								end
+								if LineLeft or LineRight then 
+									local ColorLeftR,ColorLeftG,ColorLeftB = nil,nil,nil
+									local ColorRightR,ColorRightG,ColorRightB = nil,nil,nil
+									if LineLeft then
+										ColorLeftR = AAH_SavedHistoryTable[AAH.History.curItem].history[this.index].colorleftR[s]
+										ColorLeftG = AAH_SavedHistoryTable[AAH.History.curItem].history[this.index].colorleftG[s]
+										ColorLeftB = AAH_SavedHistoryTable[AAH.History.curItem].history[this.index].colorleftB[s]
+									end
+									if LineRight then
+										ColorRightR = AAH_SavedHistoryTable[AAH.History.curItem].history[this.index].colorrightR[s]
+										ColorRightG = AAH_SavedHistoryTable[AAH.History.curItem].history[this.index].colorrightG[s]
+										ColorRightB = AAH_SavedHistoryTable[AAH.History.curItem].history[this.index].colorrightB[s]
+									end
+									GameTooltip:AddDoubleLine(LineLeft,LineRight,ColorLeftR,ColorLeftG,ColorLeftB,ColorRightR,ColorRightG,ColorRightB)
+									GameTooltip:Show()
+								end
+							end
+							if not FoundLine then GameTooltip:Hide() end
+						else
+							GameTooltip:SetOwner(this, "ANCHOR_TOPRIGHT")
+							GameTooltip:SetHistoryItem(GetAuctionHistoryItemNums() + 1 - this.index)
+						end
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+			</Button>
+            <Button name="$parentSellerText" enableMouse="true">
+                <Size>
+                    <AbsDimension x="88" y="16"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="LEFT" relativeTo="$parentDateText" relativePoint="RIGHT">
+                        <Offset>
+                            <AbsDimension x="0" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnLoad>
+                        this:RegisterForClicks("LeftButton", "RightButton")
+                    </OnLoad>
+                    <OnClick>
+                        AAH.Tools.ClickPlayerName(this, key)
+                    </OnClick>
+                </Scripts>
+                <NormalText inherits="GameFontHighlight">
+                    <Size>
+                        <AbsDimension x="0" y="16"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="LEFT">
+                            <Offset>
+                                <AbsDimension x="-1" y="-1"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </NormalText>
+            </Button>
+            <Button name="$parentBuyerText" enableMouse="true">
+                <Size>
+                    <AbsDimension x="80" y="16"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="LEFT" relativeTo="$parentSellerText" relativePoint="RIGHT">
+                        <Offset>
+                            <AbsDimension x="0" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnLoad>
+                        this:RegisterForClicks("LeftButton", "RightButton")
+                    </OnLoad>
+                    <OnClick>
+                        AAH.Tools.ClickPlayerName(this, key)
+                    </OnClick>
+                </Scripts>
+                <NormalText inherits="GameFontHighlight">
+                    <Size>
+                        <AbsDimension x="0" y="16"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="LEFT">
+                            <Offset>
+                                <AbsDimension x="-1" y="-1"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </NormalText>
+            </Button>
+			<Frame name="$parentPrice" inherits="MoneyFrameTemplate">
+				<Anchors>
+					<Anchor point="RIGHT">
+						<Offset>
+							<AbsDimension x="24" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						MoneyFrameTemplate_SetMode(this, "copper")
+						MoneyFrameTemplate_SetType(this, "STATIC")
+					</OnLoad>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnMouseWheel>
+				UIPanelScrollBar_OnMouseWheel(AAH_HistoryListScrollBar, delta)
+			</OnMouseWheel>
+		</Scripts>
+	</Frame>
+	<Frame name="AAH_HistoryList" inherits="UICommonFrameTemplate" parent="AAH_AuctionFrame" toplevel="true" hidden="true">
+		<Size>
+			<AbsDimension x="620" y="478"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="AAH_AuctionFrame">
+				<Offset>
+					<AbsDimension x="-20" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString inherits="GameTitleFont" text="AUCTION_HISTORY_PRICE">
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="8"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString inherits="GameFontYellow" text="C_ITEM_NAME">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="62" y="32"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString inherits="GameFontYellow" text="AUCTION_HISTORY_DATE">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="158" y="32"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString inherits="GameFontYellow" text="AUCTION_SELLER">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="246" y="32"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString inherits="GameFontYellow" text="AUCTION_BUYER">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="334" y="32"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="AAH_HistoryHeaderPPU" inherits="GameFontYellow" text="GENERAL_PRICE_PER_UNIT_HEADER">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="442" y="32"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString inherits="GameFontYellow" text="AUCTION_PRICE">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="524" y="32"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<Texture file="Interface\Common\PanelSeparate-HorizontalLine">
+					<Size>
+						<AbsDimension x="578" y="4"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="20" y="429"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="AAH_HistoryMinMaxLabel" inherits="GameFontHighlight" justifyH="RIGHT" text="123456789">
+					<Size>
+						<AbsDimension x="190" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="0" y="435"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="AAH_HistoryAverageLabel" inherits="GameFontHighlight" justifyH="RIGHT" text="123456789">
+					<Size>
+						<AbsDimension x="190" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="190" y="435"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="AAH_HistoryNumHistoryLabel" inherits="GameFontHighlight" justifyH="RIGHT" text="123456789">
+					<Size>
+						<AbsDimension x="190" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="380" y="429"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<EditBox name="AAH_HistoryMaxNumHistoryEditBox" inherits="UIPanelEditBoxTemplate" letters="4" numeric="true" historyLines="0">
+				<Size>
+					<AbsDimension x="50" y="22"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="AAH_HistoryNumHistoryLabel" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="135" y="17"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString inherits="GameFontHighlight" text="Max:">
+							<Anchors>
+								<Anchor point="BOTTOMLEFT" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="-30" y="5"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnShow>
+						local Text = AAH_SavedSettings.HistoryMaxSaved[AAH.History.curItem] or AAH_SavedSettings.HistoryMaxSavedDefault or 10
+						this:SetText(tostring(Text))
+					</OnShow>
+					<OnEnterPressed>
+						this:ClearFocus()
+						local Number = tonumber(this:GetText())
+						AAH.History.SetMaxEntries(Number)
+					</OnEnterPressed>
+					<OnEscapePressed>
+						this:ClearFocus()
+						local Number = tonumber(this:GetText())
+						AAH.History.SetMaxEntries(Number)
+					</OnEscapePressed>
+					<OnHide>
+						this:ClearFocus()
+						local Number = tonumber(this:GetText())
+						AAH.History.SetMaxEntries(Number)
+					</OnHide>
+				</Scripts>
+			</EditBox>
+			<Slider name="AAH_HistoryListScrollBar" inherits="UIPanelScrollBarHaveBackdropTemplate">
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-9" y="68"/>
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-9" y="-63"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>this:SetValueStepMode("INT")</OnLoad>
+					<OnValueChanged>
+						UIPanelScrollBar_OnValueChanged(this, arg1)
+                        AAH.History.List_UpdateItems()
+					</OnValueChanged>
+					<OnMouseWheel>UIPanelScrollBar_OnMouseWheel(AAH_HistoryListScrollBar, delta)</OnMouseWheel>
+				</Scripts>
+			</Slider>
+			<Frame name="AAH_HistoryListItem1" inherits="AAH_HistoryListItemTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="52"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+			<Frame name="AAH_HistoryListItem2" inherits="AAH_HistoryListItemTemplate" id="2">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AAH_HistoryListItem1" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="2"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+			<Frame name="AAH_HistoryListItem3" inherits="AAH_HistoryListItemTemplate" id="3">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AAH_HistoryListItem2" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="2"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+			<Frame name="AAH_HistoryListItem4" inherits="AAH_HistoryListItemTemplate" id="4">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AAH_HistoryListItem3" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="2"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+			<Frame name="AAH_HistoryListItem5" inherits="AAH_HistoryListItemTemplate" id="5">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AAH_HistoryListItem4" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="2"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+			<Frame name="AAH_HistoryListItem6" inherits="AAH_HistoryListItemTemplate" id="6">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AAH_HistoryListItem5" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="2"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+			<Frame name="AAH_HistoryListItem7" inherits="AAH_HistoryListItemTemplate" id="7">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AAH_HistoryListItem6" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="2"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+			<Frame name="AAH_HistoryListItem8" inherits="AAH_HistoryListItemTemplate" id="8">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AAH_HistoryListItem7" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="2"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+			<Frame name="AAH_HistoryListItem9" inherits="AAH_HistoryListItemTemplate" id="9">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AAH_HistoryListItem8" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="2"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+			<Frame name="AAH_HistoryListItem10" inherits="AAH_HistoryListItemTemplate" id="10">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AAH_HistoryListItem9" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="2"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnHide>AAH.History.List_OnClose()</OnHide>
+			<OnMouseWheel>
+				UIPanelScrollBar_OnMouseWheel(AAH_HistoryListScrollBar, delta)
+			</OnMouseWheel>
+		</Scripts>
+	</Frame>
+</Ui>

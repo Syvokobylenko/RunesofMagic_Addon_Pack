@@ -1,0 +1,140 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/..\..\WorldXML\UI.xsd">
+    <Frame name="GuildPanelConfigFrame" parent="UIParent" inherits="UICommonFrameTemplate" hidden="true" movable="true" enableMouse="true" frameStrata="DIALOG">
+        <Size>
+            <AbsDimension x="500" y="400" />
+        </Size>
+        <Anchors>
+            <Anchor point="CENTER">
+                <Offset>
+                    <AbsDimension x="0" y="0" />
+                </Offset>
+            </Anchor>
+        </Anchors>
+        <Layers>
+            <!-- Begin Title -->
+            <Layer>
+                <FontString name="$parent_Title" inherits="Font_FrameTitle">
+                    <Anchors>
+                        <Anchor point="TOP">
+                            <Offset>
+                                <AbsDimension x="0" y="7" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+                <FontString name="GuildPanelConfig_AutoSaveText" inherits="Font_QuestTrack_Text" justifyH="LEFT">
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT">
+                            <Offset>
+                                <AbsDimension x="15" y="-20" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <Frames>
+            <CheckButton name="GuildPanelConfig_LastRow_Rank" inherits="GuildPanelConfig_CheckButtonTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="20" y="40"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </CheckButton>
+            <CheckButton name="GuildPanelConfig_LastRow_Note" inherits="GuildPanelConfig_CheckButtonTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="180" y="40"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </CheckButton>
+            <CheckButton name="GuildPanelConfig_ShowColors" inherits="GuildPanelConfig_CheckButtonTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="20" y="80"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </CheckButton>
+            <CheckButton name="GuildPanelConfig_ColorsRank" inherits="GuildPanelConfig_CheckButtonTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="40" y="110"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </CheckButton>
+            <CheckButton name="GuildPanelConfig_ColorsClass" inherits="GuildPanelConfig_CheckButtonTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="200" y="110"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </CheckButton>
+            <CheckButton name="GuildPanelConfig_ColorsOffline" inherits="GuildPanelConfig_CheckButtonTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="40" y="140"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </CheckButton>
+            <CheckButton name="GuildPanelConfig_SortOnlineTop" inherits="GuildPanelConfig_CheckButtonTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="20" y="180"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </CheckButton>
+            <CheckButton name="GuildPanelConfig_SwapDruidWarden" inherits="GuildPanelConfig_CheckButtonTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="20" y="220"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </CheckButton>        
+            <CheckButton name="GuildPanelConfig_SwapDruidWarden_Raid" inherits="GuildPanelConfig_CheckButtonTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="40" y="250"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </CheckButton>                    
+            <Button name="GuildPanelConfig_CloseButton" inherits="UIPanelButtonTemplate">
+                <Size>
+                    <AbsDimension x="100" y="26"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="-15" y="-15"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        GuildPanelConfigFrame:Hide();
+                    </OnClick>
+                </Scripts>
+            </Button>
+        </Frames>
+        <Scripts>
+            <OnShow>GuildPanelConfig.OnShow(this);</OnShow>
+        </Scripts>
+    </Frame>
+</Ui>

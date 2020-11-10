@@ -1,0 +1,189 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<Frame name="XBarEQDmg" parent="UIParent" enableMouse="true" hidden="true">
+		<Size><AbsDimension x="200" y="310"/></Size>
+		<Anchors><Anchor point="BOTTOMRIGHT"/></Anchors>
+		<Backdrop bgFile="Interface\Tooltips\Tooltip-Background" edgeFile="Interface\Tooltips\Tooltip-border" tile="true">
+			<BackgroundInsets><AbsInset top="4" left="4" bottom="4" right="4"/></BackgroundInsets>
+			<EdgeSize><AbsValue val="16"/></EdgeSize>
+			<TileSize><AbsValue val="16"/></TileSize>
+		</Backdrop>
+		<Layers>
+			<Layer>
+				<FontString name="$parent_AvgName" inherits="NumberFontNormal" justifyH="LEFT">
+					<Color r="0" g=".7" b=".9"/>
+					<Anchors><Anchor point="TOPLEFT"><Offset>
+						<AbsDimension x="10" y="10"/></Offset></Anchor></Anchors>
+				</FontString>
+				<FontString name="$parent_AvgDura" inherits="NumberFontNormal" justifyH="RIGHT">
+					<Anchors><Anchor point="TOPRIGHT"><Offset>
+						<AbsDimension x="-25" y="10"/></Offset></Anchor></Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parent_Close" inherits="UIPanelCloseButtonTemplate">
+				<Anchors><Anchor point="TOPRIGHT"><Offset>
+					<AbsDimension x="-5" y="5"/></Offset></Anchor></Anchors>
+			</Button>
+			<Button name="$parent_TChange">
+				<Size><AbsDimension x="32" y="32"/></Size>
+				<Anchors><Anchor point="LEFT">
+						<Offset><AbsDimension x="88" y="-10"/></Offset>
+					</Anchor>
+				</Anchors>
+				<NormalTexture file="Interface\ChatMsn\Font-Normal"/>
+				<PushedTexture file="Interface\ChatMsn\Emotion-Pushed"/>
+				<HighlightTexture file="Interface\ChatMsn\Font-Normal" alphaMode="ADD"/>
+				<Scripts>
+					<OnClick>
+						if XBSet["EQDmg_C"] then XBSet["EQDmg_C"]=false else XBSet["EQDmg_C"]=true end
+						XBar.EQDmg_OnEvent("PLAYER_INVENTORY_CHANGED")
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this,"ANCHOR_TOP",0,-5)
+						GameTooltip:SetText(XBar.Lng["Ttip"]["EQDmg1"])
+					</OnEnter>
+					<OnLeave>GameTooltip:Hide()</OnLeave>
+				</Scripts>
+			</Button>
+			<Button name="$parent_Swap1" inherits="XBarSwapButtonTemp" id="0">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_TChange" relativePoint="BOTTOM"><Offset>
+					<AbsDimension x="-5" y="0"/></Offset></Anchor></Anchors>
+			</Button>
+			<Button name="$parent_Swap2" inherits="XBarSwapButtonTemp" id="1">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Swap1" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Swap3" inherits="XBarSwapButtonTemp" id="2">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Swap2" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Swap4" inherits="XBarSwapButtonTemp" id="3">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Swap3" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Swap5" inherits="XBarSwapButtonTemp" id="4">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Swap4" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Swap6" inherits="XBarSwapButtonTemp" id="5">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Swap5" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Slot13" inherits="XBarEQDmgButtonTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset>
+					<AbsDimension x="86" y="35"/></Offset></Anchor></Anchors>
+			</Button>
+			<Button name="$parent_Slot14" inherits="XBarEQDmgButtonTemp">
+				<Anchors><Anchor point="LEFT" relativeTo="$parent_Slot13" relativePoint="RIGHT"><Offset>
+					<AbsDimension x="10" y="0"/></Offset></Anchor></Anchors>
+			</Button>
+			<Button name="$parent_Slot8" inherits="XBarEQDmgButtonTemp">
+				<Anchors><Anchor point="LEFT" relativeTo="$parent_Slot14" relativePoint="RIGHT"><Offset>
+					<AbsDimension x="10" y="0"/></Offset></Anchor></Anchors>
+			</Button>
+			<Button name="$parent_Slot12" inherits="XBarEQDmgButtonTemp">
+				<Anchors><Anchor point="RIGHT" relativeTo="$parent_Slot13" relativePoint="LEFT"><Offset>
+					<AbsDimension x="-10" y="0"/></Offset></Anchor></Anchors>
+			</Button>
+			<Button name="$parent_Slot11" inherits="XBarEQDmgButtonTemp">
+				<Anchors><Anchor point="RIGHT" relativeTo="$parent_Slot12" relativePoint="LEFT"><Offset>
+					<AbsDimension x="-10" y="0"/></Offset></Anchor></Anchors>
+			</Button>
+			<Button name="$parent_Slot0" inherits="XBarEQDmgButtonTemp">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Slot11" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Slot7" inherits="XBarEQDmgButtonTemp">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Slot8" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Slot3" inherits="XBarEQDmgButtonTemp">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Slot0" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Slot1" inherits="XBarEQDmgButtonTemp">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Slot7" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Slot6" inherits="XBarEQDmgButtonTemp">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Slot3" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Slot2" inherits="XBarEQDmgButtonTemp">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Slot1" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Slot4" inherits="XBarEQDmgButtonTemp">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Slot6" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Slot5" inherits="XBarEQDmgButtonTemp">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Slot2" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Slot15" inherits="XBarEQDmgButtonTemp">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Slot4" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Slot16" inherits="XBarEQDmgButtonTemp">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Slot5" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Slot10" inherits="XBarEQDmgButtonTemp">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Slot15" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Slot21" inherits="XBarEQDmgButtonTemp">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Slot16" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Slot9" inherits="XBarEQDmgButtonTemp">
+				<Anchors><Anchor point="LEFT" relativeTo="$parent_Slot10" relativePoint="RIGHT"><Offset>
+					<AbsDimension x="6" y="-10"/></Offset></Anchor></Anchors>
+			</Button>
+			<Button name="$parent_Slot17" inherits="XBarEQDmgButtonTemp" hidden="true">
+			</Button>
+			<Button name="$parent_Slot18" inherits="XBarEQDmgButtonTemp">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Slot14" relativePoint="BOTTOM"><Offset>
+					<AbsDimension x="0" y="20"/></Offset></Anchor></Anchors>
+			</Button>
+			<Button name="$parent_Slot19" inherits="XBarEQDmgButtonTemp">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Slot18" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Slot20" inherits="XBarEQDmgButtonTemp">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Slot19" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Repair1" inherits="XBarEQDmgRepairTemp">
+				<Anchors><Anchor point="TOPLEFT"><Offset>
+					<AbsDimension x="206" y="35"/></Offset></Anchor></Anchors>
+			</Button>
+			<Button name="$parent_Repair2" inherits="XBarEQDmgRepairTemp">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Repair1" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Repair3" inherits="XBarEQDmgRepairTemp">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Repair2" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Repair4" inherits="XBarEQDmgRepairTemp">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Repair3" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Repair5" inherits="XBarEQDmgRepairTemp">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Repair4" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Repair6" inherits="XBarEQDmgRepairTemp">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Repair5" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Repair7" inherits="XBarEQDmgRepairTemp">
+				<Anchors><Anchor point="LEFT" relativeTo="$parent_Repair1" relativePoint="RIGHT"><Offset>
+					<AbsDimension x="10" y="0"/></Offset></Anchor></Anchors>
+			</Button>
+			<Button name="$parent_Repair8" inherits="XBarEQDmgRepairTemp">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Repair7" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parent_Repair9" inherits="XBarEQDmgRepairTemp">
+				<Anchors><Anchor point="TOP" relativeTo="$parent_Repair8" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnEvent>XBar.EQDmg_OnEvent(event, this)</OnEvent>
+			<OnShow>XBar.EQDmg_OnEvent("LOADED", this)</OnShow>
+			<OnHide>
+				this:UnregisterEvent("PLAYER_BAG_CHANGED")
+				this:UnregisterEvent("PLAYER_INVENTORY_CHANGED", "%[DURA")
+			</OnHide>
+			<OnDragStart>this:StartMoving()</OnDragStart>
+			<OnDragStop>
+				this:StopMovingOrSizing()
+				_,_,_,XBSet["EQDmg_X"],XBSet["EQDmg_Y"]=this:GetAnchor()
+			</OnDragStop>
+			<OnEnter>
+				GameTooltip:SetOwner(this, "ANCHOR_TOPLEFT", 0, 155)
+				GameTooltip:SetText(XBar.Lng["Ttip"]["EQDmg2"])
+			</OnEnter>
+			<OnLeave>GameTooltip:Hide()</OnLeave>
+		</Scripts>
+	</Frame>
+</Ui>

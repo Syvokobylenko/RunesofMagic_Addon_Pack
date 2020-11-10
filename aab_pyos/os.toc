@@ -1,0 +1,6 @@
+#OSFix:
+#Version: 1.1.2
+#Author: Pyrr
+#Date: 2020-04-30T22:04:46Z
+#Hash: 721f84fb9a18e42b9211590d4fcd63ef519c8efb
+os.lua
