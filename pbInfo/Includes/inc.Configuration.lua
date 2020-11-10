@@ -68,7 +68,7 @@ function pbInfo.Scripts.OnLoad()
 --		["QUESTTRACKERRESIZE"] 				= true,
 		["ThreatMeterDisplayLimit"] 		= 0,
 		["ThreatMeterPosition"] 			= {372, 623},
-		["GameTooltipPosition"] 			= {1009, 58},
+		["GameTooltipPosition"] 			= {939, 55},
 		["QuestTrackerPosition"] 			= {400, 300},
 		["CastingBarPosition"] 				= {0, 0},
 --		["QuestTrackerSize"] 					= {175, 200},
