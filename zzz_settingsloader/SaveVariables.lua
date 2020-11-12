@@ -1,3 +1,17 @@
+g_MinimapDate = {
+	[7] = true,
+	[1] = true,
+	[2] = true,
+	[8] = true,
+	[9] = true,
+	[5] = true,
+	[10] = true,
+	[11] = true,
+	[21] = true,
+	[6] = true,
+	["ZoomIndex"] = 1,
+	[3] = true,
+}
 g_UIPanelAnchorFrameOptions = {
 	["RaidPartyOptionFrame6"] = {
 		["y"] = 212,
@@ -56,11 +70,11 @@ g_UIPanelAnchorFrameOptions = {
 		["relativeTo"] = "ChatFrameChannelChange",
 	},
 	["AdvQuestBookMiniMapShareButton"] = {
-		["y"] = -72,
-		["x"] = -26,
-		["point"] = "CENTER",
-		["relativePoint"] = "CENTER",
-		["relativeTo"] = "MinimapViewFrame",
+		["y"] = 204,
+		["x"] = -4,
+		["point"] = "TOPRIGHT",
+		["relativePoint"] = "TOPRIGHT",
+		["relativeTo"] = "UIParent",
 	},
 	["QuestAnnouncerMinimapButton"] = {
 		["y"] = 180,
@@ -217,10 +231,10 @@ g_UIPanelAnchorFrameOptions = {
 		["relativeTo"] = "RaidPartyOptionFrame1",
 	},
 	["RightActionBarFrame"] = {
-		["y"] = -30,
+		["y"] = 68,
 		["x"] = 0,
-		["point"] = "BOTTOMRIGHT",
-		["relativePoint"] = "BOTTOMRIGHT",
+		["point"] = "RIGHT",
+		["relativePoint"] = "RIGHT",
 		["relativeTo"] = "UIParent",
 	},
 	["PEFs_Item8_Button"] = {
@@ -287,8 +301,8 @@ g_UIPanelAnchorFrameOptions = {
 		["relativeTo"] = "UIParent",
 	},
 	["MinimapFrameBugGartherButton"] = {
-		["y"] = 5.5584945678711,
-		["x"] = -168.24609375,
+		["y"] = 156,
+		["x"] = 0,
 		["point"] = "TOPRIGHT",
 		["relativePoint"] = "TOPRIGHT",
 		["relativeTo"] = "UIParent",
@@ -328,23 +342,16 @@ g_UIPanelAnchorFrameOptions = {
 		["relativePoint"] = "TOPRIGHT",
 		["relativeTo"] = "UIParent",
 	},
-	["RaidPartyOptionFrame5AnchorFrame"] = {
-		["y"] = 0,
-		["x"] = 0,
-		["point"] = "TOP",
-		["relativePoint"] = "TOP",
-		["relativeTo"] = "RaidPartyOptionFrame5",
-	},
-	["RaidPartyFrame1"] = {
-		["y"] = 120,
-		["x"] = 15,
+	["PlayerFramePetButton"] = {
+		["y"] = 95,
+		["x"] = 113,
 		["point"] = "TOPLEFT",
 		["relativePoint"] = "TOPLEFT",
 		["relativeTo"] = "UIParent",
 	},
-	["PlayerFramePetButton"] = {
-		["y"] = 95,
-		["x"] = 113,
+	["RaidPartyFrame1"] = {
+		["y"] = 120,
+		["x"] = 15,
 		["point"] = "TOPLEFT",
 		["relativePoint"] = "TOPLEFT",
 		["relativeTo"] = "UIParent",
@@ -363,19 +370,19 @@ g_UIPanelAnchorFrameOptions = {
 		["relativePoint"] = "TOPRIGHT",
 		["relativeTo"] = "UIParent",
 	},
-	["RaidPartyOptionFrame4"] = {
-		["y"] = 106,
-		["x"] = 152,
-		["point"] = "TOPLEFT",
-		["relativePoint"] = "TOPLEFT",
-		["relativeTo"] = "RaidPartyOptionFrame1",
-	},
 	["GameTooltipHyperLink"] = {
 		["y"] = -60,
 		["x"] = -65,
 		["point"] = "BOTTOMRIGHT",
 		["relativePoint"] = "BOTTOMRIGHT",
 		["relativeTo"] = "UIParent",
+	},
+	["RaidPartyOptionFrame4"] = {
+		["y"] = 106,
+		["x"] = 152,
+		["point"] = "TOPLEFT",
+		["relativePoint"] = "TOPLEFT",
+		["relativeTo"] = "RaidPartyOptionFrame1",
 	},
 	["RaidPartyOptionFrame6AnchorFrame"] = {
 		["y"] = 0,
@@ -390,6 +397,13 @@ g_UIPanelAnchorFrameOptions = {
 		["point"] = "TOP",
 		["relativePoint"] = "TOP",
 		["relativeTo"] = "RaidPartyOptionFrame3",
+	},
+	["RaidPartyOptionFrame5AnchorFrame"] = {
+		["y"] = 0,
+		["x"] = 0,
+		["point"] = "TOP",
+		["relativePoint"] = "TOP",
+		["relativeTo"] = "RaidPartyOptionFrame5",
 	},
 	["RaidPartyFrame4"] = {
 		["y"] = 152,
@@ -447,6 +461,13 @@ g_UIPanelAnchorFrameOptions = {
 		["relativePoint"] = "TOPLEFT",
 		["relativeTo"] = "PEFs_Item9",
 	},
+	["RaidPartyOptionFrame4AnchorFrame"] = {
+		["y"] = 0,
+		["x"] = 0,
+		["point"] = "TOP",
+		["relativePoint"] = "TOP",
+		["relativeTo"] = "RaidPartyOptionFrame4",
+	},
 	["RaidPartyOptionFrame2AnchorFrame"] = {
 		["y"] = 0,
 		["x"] = 0,
@@ -460,13 +481,6 @@ g_UIPanelAnchorFrameOptions = {
 		["point"] = "TOP",
 		["relativePoint"] = "TOP",
 		["relativeTo"] = "RaidPartyOptionFrame1",
-	},
-	["RaidPartyOptionFrame4AnchorFrame"] = {
-		["y"] = 0,
-		["x"] = 0,
-		["point"] = "TOP",
-		["relativePoint"] = "TOP",
-		["relativeTo"] = "RaidPartyOptionFrame4",
 	},
 	["PEFs_Item10_Button"] = {
 		["y"] = 0,
@@ -510,4 +524,16 @@ g_UIPanelAnchorFrameOptions = {
 		["relativePoint"] = "TOPLEFT",
 		["relativeTo"] = "RaidPartyOptionFrame1",
 	},
+}
+g_WorldMapConfig = {
+	["showNewQuest"] = true,
+	["showTrustQuest"] = true,
+	["showParty"] = 1,
+	["showUnfinishQuest"] = false,
+	["size"] = 90,
+	["hideQuestTrackFrame"] = false,
+	["showFinishedQuest"] = true,
+	["showTrackNpc"] = 1,
+	["showQuestNpc"] = 1,
+	["hideLowQuest"] = 1,
 }
