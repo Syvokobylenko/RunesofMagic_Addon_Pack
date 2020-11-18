@@ -12,6 +12,7 @@ g_MinimapDate = {
 	["ZoomIndex"] = 1,
 	[3] = true,
 }
+
 g_UIPanelAnchorFrameOptions = {
 	["RaidPartyOptionFrame6"] = {
 		["y"] = 212,
@@ -272,6 +273,13 @@ g_UIPanelAnchorFrameOptions = {
 		["relativePoint"] = "TOPLEFT",
 		["relativeTo"] = "PEFs_Item6",
 	},
+	["ExtraActionBarFrame"] = {
+		["y"] = 0,
+		["x"] = 0,
+		["point"] = "BOTTOMLEFT",
+		["relativePoint"] = "TOPLEFT",
+		["relativeTo"] = "PetActionBarFrame",
+	},
 	["RaidPartyOptionFrame5"] = {
 		["y"] = 212,
 		["x"] = 0,
@@ -306,6 +314,13 @@ g_UIPanelAnchorFrameOptions = {
 		["point"] = "TOPRIGHT",
 		["relativePoint"] = "TOPRIGHT",
 		["relativeTo"] = "UIParent",
+	},
+	["RaidPartyOptionFrame2"] = {
+		["y"] = 0,
+		["x"] = 152,
+		["point"] = "TOPLEFT",
+		["relativePoint"] = "TOPLEFT",
+		["relativeTo"] = "RaidPartyOptionFrame1",
 	},
 	["AddonManagerMinimapButton"] = {
 		["y"] = 59,
@@ -342,19 +357,19 @@ g_UIPanelAnchorFrameOptions = {
 		["relativePoint"] = "TOPRIGHT",
 		["relativeTo"] = "UIParent",
 	},
-	["PlayerFramePetButton"] = {
-		["y"] = 95,
-		["x"] = 113,
-		["point"] = "TOPLEFT",
-		["relativePoint"] = "TOPLEFT",
+	["DAS_Toggle"] = {
+		["y"] = 156,
+		["x"] = -175.24609375,
+		["point"] = "TOPRIGHT",
+		["relativePoint"] = "TOPRIGHT",
 		["relativeTo"] = "UIParent",
 	},
-	["RaidPartyFrame1"] = {
-		["y"] = 120,
-		["x"] = 15,
+	["RaidPartyFrame2"] = {
+		["y"] = 152,
+		["x"] = 0,
 		["point"] = "TOPLEFT",
 		["relativePoint"] = "TOPLEFT",
-		["relativeTo"] = "UIParent",
+		["relativeTo"] = "RaidPartyFrame1",
 	},
 	["QH_QuestTracker"] = {
 		["y"] = -62,
@@ -363,19 +378,19 @@ g_UIPanelAnchorFrameOptions = {
 		["relativePoint"] = "RIGHT",
 		["relativeTo"] = "UIParent",
 	},
-	["RestackButton"] = {
-		["y"] = 180,
-		["x"] = -175.24609375,
-		["point"] = "TOPRIGHT",
-		["relativePoint"] = "TOPRIGHT",
-		["relativeTo"] = "UIParent",
+	["PEFs_Item10_Button"] = {
+		["y"] = 0,
+		["x"] = 0,
+		["point"] = "TOPLEFT",
+		["relativePoint"] = "TOPLEFT",
+		["relativeTo"] = "PEFs_Item10",
 	},
-	["GameTooltipHyperLink"] = {
-		["y"] = -60,
-		["x"] = -65,
-		["point"] = "BOTTOMRIGHT",
-		["relativePoint"] = "BOTTOMRIGHT",
-		["relativeTo"] = "UIParent",
+	["RaidPartyOptionFrame1AnchorFrame"] = {
+		["y"] = 0,
+		["x"] = 0,
+		["point"] = "TOP",
+		["relativePoint"] = "TOP",
+		["relativeTo"] = "RaidPartyOptionFrame1",
 	},
 	["RaidPartyOptionFrame4"] = {
 		["y"] = 106,
@@ -384,19 +399,19 @@ g_UIPanelAnchorFrameOptions = {
 		["relativePoint"] = "TOPLEFT",
 		["relativeTo"] = "RaidPartyOptionFrame1",
 	},
-	["RaidPartyOptionFrame6AnchorFrame"] = {
+	["RaidPartyOptionFrame2AnchorFrame"] = {
 		["y"] = 0,
 		["x"] = 0,
 		["point"] = "TOP",
 		["relativePoint"] = "TOP",
-		["relativeTo"] = "RaidPartyOptionFrame6",
+		["relativeTo"] = "RaidPartyOptionFrame2",
 	},
-	["RaidPartyOptionFrame3AnchorFrame"] = {
+	["RaidPartyOptionFrame4AnchorFrame"] = {
 		["y"] = 0,
 		["x"] = 0,
 		["point"] = "TOP",
 		["relativePoint"] = "TOP",
-		["relativeTo"] = "RaidPartyOptionFrame3",
+		["relativeTo"] = "RaidPartyOptionFrame4",
 	},
 	["RaidPartyOptionFrame5AnchorFrame"] = {
 		["y"] = 0,
@@ -419,12 +434,12 @@ g_UIPanelAnchorFrameOptions = {
 		["relativePoint"] = "CENTER",
 		["relativeTo"] = "MinimapViewFrame",
 	},
-	["BottomActionBarFrame"] = {
-		["y"] = -84,
-		["x"] = -96,
-		["point"] = "BOTTOMRIGHT",
-		["relativePoint"] = "BOTTOMRIGHT",
-		["relativeTo"] = "UIParent",
+	["PEFs_Item4_Button"] = {
+		["y"] = 0,
+		["x"] = 0,
+		["point"] = "TOPLEFT",
+		["relativePoint"] = "TOPLEFT",
+		["relativeTo"] = "PEFs_Item4",
 	},
 	["PEFs_Item3_Button"] = {
 		["y"] = 0,
@@ -433,19 +448,19 @@ g_UIPanelAnchorFrameOptions = {
 		["relativePoint"] = "TOPLEFT",
 		["relativeTo"] = "PEFs_Item3",
 	},
+	["BottomActionBarFrame"] = {
+		["y"] = -84,
+		["x"] = -96,
+		["point"] = "BOTTOMRIGHT",
+		["relativePoint"] = "BOTTOMRIGHT",
+		["relativeTo"] = "UIParent",
+	},
 	["MinimapFrameBulletinButton"] = {
 		["y"] = -61.729000091553,
 		["x"] = -50.880001068115,
 		["point"] = "CENTER",
 		["relativePoint"] = "CENTER",
 		["relativeTo"] = "MinimapViewFrame",
-	},
-	["PEFs_Item4_Button"] = {
-		["y"] = 0,
-		["x"] = 0,
-		["point"] = "TOPLEFT",
-		["relativePoint"] = "TOPLEFT",
-		["relativeTo"] = "PEFs_Item4",
 	},
 	["UMMNewMailButton"] = {
 		["y"] = 0,
@@ -461,33 +476,33 @@ g_UIPanelAnchorFrameOptions = {
 		["relativePoint"] = "TOPLEFT",
 		["relativeTo"] = "PEFs_Item9",
 	},
-	["RaidPartyOptionFrame4AnchorFrame"] = {
+	["RaidPartyOptionFrame6AnchorFrame"] = {
 		["y"] = 0,
 		["x"] = 0,
 		["point"] = "TOP",
 		["relativePoint"] = "TOP",
-		["relativeTo"] = "RaidPartyOptionFrame4",
+		["relativeTo"] = "RaidPartyOptionFrame6",
 	},
-	["RaidPartyOptionFrame2AnchorFrame"] = {
+	["RaidPartyOptionFrame3AnchorFrame"] = {
 		["y"] = 0,
 		["x"] = 0,
 		["point"] = "TOP",
 		["relativePoint"] = "TOP",
-		["relativeTo"] = "RaidPartyOptionFrame2",
+		["relativeTo"] = "RaidPartyOptionFrame3",
 	},
-	["RaidPartyOptionFrame1AnchorFrame"] = {
-		["y"] = 0,
-		["x"] = 0,
-		["point"] = "TOP",
-		["relativePoint"] = "TOP",
-		["relativeTo"] = "RaidPartyOptionFrame1",
+	["GameTooltipHyperLink"] = {
+		["y"] = -46,
+		["x"] = -68,
+		["point"] = "BOTTOMRIGHT",
+		["relativePoint"] = "BOTTOMRIGHT",
+		["relativeTo"] = "UIParent",
 	},
-	["PEFs_Item10_Button"] = {
-		["y"] = 0,
-		["x"] = 0,
-		["point"] = "TOPLEFT",
-		["relativePoint"] = "TOPLEFT",
-		["relativeTo"] = "PEFs_Item10",
+	["RestackButton"] = {
+		["y"] = 180,
+		["x"] = -175.24609375,
+		["point"] = "TOPRIGHT",
+		["relativePoint"] = "TOPRIGHT",
+		["relativeTo"] = "UIParent",
 	},
 	["MinimapFrameQuestTrackButton"] = {
 		["y"] = 45.284999847412,
@@ -496,18 +511,18 @@ g_UIPanelAnchorFrameOptions = {
 		["relativePoint"] = "CENTER",
 		["relativeTo"] = "MinimapViewFrame",
 	},
-	["RaidPartyFrame2"] = {
-		["y"] = 152,
-		["x"] = 0,
+	["PlayerFramePetButton"] = {
+		["y"] = 95,
+		["x"] = 113,
 		["point"] = "TOPLEFT",
 		["relativePoint"] = "TOPLEFT",
-		["relativeTo"] = "RaidPartyFrame1",
+		["relativeTo"] = "UIParent",
 	},
-	["DAS_Toggle"] = {
-		["y"] = 156,
-		["x"] = -175.24609375,
-		["point"] = "TOPRIGHT",
-		["relativePoint"] = "TOPRIGHT",
+	["RaidPartyFrame1"] = {
+		["y"] = 120,
+		["x"] = 15,
+		["point"] = "TOPLEFT",
+		["relativePoint"] = "TOPLEFT",
 		["relativeTo"] = "UIParent",
 	},
 	["MinimapFrameOptionButton"] = {
@@ -517,21 +532,22 @@ g_UIPanelAnchorFrameOptions = {
 		["relativePoint"] = "TOPRIGHT",
 		["relativeTo"] = "UIParent",
 	},
-	["RaidPartyOptionFrame2"] = {
+	["RaidPartyFrame2AnchorFrame"] = {
 		["y"] = 0,
-		["x"] = 152,
-		["point"] = "TOPLEFT",
-		["relativePoint"] = "TOPLEFT",
-		["relativeTo"] = "RaidPartyOptionFrame1",
+		["x"] = 0,
+		["point"] = "TOP",
+		["relativePoint"] = "TOP",
+		["relativeTo"] = "RaidPartyFrame2",
 	},
 }
+
 g_WorldMapConfig = {
 	["showNewQuest"] = true,
 	["showTrustQuest"] = true,
 	["showParty"] = 1,
 	["showUnfinishQuest"] = false,
 	["size"] = 90,
-	["hideQuestTrackFrame"] = false,
+	["hideQuestTrackFrame"] = true,
 	["showFinishedQuest"] = true,
 	["showTrackNpc"] = 1,
 	["showQuestNpc"] = 1,
